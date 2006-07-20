@@ -5,7 +5,7 @@
 XQueryPointer -- find out present location. (Why?)
 */
 
-void lwaitforbutton_(but, x, y, mod)
+void F77_FUNC(lwaitforbutton,LWAITFORBUTTON)(but, x, y, mod)
 /* Responds to either button presses or releases.
 Returns the position where the
 button was pressed within the window, and which
@@ -41,7 +41,7 @@ long *but, *x, *y, *mod;
 } /* lwaitforbutton_ */
 
 
-void lwaitforbuttonup_(but, x, y, mod)
+void F77_FUNC(lwaitforbuttonup,LWAITFORBUTTONUP)(but, x, y, mod)
 /* Same as lwaitforbutton_ but only responds to button releases. */
 long *but, *x, *y, *mod;
 {
@@ -52,7 +52,7 @@ long *but, *x, *y, *mod;
 } /* lwaitforbuttonup_ */
   
 
-void lwaitforbuttondown_(but, x, y, mod)
+void F77_FUNC(lwaitforbuttondown,LWAITFORBUTTONDOWN)(but, x, y, mod)
 /* Same as lwaitforbutton_ but only responds to button presses. */
 long *but, *x, *y, *mod;
 {
@@ -62,7 +62,7 @@ long *but, *x, *y, *mod;
 } /* lwaitforbuttondown_ */
   
 
-void lmodmasks_(shift,lock,control, mod1,mod2,mod3,mod4,mod5, 
+void F77_FUNC(lmodmasks,LMODMASKS)(shift,lock,control, mod1,mod2,mod3,mod4,mod5, 
      but1,but2,but3,but4,but5)
 /* Returns the bitmask values for each of these things.  These
    give the bit positions for the mod field of lwaitforbutton_ */
@@ -85,7 +85,7 @@ long *shift, *lock, *control, *mod1, *mod2, *mod3, *mod4, *mod5,
 } /* lmodmasks_ */
 
 
-void lwarp_(x,y)
+void F77_FUNC(lwarp,LWARP)(x,y)
 long *x, *y;
 /* Suddenly moves the mouse pointer to the point x,y within our window. 
    Warning: This is very confusing to the user.  Never use. */
@@ -97,7 +97,7 @@ long *x, *y;
 int silly_cursor_exists=0;
 Cursor silly;
 
-void lcursor_(which)
+void F77_FUNC(lcursor,LCURSOR)(which)
 /* Picks which cursor symbol should be put on the screen.  
 0 gives the default cursor.
 1 Gives the "silly cursor" which is a single black pixel.
@@ -154,7 +154,7 @@ long which;
 /* getbit */ 
 
 
-void leventtypeon_(which)
+void F77_FUNC(leventtypeon,LEVENTTYPEON)(which)
 /* Causes these event types to be received by leventwait_ */
 long *which;
 {
@@ -162,7 +162,7 @@ long *which;
 } /* leventtypeon_ */
 
 
-void leventtypeoff_(which)
+void F77_FUNC(leventtypeoff,LEVENTTYPEOFF)(which)
 /* Causes these event types to be ignored by leventwait_ */
 long *which;
 {
@@ -173,7 +173,7 @@ long *which;
 } /* leventtypeoff_ */
 
 
-void leventwait_(main, x, y, mod, typ)
+void F77_FUNC(leventwait,LEVENTWAIT)(main, x, y, mod, typ)
 /* Waits for an event of the selected types, and then returns
 information about it.  Main is the main thingy returned.  x, and y are
 the position of the pointer when the button is pressed.  mod is the
@@ -248,7 +248,7 @@ long *main, *x, *y, *mod, *typ;
   } while( !done );
 } /* leventwait_ */
 
-void lwherecursor_(x,y,mod)
+void F77_FUNC(lwherecursor,LWHERECURSOR)(x,y,mod)
 /* Queries the pointer's location. */
 long *x, *y, *mod;
 {

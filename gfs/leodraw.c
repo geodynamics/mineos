@@ -2,14 +2,14 @@
 These have the drawing primitive routines in them. */
 
 
-void lclearwindow_()
+void F77_FUNC(lclearwindow,LCLEARWINDOW)()
 /* Clears the Window. */
 {
   XFillRectangle(display,draw,erasegc,0,0,window_width,window_height);
 } /* lclearwindow_ */
 
 
-void lclearpartwindow_(x, y, width, height)
+void F77_FUNC(lclearpartwindow,LCLEARPARTWINDOW)(x, y, width, height)
 long *x, *y, *width, *height;
 /* Clears part of the Window, in a rectangle, from 
 x to x+width, and y to y+height. */
@@ -19,7 +19,7 @@ x to x+width, and y to y+height. */
 } /* lclearpartwindow_ */
 
 
-void llinestyle_(width, dash, join, cap)
+void F77_FUNC(llinestyle,LLINESTYLE)(width, dash, join, cap)
 /* Selects a linewidth, cap, and a line join, and whether or not to dash.
 Width: 0: fast & sloppy
        >= 1: that many pixels wide
@@ -61,7 +61,7 @@ long *width, *dash, *join, *cap;
 } /* llinestyle_ */
 
 
-void ldrawhollowbox_(x,y,width,height)
+void F77_FUNC(ldrawhollowbox,LDRAWHOLLOWBOX)(x,y,width,height)
 long *x, *y, *width, *height;
 /* Draws the outline of a rectangle. */
 {
@@ -70,7 +70,7 @@ long *x, *y, *width, *height;
 } /* ldrawhollowbox_ */
 
 
-void ldrawfilledbox_(x,y,width,height)
+void F77_FUNC(ldrawfilledbox,LDRAWFILLEDBOX)(x,y,width,height)
 long *x, *y, *width, *height;
 /* Draws and fills in the rectangle. */
 {
@@ -79,7 +79,7 @@ long *x, *y, *width, *height;
 } /* ldrawfilledbox_ */
 
 
-void ldrawhollowcircle_(x,y,radius)
+void F77_FUNC(ldrawhollowcircle,LDRAWHOLLOWCIRCLE)(x,y,radius)
 long *x, *y, *radius;
 {
   XDrawArc(display,draw,usergc, (int)(*x-*radius), (int)(*y-*radius), 
@@ -89,7 +89,7 @@ long *x, *y, *radius;
 
 
 
-void ldrawfilledcircle_(x,y,radius)
+void F77_FUNC(ldrawfilledcircle,LDRAWFILLEDCIRCLE)(x,y,radius)
 /* radius is the radius*sqrt(2) */
 long *x, *y, *radius;
 {
@@ -100,7 +100,7 @@ long *x, *y, *radius;
 
 long CPx=0, CPy=0;  /* The current position of the pointer. */
 
-void lmoveto_(x,y)
+void F77_FUNC(lmoveto,LMOVETO)(x,y)
 long *x, *y;
 /* Moves the CP to a new place -- doesn't draw anything. */
 {
@@ -109,7 +109,7 @@ long *x, *y;
 } /* lmoveto_ */
 
 
-void llineto_(x,y)
+void F77_FUNC(llineto,LLINETO)(x,y)
 long *x, *y;
 /* Draws a line from the CP to the specified point. */
 {
@@ -120,7 +120,7 @@ long *x, *y;
 } /* llineto_ */
 
 
-void lline_(x1, y1, x2, y2)
+void F77_FUNC(lline,LLINE)(x1, y1, x2, y2)
 /* Note, this doesn't move the CP. */
 long *x1, *y1, *x2, *y2;
 {
@@ -132,7 +132,7 @@ long *x1, *y1, *x2, *y2;
 long maxlines=0;  /* The maximum number of lines drawable 
 		     at once. */
 
-void llines_(x,y,num)
+void F77_FUNC(llines,LLINES)(x,y,num)
 /* Draws many lines.  x, and y are arrays of values,
 and n says how big the array is.  Maximum n: 32767.
 */
@@ -181,7 +181,7 @@ long *x, *y, *num;
 } /* llines_ */
 
 
-void lbitblt_(x1,y1,width,height,x2,y2)
+void F77_FUNC(lbitblt,LBITBLT)(x1,y1,width,height,x2,y2)
 /* Copies the contents of the box specified by
    x1,y1,width,height to x2,y2.  Note: it uses the
    user's choice of a raster operation. */
@@ -193,7 +193,7 @@ long *x1, *y1, *width, *height, *x2, *y2;
 } /* lbitblt_ */
 
 
-void lclipbox_(x,y,width,height)
+void F77_FUNC(lclipbox,LCLIPBOX)(x,y,width,height)
 /* Sets this as the current clipping box, and turns
    clipping on. */
 long *x, *y, *width, *height;
@@ -208,14 +208,14 @@ long *x, *y, *width, *height;
 } /* lclipbox_ */
 
 
-void lnoclip_()
+void F77_FUNC(lnoclip,LNOCLIP)()
 /* Turns off clipping. */
 {
   XSetClipMask(display,usergc,None);
 } /* lnoclip_ */
 
   
-void lsetrasterops_(code)
+void F77_FUNC(lsetrasterops,LSETRASTEROPS)(code)
 long *code;
 /* For RasterOps Codes, see page 140 of XLib Programming Manual (Vol.1) 
    or page 689 of Volume 2.  
@@ -312,7 +312,7 @@ black.
 } /* get_colors */
 
 
-void lsetcolor_(index)
+void F77_FUNC(lsetcolor,LSETCOLOR)(index)
 /* Selects color number c as the current foreground drawing color. */
 long *index;
 {

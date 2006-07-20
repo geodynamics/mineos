@@ -22,7 +22,7 @@ int howmanyfonts=0;  /* How many are loaded. */
 
 int nowfont=0;
 
-void lsetfont_(which)
+void F77_FUNC(lsetfont,LSETFONT)(which)
 /* Picks which font to use for text. */
 long *which;
 {
@@ -37,7 +37,7 @@ long *which;
  
  
 
-void lloadfont_(num,fname,len)
+void F77_FUNC(lloadfont,LLOADFONT)(num,fname,len)
 /* Loads the font of the specified name.  num returns how many
 fonts are laoded after having laoded this one, which also
 gives the font index of the request font. */
@@ -81,7 +81,7 @@ char *fname;
 
 int lalign=BLEFT;
 
-void laligntext_(code)
+void F77_FUNC(laligntext,LALIGNTEXT)(code)
 /* Picks how the CP will determine text positioning. 
 Codes are same as for EZLORG */
 long *code;
@@ -104,7 +104,7 @@ long *code;
 
 float langle=0;
 
-void ltextangle_(ang)
+void F77_FUNC(ltextangle,LTEXTANGLE)(ang)
 /* Sets the text drawing angle.  ang=0 is normal left to
 right.  ang=90 draws up.  All angles are allowed.  Must be passed
 as fortran type "REAL" */
@@ -114,7 +114,7 @@ float *ang;
 } /* ltextangle_ */
 
 
-void lprint_(text, len)
+void F77_FUNC(lprint,LPRINT)(text, len)
 /* Places the text on the screen at the CP.  
 Note: len does not need to be passed from fortran.
 (Does not move the CP).  Use lmoveto_, laligntext_ and ltextangle_ 

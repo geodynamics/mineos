@@ -11,6 +11,8 @@ This file just has the main control routines: Create window / destroy it...
 
 #include <stdio.h>
 
+#include "config.h"
+
 #define NOTDEBUGGING
 
 #ifdef DEBUGGING
@@ -42,7 +44,7 @@ unsigned int window_width, window_height;
 
 
 #ifdef DEBUGGING
-void lnum_(x)
+void F77_FUNC(lnum,LNUM)(x)
 long *x;
 {
   printf("x: %ld\n",*x);
@@ -50,7 +52,7 @@ long *x;
 #endif
 
 
-void lfastmode_()
+void F77_FUNC(lfastmode,LFASTMODE)()
 /* Sets fast drawing mode, in which drawing calls are made directly
    to the screen, with no backup in case of covering. */
 {
@@ -58,7 +60,7 @@ void lfastmode_()
 } /* lfastmode_ */
 
 
-void lslowmode_()
+void F77_FUNC(lslowmode,LSLOWMODE)()
 /* Sets the slow drawing mode, where drawing calls are done to the
    Background Pixmap, which is updated with an output buffer flush. */
 {
@@ -108,7 +110,7 @@ void connect_to_display()
 } /* connect_to_display */
 
 
-void linitfancywindow_(fwidth,fheight,origx,origy,fwindow_name,ficon_name,wlen,ilen)
+void F77_FUNC(linitfancywindow,LINITFANCYWINDOW)(fwidth,fheight,origx,origy,fwindow_name,ficon_name,wlen,ilen)
 /* Here, we blindly assume that the window manager will give us a window
 of the size we demanded.  (We specify minimum, maximum, and suggested size of
 the window all to be the size we want it.)  This works under openwindows. 
@@ -258,7 +260,7 @@ char *fwindow_name,*ficon_name;
 } /* linitfancywindow_ */
 
 
-void linitializewindow_(fwidth, fheight)
+void F77_FUNC(linitializewindow,LINITIALIZEWINDOW)(fwidth, fheight)
 /* Calls linitfancy window, with some default settings. */
 long *fwidth, *fheight;
 {
@@ -273,7 +275,7 @@ long *fwidth, *fheight;
 
 
 
-void lscreentype_(width,height,color,planes)
+void F77_FUNC(lscreentype,LSCREENTYPE)(width,height,color,planes)
 /* Determines what type of display is available -- how big, is it color, how
 many bit-planes */
 long *width, *height, *color, *planes;
@@ -311,7 +313,7 @@ long *width, *height, *color, *planes;
  
  
 
-void lreset_()
+void F77_FUNC(lreset,LRESET)()
 /* Reset's the drawing mode to something sensible */
 {
   long l1=1, l0=0;
@@ -326,7 +328,7 @@ void lreset_()
 } /* lreset_ */
 
 
-void ldie_()
+void F77_FUNC(ldie,LDIE)()
 /* Kills the window and unloads all the loaded stuff. */
 {
   XFreePixmap(display,background);
@@ -338,7 +340,7 @@ void ldie_()
 } /* ldie_ */
 
 
-void ldoit_()
+void F77_FUNC(ldoit,LDOIT)()
 /* Flushes the output buffer. */
 {
   if( draw == background ) /* i.e. we're in slow mode. */
@@ -347,7 +349,7 @@ void ldoit_()
 } /* ldoit */
 
 
-void lfastscreendump_(fname, len)
+void F77_FUNC(lfastscreendump,LFASTSCREENDUMP)(fname, len)
 /* Dumps the screen contents to the specified file. 
 Uses Images to run faster, but doesn't always work. */
 char *fname;
@@ -444,7 +446,7 @@ long len;
 } /* lscreendump_() */
 
 
-void lscreendump_(fname, len)
+void F77_FUNC(lscreendump,LSCREENDUMP)(fname, len)
 /* Dumps the screen contents to the specified file. */
 char *fname;
 long len;
