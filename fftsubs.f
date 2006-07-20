@@ -1,0 +1,1243 @@
+      SUBROUTINE FACTOR(N)
+C  FACTOR DETERMINES THE SMALLEST EVEN NUMBER .GE. N THAT CAN BE FACTORED INTO
+C  PRODUCTS OF PRIMES IN THE ARRAY NP. THE RESULT IS RETURNED AS N.
+C  ONLY THE FIRST FOUR PRIMES ARE USED. THIS ROUTINE IS CALLED BEFORE USING FFTL.  
+      DIMENSION NP(4)
+      DATA NP/2,3,5,7/
+      NCHK=N/2
+      IF(N.NE.(NCHK*2)) N=N+1
+    5 NF=N
+      DO 15 I=1,4
+      M=NP(I)
+   10 L=MOD(NF,M)
+      IF(L.NE.0) GO TO 15
+      NF=NF/M
+      GO TO 10
+   15 CONTINUE
+      IF(NF.EQ.1) RETURN
+      N=N+2
+      GO TO 5
+      END
+      SUBROUTINE FACDWN(N)
+C  FACDWN DETERMINES THE LARGEST EVEN NUMBER .LE. N THAT CAN BE FACTORED INTO
+C  PRODUCTS OF PRIMES IN THE ARRAY NP. THE RESULT IS RETURNED AS N.
+C  ONLY THE FIRST FOUR PRIMES ARE USED. THIS ROUTINE IS CALLED BEFORE USING FFTL. 
+      DIMENSION NP(4)
+      DATA NP/2,3,5,7/
+      NCHK=N/2
+      IF(N.NE.(NCHK*2)) N=N-1
+    5 NF=N
+      DO 15 I=1,4
+      M=NP(I)
+   10 L=MOD(NF,M)
+      IF(L.NE.0) GO TO 15
+      NF=NF/M
+      GO TO 10
+   15 CONTINUE
+      IF(NF.EQ.1) RETURN  
+      N=N-2
+      GO TO 5
+      END
+      SUBROUTINE FFTL(X,N,NDIR,IERR)
+C  IF IABS(NDIR)=1 FFTL FOURIER TRANSFORMS THE N POINTS REAL TIME SERIES IN ARRAY 
+C  X. THE RESULT OVERWRITES X STORED AS (N+2)/2 COMPLEX NUMBERS (NON-NEGATIVE 
+C  FREQUENCIES ONLY). 
+C  IF IABS(NDIR)=2 FFTL FOURIER TRANSFORMS THE (N+2)/2 COMPLEX FOURIER COEFFICIENTS 
+C  (NON-NEGATIVE FREQUENCIES ONLY) IN ARRAY X (ASSUMING THE SERIES IS HERMITIAN). 
+C  THE RESULTING N POINT REAL TIME SERIES OVERWRITES X.  
+C   NDIR>0 THE FORWARD TRANSFORM USES THE SIGN CONVENTION EXP(I*W*T).  
+C   NDIR<0 THE FORWARD TRANSFORM USES THE SIGN CONVENTION EXP(-I*W*T).  
+C  THE FORWARD TRANSFORM IS NORMALIZED SUCH THAT A SINE WAVE OF UNIT AMPLITUDE 
+C  IS TRANSFORMED INTO DELTA FUNCTIONS OF UNIT AMPLITUDE.  THE BACKWARD TRANSFORM
+C  IS NORMALIZED SUCH THAT TRANSFORMING FORWARD AND THEN BACK RECOVERS THE 
+C  ORIGINAL SERIES.  IERR IS NORMALLY ZERO.  IF IERR.EQ.1 THEN FFT HAS NOT BEEN 
+C  ABLE TO FACTOR THE SERIES.  HOWEVER, X HAS BEEN SCRAMBLED BY REALTR.  NOTE 
+C  THAT IF N IS ODD THE LAST POINT WILL NOT  BE USED IN THE TRANSFORM.
+C                                                     -RPB
+      DIMENSION X(*)                                                                    
+      N2=N/2
+      IDIR=IABS(NDIR)
+      GO TO (1,2),IDIR
+C   DO FORWARD TRANSFORM (IE. TIME TO FREQUENCY).
+ 1    CALL FFT(X,X(2),N2,N2,N2,2,IERR)
+      CALL REALTR(X,X(2),N2,2)
+      N1=2*N2+2
+      SCALE=1./N
+      IF(NDIR.GT.0) GO TO 3
+      DO 5 I=4,N,2
+ 5    X(I)=-X(I)
+      GO TO 3
+C   DO BACKWARD TRANSFORM (IE. FREQUENCY TO TIME).
+ 2    IF(NDIR.GT.0) GO TO 6
+      DO 7 I=4,N,2
+ 7    X(I)=-X(I)
+ 6    X(2)=0.
+      X(2*N2+2)=0.
+      CALL REALTR(X,X(2),N2,-2)
+      CALL FFT(X,X(2),N2,N2,N2,-2,IERR)
+      N1=2*N2
+      SCALE=.5
+C   NORMALIZE THE TRANSFORM.
+ 3    DO 4 I=1,N1
+ 4    X(I)=SCALE*X(I)
+      RETURN
+      END
+      SUBROUTINE REALTR(A,B,N,ISN)
+C  IF ISN=1, THIS SUBROUTINE COMPLETES THE FOURIER TRANSFORM OF 2*N REAL 
+C  DATA VALUES, WHERE THE ORIGINAL DATA VALUES ARE STORED ALTERNATELY IN 
+C  ARRAYS A AND B, AND ARE FIRST TRANSFORMED BY A COMPLEX FOURIER TRANSFORM 
+c  OF DIMENSION N. THE COSINE COEFFICIENTS ARE IN A(1),A(2),...A(N+1) AND
+C  THE SINE COEFFICIENTS ARE IN B(1),B(2),...B(N+1). A TYPICAL CALLING 
+C  SEQUENCE IS
+C              CALL FFT (A,B,N,1)
+C              CALL REALTR (A,B,N,1)
+C  THE RESULTS SHOULD BE MULTIPLIED BY 0.5/N TO GIVE THE USUAL SCALING 
+C  IF ISN=1, THE INVERSE TRANSFORMATION IS DONE, THE FIRST STEP IN EVALUATING 
+C  A REAL FOURIER SERIES. A TYPICAL CALLING SEQUENCE IS
+C              CALL REALTR (A,B,N,-1)
+C              CALL FFT (A,B,N,-1)
+C  THE RESULTS SHOULD BE MULTIPLIED BY 0.5 TO GIVE THE USUAL SCALING, AND 
+C  THE TIME DOMAIN RESULTS ALTERNATE IN ARRAYS A AND B, I.E. A(1),B(1), A(2),B(2),
+C  ...A(N),B(N). THE DATA MAY ALTERNATIVELY BE STORED IN A SINGLE COMPLEX 
+C  ARRAY A, THEN THE MAGNITUDE OF ISN CHANGED TO TWO TO GIVE THE CORRECT 
+C  INDEXING INCREMENT AND A(2) USED TO PASS THE INITIAL ADDRESS FOR THE 
+C  SEQUENCE OF IMAGINARY VALUES,E.G.
+C              CALL FFT(A,A(2),N,2)
+C              CALL REALTR(A,A(2),N,2)
+C  IN THIS CASE, THE COSINE AND SINE COEFFICIENTS ALTERNATE IN A.
+      DIMENSION A(*),B(*)
+      IF(N .LE. 1) RETURN
+      INC=ISN
+      IF(INC.LT.0) INC=-INC
+      NK = N * INC + 2
+      NH = NK / 2
+      SD = 3.1415926535898E0/(2.E0*N)
+      CD = 2.E0 * SIN(SD)**2
+      SD = SIN(SD+SD)
+      SN = 0.E0
+      IF(ISN .GT. 0) GO TO 10
+      CN = -1.E0
+      SD = -SD
+      GO TO 20
+ 10   CN = 1.E0
+      A(NK-1) = A(1)
+      B(NK-1) = B(1)
+ 20   DO 30 J=1,NH,INC
+      K = NK - J
+      AA = A(J) + A(K)
+      AB = A(J) - A(K)
+      BA = B(J) + B(K)
+      BB = B(J) - B(K)
+      XX = CN * BA + SN * AB
+      YY = SN * BA - CN * AB
+      B(K) = YY - BB
+      B(J) = YY + BB
+      A(K) = AA - XX
+      A(J) = AA + XX
+      AA = CN - (CD * CN + SD * SN)
+      SN = (SD * CN - CD * SN) + SN
+ 30   CN = AA
+      RETURN
+      END
+      SUBROUTINE FFT(A,B,NTOT,N,NSPAN,ISN,IERR)
+C  FFT IS A SINGLE PRECISION VERSION OF SINGLETON'S FFT PROCEDURE. 
+C  MULTIVARIATE COMPLEX FOURIER TRANSFORM, COMPUTED IN PLACE USING 
+C  MIXED-RADIX FAST FOURIER TRANSFORM ALGORITHM. BY R. C. SINGLETON, 
+C  STANFORD RESEARCH INSTITUTE, SEPT. 1968
+C  ARRAYS A AND B ORIGINALLY HOLD THE REAL AND IMAGINARY COMPONENTS OF THE 
+C  DATA, AND RETURN THE REAL AND IMAGINARY COMPONENTS OF THE RESULTING FOURIER 
+C  COEFFICIENTS. MULTIVARIATE DATA IS INDEXED ACCORDING TO THE FORTRAN ARRAY 
+C  ELEMENT SUCCESSOR FUNCTION, WITHOUT LIMIT ON THE NUMBER OF IMPLIED MULTIPLE 
+C  SUBSCRIPTS. THE SUBROUTINE IS CALLED ONCE FOR EACH VARIATE. THE CALLS FOR A 
+C  MULTIVARIATE TRANSFORM MAY BE IN ANY ORDER.
+C    NTOT IS THE TOTAL NUMBER OF COMPLEX DATA VALUES.
+C    N IS THE DIMENSION OF THE CURRENT VARIABLE.
+C    NSPAN/N IS THE SPACING OF CONSECUTIVE DATA VALUES FOR THE CURRENT VARIABLE.
+C    IERR IS AN ERROR RETURN INDICATOR. IT IS NORMALLY ZERO, BUT IS SET TO 1 IF 
+C    THE NUMBER OF TERMS CANNOT BE FACTORED IN THE SPACE AVAILABLE. 
+C    THE SIGN OF ISN DETERMINES THE SIGN OF THE COMPLEX EXPONENTIAL, AND THE 
+C    MAGNITUDE OF ISN IS NORMALLY ONE.
+C  A TRI-VARIATE TRANSFORM WITH A(N1,N2,N3), B(N1,N2,N3) IS COMPUTED BY
+C      CALL FFT(A,B,N1*N2*N3,N1,N1,1)
+C      CALL FFT(A,B,N1*N2*N3,N2,N1*N2,1)
+C      CALL FFT(A,B,N1*N2*N3,N3,N1*N2*N3,1)
+C  FOR A SINGLE-VARIATE TRANSFORM,
+C    NTOT = N = NSPAN = (NUMBER OF COMPLEX DATA VALUES), E.G.
+C      CALL FFT(A,B,N,N,N,1)
+C  WITH MOST FORTRAN COMPILERS THE DATA CAN ALTERNATIVELY BE STORED IN A SINGLE 
+C  COMPLEX ARRAY A, THEN THE MAGNITUDE OF ISN CHANGED TO TWO TO GIVE THE CORRECT 
+C  INDEXING INCREMENT AND A(2) USED TO PASS THE INITIAL ADDRESS FOR THE SEQUENCE 
+C  OF IMAGINARY VALUES, E.G.
+C      CALL FFT(A,A(2),NTOT,N,NSPAN,2)
+C  ARRAYS AT(MAXF), CK(MAXF), BT(MAXF), SK(MAXF), AND NP(MAXP) ARE USED FOR 
+C  TEMPORARY STORAGE.  IF THE AVAILABLE STORAGE IS INSUFFICIENT, THE PROGRAM IS 
+C  TERMINATED BY THE ERROR RETURN OPTION
+C    MAXF MUST BE .GE. THE MAXIMUM PRIME FACTOR OF N.
+C    MAXP MUST BE .GT. THE NUMBER OF PRIME FACTORS OF N.
+C  IN ADDITION, IF THE SQUARE-FREE PORTION K OF N HAS TWO OR MORE PRIME FACTORS, 
+C  THEN MAXP MUST BE .GE. K-1. ARRAY STORAGE IN NFAC FOR A MAXIMUM OF 11 PRIME 
+C  FACTORS OF N. IF N HAS MORE THAN ONE SQUARE-FREE FACTOR, THE PRODUCT OF THE
+C  SQUARE-FREE FACTORS MUST BE .LE. 210.  (2**5*7=210)
+      DIMENSION A(*),B(*)
+      DIMENSION NFAC(11),NP(209)
+C  ARRAY STORAGE FOR MAXIMUM PRIME FACTOR OF 23
+      DIMENSION AT(23),CK(23),BT(23),SK(23)
+      EQUIVALENCE (I,II)
+C  THE FOLLOWING TWO CONSTANTS SHOULD AGREE WITH THE ARRAY DIMENSIONS.
+      MAXF=23
+      MAXP=209
+      IERR=0
+      IF(N .LT. 2) RETURN
+      INC=ISN
+      C72=0.30901699437494E0
+      S72=0.95105651629515E0
+      S120=0.86602540378443E0
+      RAD=6.2831853071796E0
+      IF(ISN .GE. 0) GO TO 10
+      S72=-S72
+      S120=-S120
+      RAD=-RAD
+      INC=-INC
+   10 NT=INC*NTOT
+      KS=INC*NSPAN
+      KSPAN=KS
+      NN=NT-INC
+      JC=KS/N
+      RADF=RAD*(JC*0.5E0)
+      I=0
+      JF=0
+C  DETERMINE THE FACTORS OF N
+      M=0
+      K=N
+      GO TO 20
+   15 M=M+1
+      NFAC(M)=4
+      K=K/16
+   20 IF(K-(K/16)*16 .EQ. 0) GO TO 15
+      J=3
+      JJ=9
+      GO TO 30
+   25 M=M+1
+      NFAC(M)=J
+      K=K/JJ
+   30 IF(MOD(K,JJ) .EQ. 0) GO TO 25
+      J=J+2
+      JJ=J**2
+      IF(JJ .LE. K) GO TO 30
+      IF(K .GT. 4) GO TO 40
+      KT=M
+      NFAC(M+1)=K
+      IF(K .NE. 1) M=M+1
+      GO TO 80
+   40 IF(K-(K/4)*4 .NE. 0) GO TO 50
+      M=M+1
+      NFAC(M)=2
+      K=K/4
+   50 KT=M
+      J=2
+   60 IF(MOD(K,J) .NE. 0) GO TO 70
+      M=M+1
+      NFAC(M)=J
+      K=K/J
+   70 J=((J+1)/2)*2+1
+      IF(J .LE. K) GO TO 60
+   80 IF(KT .EQ. 0) GO TO 100
+      J=KT
+   90 M=M+1
+      NFAC(M)=NFAC(J)
+      J=J-1
+      IF(J .NE. 0) GO TO 90
+C  COMPUTE FOURIER TRANSFORM
+  100 SD=RADF/(KSPAN)
+      CD=2.E0*SIN(SD)**2
+      SD=SIN(SD+SD)
+      KK=1
+      I=I+1
+      IF(NFAC(I) .NE. 2) GO TO 400
+C  TRANSFORM FOR FACTOR OF 2 (INCLUDING ROTATION FACTOR)
+      KSPAN=KSPAN/2
+      K1=KSPAN+2
+  210 K2=KK+KSPAN
+      AK=A(K2)
+      BK=B(K2)
+      A(K2)=A(KK)-AK
+      B(K2)=B(KK)-BK
+      A(KK)=A(KK)+AK
+      B(KK)=B(KK)+BK
+      KK=K2+KSPAN
+      IF(KK .LE. NN) GO TO 210
+      KK=KK-NN
+      IF(KK .LE. JC) GO TO 210
+      IF(KK .GT. KSPAN) GO TO 800
+  220 C1=1.E0-CD
+      S1=SD
+  230 K2=KK+KSPAN
+      AK=A(KK)-A(K2)
+      BK=B(KK)-B(K2)
+      A(KK)=A(KK)+A(K2)
+      B(KK)=B(KK)+B(K2)
+      A(K2)=C1*AK-S1*BK
+      B(K2)=S1*AK+C1*BK
+      KK=K2+KSPAN
+      IF(KK .LT. NT) GO TO 230
+      K2=KK-NT
+      C1=-C1
+      KK=K1-K2
+      IF(KK .GT. K2) GO TO 230
+      AK=CD*C1+SD*S1
+      S1=(SD*C1-CD*S1)+S1
+      C1=C1-AK
+      KK=KK+JC
+      IF(KK .LT. K2) GO TO 230
+      K1=K1+INC+INC
+      KK=(K1-KSPAN)/2+JC
+      IF(KK .LE. JC+JC) GO TO 220
+      GO TO 100
+C  TRANSFORM FOR FACTOR OF 3 (OPTIONAL CODE)
+  320 K1=KK+KSPAN
+      K2=K1+KSPAN
+      AK=A(KK)
+      BK=B(KK)
+      AJ=A(K1)+A(K2)
+      BJ=B(K1)+B(K2)
+      A(KK)=AK+AJ
+      B(KK)=BK+BJ
+      AK=-0.5*AJ+AK
+      BK=-0.5*BJ+BK
+      AJ=(A(K1)-A(K2))*S120
+      BJ=(B(K1)-B(K2))*S120
+      A(K1)=AK-BJ
+      B(K1)=BK+AJ
+      A(K2)=AK+BJ
+      B(K2)=BK-AJ
+      KK=K2+KSPAN
+      IF(KK .LT. NN) GO TO 320
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 320
+      GO TO 700
+C  TRANSFORM FOR FACTOR OF 4
+  400 IF(NFAC(I) .NE. 4) GO TO 600
+      KSPNN=KSPAN
+      KSPAN=KSPAN/4
+  410 C1=1.E0
+      S1=0
+  420 K1=KK+KSPAN
+      K2=K1+KSPAN
+      K3=K2+KSPAN
+      AKP=A(KK)+A(K2)
+      AKM=A(KK)-A(K2)
+      AJP=A(K1)+A(K3)
+      AJM=A(K1)-A(K3)
+      A(KK)=AKP+AJP
+      AJP=AKP-AJP
+      BKP=B(KK)+B(K2)
+      BKM=B(KK)-B(K2)
+      BJP=B(K1)+B(K3)
+      BJM=B(K1)-B(K3)
+      B(KK)=BKP+BJP
+      BJP=BKP-BJP
+      IF(ISN .LT. 0) GO TO 450
+      AKP=AKM-BJM
+      AKM=AKM+BJM
+      BKP=BKM+AJM
+      BKM=BKM-AJM
+      IF(S1 .EQ. 0) GO TO 460
+  430 A(K1)=AKP*C1-BKP*S1
+      B(K1)=AKP*S1+BKP*C1
+      A(K2)=AJP*C2-BJP*S2
+      B(K2)=AJP*S2+BJP*C2
+      A(K3)=AKM*C3-BKM*S3
+      B(K3)=AKM*S3+BKM*C3
+      KK=K3+KSPAN
+      IF(KK .LE. NT) GO TO 420
+  440 C2=CD*C1+SD*S1
+      S1=(SD*C1-CD*S1)+S1
+      C1=C1-C2
+      C2=C1**2-S1**2
+      S2=2.E0*C1*S1
+      C3=C2*C1-S2*S1
+      S3=C2*S1+S2*C1
+      KK=KK-NT+JC
+      IF(KK .LE. KSPAN) GO TO 420
+      KK=KK-KSPAN+INC
+      IF(KK .LE. JC) GO TO 410
+      IF(KSPAN .EQ. JC) GO TO 800
+      GO TO 100
+  450 AKP=AKM+BJM
+      AKM=AKM-BJM
+      BKP=BKM-AJM
+      BKM=BKM+AJM
+      IF(S1 .NE. 0) GO TO 430
+  460 A(K1)=AKP
+      B(K1)=BKP
+      A(K2)=AJP
+      B(K2)=BJP
+      A(K3)=AKM
+      B(K3)=BKM
+      KK=K3+KSPAN
+      IF(KK .LE. NT) GO TO 420
+      GO TO 440
+C  TRANSFORM FOR FACTOR OF 5 (OPTIONAL CODE)
+  510 C2=C72**2-S72**2
+      S2=2.E0*C72*S72
+  520 K1=KK+KSPAN
+      K2=K1+KSPAN
+      K3=K2+KSPAN
+      K4=K3+KSPAN
+      AKP=A(K1)+A(K4)
+      AKM=A(K1)-A(K4)
+      BKP=B(K1)+B(K4)
+      BKM=B(K1)-B(K4)
+      AJP=A(K2)+A(K3)
+      AJM=A(K2)-A(K3)
+      BJP=B(K2)+B(K3)
+      BJM=B(K2)-B(K3)
+      AA=A(KK)
+      BB=B(KK)
+      A(KK)=AA+AKP+AJP
+      B(KK)=BB+BKP+BJP
+      AK=AKP*C72+AJP*C2+AA
+      BK=BKP*C72+BJP*C2+BB
+      AJ=AKM*S72+AJM*S2
+      BJ=BKM*S72+BJM*S2
+      A(K1)=AK-BJ
+      A(K4)=AK+BJ
+      B(K1)=BK+AJ
+      B(K4)=BK-AJ
+      AK=AKP*C2+AJP*C72+AA
+      BK=BKP*C2+BJP*C72+BB
+      AJ=AKM*S2-AJM*S72
+      BJ=BKM*S2-BJM*S72
+      A(K2)=AK-BJ
+      A(K3)=AK+BJ
+      B(K2)=BK+AJ
+      B(K3)=BK-AJ
+      KK=K4+KSPAN
+      IF(KK .LT. NN) GO TO 520
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 520
+      GO TO 700
+C  TRANSFORM FOR ODD FACTORS
+  600 K=NFAC(I)
+      KSPNN=KSPAN
+      KSPAN=KSPAN/K
+      IF(K .EQ. 3) GO TO 320
+      IF(K .EQ. 5) GO TO 510
+      IF(K .EQ. JF) GO TO 640
+      JF=K
+      S1=RAD/(K)
+      C1=COS(S1)
+      S1=SIN(S1)
+      IF(JF .GT. MAXF) GO TO 998
+      CK(JF)=1.E0
+      SK(JF)=0.E0
+      J=1
+  630 CK(J)=CK(K)*C1+SK(K)*S1
+      SK(J)=CK(K)*S1-SK(K)*C1
+      K=K-1
+      CK(K)=CK(J)
+      SK(K)=-SK(J)
+      J=J+1
+      IF(J .LT. K) GO TO 630
+  640 K1=KK
+      K2=KK+KSPNN
+      AA=A(KK)
+      BB=B(KK)
+      AK=AA
+      BK=BB
+      J=1
+      K1=K1+KSPAN
+  650 K2=K2-KSPAN
+      J=J+1
+      AT(J)=A(K1)+A(K2)
+      AK=AT(J)+AK
+      BT(J)=B(K1)+B(K2)
+      BK=BT(J)+BK
+      J=J+1
+      AT(J)=A(K1)-A(K2)
+      BT(J)=B(K1)-B(K2)
+      K1=K1+KSPAN
+      IF(K1 .LT. K2) GO TO 650
+      A(KK)=AK
+      B(KK)=BK
+      K1=KK
+      K2=KK+KSPNN
+      J=1
+  660 K1=K1+KSPAN
+      K2=K2-KSPAN
+      JJ=J
+      AK=AA
+      BK=BB
+      AJ=0.E0
+      BJ=0.E0
+      K=1
+  670 K=K+1
+      AK=AT(K)*CK(JJ)+AK
+      BK=BT(K)*CK(JJ)+BK
+      K=K+1
+      AJ=AT(K)*SK(JJ)+AJ
+      BJ=BT(K)*SK(JJ)+BJ
+      JJ=JJ+J
+      IF(JJ .GT. JF) JJ=JJ-JF
+      IF(K .LT. JF) GO TO 670
+      K=JF-J
+      A(K1)=AK-BJ
+      B(K1)=BK+AJ
+      A(K2)=AK+BJ
+      B(K2)=BK-AJ
+      J=J+1
+      IF(J .LT. K) GO TO 660
+      KK=KK+KSPNN
+      IF(KK .LE. NN) GO TO 640
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 640
+C  MULTIPLY BY ROTATION FACTOR (EXCEPT FOR FACTORS OF 2 AND 4)
+  700 IF(I .EQ. M) GO TO 800
+      KK=JC+1
+  710 C2=1.E0-CD
+      S1=SD
+  720 C1=C2
+      S2=S1
+      KK=KK+KSPAN
+  730 AK=A(KK)
+      A(KK)=C2*AK-S2*B(KK)
+      B(KK)=S2*AK+C2*B(KK)
+      KK=KK+KSPNN
+      IF(KK .LE. NT) GO TO 730
+      AK=S1*S2
+      S2=S1*C2+C1*S2
+      C2=C1*C2-AK
+      KK=KK-NT+KSPAN
+      IF(KK .LE. KSPNN) GO TO 730
+      C2=C1-(CD*C1+SD*S1)
+      S1=S1+(SD*C1-CD*S1)
+      KK=KK-KSPNN+JC
+      IF(KK .LE. KSPAN) GO TO 720
+      KK=KK-KSPAN+JC+INC
+      IF(KK .LE. JC+JC) GO TO 710
+      GO TO 100
+C  PERMUTE THE RESULTS TO NORMAL ORDER---DONE IN TWO STAGES
+C  PERMUTATION FOR SQUARE FACTORS OF N
+  800 NP(1)=KS
+      IF(KT .EQ. 0) GO TO 890
+      K=KT+KT+1
+      IF(M .LT. K) K=K-1
+      J=1
+      NP(K+1)=JC
+  810 NP(J+1)=NP(J)/NFAC(J)
+      NP(K)=NP(K+1)*NFAC(J)
+      J=J+1
+      K=K-1
+      IF(J .LT. K) GO TO 810
+      K3=NP(K+1)
+      KSPAN=NP(2)
+      KK=JC+1
+      K2=KSPAN+1
+      J=1
+      IF(N .NE. NTOT) GO TO 850
+C  PERMUTATION FOR SINGLE-VARIATE TRANSFORM (OPTIONAL CODE)
+  820 AK=A(KK)
+      A(KK)=A(K2)
+      A(K2)=AK
+      BK=B(KK)
+      B(KK)=B(K2)
+      B(K2)=BK
+      KK=KK+INC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 820
+  830 K2=K2-NP(J)
+      J=J+1
+      K2=NP(J+1)+K2
+      IF(K2 .GT. NP(J)) GO TO 830
+      J=1
+  840 IF(KK .LT. K2) GO TO 820
+      KK=KK+INC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 840
+      IF(KK .LT. KS) GO TO 830
+      JC=K3
+      GO TO 890
+C  PERMUTATION FOR MULTIVARIATE TRANSFORM
+  850 K=KK+JC
+  860 AK=A(KK)
+      A(KK)=A(K2)
+      A(K2)=AK
+      BK=B(KK)
+      B(KK)=B(K2)
+      B(K2)=BK
+      KK=KK+INC
+      K2=K2+INC
+      IF(KK .LT. K) GO TO 860
+      KK=KK+KS-JC
+      K2=K2+KS-JC
+      IF(KK .LT. NT) GO TO 850
+      K2=K2-NT+KSPAN
+      KK=KK-NT+JC
+      IF(K2 .LT. KS) GO TO 850
+  870 K2=K2-NP(J)
+      J=J+1
+      K2=NP(J+1)+K2
+      IF(K2 .GT. NP(J)) GO TO 870
+      J=1
+  880 IF(KK .LT. K2) GO TO 850
+      KK=KK+JC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 880
+      IF(KK .LT. KS) GO TO 870
+      JC=K3
+  890 IF(2*KT+1 .GE. M) RETURN
+      KSPNN=NP(KT+1)
+C  PERMUTATION FOR SQUARE-FREE FACTORS OF N
+      J=M-KT
+      NFAC(J+1)=1
+  900 NFAC(J)=NFAC(J)*NFAC(J+1)
+      J=J-1
+      IF(J .NE. KT) GO TO 900
+      KT=KT+1
+      NN=NFAC(KT)-1
+      IF(NN .GT. MAXP) GO TO 998
+      JJ=0
+      J=0
+      GO TO 906
+  902 JJ=JJ-K2
+      K2=KK
+      K=K+1
+      KK=NFAC(K)
+  904 JJ=KK+JJ
+      IF(JJ .GE. K2) GO TO 902
+      NP(J)=JJ
+  906 K2=NFAC(KT)
+      K=KT+1
+      KK=NFAC(K)
+      J=J+1
+      IF(J .LE. NN) GO TO 904
+C  DETERMINE THE PERMUTATION CYCLES OF LENGTH GREATER THAN 1
+      J=0
+      GO TO 914
+  910 K=KK
+      KK=NP(K)
+      NP(K)=-KK
+      IF(KK .NE. J) GO TO 910
+      K3=KK
+  914 J=J+1
+      KK=NP(J)
+      IF(KK .LT. 0) GO TO 914
+      IF(KK .NE. J) GO TO 910
+      NP(J)=-J
+      IF(J .NE. NN) GO TO 914
+      MAXF=INC*MAXF
+C  REORDER A AND B, FOLLOWING THE PERMUTATION CYCLES
+      GO TO 950
+  924 J=J-1
+      IF(NP(J) .LT. 0) GO TO 924
+      JJ=JC
+  926 KSPAN=JJ
+      IF(JJ .GT. MAXF) KSPAN=MAXF
+      JJ=JJ-KSPAN
+      K=NP(J)
+      KK=JC*K+II+JJ
+      K1=KK+KSPAN
+      K2=0
+  928 K2=K2+1
+      AT(K2)=A(K1)
+      BT(K2)=B(K1)
+      K1=K1-INC
+      IF(K1 .NE. KK) GO TO 928
+  932 K1=KK+KSPAN
+      K2=K1-JC*(K+NP(K))
+      K=-NP(K)
+  936 A(K1)=A(K2)
+      B(K1)=B(K2)
+      K1=K1-INC
+      K2=K2-INC
+      IF(K1 .NE. KK) GO TO 936
+      KK=K2
+      IF(K .NE. J) GO TO 932
+      K1=KK+KSPAN
+      K2=0
+  940 K2=K2+1
+      A(K1)=AT(K2)
+      B(K1)=BT(K2)
+      K1=K1-INC
+      IF(K1 .NE. KK) GO TO 940
+      IF(JJ .NE. 0) GO TO 926
+      IF(J .NE. 1) GO TO 924
+  950 J=K3+1
+      NT=NT-KSPNN
+      II=NT-INC+1
+      IF(NT .GE. 0) GO TO 924
+      RETURN
+C  ERROR FINISH, INSUFFICIENT ARRAY STORAGE
+ 998  IERR=1
+      RETURN
+      END
+      SUBROUTINE FFTLDP(X,N,NDIR,DT,IERR)
+C  FFTLDP IS A DOUBLE PRECISION VERSION OF FFTL. SEE NOTES TO FFTL FOR USAGE
+C  THE SCALING IN FFTLDP DIFFERS FROM THAT IN FFTL :
+C  THE FORWARD TRANSFORM IS SPECTRUM(W)=DT*SUM(0,N-1)X(J)*EXP(-I*W*J*DT)
+C  THE SPACING IN W IS 2*PI/(N*DT)
+      IMPLICIT REAL*8(A-H,O-Z)
+      DIMENSION X(*)
+      N2=N/2
+      IDIR=NDIR
+      IF(IDIR.LT.0) IDIR=-IDIR
+      GO TO (1,2),IDIR
+C   DO FORWARD TRANSFORM (IE. TIME TO FREQUENCY).
+ 1    CALL FFTDP(X,X(2),N2,N2,N2,2,IERR)
+      CALL RLTRDP(X,X(2),N2,2)
+      N1=2*N2+2
+      SCALE=0.5D0*DT
+      IF(NDIR.GT.0) GO TO 3
+      DO 5 I=4,N,2
+ 5    X(I)=-X(I)
+      GO TO 3
+C   DO BACKWARD TRANSFORM (IE. FREQUENCY TO TIME).
+ 2    IF(NDIR.GT.0) GO TO 6
+      DO 7 I=4,N,2
+ 7    X(I)=-X(I)
+ 6    X(2)=0.D0
+      N1=2*N2
+      X(N1+2)=0.D0
+      CALL RLTRDP(X,X(2),N2,-2)
+      CALL FFTDP(X,X(2),N2,N2,N2,-2,IERR)
+      SCALE=1.D0/(N*DT)
+C   NORMALIZE THE TRANSFORM.
+ 3    DO 4 I=1,N1
+ 4    X(I)=SCALE*X(I)
+      RETURN
+      END
+      SUBROUTINE RLTRDP(A,B,N,ISN)
+C   RLTRDP IS A DOUBLE PRECISION VERSION OF REALTR. SEE REALTR FOR NOTES
+C   ON USAGE.
+      IMPLICIT REAL*8(A-H,O-Z)
+      DIMENSION A(*),B(*)
+      IF(N .LE. 1) RETURN
+      INC=ISN
+      IF(INC.LT.0) INC=-INC
+      NK = N * INC + 2
+      NH = NK / 2
+      SD = 3.1415926535898D0/(2.D0*N)
+      CD = 2.D0 * DSIN(SD)**2
+      SD = DSIN(SD+SD)
+      SN = 0.D0
+      IF(ISN .GT. 0) GO TO 10
+      CN = -1.D0
+      SD = -SD
+      GO TO 20
+ 10   CN = 1.D0
+      A(NK-1) = A(1)
+      B(NK-1) = B(1)
+ 20   DO 30 J=1,NH,INC
+      K = NK - J
+      AA = A(J) + A(K)
+      AB = A(J) - A(K)
+      BA = B(J) + B(K)
+      BB = B(J) - B(K)
+      XX = CN * BA + SN * AB
+      YY = SN * BA - CN * AB
+      B(K) = YY - BB
+      B(J) = YY + BB
+      A(K) = AA - XX
+      A(J) = AA + XX
+      AA = CN - (CD * CN + SD * SN)
+      SN = (SD * CN - CD * SN) + SN
+ 30   CN = AA
+      RETURN
+      END
+      SUBROUTINE FFTDP(A,B,NTOT,N,NSPAN,ISN,IERR)
+C  FFTDP IS A DOUBLE PRECISION VERSION OF SINGLETON'S FFT PROCEDURE. SEE NOTES
+C  TO FFT FOR USAGE
+      IMPLICIT REAL*8(A-H),REAL*8(O-Z)
+      DIMENSION A(*),B(*)
+      DIMENSION NFAC(11),NP(209)
+C  ARRAY STORAGE FOR MAXIMUM PRIME FACTOR OF 23
+      DIMENSION AT(23),CK(23),BT(23),SK(23)
+      EQUIVALENCE (I,II)
+C  THE FOLLOWING TWO CONSTANTS SHOULD AGREE WITH THE ARRAY DIMENSIONS.
+      MAXF=23
+      MAXP=209
+      IERR=0
+      IF(N .LT. 2) RETURN
+      INC=ISN
+      C72=0.30901699437494D0
+      S72=0.95105651629515D0
+      S120=0.86602540378443D0
+      RAD=6.2831853071796D0
+      IF(ISN .GE. 0) GO TO 10
+      S72=-S72
+      S120=-S120
+      RAD=-RAD
+      INC=-INC
+   10 NT=INC*NTOT
+      KS=INC*NSPAN
+      KSPAN=KS
+      NN=NT-INC
+      JC=KS/N
+      RADF=RAD*(JC*0.5D0)
+      I=0
+      JF=0
+C  DETERMINE THE FACTORS OF N
+      M=0
+      K=N
+      GO TO 20
+   15 M=M+1
+      NFAC(M)=4
+      K=K/16
+   20 IF(K-(K/16)*16 .EQ. 0) GO TO 15
+      J=3
+      JJ=9
+      GO TO 30
+   25 M=M+1
+      NFAC(M)=J
+      K=K/JJ
+   30 IF(MOD(K,JJ) .EQ. 0) GO TO 25
+      J=J+2
+      JJ=J**2
+      IF(JJ .LE. K) GO TO 30
+      IF(K .GT. 4) GO TO 40
+      KT=M
+      NFAC(M+1)=K
+      IF(K .NE. 1) M=M+1
+      GO TO 80
+   40 IF(K-(K/4)*4 .NE. 0) GO TO 50
+      M=M+1
+      NFAC(M)=2
+      K=K/4
+   50 KT=M
+      J=2
+   60 IF(MOD(K,J) .NE. 0) GO TO 70
+      M=M+1
+      NFAC(M)=J
+      K=K/J
+   70 J=((J+1)/2)*2+1
+      IF(J .LE. K) GO TO 60
+   80 IF(KT .EQ. 0) GO TO 100
+      J=KT
+   90 M=M+1
+      NFAC(M)=NFAC(J)
+      J=J-1
+      IF(J .NE. 0) GO TO 90
+C  COMPUTE FOURIER TRANSFORM
+  100 SD=RADF/(KSPAN)
+      CD=2.D0*DSIN(SD)**2
+      SD=DSIN(SD+SD)
+      KK=1
+      I=I+1
+      IF(NFAC(I) .NE. 2) GO TO 400
+C  TRANSFORM FOR FACTOR OF 2 (INCLUDING ROTATION FACTOR)
+      KSPAN=KSPAN/2
+      K1=KSPAN+2
+  210 K2=KK+KSPAN
+      AK=A(K2)
+      BK=B(K2)
+      A(K2)=A(KK)-AK
+      B(K2)=B(KK)-BK
+      A(KK)=A(KK)+AK
+      B(KK)=B(KK)+BK
+      KK=K2+KSPAN
+      IF(KK .LE. NN) GO TO 210
+      KK=KK-NN
+      IF(KK .LE. JC) GO TO 210
+      IF(KK .GT. KSPAN) GO TO 800
+  220 C1=1.D0-CD
+      S1=SD
+  230 K2=KK+KSPAN
+      AK=A(KK)-A(K2)
+      BK=B(KK)-B(K2)
+      A(KK)=A(KK)+A(K2)
+      B(KK)=B(KK)+B(K2)
+      A(K2)=C1*AK-S1*BK
+      B(K2)=S1*AK+C1*BK
+      KK=K2+KSPAN
+      IF(KK .LT. NT) GO TO 230
+      K2=KK-NT
+      C1=-C1
+      KK=K1-K2
+      IF(KK .GT. K2) GO TO 230
+      AK=CD*C1+SD*S1
+      S1=(SD*C1-CD*S1)+S1
+      C1=C1-AK
+      KK=KK+JC
+      IF(KK .LT. K2) GO TO 230
+      K1=K1+INC+INC
+      KK=(K1-KSPAN)/2+JC
+      IF(KK .LE. JC+JC) GO TO 220
+      GO TO 100
+C  TRANSFORM FOR FACTOR OF 3 (OPTIONAL CODE)
+  320 K1=KK+KSPAN
+      K2=K1+KSPAN
+      AK=A(KK)
+      BK=B(KK)
+      AJ=A(K1)+A(K2)
+      BJ=B(K1)+B(K2)
+      A(KK)=AK+AJ
+      B(KK)=BK+BJ
+      AK=-0.5*AJ+AK
+      BK=-0.5*BJ+BK
+      AJ=(A(K1)-A(K2))*S120
+      BJ=(B(K1)-B(K2))*S120
+      A(K1)=AK-BJ
+      B(K1)=BK+AJ
+      A(K2)=AK+BJ
+      B(K2)=BK-AJ
+      KK=K2+KSPAN
+      IF(KK .LT. NN) GO TO 320
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 320
+      GO TO 700
+C  TRANSFORM FOR FACTOR OF 4
+  400 IF(NFAC(I) .NE. 4) GO TO 600
+      KSPNN=KSPAN
+      KSPAN=KSPAN/4
+  410 C1=1.D0
+      S1=0
+  420 K1=KK+KSPAN
+      K2=K1+KSPAN
+      K3=K2+KSPAN
+      AKP=A(KK)+A(K2)
+      AKM=A(KK)-A(K2)
+      AJP=A(K1)+A(K3)
+      AJM=A(K1)-A(K3)
+      A(KK)=AKP+AJP
+      AJP=AKP-AJP
+      BKP=B(KK)+B(K2)
+      BKM=B(KK)-B(K2)
+      BJP=B(K1)+B(K3)
+      BJM=B(K1)-B(K3)
+      B(KK)=BKP+BJP
+      BJP=BKP-BJP
+      IF(ISN .LT. 0) GO TO 450
+      AKP=AKM-BJM
+      AKM=AKM+BJM
+      BKP=BKM+AJM
+      BKM=BKM-AJM
+      IF(S1 .EQ. 0) GO TO 460
+  430 A(K1)=AKP*C1-BKP*S1
+      B(K1)=AKP*S1+BKP*C1
+      A(K2)=AJP*C2-BJP*S2
+      B(K2)=AJP*S2+BJP*C2
+      A(K3)=AKM*C3-BKM*S3
+      B(K3)=AKM*S3+BKM*C3
+      KK=K3+KSPAN
+      IF(KK .LE. NT) GO TO 420
+  440 C2=CD*C1+SD*S1
+      S1=(SD*C1-CD*S1)+S1
+      C1=C1-C2
+      C2=C1**2-S1**2
+      S2=2.D0*C1*S1
+      C3=C2*C1-S2*S1
+      S3=C2*S1+S2*C1
+      KK=KK-NT+JC
+      IF(KK .LE. KSPAN) GO TO 420
+      KK=KK-KSPAN+INC
+      IF(KK .LE. JC) GO TO 410
+      IF(KSPAN .EQ. JC) GO TO 800
+      GO TO 100
+  450 AKP=AKM+BJM
+      AKM=AKM-BJM
+      BKP=BKM-AJM
+      BKM=BKM+AJM
+      IF(S1 .NE. 0) GO TO 430
+  460 A(K1)=AKP
+      B(K1)=BKP
+      A(K2)=AJP
+      B(K2)=BJP
+      A(K3)=AKM
+      B(K3)=BKM
+      KK=K3+KSPAN
+      IF(KK .LE. NT) GO TO 420
+      GO TO 440
+C  TRANSFORM FOR FACTOR OF 5 (OPTIONAL CODE)
+  510 C2=C72**2-S72**2
+      S2=2.D0*C72*S72
+  520 K1=KK+KSPAN
+      K2=K1+KSPAN
+      K3=K2+KSPAN
+      K4=K3+KSPAN
+      AKP=A(K1)+A(K4)
+      AKM=A(K1)-A(K4)
+      BKP=B(K1)+B(K4)
+      BKM=B(K1)-B(K4)
+      AJP=A(K2)+A(K3)
+      AJM=A(K2)-A(K3)
+      BJP=B(K2)+B(K3)
+      BJM=B(K2)-B(K3)
+      AA=A(KK)
+      BB=B(KK)
+      A(KK)=AA+AKP+AJP
+      B(KK)=BB+BKP+BJP
+      AK=AKP*C72+AJP*C2+AA
+      BK=BKP*C72+BJP*C2+BB
+      AJ=AKM*S72+AJM*S2
+      BJ=BKM*S72+BJM*S2
+      A(K1)=AK-BJ
+      A(K4)=AK+BJ
+      B(K1)=BK+AJ
+      B(K4)=BK-AJ
+      AK=AKP*C2+AJP*C72+AA
+      BK=BKP*C2+BJP*C72+BB
+      AJ=AKM*S2-AJM*S72
+      BJ=BKM*S2-BJM*S72
+      A(K2)=AK-BJ
+      A(K3)=AK+BJ
+      B(K2)=BK+AJ
+      B(K3)=BK-AJ
+      KK=K4+KSPAN
+      IF(KK .LT. NN) GO TO 520
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 520
+      GO TO 700
+C  TRANSFORM FOR ODD FACTORS
+  600 K=NFAC(I)
+      KSPNN=KSPAN
+      KSPAN=KSPAN/K
+      IF(K .EQ. 3) GO TO 320
+      IF(K .EQ. 5) GO TO 510
+      IF(K .EQ. JF) GO TO 640
+      JF=K
+      S1=RAD/(K)
+      C1=DCOS(S1)
+      S1=DSIN(S1)
+      IF(JF .GT. MAXF) GO TO 998
+      CK(JF)=1.D0
+      SK(JF)=0.D0
+      J=1
+  630 CK(J)=CK(K)*C1+SK(K)*S1
+      SK(J)=CK(K)*S1-SK(K)*C1
+      K=K-1
+      CK(K)=CK(J)
+      SK(K)=-SK(J)
+      J=J+1
+      IF(J .LT. K) GO TO 630
+  640 K1=KK
+      K2=KK+KSPNN
+      AA=A(KK)
+      BB=B(KK)
+      AK=AA
+      BK=BB
+      J=1
+      K1=K1+KSPAN
+  650 K2=K2-KSPAN
+      J=J+1
+      AT(J)=A(K1)+A(K2)
+      AK=AT(J)+AK
+      BT(J)=B(K1)+B(K2)
+      BK=BT(J)+BK
+      J=J+1
+      AT(J)=A(K1)-A(K2)
+      BT(J)=B(K1)-B(K2)
+      K1=K1+KSPAN
+      IF(K1 .LT. K2) GO TO 650
+      A(KK)=AK
+      B(KK)=BK
+      K1=KK
+      K2=KK+KSPNN
+      J=1
+  660 K1=K1+KSPAN
+      K2=K2-KSPAN
+      JJ=J
+      AK=AA
+      BK=BB
+      AJ=0.D0
+      BJ=0.D0
+      K=1
+  670 K=K+1
+      AK=AT(K)*CK(JJ)+AK
+      BK=BT(K)*CK(JJ)+BK
+      K=K+1
+      AJ=AT(K)*SK(JJ)+AJ
+      BJ=BT(K)*SK(JJ)+BJ
+      JJ=JJ+J
+      IF(JJ .GT. JF) JJ=JJ-JF
+      IF(K .LT. JF) GO TO 670
+      K=JF-J
+      A(K1)=AK-BJ
+      B(K1)=BK+AJ
+      A(K2)=AK+BJ
+      B(K2)=BK-AJ
+      J=J+1
+      IF(J .LT. K) GO TO 660
+      KK=KK+KSPNN
+      IF(KK .LE. NN) GO TO 640
+      KK=KK-NN
+      IF(KK .LE. KSPAN) GO TO 640
+C  MULTIPLY BY ROTATION FACTOR (EXCEPT FOR FACTORS OF 2 AND 4)
+  700 IF(I .EQ. M) GO TO 800
+      KK=JC+1
+  710 C2=1.D0-CD
+      S1=SD
+  720 C1=C2
+      S2=S1
+      KK=KK+KSPAN
+  730 AK=A(KK)
+      A(KK)=C2*AK-S2*B(KK)
+      B(KK)=S2*AK+C2*B(KK)
+      KK=KK+KSPNN
+      IF(KK .LE. NT) GO TO 730
+      AK=S1*S2
+      S2=S1*C2+C1*S2
+      C2=C1*C2-AK
+      KK=KK-NT+KSPAN
+      IF(KK .LE. KSPNN) GO TO 730
+      C2=C1-(CD*C1+SD*S1)
+      S1=S1+(SD*C1-CD*S1)
+      KK=KK-KSPNN+JC
+      IF(KK .LE. KSPAN) GO TO 720
+      KK=KK-KSPAN+JC+INC
+      IF(KK .LE. JC+JC) GO TO 710
+      GO TO 100
+C  PERMUTE THE RESULTS TO NORMAL ORDER---DONE IN TWO STAGES
+C  PERMUTATION FOR SQUARE FACTORS OF N
+  800 NP(1)=KS
+      IF(KT .EQ. 0) GO TO 890
+      K=KT+KT+1
+      IF(M .LT. K) K=K-1
+      J=1
+      NP(K+1)=JC
+  810 NP(J+1)=NP(J)/NFAC(J)
+      NP(K)=NP(K+1)*NFAC(J)
+      J=J+1
+      K=K-1
+      IF(J .LT. K) GO TO 810
+      K3=NP(K+1)
+      KSPAN=NP(2)
+      KK=JC+1
+      K2=KSPAN+1
+      J=1
+      IF(N .NE. NTOT) GO TO 850
+C  PERMUTATION FOR SINGLE-VARIATE TRANSFORM (OPTIONAL CODE)
+  820 AK=A(KK)
+      A(KK)=A(K2)
+      A(K2)=AK
+      BK=B(KK)
+      B(KK)=B(K2)
+      B(K2)=BK
+      KK=KK+INC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 820
+  830 K2=K2-NP(J)
+      J=J+1
+      K2=NP(J+1)+K2
+      IF(K2 .GT. NP(J)) GO TO 830
+      J=1
+  840 IF(KK .LT. K2) GO TO 820
+      KK=KK+INC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 840
+      IF(KK .LT. KS) GO TO 830
+      JC=K3
+      GO TO 890
+C  PERMUTATION FOR MULTIVARIATE TRANSFORM
+  850 K=KK+JC
+  860 AK=A(KK)
+      A(KK)=A(K2)
+      A(K2)=AK
+      BK=B(KK)
+      B(KK)=B(K2)
+      B(K2)=BK
+      KK=KK+INC
+      K2=K2+INC
+      IF(KK .LT. K) GO TO 860
+      KK=KK+KS-JC
+      K2=K2+KS-JC
+      IF(KK .LT. NT) GO TO 850
+      K2=K2-NT+KSPAN
+      KK=KK-NT+JC
+      IF(K2 .LT. KS) GO TO 850
+  870 K2=K2-NP(J)
+      J=J+1
+      K2=NP(J+1)+K2
+      IF(K2 .GT. NP(J)) GO TO 870
+      J=1
+  880 IF(KK .LT. K2) GO TO 850
+      KK=KK+JC
+      K2=KSPAN+K2
+      IF(K2 .LT. KS) GO TO 880
+      IF(KK .LT. KS) GO TO 870
+      JC=K3
+  890 IF(2*KT+1 .GE. M) RETURN
+      KSPNN=NP(KT+1)
+C  PERMUTATION FOR SQUARE-FREE FACTORS OF N
+      J=M-KT
+      NFAC(J+1)=1
+  900 NFAC(J)=NFAC(J)*NFAC(J+1)
+      J=J-1
+      IF(J .NE. KT) GO TO 900
+      KT=KT+1
+      NN=NFAC(KT)-1
+      IF(NN .GT. MAXP) GO TO 998
+      JJ=0
+      J=0
+      GO TO 906
+  902 JJ=JJ-K2
+      K2=KK
+      K=K+1
+      KK=NFAC(K)
+  904 JJ=KK+JJ
+      IF(JJ .GE. K2) GO TO 902
+      NP(J)=JJ
+  906 K2=NFAC(KT)
+      K=KT+1
+      KK=NFAC(K)
+      J=J+1
+      IF(J .LE. NN) GO TO 904
+C  DETERMINE THE PERMUTATION CYCLES OF LENGTH GREATER THAN 1
+      J=0
+      GO TO 914
+  910 K=KK
+      KK=NP(K)
+      NP(K)=-KK
+      IF(KK .NE. J) GO TO 910
+      K3=KK
+  914 J=J+1
+      KK=NP(J)
+      IF(KK .LT. 0) GO TO 914
+      IF(KK .NE. J) GO TO 910
+      NP(J)=-J
+      IF(J .NE. NN) GO TO 914
+      MAXF=INC*MAXF
+C  REORDER A AND B, FOLLOWING THE PERMUTATION CYCLES
+      GO TO 950
+  924 J=J-1
+      IF(NP(J) .LT. 0) GO TO 924
+      JJ=JC
+  926 KSPAN=JJ
+      IF(JJ .GT. MAXF) KSPAN=MAXF
+      JJ=JJ-KSPAN
+      K=NP(J)
+      KK=JC*K+II+JJ
+      K1=KK+KSPAN
+      K2=0
+  928 K2=K2+1
+      AT(K2)=A(K1)
+      BT(K2)=B(K1)
+      K1=K1-INC
+      IF(K1 .NE. KK) GO TO 928
+  932 K1=KK+KSPAN
+      K2=K1-JC*(K+NP(K))
+      K=-NP(K)
+  936 A(K1)=A(K2)
+      B(K1)=B(K2)
+      K1=K1-INC
+      K2=K2-INC
+      IF(K1 .NE. KK) GO TO 936
+      KK=K2
+      IF(K .NE. J) GO TO 932
+      K1=KK+KSPAN
+      K2=0
+  940 K2=K2+1
+      A(K1)=AT(K2)
+      B(K1)=BT(K2)
+      K1=K1-INC
+      IF(K1 .NE. KK) GO TO 940
+      IF(JJ .NE. 0) GO TO 926
+      IF(J .NE. 1) GO TO 924
+  950 J=K3+1
+      NT=NT-KSPNN
+      II=NT-INC+1
+      IF(NT .GE. 0) GO TO 924
+      RETURN
+C  ERROR FINISH, INSUFFICIENT ARRAY STORAGE
+ 998  IERR=1
+      RETURN
+      END
