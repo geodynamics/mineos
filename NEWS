@@ -1,0 +1,15 @@
+SynDat NEWS -- history of user-visible changes.  2006-07-19
+
+Please send SynDat bug reports to cig-seismo@geodynamics.org.
+
+
+Version 1.0.0
+
+* SynDat is now distributed under the GNU General Public License.
+  See the file COPYING for copying conditions.
+
+
+Local variables:
+version-control: never
+mode: indented-text
+end:

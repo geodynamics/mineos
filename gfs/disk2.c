@@ -84,7 +84,10 @@ unit lun.
 
 */
 
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
+#include "config.h"
 
 
 #define   MAXFDS    40  /* the most files allowed in UNIX */
@@ -117,7 +120,7 @@ static    int       reserved[MAXFDS] = {0, 1, 2, -1, -1, 5, 6, -1, -1, -1,
           int       status;
           int       i;
 
-ggetfil_(mode, lun, name, istat)
+F77_FUNC(ggetfil,GGETFIL)(mode, lun, name, istat)
           int       *mode;
           int       *lun;
           char      *name;
@@ -158,7 +161,7 @@ ggetfil_(mode, lun, name, istat)
 }
 
 
-gfrefil_( lun )
+F77_FUNC(gfrefil,GFREFIL)( lun )
         int    *lun;
 
 {
@@ -169,7 +172,7 @@ gfrefil_( lun )
 }
 
 
-gfilsiz_(name, bsize)
+F77_FUNC(gfilsiz,GFILSIZ)(name, bsize)
           char      *name;
           int       *bsize;
 {
@@ -182,7 +185,7 @@ gfilsiz_(name, bsize)
 }
 
 
-gpodiscb_( lun,  addres)
+F77_FUNC(gpodiscb,GPODISCB)( lun,  addres)
       int     *lun;
       int     *addres;
 
@@ -194,7 +197,7 @@ gpodiscb_( lun,  addres)
 }
 
 
-grddiscb_(lun, buffer, n, istat)
+F77_FUNC(grddiscb,GRDDISCB)(lun, buffer, n, istat)
        int     *lun;
        int     *buffer;
        int     *n;
@@ -211,7 +214,7 @@ grddiscb_(lun, buffer, n, istat)
        return;
 }
 
-gwrdiscb_(lun, buffer, n, istat)
+F77_FUNC(gwrdiscb,GWRDISCB)(lun, buffer, n, istat)
        int     *lun;
        int     *buffer;
        int     *n;

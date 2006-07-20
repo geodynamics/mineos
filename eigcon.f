@@ -35,7 +35,7 @@ c  read in radial knots
 c
       print*,' enter name of model file'
       read(*,'(a)')filen 
-      open(iin,file=filen,status='readonly')
+      open(iin,file=filen,status='old')
       read(iin,101) (ititle(i),i=1,20)
   101 format(20a4)
       read(iin,*) ifanis,tref,ifdeck
@@ -111,7 +111,7 @@ c  write first header containing radial grid
 ccc
       print 40,nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
      *           rn,wn,accn
-   40 format(i6,x,a8,2i6,x,a4,i4,3g15.5,i6,3g15.5)
+   40 format(i6,1x,a8,2i6,1x,a4,i4,3g15.5,i6,3g15.5)
       print 41,(rout(i),i=1,nrad)
    41 format(5g15.5)
 ccc

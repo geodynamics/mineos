@@ -1,5 +1,9 @@
 /* Simple routines for interfacing Fortran and C. */
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <string.h>
+
 int white(k)
 char k;
 /* Tells if it's whitespace or not. */
