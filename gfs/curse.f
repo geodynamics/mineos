@@ -824,16 +824,22 @@ c  primitive write to output file,this version for gfs
       goto 1
       end
 
-      subroutine makbig(iin,iout)
+      subroutine makbig(rriin,rriout)
+      equivalence (riin,iin),(riout,iout)
 c  subroutine to use top 4 bits to flag a real*4 datum
 c  call this with real numbers as arguments!
+      riin=rriin
       iout=or(and(iin,268435440),and(rshift(iin,28),15)+1610612736)
+      rriout=riout
       return
       end
 
-      subroutine maksml(iin,iout)
+      subroutine maksml(rriin,rriout)
+      equivalence (riin,iin),(riout,iout)
 c  subroutine to use top 4 bits to unflag a real*4 datum
 c  call this with real numbers as arguments!
+      riin=rriin
       iout=or(and(iin,268435440),lshift(iin,28))
+      rriout=riout
       return
       end

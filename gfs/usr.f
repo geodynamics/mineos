@@ -157,7 +157,8 @@ c                AND COMPUTATION OF GREENS FUNCTIONS
 c
    60 if(itype.ne.6) goto 70
       nwb(io)=4
-      lhed(io)=214
+cxx (MB)   lhed(io)=214
+      lhed(io)=1540
       natt(io)=4
       attrem(1,io)='mode type       '
       iatt(1,1,io)=6
@@ -335,7 +336,7 @@ c    tlat,tlon,tdep = turning point location
      +    ems,emb,emom,ecode,                                             
      +    nsta8,ntyp8,nchn8,dtd,slat8,slon8,selev,scor,scode,                   
      +    dist,azs,azr,hlat,hlon,code,                                    
-     +    iys,ids,ihs,ims,sss,stim,toffset,npts8,                          
+     +    iys,ids,ihs,ims,sss,zzz,stim,toffset,npts8,                          
      +    pnam,ptim,amp,tstar,pol,qual,ctim,ecor,modid,tlat,tlon,   
      +    tdep,tcode,extra(11)
       equivalence (head8,nscan8)
@@ -448,7 +449,7 @@ c
      +    ems,emb,emom,ecode,                                             
      +    nsta8,ntyp8,nchn8,dtd,slat8,slon8,selev,scor,scode,                   
      +    dist,azs,azr,hlat,hlon,code,                                    
-     +    iys,ids,ihs,ims,sss,stim,toffset,npts8,                          
+     +    iys,ids,ihs,ims,sss,zzz,stim,toffset,npts8,                          
      +    pnam,ptim,amp,tstar,pol,qual,ctim,ecor,modid,tlat,tlon,   
      +    tdep,tcode,extra1(11)
       equivalence (head8,nscan8)

@@ -12,14 +12,14 @@ c
 *                             variable  irecl for reclength of eigfun file*
 *     latest change: 19.08.91 subroutines    for sph, rad and tor modes   *
 ***************************************************************************
-      dimension ititle(20),hed6(214)
-      real*8 r(200),pi
+      dimension ititle(20),hed6(1554)
+      real*8 r(300),pi
       character atyp*4, model*8,filen*80  
-      common/hed$/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *           rn,wn,accn,rout(200)
-      equivalence (nhed,hed6)
+      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
+     *           rn,wn,accn,rout(1540)
+      equivalence (nhed,hed6(1))
       data bigg,tau,rhobar/6.6723e-11,1000.0,5515.0/
-      data rout/200*0./                               
+      data rout/1540*0./                               
       irecl=5600
       iin=11
       pi=4.*atan(1.d0)          
@@ -97,7 +97,7 @@ c  normalize radius
       print*,' enter name of eigenfunction file to be reduced'
       read(*,'(a)')filen
       open(2,file=filen,
-     *       form='unformatted',iostat=iret,recl=irecl)
+     *       form='unformatted',iostat=iret)
       call gfs_opena(3,'output gfs-file name :',ityp,ierr)
 c  write first header containing radial grid
       kfl  = 1
@@ -130,11 +130,11 @@ c...  i/o of eigenfunctions
       end                         
 
       subroutine conv4(nstart,n,kfl)
-      parameter(mnl=223)          
-      common/buf$/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hed$/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(200)
-      dimension abuf(6*mnl+5),a(4,250),aa(1),hed6(214)
+      parameter(mnl=323)          
+      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
+      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
+     *            rn,wn,accn,x(1540)
+      dimension abuf(6*mnl+5),a(4,350),aa(1),hed6(1554)
       character*4 atyp                                       
       character*8 model
       equivalence (nn,abuf),(a,aa),(hed6,nhed)
@@ -143,8 +143,8 @@ c...  i/o of eigenfunctions
         nloop=4
         nlen = nloop*nrad                                 
         nout = nloop*nrad+5
-      print *,'nlen (must be .le. 200 or else change defhdr) : ',nlen
-      if(nlen.gt.200)stop
+      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen,nvec
+      if(nlen.gt.1540)stop
    50 read(2,end=99) (abuf(i),i=1,nvec)
     5 do 1 i=1,nrad
          do 1 j=1,nloop
@@ -184,21 +184,21 @@ c*** cg is really the perturbation of the grav potl at the surface!
       end
 
       subroutine conv2(nstart,n,kfl)
-      parameter(mnl=223)          
-      common/buf$/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hed$/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(200)
-      dimension abuf(6*mnl+5),a(2,250),aa(1),hed6(214)
+      parameter(mnl=323)          
+      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
+      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
+     *            rn,wn,accn,x(1540)
+      dimension abuf(6*mnl+5),a(2,350),aa(1),hed6(1554)
       character*4 atyp                                       
       character*8 model
-      equivalence (nn,abuf),(a,aa),(hed6,nhed)
+      equivalence (nn,abuf(1)),(a(1,1),aa(1)),(hed6(1),nhed)
         atyp    ='T   '
         nvec = 2*n + 5                                
         nloop=2
         nlen = nloop*nrad                                 
         nout = nloop*nrad+5
-      print *,'nlen (must be .le. 200 or else change defhdr) : ',nlen
-      if(nlen.gt.200)stop
+      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen
+      if(nlen.gt.1540)stop
    50 read(2,end=99) (abuf(i),i=1,nvec)
     5 do 1 i=1,nrad
          do 1 j=1,nloop
@@ -232,11 +232,11 @@ c*** cg is really the perturbation of the grav potl at the surface!
 
       subroutine conv1(nstart,n,kfl)
 c*** special for radial modes
-      parameter(mnl=223)          
-      common/buf$/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hed$/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(200)
-      dimension abuf(6*mnl+5),a(4,250),aa(1),hed6(214)
+      parameter(mnl=323)          
+      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
+      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
+     *            rn,wn,accn,x(1540)
+      dimension abuf(6*mnl+5),a(4,350),aa(1),hed6(1554)
       character*4 atyp                                       
       character*8 model
       equivalence (nn,abuf),(a,aa),(hed6,nhed)
@@ -245,8 +245,8 @@ c*** special for radial modes
         nloop=4
         nlen = nloop*nrad                                 
         nout = nloop*nrad+5
-      print *,'nlen (must be .le. 200 or else change defhdr) : ',nlen
-      if(nlen.gt.200)stop
+      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen
+      if(nlen.gt.1540)stop
    50 read(2,end=99) (abuf(i),i=1,nvec)
     5 do 1 i=1,nrad
          do 1 j=1,nloop

@@ -12,8 +12,10 @@
       istat=0
       if(ifirs.eq.1)goto 1
   
+cxx (MB)      open(51,file=
+cxx (MB)     + '/home/guy/resp.dir/stations',status='old')
       open(51,file=
-     + '/home/guy/resp.dir/stations',status='old')
+     + 'stations',status='old')
       j=0
  2    continue
       j=j+1
@@ -55,9 +57,11 @@
       ph=0.
       istat=0
       if(ifirs.eq.1)goto 1
-  
+      
+cxx (MB)      open(51,file=
+cxx (MB)     + '/home/guy/resp.dir/stations',status='old')
       open(51,file=
-     + '/home/guy/resp.dir/stations',status='old')
+     + 'stations',status='old')
       j=0
  2    continue
       j=j+1
@@ -101,10 +105,12 @@ c*** response is evaluated with evresh
 	character*23 ftmp5
 	character*3 chn
 	real*8 freql,freqh,tfreq,treal,trealw,timag,timagw
-	parameter(mx=70001,nx=2001)
+cxx (MB)	parameter(mx=70001,nx=2001)
+	parameter(mx=70004,nx=2001)
+cxx (MB) added ZZZ in common irisXXX for alingment
         common/irisXXX/niris,nmx,sta(mx),chn(mx),typ(mx),
      &    iy1(mx),id1(mx),ih1(mx),iy2(mx),id2(mx),ih2(mx),
-     &    freql,freqh,tfreq(nx),
+     &    ZZZ,freql,freqh,tfreq(nx),
      &    treal(nx),trealw(nx),timag(nx),timagw(nx)
 	data iflag/1/
 	istat = -1
@@ -212,15 +218,18 @@ C	call splneq2(niris,timag,timagw)
 	end
 
         complex function evresh(w)
-	real*8 freql,freqh,tfreq,tmp,eval2
+cxx (MB)        real*8 freql,freqh,tfreq,tmp,eval2
+	real*8 freql,freqh,tfreq,tmp
         real*8 treal,trealw,timag,timagw
 	character*4 sta
 	character*3 chn
         character*2 typ
-	parameter(mx=70001,nx=2001)
+cxx (MB)	parameter(mx=70001,nx=2001)
+	parameter(mx=70004,nx=2001)
+cxx (MB) added ZZZ in common irisXXX for alingment
         common/irisXXX/niris,nmx,sta(mx),chn(mx),typ(mx),
      &    iy1(mx),id1(mx),ih1(mx),iy2(mx),id2(mx),ih2(mx),
-     &    freql,freqh,tfreq(nx),
+     &    ZZZ,freql,freqh,tfreq(nx),
      &    treal(nx),trealw(nx),timag(nx),timagw(nx)
 C       tmp=1.D0+(   ( dble(w)/(2.D0*3.1415926535D0) ) - freql )
 C    &            /( (freqh - freql ) / dble(niris-1) )

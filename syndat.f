@@ -12,7 +12,7 @@ c
       equivalence (nscan,hed1)
       data pi/3.14159265358979d0/            
       data itype1,zero,flag/1,0.,5.e15/
-      open(7,file='/home/guy/lfsyn.dir/locale.cmt.big')
+      open(7,file='locale.cmt.big')
    21 write(*,101)
   101 format('Do you want to use moment tensor in locale ? (y/n) : ',$)
       read(*,'(a1)',err=21)l2               

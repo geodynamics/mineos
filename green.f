@@ -1,4 +1,4 @@
-c
+
 c.....program green
 c       common blocks :
 c          dheadX : source info
@@ -8,7 +8,8 @@ c          vecnlX : exitations of modes
 c
       program green
       integer n1(100),n2(100)
-      real*4 hed1(30),alocal(9),scalrs(8),dcg(3)
+cxx (MB)      real*4 hed1(30),alocal(9),scalrs(8),dcg(3)
+      real*4 hed1(30),alocal(9),scalrs(8)
       real*8 co,si,c1,c2,s1,s2,z,zp,cz,sz,caz,saz,prp
       common/dheadX/d0,th,ph,jy,jd,jh,jm,sec,tstart
       common/zfXX/z(3,250),zp(3,250)
@@ -23,15 +24,26 @@ c
       common/sclrX/n,l,e1,e2,e3,e4,au,av
       common/propX/prp(54000)
       character*4 nchn,nsta,ksta
+c (MB) added for consistency
+      character*4 ntyp
+
       equivalence (n,scalrs),(hed1,nscan),(alocal,d0)
       data pi,rad,zero,tstart/3.14159265359,57.29578,0.,0./
       data icomp,itype1,ksta/0,1,'xxxx'/
 c
 c.....open event file for which you want to compute green's functions
 c
-      call gfs_opena(1,'event file (input) :',itype1,jret1)
+cxx   call gfs_opena(1,'event file (input) :',itype1,jret1)
 c*** read first header to get source info
-      call gfs_rwdir(1,hed1,1,'r',ierr)
+cxx   call gfs_rwdir(1,hed1,1,'r',ierr)
+      open(12,file='green_in',status='old')
+      read(12,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
+     &             sdep,jys,jds,jhs,jms,sss
+      do i=1,12
+         spare(i) =0.0
+      enddo
+      close (12)
+c--
       d0=sdep
       th=90.-slat
       ph=slon
@@ -71,8 +83,15 @@ c
 c====loop over records
 c........read event header
 c
-      do 90 ifl=1,jret1
-      call gfs_rwdir(1,hed1,ifl,'r',ierr)
+      open(12,file='green_in',status='old')
+cxx   do 90 ifl=1,jret1
+      do 90 ifl=1,3
+cxx   call gfs_rwdir(1,hed1,ifl,'r',ierr)
+      read(12,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
+     &             sdep,jys,jds,jhs,jms,sss
+      ierr=0
+      write(*,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
+     &             sdep,jys,jds,jhs,jms,sss
       if (ierr.ne.0) stop 'could not read event header'
       if (nscan.gt.9000) stop 'Data array too long! '
       if (nsta.eq.ksta) then
@@ -94,7 +113,7 @@ c
 
       print 110,nsta,mchn
   110 format(' Station ',a4,'   Channel',i2)
-      call inresp(iscan)
+cxx   call inresp(iscan)
       tstart=((((iy-jy)*366.+(id-jd))*24.+(ih-jh))*60.+(im-jm))*60.+
      +ss-sec
       if(tstart.ne.told.and.icomp.ne.0) icomp=1
@@ -193,7 +212,10 @@ c
 c
 c....read in data record
 c
-  500 call gfs_rwentry(1,hed1,dat,ifl,'r')
+cxx  500 call gfs_rwentry(1,hed1,dat,ifl,'r')
+ 500  do ii = 1,nscan
+       dat(ii) = 0.5*sin(0.31415926*(ii-1)*dt)
+      enddo
 c
 c....greens function longer than data ? : add flags to data !
 c
@@ -219,7 +241,7 @@ c
 c
 c....convolve green's function by instrument response
 c
-      call grnflt(grn(indx+1),iscan,6)
+cxx   call grnflt(grn(indx+1),iscan,6)
       len=6*iscan
 c      if(dcg(mchn).eq.1.0) goto 87
 c
@@ -236,7 +258,9 @@ c
       call prhdr(igr,hed1,itype1)
       call gfs_rwentry(2,hed1,grn(indx+1),igr,'w')
    90 continue
-   99 call gfs_close(1)
+      close(12)
+cxx   99 call gfs_close(1)
+99    continue
       call gfs_close(2)
       stop
       end
@@ -301,12 +325,14 @@ c
       common/vecnlX/vecnl(8,2760),vecnlt(4,1650)
       common/modeX/om(2760),a0(2760),omt(1650),a0t(1650)
       common/hedX/nhed,model,jcom,n,atyp,l,w,q,p,npts,
-     *           rn,wn,accn,buf(200)
-      dimension r(200),hed6(214)
+     *           rn,wn,accn,buf(1540)
+      dimension r(300),hed6(1554)
       equivalence (nhed,hed6)
       data fot/1.33333333333/
-      data name1/'/home/guy/lfsyn.dir/sph20m.gfs'/
-      data name2/'/home/guy/lfsyn.dir/tor20m.gfs'/
+cxx (MB) data name1/'/home/guy/lfsyn.dir/sph20m.gfs'/
+cxx (MB) data name2/'/home/guy/lfsyn.dir/tor20m.gfs'/
+      data name1/'gfs_S'/
+      data name2/'gfs_T'/
       data ityp6/6/
 c*** get spheroidal source scalars ***
       call gfs_open(3,name1,ityp6,jret3)
@@ -468,7 +494,8 @@ c
 c....instrument response
 c
       real*8 df,pi,sh
-      complex evresh,resp,z
+cxx (MB)      complex evresh,resp,z
+      complex evresh,resp
       common/respX/resp(4501)
       common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,spare(20)
       data pi/3.14159265358979d0/
@@ -696,12 +723,14 @@ c if there are leading blanks
       DATA RAD/.0174532/
       data iflag/1/
       if(iflag.eq.1) then
-        filename='/Users/guy/resp.dir/LIST.STA'
+cxx (MB)  filename='/Users/guy/resp.dir/LIST.STA'
+        filename='LIST.STA'
         open(99,file=filename(1:lenb2(filename)))
         n=1
    98   read(99,96,end=97) tsta(n),tchn(n),ty1(n),td1(n),
      &      ty2(n),td2(n),tlat(n),tlon(n),tele(n),azi(n)
-   96   format(a4,1x,a3,2x,i4,1x,i3,1x,i4,1x,i3,1x,f10.5,1x,f10.5,1x,
+cxx (MB) 96   format(a4,1x,a3,2x,i4,1x,i3,1x,i4,1x,i3,1x,f10.5,1x,f10.5,1x,
+   96   format(a4,2x,a3,2x,i4,1x,i3,1x,i4,1x,i3,1x,f10.5,1x,f10.5,1x,
      +       f6.0,1x,f10.5)
         n=n+1
         go to 98

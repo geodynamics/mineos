@@ -19,11 +19,12 @@
 
 # $Id: Makefile.am 2452 2005-10-19 20:03:01Z leif $
 
-bin_PROGRAMS = syndat green eigcon \
+bin_PROGRAMS = minos_bran syndat green eigcon \
 	ghead glist gtail iutil \
 	curse
 
 # main programs
+minos_bran_SOURCES = minos_bran.f
 syndat_SOURCES = syndat.f $(gfs) fftsubs.f
 green_SOURCES = green.f $(gfs) fftsubs.f rcode.f
 eigcon_SOURCES = eigcon.f $(gfs)
