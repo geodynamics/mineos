@@ -63,8 +63,8 @@ c
 
       call source(fmin,fmax,lmax,nmodes,nmodet)
 
-      if(lmax.lt.249) goto 5
-      print*,'max l =',lmax,' must be .le.249'
+      if(lmax.lt.meig) goto 5
+      print*,'max l =',lmax,' must be .le.',meig
       goto 99
     5 print 105,d0,th,ph
   105 format('source depth =',f5.0,' km, colat. and long. =',2f7.2)
