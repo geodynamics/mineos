@@ -12,30 +12,75 @@ c
 *                             variable  irecl for reclength of eigfun file*
 *     latest change: 19.08.91 subroutines    for sph, rad and tor modes   *
 ***************************************************************************
-      dimension ititle(20),hed6(1554)
-      real*8 r(300),pi
-      character atyp*4, model*8,filen*80  
-      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *           rn,wn,accn,rout(1540)
-      equivalence (nhed,hed6(1))
+      implicit none
+      integer*4 mk
+      parameter (mk=350)
+c ---  eigen relation common block
+      real*4    per_eigen,phvel_eigen,grvel_eigen,attn_eigen
+      integer*4 norder_eigen,lorder_eigen,eigid_eigen,
+     +          nraw_eigen,ncol_eigen,npar_eigen,foff_eigen,
+     +          commid_eigen
+      character*2 datatype_eigen
+      character*64 dir_eigen
+      character*32 dfile_eigen
+      character*17 lddate_eigen
+      character*1 typeo_eigen
+      common/c_eigen/norder_eigen,lorder_eigen,
+     +      eigid_eigen,per_eigen,phvel_eigen,grvel_eigen,
+     +      attn_eigen,nraw_eigen,ncol_eigen,npar_eigen,
+     +      foff_eigen,commid_eigen,typeo_eigen,
+     +      datatype_eigen,dir_eigen,dfile_eigen,lddate_eigen
+c --- other variables
+      real*8    r(mk),pi
+      real*4    rout(mk),buf(6,mk)
+      real*4    bigg,tau,rhobar,con,accn
+      real*4    tref,rx,r1,r2,dr,dum,rn,gn,vn,wn
+      real*4    dmax,rmax,ww,qq,qc,tf,fl,fl1,fl3
+      integer*4 i,ieig,idat,iin,ifanis,ifdeck,j,jj,jcom,l,ll,lll
+      integer*4 n,nic,noc,nreg,nn,nlay,nstart,nrad,ni,nrecl,nrest
+      integer*4 ierr,iflag,ititle(20)
+      character*20 str
+      character*64 dir
+      character*1 typeo
+      character*256 fmodel,fflatin,fbinin,fout  
+c ---
       data bigg,tau,rhobar/6.6723e-11,1000.0,5515.0/
-      data rout/1540*0./                               
-      irecl=5600
-      iin=11
-      pi=4.*atan(1.d0)          
+      pi=4.0d0*datan(1.d0)          
       con=pi*bigg
-      print*,'enter name of model : '
-      read (*,'(a)') model
-c...  hed6 must have dimension of rout+14 (not 13, because of model*8!)
-c  jcom : flag to indicate mode type
-      print*,' spheroidals (3) or toroidals (2) or radial (1)'
+      nstart = 0
+c
+c read control parameters from stdin
+c
+c  read jcom : flag to indicate mode type
+      print*,' spheroidals (3) or toroidals (2) or radial (1) or'
+      print*,' inner core toroidals (4) modes'
       read(*,*)jcom
-c
-c  read in radial knots
-c
+c read model file name
       print*,' enter name of model file'
-      read(*,'(a)')filen 
-      open(iin,file=filen,status='old')
+      read(*,'(a)')fmodel
+c read max depth for eigenvectors
+      print *,'enter max depth [km] : '
+      read(5,*) dmax
+c read minos_bran output text file
+      write(*,*) ' enter name of minos_bran output text file'
+      read(*,'(a)') fflatin
+c read minos_bran output binary unformatted file
+      write(*,*) ' minos_bran output binary unformatted file name'
+      read(*,'(a)') fbinin
+c read dbase_name. There might be two form of input string:
+c path/dbase_name  or dbase_name, where path is relative or absolute
+c path to existing directory. Under this directory or working
+c directory (no path/ in input string) will be created db relation file
+c dbase_name.eigen, directory dbase_name.eigen.dat, and
+c under dbase_name.eigen.dat binary data file eigen.
+      print*,
+     * ' enter path/dbase_name or dbase_name to store eigenfunctions:'
+      read(*,'(a)')fout
+c
+c  read in radial knots from model
+c
+      iin = 7
+      open(iin,file=fmodel,status='old')
       read(iin,101) (ititle(i),i=1,20)
   101 format(20a4)
       read(iin,*) ifanis,tref,ifdeck
@@ -64,8 +109,12 @@ c*** polynomial model ***
  2000 close(iin)
 c
 c  rn     : radius at surface
+c  wn     : frequency normalization
+c  vn     : velocity normalisation
+c  gn     : acceleration normalisation
+c  accn   : ??????
 c  n      : index of surface grid point
-c  nstart :   "   "  lowest   "     "
+c  nstart : index of lowest grid point
 c  nrad   : # of gridpoints of reduced eigenfunctions
 c
       rn=r(n)
@@ -74,207 +123,121 @@ c
       wn=vn/rn
       accn=1.e+20/(rhobar*rn**4)
 c  normalize radius
-      do 55 i=1,n
+      do i=1,n
          r(i)=r(i)/rn
          if(i.gt.1.and.dabs(r(i)-r(i-1)).lt.1.d-7) r(i)=r(i-1)
-   55    continue
-      print *,'enter max depth [km] : '
-      read(5,*) dmax
+      enddo
+c cut radius knots lower than max depth
       rmax=1.-dmax*tau/rn
       j=0
-      do 25 i=1,n
-         if(r(i).gt.rmax) goto 30
-   25    j=j+1
-   30 nstart=j
-      j=0
-      do 35 i=nstart,n
+      do i=1,n
          j=j+1
-   35    rout(j)=r(i)
+         if(r(i).ge.rmax) goto 30
+      enddo
+   30 nstart=max0(j-1,1)
+      j=0
+      do i=nstart,n
+         j=j+1
+         rout(j)=r(i)
+      enddo
       nrad=j
-      print *,'n,nstart,nrad = ',n,nstart,nrad
-
-      ityp = 6
-      print*,' enter name of eigenfunction file to be reduced'
-      read(*,'(a)')filen
-      open(2,file=filen,
-     *       form='unformatted',iostat=iret)
-      call gfs_opena(3,'output gfs-file name :',ityp,ierr)
-c  write first header containing radial grid
-      kfl  = 1
-      nz   = 0
-      atyp = 'grid'
-      lz   = 0           
-      w    = 0.
-      q    = 0.
-      g    = 0.
-      nhed = 0                       
-ccc
-      print 40,nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *           rn,wn,accn
-   40 format(i6,1x,a8,2i6,1x,a4,i4,3g15.5,i6,3g15.5)
-      print 41,(rout(i),i=1,nrad)
-   41 format(5g15.5)
-ccc
-      call gfs_rwdir(3,hed6,kfl,'w',ierr)                              
-c...  i/o of eigenfunctions
-      if(jcom.eq.3)then
-        call conv4(nstart,n,kfl)   
-      else  if(jcom.eq.2) then
-        call conv2(nstart,n,kfl)   
-      else
-        call conv1(nstart,n,kfl)
+      write(*,*) 'n,nstart,nrad = ',n,nstart,nrad
+c open minos_bran plane output file and search mode part
+      open(7,file=fflatin,form='formatted',status='old')
+  1   read(7,'(a)',end=9) str
+      ni=0
+      do i = 1,20
+        if(str(i:i).eq.'m') ni=i
+      enddo
+      if(ni.eq.0) goto 1
+      if(str(ni:ni+3).eq.'mode') goto 2
+      goto 1
+  9   stop 'Wrong minos_bran output text file'
+  2   read(7,'(a)') str
+c open minos_bran binary unformatted file
+      open(8,file=fbinin,form='unformatted',status='old')
+c***************************************************************
+c Create .eigen relations and binary eigenfunctions file
+c***************************************************************
+      ieig = 9
+      idat = 10
+      call null_eigen
+      eigid_eigen = 1
+      foff_eigen = 0
+      ncol_eigen = 2
+      if(jcom.eq.3) ncol_eigen = 6
+      npar_eigen = 4
+      nraw_eigen = nrad
+      nrecl = max0(ncol_eigen*nraw_eigen+npar_eigen,10)*4
+      call open_eigen(fout,nrecl,ieig,idat,dir,'w',ierr)
+      dir_eigen = dir
+      dfile_eigen = 'eigen'
+      call write_eigen(ieig,ierr)
+      nrest=nrecl/4-nrad-9
+      write(idat,rec=eigid_eigen) 
+     +        jcom,bigg,tau,rhobar,rn,wn,vn,gn,accn,
+     +        (rout(l),l=1,nrad),(foff_eigen,lll=1,nrest)
+c
+c Main loop ----
+c
+ 200  eigid_eigen = eigid_eigen+1
+      foff_eigen = foff_eigen+nrecl
+      read(8,end=99) nn,ll,ww,qq,qc,((buf(l,lll),lll=1,n),
+     +               l=1,ncol_eigen)
+      read(7,*) norder_eigen,typeo,lorder_eigen,phvel_eigen,
+     +          tf,per_eigen,grvel_eigen,attn_eigen
+      if(nn.ne.norder_eigen.or.ll.ne.lorder_eigen) then
+        write(*,*) 
+     +      'ERR001: eigcon: Input plane and binary files differ: ',
+     +      nn,ll,norder_eigen,lorder_eigen
+        stop
       endif
-      close(2)
-      call gfs_close(3)
-      stop
+c check that jcom corresponds to minos_bran mode
+      iflag = 0
+      if(jcom.eq.4) then
+        if(typeo.ne.'c') iflag = 1
+        typeo_eigen = 'C'
+      else if(jcom.eq.3)then
+        if(typeo.ne.'s') iflag = 1
+        typeo_eigen = 'S'
+      else if(jcom.eq.2) then
+        if(typeo.ne.'t') iflag = 1
+        typeo_eigen = 'T'
+      else if(jcom.eq.1) then 
+        if(typeo.ne.'s') iflag = 1
+        typeo_eigen = 'R'
+        grvel_eigen = -1.0
+      else
+        write(*,*) 'ERR002: eigcon: Unknown jcom ',jcom
+        stop
+      endif
+      if(iflag.eq.1) then
+        write(*,*) 'ERR003: eigcon: jcom=',jcom,
+     +            ' does not fit mode ',typeo_eigen
+        stop
+      endif
+c additional normalization V, V' or W, W'
+      if(typeo_eigen.eq.'S'.or.typeo_eigen.eq.'T') then
+        fl=ll
+        fl1=fl+1.0
+        fl3=sqrt(fl*fl1)
+        do i=nstart,n
+          do j =1,2
+             if(typeo_eigen.eq.'T') then
+               buf(j,i)=buf(j,i)/fl3
+             else
+               buf(j+2,i)=buf(j+2,i)/fl3
+             endif
+          enddo
+        enddo
+      endif
+      qq=0.5*ww/qq
+cxx   ww = ww/wn
+      call write_eigen(ieig,ierr)
+      write(idat,rec=eigid_eigen) nn,ll,ww,qq,
+     +     ((buf(l,lll),l=1,ncol_eigen),lll=nstart,n)
+      goto 200
+  99  close(7)
+      close(8)
+      call close_eigen(ieig,idat)
       end                         
-
-      subroutine conv4(nstart,n,kfl)
-      parameter(mnl=323)          
-      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(1540)
-      dimension abuf(6*mnl+5),a(4,350),aa(1),hed6(1554)
-      character*4 atyp                                       
-      character*8 model
-      equivalence (nn,abuf),(a,aa),(hed6,nhed)
-        atyp    ='S   ' 
-        nvec = 6*n + 5     
-        nloop=4
-        nlen = nloop*nrad                                 
-        nout = nloop*nrad+5
-      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen,nvec
-      if(nlen.gt.1540)stop
-   50 read(2,end=99) (abuf(i),i=1,nvec)
-    5 do 1 i=1,nrad
-         do 1 j=1,nloop
-    1       a(j,i)=0.0
-      fl=ll
-      fl1=fl+1.0
-      fl3=fl*fl1
-      sfl3=sqrt(fl3)
-      print 900,nn,atyp,ll,ww,qq,cg,sfl3,buf(5*n)
-  900 format(i4,a4,i4,5g14.6)
-      qq=0.5*ww/qq
-c*** cg is really the perturbation of the grav potl at the surface!
-      cg=buf(5*n)
-      if(ll.eq.0) cg=0.
-      k=0
-      do 10 i=nstart,n
-         k=k+1
-         a(1,k)=buf(i)
-         j=i+n
-         a(2,k)=buf(j)
-         j=j+n
-         a(3,k)=buf(j)/sfl3
-         j=j+n
-         a(4,k)=buf(j)/sfl3
-   10    continue
-      do 20 i=1,nlen
-   20    x(i)=aa(i)
-      nz  = nn
-      lz  = ll                
-      w   = ww
-      q   = qq
-      g   = cg
-      kfl = kfl + 1
-      call gfs_rwdir(3,hed6,kfl,'w',ierr)
-      goto 50
-   99 return
-      end
-
-      subroutine conv2(nstart,n,kfl)
-      parameter(mnl=323)          
-      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(1540)
-      dimension abuf(6*mnl+5),a(2,350),aa(1),hed6(1554)
-      character*4 atyp                                       
-      character*8 model
-      equivalence (nn,abuf(1)),(a(1,1),aa(1)),(hed6(1),nhed)
-        atyp    ='T   '
-        nvec = 2*n + 5                                
-        nloop=2
-        nlen = nloop*nrad                                 
-        nout = nloop*nrad+5
-      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen
-      if(nlen.gt.1540)stop
-   50 read(2,end=99) (abuf(i),i=1,nvec)
-    5 do 1 i=1,nrad
-         do 1 j=1,nloop
-    1       a(j,i)=0.0
-      fl=ll
-      fl1=fl+1.0
-      fl3=fl*fl1
-      sfl3=sqrt(fl3)
-      print 900,nn,atyp,ll,ww,qq,cg,sfl3
-  900 format(i4,a4,i4,5g14.6)
-      qq=0.5*ww/qq
-      k=0
-      do 10 i=nstart,n
-         k=k+1
-         a(1,k)=buf(i)/sfl3
-         a(2,k)=buf(i+n)/sfl3
-   10    continue    
-      do 20 i=1,nlen
-   20    x(i)=aa(i)
-      nz  = nn
-      lz  = ll                
-      w   = ww
-      q   = qq
-      g   = 0.
-      kfl = kfl + 1
-      call gfs_rwdir(3,hed6,kfl,'w',ierr)
-      goto 50
-   99 return
-      end
-
-
-      subroutine conv1(nstart,n,kfl)
-c*** special for radial modes
-      parameter(mnl=323)          
-      common/bufz/nn,ll,ww,qq,cg,buf(6*mnl)
-      common/hedX/nhed,model,jcom,nz,atyp,lz,w,q,g,nrad,
-     *            rn,wn,accn,x(1540)
-      dimension abuf(6*mnl+5),a(4,350),aa(1),hed6(1554)
-      character*4 atyp                                       
-      character*8 model
-      equivalence (nn,abuf),(a,aa),(hed6,nhed)
-        atyp    ='S   ' 
-        nvec = 2*n + 5     
-        nloop=4
-        nlen = nloop*nrad                                 
-        nout = nloop*nrad+5
-      print *,'nlen (must be .le. 1540 or else change defhdr) : ',nlen
-      if(nlen.gt.1540)stop
-   50 read(2,end=99) (abuf(i),i=1,nvec)
-    5 do 1 i=1,nrad
-         do 1 j=1,nloop
-    1       a(j,i)=0.0
-      fl=ll
-      fl1=fl+1.0
-      fl3=fl*fl1
-      sfl3=sqrt(fl3)
-      print 900,nn,atyp,ll,ww,qq
-  900 format(i4,a4,i4,5g14.6)
-      qq=0.5*ww/qq
-      k=0
-      do 10 i=nstart,n
-         k=k+1
-         a(1,k)=buf(i)
-         a(2,k)=buf(i+n)
-         a(3,k)=0.
-         a(4,k)=0.
-   10    continue
-      do 20 i=1,nlen
-   20    x(i)=aa(i)
-      nz  = nn
-      lz  = ll                
-      w   = ww
-      q   = qq
-      g   = 0.
-      kfl = kfl + 1
-      call gfs_rwdir(3,hed6,kfl,'w',ierr)
-      goto 50
-   99 return
-      end

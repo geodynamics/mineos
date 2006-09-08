@@ -26,8 +26,13 @@ bin_PROGRAMS = minos_bran syndat green eigcon \
 # main programs
 minos_bran_SOURCES = minos_bran.f
 syndat_SOURCES = syndat.f $(gfs) fftsubs.f
-green_SOURCES = green.f $(gfs) fftsubs.f rcode.f
-eigcon_SOURCES = eigcon.f $(gfs)
+green_SOURCES = green.f $(fdb) $(gfs) fftsubs.f rcode.f
+eigcon_SOURCES = eigcon.f $(fdb)
+
+# FDB utils
+
+fdb = \
+	fdb/fdb_eigen.f
 
 # GFS utils
 ghead_SOURCES = gfs/ghead.f $(gfs)

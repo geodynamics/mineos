@@ -7,22 +7,23 @@ c          modeX  : complex eigenfrequencies
 c          vecnlX : exitations of modes
 c
       program green
+      include "green.h"
       integer n1(100),n2(100)
 cxx (MB)      real*4 hed1(30),alocal(9),scalrs(8),dcg(3)
       real*4 hed1(30),alocal(9),scalrs(8)
       real*8 co,si,c1,c2,s1,s2,z,zp,cz,sz,caz,saz,prp
       common/dheadX/d0,th,ph,jy,jd,jh,jm,sec,tstart
-      common/zfXX/z(3,250),zp(3,250)
-      common/rcrds/dat(9000)
+      common/zfXX/z(3,ml),zp(3,ml)
+      common/rcrds/dat(mseis)
       common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
      &             sdep,jys,jds,jhs,jms,sss,spare(12)
 
-      common/grnX/grn(108000)
-      common/modeX/om(2760),a0(2760),omt(1650),a0t(1650)
-      common/vecnlX/vecnl(8,2760),vecnlt(4,1650)
-      common/wts/wt(6,2760)
+      common/grnX/grn(12*mseis)
+      common/modeX/om(meig),a0(meig),omt(meig),a0t(meig)
+      common/vecnlX/vecnl(8,meig),vecnlt(4,meig)
+      common/wts/wt(6,meig)
       common/sclrX/n,l,e1,e2,e3,e4,au,av
-      common/propX/prp(54000)
+      common/propX/prp(6*mseis)
       character*4 nchn,nsta,ksta
 c (MB) added for consistency
       character*4 ntyp
@@ -32,10 +33,8 @@ c (MB) added for consistency
       data icomp,itype1,ksta/0,1,'xxxx'/
 c
 c.....open event file for which you want to compute green's functions
+c.....read first header to get source info
 c
-cxx   call gfs_opena(1,'event file (input) :',itype1,jret1)
-c*** read first header to get source info
-cxx   call gfs_rwdir(1,hed1,1,'r',ierr)
       open(12,file='green_in',status='old')
       read(12,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
      &             sdep,jys,jds,jhs,jms,sss
@@ -267,11 +266,12 @@ cxx   99 call gfs_close(1)
 
 
       subroutine prop(om,a0,dt,tst,nmodes,len,npts,nfun,prp)
+      include "green.h"
       real*8 ddt,dts,dt0,dt1,prp(nfun,npts),phi,ain
       real*8 b0,b1,c0,c1,c2
       common/propc/ddt,dts,dt0,dt1,phi,ain,b0,b1,c0,c1,c2
-      common/grnX/grn(108000)
-      common/wts/wt(6,2760)
+      common/grnX/grn(12*mseis)
+      common/wts/wt(6,meig)
       dimension om(*),a0(*)
 c
 c....stores green's function in multiplexed form
@@ -317,36 +317,84 @@ c
 
       return
       end
-
+c***************************************************************
+c source sub reads eigen functions from flat databases.
+c List of dbnames are defined in dbnames.dat file. source read 
+c .eigen relations and select eigen functions for S & T modes
+c****************************************************************
       subroutine source(fmin,fmax,lmax,nmodes,nmodet)
-      character atyp*4, model*8, name1*30, name2*30
+      implicit none
+      include "green.h"
+      integer*4 mk,lmax,nmodes,nmodet
+      real*4    fmin,fmax
+c --- common blocks -------------------------------
+      real*4    d0,t0,p0,sec,tstart
+      integer*4 jy,jd,jh,jm
       common/dheadX/d0,t0,p0,jy,jd,jh,jm,sec,tstart
+      real*4 x1,r0,x2,f
       common/sclXXX/x1,r0,x2,f(4,3)
-      common/vecnlX/vecnl(8,2760),vecnlt(4,1650)
-      common/modeX/om(2760),a0(2760),omt(1650),a0t(1650)
-      common/hedX/nhed,model,jcom,n,atyp,l,w,q,p,npts,
-     *           rn,wn,accn,buf(1540)
-      dimension r(300),hed6(1554)
-      equivalence (nhed,hed6)
+      real*4 vecnl,vecnlt
+      common/vecnlX/vecnl(8,meig),vecnlt(4,meig)
+      real*4 om,a0,omt,a0t
+      common/modeX/om(meig),a0(meig),omt(meig),a0t(meig)
+c ---  eigen relation common block
+      real*4    per_eigen,phvel_eigen,grvel_eigen,attn_eigen
+      integer*4 norder_eigen,lorder_eigen,eigid_eigen,
+     +          nraw_eigen,ncol_eigen,npar_eigen,foff_eigen,
+     +          commid_eigen
+      character*2 datatype_eigen
+      character*64 dir_eigen
+      character*32 dfile_eigen
+      character*17 lddate_eigen
+      character*1 typeo_eigen
+      common/c_eigen/norder_eigen,lorder_eigen,
+     +      eigid_eigen,per_eigen,phvel_eigen,grvel_eigen,
+     +      attn_eigen,nraw_eigen,ncol_eigen,npar_eigen,
+     +      foff_eigen,commid_eigen,typeo_eigen,
+     +      datatype_eigen,dir_eigen,dfile_eigen,lddate_eigen
+c --- other variables
+      real* 4   w,q,p,rn,wn,accn
+      real*4    pi2,fot,bigg,tau,rhobar,vn,gn,rs,fl,fl1,fl3,u,v
+      real*4    wsq,e14,au,av,wr,aw
+      integer*4 jcom,npts,nrecl,ieig,idat,ierr,ifl,i,is,j,js
+      integer*4 ll,lll,m,l,n
+c ---
+      character*64 dir
+      character*256 dbname
+      real*4      r(mk),buf(6,mk)
+c ---
+      real*4    fnl(2)
+      equivalence (fnl(1),n),(fnl(2),l)
       data fot/1.33333333333/
 cxx (MB) data name1/'/home/guy/lfsyn.dir/sph20m.gfs'/
 cxx (MB) data name2/'/home/guy/lfsyn.dir/tor20m.gfs'/
-      data name1/'gfs_S'/
-      data name2/'gfs_T'/
-      data ityp6/6/
-c*** get spheroidal source scalars ***
-      call gfs_open(3,name1,ityp6,jret3)
+      pi2 = datan(1.0d0)*8.0d0
+      nmodes = 0
+      nmodet = 0
+      lmax=0
+      ieig = 9
+      idat = 10
+c===================================================================
+c Main loop by dbase names
+c===================================================================
+      open(7,file='dbnames.dat',status='old')
+c*** read dbnames list
+   8  read(7,'(a256)',end=9) dbname
+      nrecl = 2000
+      call open_eigen(dbname,nrecl,ieig,idat,dir,'r',ierr)
+      call read_eigen(ieig,ierr)
+      nrecl = (ncol_eigen*nraw_eigen+npar_eigen)*4
 c
-c....read in radial grid
+c....read in parameters and radial grid
 c
       ifl=1
-      call gfs_rwdir(3,hed6,ifl,'r',ierr)
-c     call prhdr(ifl,hed6,ityp6)
-      if(atyp.ne.'grid') stop 'grid not found'
-      do 4 i=1,npts
-    4   r(i)=buf(i)
+      read(idat,rec=ifl) jcom,bigg,tau,rhobar,rn,wn,vn,gn,accn,
+     +                        (r(ll),ll=1,nraw_eigen)
+      call close_eigen(ieig,idat)
+      if(typeo_eigen.ne.'P') stop 
+     *         'ERR010:eigen: radius pints are not found'
+      npts = nraw_eigen
       rs=rn/1000.
-      lmax=0
       r0=1.-(d0/rs)
       do 5 i=1,npts
          if(r(i).lt.r0)is=i
@@ -354,22 +402,30 @@ c     call prhdr(ifl,hed6,ityp6)
       x1=r(is)
       js=is+1
       x2=r(js)
-      iau=4*npts-3
-      iav=iau+2
 c
-c....read in spheroidal modes in frequency band fmin < f < fmax
+c....read in spheroidal and toroidal modes 
+c....in frequency band fmin < f < fmax
 c
-      nmodes = 0
-      do 10 ifl=1,jret3
-         call gfs_rwdir(3,hed6,ifl,'r',ierr)
+      call open_eigen(dbname,nrecl,ieig,idat,dir,'r',ierr)
+      call read_eigen(ieig,ierr)
+      
+  10  ifl = ifl+1
+      call read_eigen(ieig,ierr)
+      if(ierr.ne.0) goto 30
+      if(ifl.ne.eigid_eigen) stop 
+     *          'ERR011:eigen: flat and bin indices are different.'
+         w = pi2/per_eigen
          if (w.lt.fmin) goto 10
          if (w.le.fmax) goto 11
-c         goto 12
-c*** files may not be sorted
-         goto 10
-   11    if (atyp.ne.'S') goto 10
+          goto 10
+  11  read(idat,rec=eigid_eigen) n,l,w,q,
+     +     ((buf(ll,lll),ll=1,ncol_eigen),lll=1,nraw_eigen)
+      npts = nraw_eigen
+      if (typeo_eigen.eq.'S') then
+c
+c  get source scalars for S mode
+c
          nmodes=nmodes+1
-c         call prhdr(ifl,hed6,ityp6)
          om(nmodes)=w
          a0(nmodes)=q
          lmax = max0(l,lmax)
@@ -377,11 +433,12 @@ c         call prhdr(ifl,hed6,ityp6)
          fl1=fl+1.
          fl3=fl*fl1
          m=-1
-         do 14 i=is,js
+         do i=is,js
             m=m+2
-            jst=(i-1)*4
-            do 14 j=1,4
-   14          f(j,m)=buf(j+jst)
+            do j=1,4
+               f(j,m)=buf(j,i)
+            enddo
+         enddo
          call cubic(2)
          u=f(1,2)/r0
          v=f(3,2)/r0
@@ -389,12 +446,13 @@ c         call prhdr(ifl,hed6,ityp6)
          e14=f(4,2)+u-v
          if(l.eq.0) e14=0.
 
-         au=-((wsq+2.*fot)*buf(iau)+fl1*p)*accn
-         av=-(wsq*buf(iav)-buf(iau)*fot-p)*accn
+         p = buf(5,npts)
+         au=-((wsq+2.*fot)*buf(1,npts)+fl1*p)*accn
+         av=-(wsq*buf(3,npts)-buf(1,npts)*fot-p)*accn
 
          if(l.eq.0) av=0.
-         vecnl(1,nmodes)=hed6(5)
-         vecnl(2,nmodes)=hed6(7)
+         vecnl(1,nmodes)=fnl(1)
+         vecnl(2,nmodes)=fnl(2)
          vecnl(3,nmodes)=f(2,2)
          vecnl(4,nmodes)=u-.5*fl3*v
          vecnl(5,nmodes)=e14
@@ -403,51 +461,39 @@ c         call prhdr(ifl,hed6,ityp6)
          vecnl(8,nmodes)=av
 c         print 800,n,l,(vecnl(i,nmodes),i=3,8)
   800    format(2i4,6e15.7)
-   10    continue
-   12 call gfs_close(3)
-      print *,'# sph. modes in band =',nmodes,'  must be .le. 2760'
-c*** get source scalars for toroidal modes ***
-      ifl=1
-      call gfs_open(3,name2,ityp6,jret3)
-      call gfs_rwdir(3,hed6,ifl,'r',ierr)
-      iaw=2*npts-1
+      else if (typeo_eigen.eq.'T')  then
 c
-c....read in toroidal modes in frequency band fmin < f < fmax
+c  get source scalars for T mode
 c
-      nmodet = 0
-      do 30 ifl=1,jret3
-         call gfs_rwdir(3,hed6,ifl,'r',ierr)
-         if (w.lt.fmin) goto 30
-         if (w.le.fmax) goto 31
-c         goto 32
-         goto 30
-   31    if (atyp.ne.'T') goto 30
          nmodet=nmodet+1
-c        call prhdr(nmodet,hed6,ityp6)
          omt(nmodet)=w
          a0t(nmodet)=q
          lmax = max0(l,lmax)
          m=-1
-         do 45 i=is,js
+         do i=is,js
             m=m+2
-            jst=(i-1)*2
-            do 45 j=1,2
-   45          f(j,m)=buf(j+jst)
+            do j=1,2
+               f(j,m)=buf(j,i)
+            enddo
+         enddo
          call cubic(1)
          wr=f(1,2)/r0
          wsq=(w/wn)**2
 
-         aw=-buf(iaw)*wsq*accn
+         aw=-buf(1,npts)*wsq*accn
 
-         vecnlt(1,nmodet)=hed6(5)
-         vecnlt(2,nmodet)=hed6(7) 
+         vecnlt(1,nmodet)=fnl(1)
+         vecnlt(2,nmodet)=fnl(2)
          vecnlt(3,nmodet)=aw*(wr-f(2,2))
          vecnlt(4,nmodet)=-4.*aw*wr
 c         print 801,n,l,(vecnlt(i,nmodet),i=3,4)
   801    format(2i4,6e15.7)
-   30    continue
-   32 print *,'# tor. modes in band =',nmodet,'  must be .le. 1650'
-      call gfs_close(3)
+      endif
+      goto 10
+  30  goto 8
+   9  close(7)
+      print *,'# sph. modes in band =',nmodes,'  must be .le. ',meig
+      print *,'# tor. modes in band =',nmodet,'  must be .le. ',meig
       return
       end
 
@@ -622,8 +668,9 @@ c    Z(m,l,theta) = b(m,l) * X(m,l,theta) where
 c        b(m,l) is given in G&D (1975) equation (21)
 c  and   X(m,l,theta) is given in G&D (1975) equation (2)
 c          G&D = Gilbert & Dziewonski
+      include "green.h"
       implicit real*8(a-h,o-z)
-      common/zfXX/z(3,250),p(3,250)
+      common/zfXX/z(3,ml),p(3,ml)
       data pi/3.14159265358979d0/
       z(1,1)=1d0/(4.d0*pi)
       z(2,1)=0.d0
