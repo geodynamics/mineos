@@ -325,7 +325,7 @@ c****************************************************************
       subroutine source(fmin,fmax,lmax,nmodes,nmodet)
       implicit none
       include "green.h"
-      integer*4 mk,lmax,nmodes,nmodet
+      integer*4 lmax,nmodes,nmodet
       real*4    fmin,fmax
 c --- common blocks -------------------------------
       real*4    d0,t0,p0,sec,tstart
@@ -668,8 +668,8 @@ c    Z(m,l,theta) = b(m,l) * X(m,l,theta) where
 c        b(m,l) is given in G&D (1975) equation (21)
 c  and   X(m,l,theta) is given in G&D (1975) equation (2)
 c          G&D = Gilbert & Dziewonski
-      include "green.h"
       implicit real*8(a-h,o-z)
+      include "green.h"
       common/zfXX/z(3,ml),p(3,ml)
       data pi/3.14159265358979d0/
       z(1,1)=1d0/(4.d0*pi)
