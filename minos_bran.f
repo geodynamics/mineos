@@ -93,14 +93,20 @@ c
       print *,'input model file:'
       read(5,100) filnam
   100 format(a256)
+c MB added one line below
+      print *,filnam(1:lnblnk(filnam))
       open(7,file=filnam,status='old',form='formatted',iostat=iret)
       print *,'output file:'
       read(5,100) filnam
+c MB added one line below
+      print *,filnam(1:lnblnk(filnam))
       open(8,file=filnam,form='formatted',iostat=iret)
       call model(7,8)
       close(7)
       print *,'eigenfunction file (output):'
       read(5,100) filnam
+c MB added one line below
+      print *,filnam(1:lnblnk(filnam))
       ifreq=1
       if(filnam(1:4).eq.'none') ifreq=0
       open(3,file=filnam,form='unformatted',iostat=iret)
@@ -123,6 +129,8 @@ c*** makes up table of frequencies ***
       stepf=1.d0        
       print *,'enter eps and wgrav'
       read(*,*) eps,wgrav
+c MB added one line below
+      print *,eps,wgrav
       eps=max(eps,1.d-12)
       eps1=eps
       eps2=eps
@@ -135,9 +143,13 @@ c*** makes up table of frequencies ***
       call steps(eps)
       print *,'enter jcom (1=rad;2=tor;3=sph;4=ictor)'
       read(*,*) jcom
+c MB added one line below
+      print *,jcom
       if(jcom.lt.1.or.jcom.gt.4) jcom=3
       print *,'enter lmin,lmax,wmin,wmax,nmin,nmax'
       read(*,*) lmin,lmax,wmin,wmax,normin,normax
+c MB added one line below
+      print *,lmin,lmax,wmin,wmax,normin,normax
       wmin=max(wmin,0.1d0)
       wmin=wmin*cmhz
       wmax=wmax*cmhz

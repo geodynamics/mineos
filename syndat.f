@@ -1,168 +1,183 @@
-      program syndat
 c
 c.....syndat makes up synthetic seismograms from green's functions
 c
-      implicit real*8(a-h,o-z)
-      real*4 ss,dt,a,flag,hed1(30),spare,zero
-      character*1l2,k2,k3
-      common/rcrds/a(108000)
-      common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,spare(20)
-      common/rhs/rh1(10000)
-      dimension sol(6),n1(100),n2(100)
-      equivalence (nscan,hed1)
+      program syndat
+      implicit none
+      include 'fdb/fdb_wfdisc.h'
+      include 'fdb/fdb_io.h'
+      include 'green.h'
+c----
+      real*4 a
+      common/rcrds/a(6*mseis)
+      real*8 rh1
+      common/rhs/rh1(mseis)
+      real*4 dt,fnorm
+      integer*4 nscan, itptens, jys, jds, jhs, jms
+      integer*4 l, i, nfw, ifl, ierr, j, ib, nh
+      integer*4 iscan, iscan2, np1, isn, kerr,lnblnk
+      real*8    pi,sss,slat,slon,sdep,tconst,dm0,fscal,ww
+      real*8    si,df,wr,con,arg,sinc2,frp,dati,fip,datr,sol(6)
+      real*8    p1(3),p2(3),un(3),us(3)
+      character*256 efname
+      character*8 ename
+      character*2 endian
+c--
       data pi/3.14159265358979d0/            
-      data itype1,zero,flag/1,0.,5.e15/
-      open(7,file='locale.cmt.big')
-   21 write(*,101)
-  101 format('Do you want to use moment tensor in locale ? (y/n) : ',$)
-      read(*,'(a1)',err=21)l2               
-      if(l2.ne.'y'.and.l2.ne.'Y') goto 1
-      goto 22
-    1 write(*,102)
-  102 format('Do you want to use strike,dip and slip ? (y/n)     : ',$)
-      read(*,'(a1)',err=1)k2
-      if(k2.ne.'y'.and.k2.ne.'Y') goto 10
-      call fault(sol)
-      goto 20
-   10 write(*,103)
-  103 format('enter moment tensor elements f(x6) : ',$)
-      read(*,*,err=10)sol
-   20 write(*,104)
-  104 format('enter time constant : ',$)
-      read(*,*,err=20)tconst                
-   22 call gfs_opena(1,'greens function file name : ',itype1,jret1)
-      call gfs_opena(2,'output file name          : ',itype1,jret2)
-      call gfs_erase(2)
-    2 write(*,105) 
-  105 format('Do you want synthetics only ? (y/n)                : ',$)
-      read(*,'(a1)',err=2)k2
-    3 write(*,106)
-  106 format('Do you want the synthetics to be gap free ? (y/n)  : ',$)
-      read(*,'(a1)',err=3)k3
-      ifl=1
-      call gfs_rwdir(1,hed1,ifl,'r',ierr)
-      if (ierr.ne.0) goto 50
-      if(l2.ne.'y'.and.l2.ne.'Y') goto 34
+      data fnorm/1.0e-27/
 c
-c.... locate source parameters
+c    read input parameters
 c
-   31 read(7,100,end=32) jy,jd,jh,jm,sec,t0,p0,d0,fm,
-     +     (sol(i),i=1,6),tconst,fscal
-  100 format(i4,i4,2i3,f5.1,2f9.2,f4.0,g11.3,7f7.2,g11.3)
-      if(iy.eq.jy.and.id.eq.jd.and.jh.eq.ih) goto 33
-      goto 31
-   32 print*,'***** event not found in locale! *****'
-      close(7)
-      l2 = 'n   '
-      goto 1
-   33 close(7)
-      fm=fm*1.e-27
-      fscal=fscal*1.e-27
-      do i=1,6
-         sol(i)=sol(i)*fscal
-      enddo
+c....read in file name within event and moment tensor info
+      write(*,*) '============== Program syndat =================='
+      write(*,*) 'enter input CMT file name:'
+      read(*,'(a256)') fname1
+      write(*,*) fname1(1:lnblnk(fname1))
+c.... setup tensor type: moment/Mo,nodal2/Mo,nodal2
+      write(*,*) 'enter tensor type: 0 - moment, ',
+     *     '1 - nodal plane 1, 2 - nodal plane 2'
+      read(*,*) itptens
+      write(*,*) itptens
+c.... i/o database name
+      write(*,*) 'enter input dbname'
+      read(*,'(a256)') dbin
+      write(*,*) dbin(1:lnblnk(dbin))
+      write(*,*) 'enter output dbname'
+      read(*,'(a256)') dbout
+      write(*,*) dbout(1:lnblnk(dbout))
+c
+c    read source and moment
+c
+      open(12,file=fname1,status='old')
+      read(12,*) ename,jys,jds,jhs,jms,sss,slat,slon,sdep,dt,
+     *           tconst,dM0,(sol(l),l=1,6),fscal,(p1(l),l=1,3),
+     *           (p2(l),l=1,3)
+      close(12)
+      write(*,1001) ename,jys,jds,jhs,jms,sss,slat,slon,sdep,dt,
+     *           tconst,dM0,(fscal*sol(l),l=1,6),(p1(l),l=1,3),
+     *           (p2(l),l=1,3)
+ 1001 format('syndat: CMT solution:',/
+     * 'syndat: Event: ',a8,i5,i4,i3,':',i3,':',f5.1,', lat/lon = ',
+     * f8.2,f9.2,',',/
+     * 'syndat: depth = ',f6.1,' km, step = ',f8.3,
+     * ' sec, Duration = ',f5.1, ' sec,',/
+     * 'syndat: M0 = ',e11.3,','/
+     * 'syndat: comp: ',6e11.3,/
+     * 'syndat: plane1: ',3f5.0,' plane2: ',3f5.0)
+      if(itptens.eq.0) then
+        do i = 1,6
+          sol(i) = sol(i)*fscal*fnorm
+        enddo
+      else if(itptens.eq.1) then
+        call udc(p1(1),p1(2),p1(3),un,us,sol)  
+        do i = 1,6
+          sol(i) = sol(i)*dM0*fnorm
+        enddo
+      else
+        call udc(p2(1),p2(2),p2(3),un,us,sol)  
+        do i = 1,6
+          sol(i) = sol(i)*dM0*fnorm
+        enddo
+      endif
+      write(*,1002) (sol(l)/fnorm,l=1,6)
+ 1002 format('syndat: Selected moment tensor components:',/
+     *       'syndat:',6e11.3,//'syndat: Synthetic waveforms: ')
 c
 c....loop over records
 c      
-   34 isy = 0
-      do 30 ifl=1,jret1,2       
-      igr = ifl + 1
-c
-c....read in record
-c
-      call gfs_rwentry(1,hed1,a,ifl,'r')
-      call panlsp(a,nscan,n1,n2,np)
-      if(k2.eq.'y'.or.k2.eq.'Y') goto 60
-      call fgapsp(a,nscan,n1,n2,np,flag)
-c
-c....write record to disk
-c             
-      isy = isy + 1
-      call gfs_rwentry(2,hed1,a,isy,'w')
-c
-c....read in green's functions
-c
-   60 nold = nscan
-      call gfs_rwentry(1,hed1,a,igr,'r')
-      len = nscan
-      nscan = nold
-      do 71 i=1,nscan
-  71     rh1(i)=0.d0
-      do 72 j=1,6
-         ib=(j-1)*nscan
-         if(k3.ne.'y'.and.k3.ne.'Y')
-     *      call fgapsp(a(ib+1),nscan,n1,n2,np,zero)
-         do 72 i=1,nscan
-   72       rh1(i)=rh1(i)+a(ib+i)*sol(j)
-      do 81 i=1,nscan
-   81    a(i)=rh1(i)
-
-      if(tconst.le.0.d0) goto 90
-
-      si=dt
-      nh=(nscan+1)/2
-      call facdwn(nh)
-      iscan=2*nh
-      iscan2=iscan+2
-      np1=nscan+1
-      do 82 i=np1,iscan2
-   82    a(i)=0.
-      isn=-1
-      call fftl(a,iscan,isn,kerr)
-      df=2.d0*pi/(iscan*si)
-      j=0
-      do 83 i=3,iscan2,2
-         j=j+1
-         wr=j*df
-         con=0.5d0*tconst*wr
-         arg=0.5d0*con
-         sinc2=(dsin(arg)/arg)**2
-         frp=sinc2*dcos(con)
-         fip=-sinc2*dsin(con)
-         datr=a(i)*frp-a(i+1)*fip
-         dati=a(i)*fip+a(i+1)*frp
-         a(i)=datr
-   83    a(i+1)=dati
-      isn=-2
-      call fftl(a,iscan,isn,kerr)
-   90 if(k3.ne.'y'.and.k3.ne.'Y') call fgapsp(a,nscan,n1,n2,np,flag)
-c
-c....write out synthetics 
-c                                  
-      isy  = isy + 1 
-c....force SNR flag of synthetic to be zero
-      hed1(30)=0.
-      call gfs_rwentry(2,hed1,a,isy,'w') 
-      call prhdr(isy,hed1,itype1)
+c.....read input wfdisc relation
+      call read_wfdisc
+      nfw = nrowwfdisc
+      do 30 ifl=1,nfw    
+        nscan =nsamp_wfdisc(ifl)
+        write(*,1000) ifl,sta_wfdisc(ifl),chan_wfdisc(ifl),
+     *                1.0/samprate_wfdisc(ifl), nscan/6
+ 1000 format('syndat: ',i4,1x,a6,1x,a8,1x,f8.3,1x,i7)
+        call get_wfdisc(ifl,nscan,a,ierr)
+        nscan = nscan/6
+        do i=1,nscan
+          rh1(i) = 0.d0
+        enddo
+        do j = 1,6
+          ib=(j-1)*nscan
+          do i = 1,nscan
+            rh1(i)=rh1(i)+a(ib+i)*sol(j)
+          enddo
+        enddo
+        do i=1,nscan
+          a(i)=rh1(i)
+        enddo
+  
+        if(tconst.le.0.d0) goto 90
+  
+        si=dt
+        nh=(nscan+1)/2
+        call facdwn(nh)
+        iscan=2*nh
+        iscan2=iscan+2
+        np1=nscan+1
+        do i=np1,iscan2
+          a(i)=0.
+        enddo
+        isn=-1
+        call fftl(a,iscan,isn,kerr)
+        df=2.d0*pi/(iscan*si)
+        j=0
+        do i=3,iscan2,2
+           j=j+1
+           wr=j*df
+           con=0.5d0*tconst*wr
+           arg=0.5d0*con
+           sinc2=(dsin(arg)/arg)**2
+           frp=sinc2*dcos(con)
+           fip=-sinc2*dsin(con)
+           datr=a(i)*frp-a(i+1)*fip
+           dati=a(i)*fip+a(i+1)*frp
+           a(i)=datr
+           a(i+1)=dati
+c convert from acceleration to velocity
+           ww = a(i)
+           a(i) = a(i+1)/wr
+           a(i+1) = -ww/wr
+        enddo
+        isn=-2
+        call fftl(a,iscan,isn,kerr)
+   90   continue
+c write new wfdisc relation
+        nrowwfdisc = 1
+        sta_wfdisc(1) = sta_wfdisc(ifl)
+        chan_wfdisc(1) = chan_wfdisc(ifl)
+        time_wfdisc(1) = time_wfdisc(ifl)
+        wfid_wfdisc(1) = ifl
+        jdate_wfdisc(1) = jdate_wfdisc(ifl)
+        endtime_wfdisc(1) = time_wfdisc(ifl)+(nscan-1)/
+     *        samprate_wfdisc(ifl)
+        nsamp_wfdisc(1) = nscan
+        chanid_wfdisc(1) = chanid_wfdisc(ifl)
+        samprate_wfdisc(1) = samprate_wfdisc(ifl)
+        segtype_wfdisc(1) = 'w'
+        foff_wfdisc(1) = 0
+        dir_wfdisc(1) = '.'
+        write(efname,'("w.",i5)') ifl
+        do i = 1,7
+          if(efname(i:i).eq.' ') efname(i:i) = '0'
+        enddo
+        dfile_wfdisc(1) = efname
+        calper_wfdisc(1) = 20.0
+        calib_wfdisc(1) = 1.0
+        datatype_wfdisc(1) = endian()
+        do i = 1,nscan
+           a(i) = a(i)*1.0e9
+        enddo
+        call put_wfdisc(1,nscan,a,ierr)
+        call write_wfdisc
    30 continue                      
-   50 call gfs_close(1)
-      call gfs_close(2)
-      stop
       end
 
-
-      subroutine fault(sol)
-      implicit real*8(a-h,o-z)
-      common/faultX/un(3),us(3)
-      dimension sol(*)
-    1 write(*,100)
-  100 format('enter strike, dip and slip [deg] : ',$)
-      read(*,*,err=1)sig,del,gam
-      call udc(sig,del,gam,un,us,sol)
-    2 write(*,101)
-  101 format('enter moment : ',$)
-      read(*,*,err=2)fmom
-      do 5 i=1,6
-    5 sol(i)=fmom*sol(i)
-      return
-      end
-
-
-      subroutine udc(sig,del,gam,un,us,f)
-c
+c*********************************************************************
 c  udc computes the unit normal, unit slip and unit moment tensor
 c  given strike(sig), dip(del) and slip(gam) in degrees.
-c
+c*********************************************************************
+      subroutine udc(sig,del,gam,un,us,f)
       implicit real*8(a-h,o-z)
       dimension un(*),us(*),f(*)
       data rad/57.29578/
@@ -189,60 +204,3 @@ c
       f(6)=un(2)*us(3)+us(2)*un(3)
       return
       end                                 
-
-
-
-      subroutine panlsp(a,len,n1,n2,np)
-c   find gaps of bad data, previously flagged, zero them and index them.
-c   the resulting time series consists of np panels of good data indexed
-c   from n1(i) to n2(i), i=1 to np.
-      dimension a(*),n1(*),n2(*)
-      data zero/0./,badun/3.5e15/
-      id=2
-      np=0
-      do 30 i=1,len
-      go to (15,20),id
-   15 if(a(i).lt.badun) goto 30
-      a(i)=zero
-      n2(np)=i-1
-      id=2
-      go to 30
-   20 if(a(i).gt.badun) goto 25
-      np=np+1
-      n1(np)=i
-      id=1     
-      goto 30
-   25 a(i)=zero
-   30 continue
-      if(id.eq.2) return
-      n2(np)=len
-      return
-      end
-      subroutine fgapsp(a,len,n1,n2,np,flag)
-c  fgapsp flags bad gaps in a time series with flag(usually zero
-c  or 5.e15). fgapsp presupposes a call to panlsp to put
-c  panel structure in n1 and n2.
-      dimension a(*),n1(*),n2(*)
-      if(np.gt.0) goto 15
-      do 10 i=1,len
-   10 a(i) = flag
-      return 
-   15 if(n1(1).eq.1) go to 25
-      mm1=n1(1)-1
-      do 20 i=1,mm1
-   20 a(i)=flag
-   25 if(n2(np).eq.len) go to 35
-      mp1=n2(np)+1
-      do 30 i=mp1,len
-   30 a(i)=flag
-   35 if(np.eq.1) return
-      nbad=np-1
-      do 45 nb=1,nbad
-      m1=n2(nb)+1
-      m2=n1(nb+1)-1
-      if(m2.lt.m1) go to 45
-      do 40 m=m1,m2
-   40 a(m)=flag
-   45 continue
-      return
-      end

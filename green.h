@@ -12,7 +12,11 @@ c ---
       parameter (ml=6000)
 c ---
       integer*4 meig
-      parameter (meig=100000)
+      parameter (meig=200000)
 c ---
       integer*4 mseis
       parameter (mseis=30000)
+c ---
+c coomon block /names/ stores in/out file names
+      character*256 fname1,fname2,fname3,fname4,fname5
+      common/names/fname1,fname2,fname3,fname4,fname5

@@ -20,58 +20,74 @@
 # $Id: Makefile.am 2452 2005-10-19 20:03:01Z leif $
 
 bin_PROGRAMS = minos_bran syndat green eigcon \
-	ghead glist gtail iutil \
-	curse
+	endi wfendi preigen
+#	ghead glist gtail iutil \
+#	curse
 
 # main programs
 minos_bran_SOURCES = minos_bran.f
-syndat_SOURCES = syndat.f $(gfs) fftsubs.f
-green_SOURCES = green.f $(fdb) $(gfs) fftsubs.f rcode.f
-eigcon_SOURCES = eigcon.f $(fdb)
+syndat_SOURCES = syndat.f $(fdb) $(time) fftsubs.f
+green_SOURCES = green.f $(fdb) $(time) fftsubs.f
+eigcon_SOURCES = eigcon.f $(fdb) $(time)
 
 # FDB utils
 
 fdb = \
-	fdb/fdb_eigen.f
+	fdb/fdb_eigen.f \
+	fdb/fdbs.f \
+	fdb/fdb_io.h \
+	fdb/fdb_site.h \
+	fdb/fdb_sitechan.h \
+	fdb/fdb_wfdisc.h \
+	fdb/fdb_eigen.h \
+	fdb/swapn.c
+# time utils
+time = \
+	time/time.f
+
+# Utilities
+endi_SOURCES = utils/endi.c utils/swap.c
+wfendi_SOURCES = utils/wfendi.f $(fdb) $(time)
+preigen_SOURCES = utils/preigen.f $(fdb) $(time)
 
 # GFS utils
-ghead_SOURCES = gfs/ghead.f $(gfs)
-glist_SOURCES = gfs/glist.f $(gfs)
-gtail_SOURCES = gfs/gtail.f $(gfs)
-iutil_SOURCES = gfs/iutil.f $(gfs)
-
+# ghead_SOURCES = gfs/ghead.f $(gfs)
+# glist_SOURCES = gfs/glist.f $(gfs)
+# gtail_SOURCES = gfs/gtail.f $(gfs)
+# iutil_SOURCES = gfs/iutil.f $(gfs)
+#
 # curse
-curse_SOURCES = gfs/curse.f $(gfs) $(leo)
-curse_LDADD = -L/usr/X11R6/lib -lX11
-
-gfs = \
-	gfs/disk2.c \
-	gfs/gfs.f \
-	gfs/usr.f
-
-leo = \
-	gfs/leolib.c \
-	gfs/psscreendump.f \
-	gfs/scr1.f
-
+# curse_SOURCES = gfs/curse.f $(gfs) $(leo)
+# curse_LDADD = -L/usr/X11R6/lib -lX11
+#
+# gfs = \
+# 	gfs/disk2.c \
+# 	gfs/gfs.f \
+# 	gfs/usr.f
+# 
+# leo = \
+# 	gfs/leolib.c \
+# 	gfs/psscreendump.f \
+# 	gfs/scr1.f
+# 
 # included by leolib.c
-leoinc = \
-	gfs/ftoc.c \
-	gfs/leodraw.c \
-	gfs/leoinp.c \
-	gfs/leotext.c \
-	$(xvertext)
-
+# leoinc = \
+# 	gfs/ftoc.c \
+# 	gfs/leodraw.c \
+# 	gfs/leoinp.c \
+# 	gfs/leotext.c \
+# 	$(xvertext)
+#
 # xvertext 5.0 by Alan Richardson
-xvertext = \
-	gfs/rotated.c \
-	gfs/rotated.h
-
-EXTRA_DIST = \
-	LIST.STA \
-	locale.cmt.big \
-	stations \
-	gfs/gfs.doc \
-	$(leoinc)
-
+#xvertext = \
+# 	gfs/rotated.c \
+# 	gfs/rotated.h
+# 
+# EXTRA_DIST = \
+# 	LIST.STA \
+# 	locale.cmt.big \
+# 	stations \
+# 	gfs/gfs.doc \
+# 	$(leoinc)
+#
 ## end of Makefile.am

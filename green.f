@@ -1,47 +1,93 @@
-
 c.....program green
 c       common blocks :
 c          dheadX : source info
-c          myhedX : record header
 c          modeX  : complex eigenfrequencies
 c          vecnlX : exitations of modes
 c
       program green
+      implicit none
       include "green.h"
-      integer n1(100),n2(100)
-cxx (MB)      real*4 hed1(30),alocal(9),scalrs(8),dcg(3)
-      real*4 hed1(30),alocal(9),scalrs(8)
+      include "fdb/fdb_io.h"
+      include "fdb/fdb_site.h"
+      include "fdb/fdb_sitechan.h"
+      include "fdb/fdb_wfdisc.h"
+c---
+      real*4 scalrs(8)
       real*8 co,si,c1,c2,s1,s2,z,zp,cz,sz,caz,saz,prp
       common/dheadX/d0,th,ph,jy,jd,jh,jm,sec,tstart
       common/zfXX/z(3,ml),zp(3,ml)
-      common/rcrds/dat(mseis)
-      common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
-     &             sdep,jys,jds,jhs,jms,sss,spare(12)
-
       common/grnX/grn(12*mseis)
       common/modeX/om(meig),a0(meig),omt(meig),a0t(meig)
       common/vecnlX/vecnl(8,meig),vecnlt(4,meig)
       common/wts/wt(6,meig)
       common/sclrX/n,l,e1,e2,e3,e4,au,av
       common/propX/prp(6*mseis)
-      character*4 nchn,nsta,ksta
-c (MB) added for consistency
-      character*4 ntyp
-
-      equivalence (n,scalrs),(hed1,nscan),(alocal,d0)
-      data pi,rad,zero,tstart/3.14159265359,57.29578,0.,0./
-      data icomp,itype1,ksta/0,1,'xxxx'/
+c--- local variables ---
+      integer*4 lnblnk,numchan(msitechan),numsta(msite)
+      real*8 time,endtime,htoepoch
+      real*4    d0,th,ph,sec,tstart,ss,dt,slat,slon,sdep,
+     *          sss, grn, om, a0, omt, a0t, vecnl, vecnlt,
+     *          wt,e1,e2,e3,e4,au,av,pi,rad,fmin,fmax,
+     *          t0,p0,c0,s0,t1,p1,dp,del,azim
+      integer*4 i,lmax,nmodes,nmodet,j,lp1,indx,
+     *          jy,jd,jh,jm,nscan,iy,id,ih,im,jys,jds,jhs,jms,
+     *          n,l,len,mchn,icomp,itype1,iscan,ifl,isq
+      integer*4 nchan,inchn,iseq,jdate,ierr,nc(100),ns(100)
+      real*4    ang(3)
+      character*8 ename
+      character*256 efname
+c--- equivalence and data ---
+      equivalence (n,scalrs)
+      data pi,rad,tstart/3.14159265359,57.29578,0./
+      data icomp,itype1/0,1/
+c
+c    read input parameters
+c
+c....read in dbname with static relations: sta, stachan
+      write(*,*) '============= Program green ===================='
+      write(*,*) 'enter path to db with sta & stachan:'
+      read(*,'(a256)') dbin
+      write(*,*) dbin(1:lnblnk(dbin))
+c....read in name of file containing list of dbnames.
+c....each dbname in list refferes ito db with .eigen relation.
+      write(*,*) 'enter name of file within list of nmodes db:'
+      read(*,'(a256)') fname3
+      write(*,*) fname3(1:lnblnk(fname3))
+c....read in file within event and moment tensor info
+      write(*,*) 'enter input CMT file name:'
+      read(*,'(a256)') fname4
+      write(*,*) fname4(1:lnblnk(fname4))
+c....read in frequency range in mHz
+      write(*,*) 'min and max frequencies to be considered (mHz) : '
+      read(*,*) fmin,fmax
+      write(*,*) fmin,fmax
+c....read in number of samples in Green function
+      write(*,*) 'enter # pts in greens fns .le. ',mseis,' :'
+      read(*,*) iscan
+      write(*,*) iscan
+c.... read in output path to gsf name to store Green functions
+      write(*,*) 'enter Green functions output db file name:'
+      read(*,'(a256)') dbout
+      write(*,*) dbout(1:lnblnk(dbout))
+      write(*,*) '===================================================='
 c
 c.....open event file for which you want to compute green's functions
-c.....read first header to get source info
+c.....read first line to get source  and moment tensor info
 c
-      open(12,file='green_in',status='old')
-      read(12,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
-     &             sdep,jys,jds,jhs,jms,sss
-      do i=1,12
-         spare(i) =0.0
-      enddo
+      open(12,file=fname4,status='old')
+      read(12,*) ename,jys,jds,jhs,jms,sss,slat,slon,sdep,dt
       close (12)
+      write(*,1001) ename,jys,jds,jhs,jms,sss,slat,slon
+      write(*,1002) sdep
+ 1001 format(' green: Event: ',a8,2x,i4,1x,i3,1x,i2,':',i2,':',f6.3,1x,
+     *       'lat = ',f8.3,', lon = ',f9.3)
+ 1002 format(' green:        source depth =',f5.1,' km')
+      write(*,1003) dt,iscan
+ 1003 format(' green: step = ',f8.3,' sec, nsamples =',i7)
+c convert human time to epoch time
+      time = htoepoch (jys,jds,jhs,jms,dble(sss))
+      endtime = time+dt*(iscan-1)
+      jdate = jys*1000+jds
 c--
       d0=sdep
       th=90.-slat
@@ -54,26 +100,23 @@ c--
 c
 c.....open output file for green's functions
 c
-      call gfs_opena(2,'greens function file (output) :',itype1,jret2)
-      call gfs_erase(2)
-      print*,'min and max frequencies to be considered (mHz) : '
-      read*,fmin,fmax
       fmin = fmin*pi/500.
       fmax = fmax*pi/500.
 
       call source(fmin,fmax,lmax,nmodes,nmodet)
 
-      if(lmax.lt.meig) goto 5
-      print*,'max l =',lmax,' must be .le.',meig
-      goto 99
-    5 print 105,d0,th,ph
-  105 format('source depth =',f5.0,' km, colat. and long. =',2f7.2)
-      print*,'# pts in greens fns ( .le. 9000) :'
-      read*,iscan
-      iscan = iscan/2
+      if(lmax.le.ml) goto 5
+      write(*,*) 'ERR010: green: max l =',lmax,' must be .le.',ml
+      stop '  '
+cxx   goto 99
+    5 iscan = iscan/2
       call factor(iscan)
       iscan = 2*iscan
-      iscan=min0(iscan,9000)
+      if(iscan.gt.mseis) then
+         write(*,*) 'WARNING: green: # of points in Green ',
+     *      'functions is stripped to ',mseis
+      endif
+      iscan=min0(iscan,mseis)
       t0=th/rad
       p0=ph/rad
       c0=cos(t0)
@@ -82,44 +125,82 @@ c
 c====loop over records
 c........read event header
 c
-      open(12,file='green_in',status='old')
-cxx   do 90 ifl=1,jret1
-      do 90 ifl=1,3
-cxx   call gfs_rwdir(1,hed1,ifl,'r',ierr)
-      read(12,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
-     &             sdep,jys,jds,jhs,jms,sss
-      ierr=0
-      write(*,*) nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,slat,slon,
-     &             sdep,jys,jds,jhs,jms,sss
-      if (ierr.ne.0) stop 'could not read event header'
-      if (nscan.gt.9000) stop 'Data array too long! '
-      if (nsta.eq.ksta) then
-         if (nchn(1:4).eq.'MODE') icomp = 0
-         if (nchn(1:3).eq.'VHZ') icomp = 0
-         told = tstart
-      else
-         icomp = 0
-         told = 0.
+c.....open file with station & channel info ---
+      write(*,*) 'green: Input dbname : ',dbin(1:lnblnk(dbin))
+      call read_site
+      call read_sitechan
+c.....select channel sequence ---
+      call select_sitechan(jdate,nchan,numchan,numsta)
+      open(12,file=fname4,status='old')
+      inchn = 1
+      ifl = 0
+c.....choose new single or triple of station(s)
+  6   iseq = 1
+cxx
+cxx   if(ifl.ge.30) goto 88
+  66  if(inchn.gt.nchan) goto 88
+      nc(iseq) = iabs(numchan(inchn))
+      ns(iseq) = numsta(inchn)
+      inchn = inchn+1
+      iseq = iseq+1
+      if(numchan(inchn-1).le.0) goto 7
+      goto 66
+   7  iseq = iseq-1
+c.....print station and channel info ---
+      write(*,1004) sta_site(ns(1)),lat_site(ns(1)),
+     *           lon_site(ns(1)),iseq
+ 1004 format(' green: Station: ',a6,1x,f9.4,f10.4,' , Channels: ',i1)
+      do i = 1,iseq
+        write(*,*) 'green: Channel: # ',i,'  ',sta_sitechan(nc(i)),
+     *       chan_sitechan(nc(i)),hang_sitechan(nc(i)),
+     *       vang_sitechan(nc(i))
+      enddo
+c....check channels sequence: Z,N,E ---
+      if(iseq.gt.3) then
+         write(*,*) 'WARNING: green: # of channels is stripped to 3'
+         iseq = 3
       endif
-      ksta = nsta
-      mchn=1
-      if(nchn(1:3).eq.'VHN ') mchn=2
-      if(nchn(1:3).eq.'VH1 ') mchn=2
-      if(nchn(1:3).eq.'VHE ') mchn=3
-      if(nchn(1:3).eq.'VH2 ') mchn=3
-      if(mchn.eq.2) call newsta(nsta,nchn,iy,id,t1,p1,az1)
-      if(mchn.eq.3) call newsta(nsta,nchn,iy,id,t1,p1,az2)
+      if(iseq.eq.2) then
+         write(*,*) 'WARNING: green: # of channels is stripped to 1'
+         iseq = 1
+      endif
+      ang(1) = (vang_sitechan(nc(1))-90.0)/rad
+      if(abs(vang_sitechan(nc(1))).gt.0.5) then
+         write(*,*)
+     *   'WARNING: green: Channel: # ',1,' is not vertical. ',
+     *            'Sequence ignored'
+         goto 6
+      endif
+      do i = 2,iseq
+        ang(i) = hang_sitechan(nc(i))/rad
+        if(abs(vang_sitechan(nc(i))-90.0).gt.0.5) then
+           write(*,*)
+     *     'WARNING: green: Channel: # ',i,' is not horizontal. ',
+     *             'Sequence ignored'
+           goto 6
+        endif
+      enddo
+c
+c compute green functions for selected channels
+c
+      icomp = 0
+      do 90 isq=1,iseq
+c.....extract channel parameters from relation tables 
+      ifl = ifl+1
+      mchn = isq
+      iy = jy
+      id = jd
+      ih = jh
+      im = jm
+      ss = sec
+      t1 = (90.0-lat_site(ns(1)))/rad
+      p1 = lon_site(ns(1))
+      if(p1.lt.0.0) p1 = 360.0+p1
+      p1 = p1/rad
 
-      print 110,nsta,mchn
-  110 format(' Station ',a4,'   Channel',i2)
-cxx   call inresp(iscan)
-      tstart=((((iy-jy)*366.+(id-jd))*24.+(ih-jh))*60.+(im-jm))*60.+
-     +ss-sec
-      if(tstart.ne.told.and.icomp.ne.0) icomp=1
       if(icomp.eq.2) goto 500
       len=0
       if(icomp.eq.1) goto 35
-      call allnsta(nsta,t1,p1)
 c
 c....do some trigonometry
 c      epicentral distance: co, si
@@ -131,18 +212,18 @@ c
       co=c0*c1+s0*s1*cos(dp)
       si=dsqrt(1.d0-co*co)
 
-      del = atan2(si,co)
-      del = del /pi*180.
-      write(*,'(a,f10.3)')' Epicentral Distance : ',del
+      del = datan2(si,co)
+      del = del/pi*180.
+      write(*,'(a,f10.3)')' green: Epicentral Distance : ',del
 
       sz=s1*sin(dp)/si
       cz=(c0*co-c1)/(s0*si)
       saz=-s0*sin(dp)/si
       caz=(c0-co*c1)/(si*s1)
 
-      azim = atan2(saz,caz)
+      azim = datan2(saz,caz)
       azim = azim/pi*180.
-      write(*,'(a,f10.3)')' Azimuth of Source   : ',azim
+      write(*,'(a,f10.3)')' green: Azimuth of Source   : ',azim
 
       c2=2.d0*(cz**2-sz**2)
       s2=8.d0*cz*sz
@@ -207,63 +288,50 @@ c
       call prop(omt,a0t,dt,tstart,nmodet,len,iscan,4,prp)
    61 continue
       call s10t12(grn,iscan,c1,s1,c2,s2)
-      call rotate(grn,iscan,caz,saz,az1,az2)
-c
-c....read in data record
-c
-cxx  500 call gfs_rwentry(1,hed1,dat,ifl,'r')
- 500  do ii = 1,nscan
-       dat(ii) = 0.5*sin(0.31415926*(ii-1)*dt)
-      enddo
+      call rotate(grn,iscan,caz,saz,ang(2),ang(3))
 c
 c....greens function longer than data ? : add flags to data !
 c
-      if(iscan.le.nscan) goto 75
-      ip1=nscan+1
-      do 70 i=ip1,iscan
-   70 dat(i)=5.e15
-   75 nscan=iscan
-c
-c....write out record
-c
-      do 77 i=1,9
-   77    hed1(10+i)=alocal(i)
-      igr = 2*ifl - 1
-      call prhdr(igr,hed1,itype1)
-      call gfs_rwentry(2,hed1,dat,igr,'w')
-c
-c....find gaps in data
-c
-      call panlsp(dat,nscan,n1,n2,np)
-      indx=0
+cxx  500 nscan=iscan
+  500 indx=0
       if(mchn.eq.3) indx=6*iscan
-c
-c....convolve green's function by instrument response
-c
-cxx   call grnflt(grn(indx+1),iscan,6)
       len=6*iscan
-c      if(dcg(mchn).eq.1.0) goto 87
-c
-c....multiply green's function by calibration factor
-c
-c      do 86 i1=1,len
-c         jlong=indx+i1
-c   86    grn(jlong)=grn(jlong)*dcg(mchn)
 c
 c....write out green's functions
 c
-   87 nscan = 6 * iscan
-      igr = 2*ifl
-      call prhdr(igr,hed1,itype1)
-      call gfs_rwentry(2,hed1,grn(indx+1),igr,'w')
+      nscan = 6 * iscan
+      write(*,1000) ifl,sta_sitechan(nc(1)),chan_sitechan(nc(isq)),
+     *           jys,jds,jhs,jms,sss,dt,nscan
+ 1000 format(' green: ',i4,1x,a6,1x,a8,i4,1x,i3,1x,i2,':',i2,':',
+     *       f6.3,1x,f8.3,1x,i6)
+c write wfdisc relation with green functions
+      call default_wfdisc(1)
+      nrowwfdisc = 1
+      sta_wfdisc(1) = sta_sitechan(nc(1))
+      chan_wfdisc(1) = chan_sitechan(nc(isq))
+      chanid_wfdisc(1) = nc(isq)
+      time_wfdisc(1) = time
+      wfid_wfdisc(1) = ifl
+      jdate_wfdisc(1) = jdate
+      endtime_wfdisc(1) = time+(nscan-1)/dt
+      nsamp_wfdisc(1) = nscan
+      samprate_wfdisc(1) = 1.0/dt
+      segtype_wfdisc(1) = 'g'
+      foff_wfdisc(1) = 0
+      dir_wfdisc(1) = '.'
+      write(efname,'("g.",i5)') ifl
+      do i = 1,7
+        if(efname(i:i).eq.' ') efname(i:i) = '0'
+      enddo
+      dfile_wfdisc(1) = efname
+      call put_wfdisc(1,nscan,grn(indx+1),ierr)
+      call write_wfdisc
    90 continue
+      goto 6
+   88 continue
       close(12)
-cxx   99 call gfs_close(1)
 99    continue
-      call gfs_close(2)
-      stop
       end
-
 
       subroutine prop(om,a0,dt,tst,nmodes,len,npts,nfun,prp)
       include "green.h"
@@ -317,6 +385,7 @@ c
 
       return
       end
+
 c***************************************************************
 c source sub reads eigen functions from flat databases.
 c List of dbnames are defined in dbnames.dat file. source read 
@@ -325,6 +394,7 @@ c****************************************************************
       subroutine source(fmin,fmax,lmax,nmodes,nmodet)
       implicit none
       include "green.h"
+      include "fdb/fdb_eigen.h"
       integer*4 lmax,nmodes,nmodet
       real*4    fmin,fmax
 c --- common blocks -------------------------------
@@ -337,37 +407,21 @@ c --- common blocks -------------------------------
       common/vecnlX/vecnl(8,meig),vecnlt(4,meig)
       real*4 om,a0,omt,a0t
       common/modeX/om(meig),a0(meig),omt(meig),a0t(meig)
-c ---  eigen relation common block
-      real*4    per_eigen,phvel_eigen,grvel_eigen,attn_eigen
-      integer*4 norder_eigen,lorder_eigen,eigid_eigen,
-     +          nraw_eigen,ncol_eigen,npar_eigen,foff_eigen,
-     +          commid_eigen
-      character*2 datatype_eigen
-      character*64 dir_eigen
-      character*32 dfile_eigen
-      character*17 lddate_eigen
-      character*1 typeo_eigen
-      common/c_eigen/norder_eigen,lorder_eigen,
-     +      eigid_eigen,per_eigen,phvel_eigen,grvel_eigen,
-     +      attn_eigen,nraw_eigen,ncol_eigen,npar_eigen,
-     +      foff_eigen,commid_eigen,typeo_eigen,
-     +      datatype_eigen,dir_eigen,dfile_eigen,lddate_eigen
 c --- other variables
       real* 4   w,q,p,rn,wn,accn
-      real*4    pi2,fot,bigg,tau,rhobar,vn,gn,rs,fl,fl1,fl3,u,v
+      real*4    pi2,fot,vn,rs,fl,fl1,fl3,u,v
       real*4    wsq,e14,au,av,wr,aw
-      integer*4 jcom,npts,nrecl,ieig,idat,ierr,ifl,i,is,j,js
+      integer*4 npts,nrecl,ieig,idat,ierr,ifl,i,is,j,js
       integer*4 ll,lll,m,l,n
+      character*2 tendia,endian
 c ---
       character*64 dir
       character*256 dbname
-      real*4      r(mk),buf(6,mk)
+      real*4      fnl(2),r(mk),buf(6,mk)
 c ---
-      real*4    fnl(2)
       equivalence (fnl(1),n),(fnl(2),l)
       data fot/1.33333333333/
-cxx (MB) data name1/'/home/guy/lfsyn.dir/sph20m.gfs'/
-cxx (MB) data name2/'/home/guy/lfsyn.dir/tor20m.gfs'/
+
       pi2 = datan(1.0d0)*8.0d0
       nmodes = 0
       nmodet = 0
@@ -377,37 +431,21 @@ cxx (MB) data name2/'/home/guy/lfsyn.dir/tor20m.gfs'/
 c===================================================================
 c Main loop by dbase names
 c===================================================================
-      open(7,file='dbnames.dat',status='old')
+      open(7,file=fname3,status='old')
 c*** read dbnames list
    8  read(7,'(a256)',end=9) dbname
       nrecl = 2000
-      call open_eigen(dbname,nrecl,ieig,idat,dir,'r',ierr)
+      call open_eigen(dbname,ieig,idat,nrecl,dir,'r',ierr)
       call read_eigen(ieig,ierr)
       nrecl = (ncol_eigen*nraw_eigen+npar_eigen)*4
-c
-c....read in parameters and radial grid
-c
-      ifl=1
-      read(idat,rec=ifl) jcom,bigg,tau,rhobar,rn,wn,vn,gn,accn,
-     +                        (r(ll),ll=1,nraw_eigen)
-      call close_eigen(ieig,idat)
-      if(typeo_eigen.ne.'P') stop 
-     *         'ERR010:eigen: radius pints are not found'
       npts = nraw_eigen
-      rs=rn/1000.
-      r0=1.-(d0/rs)
-      do 5 i=1,npts
-         if(r(i).lt.r0)is=i
-    5    continue
-      x1=r(is)
-      js=is+1
-      x2=r(js)
+      call close_eigen(ieig,idat)
 c
 c....read in spheroidal and toroidal modes 
 c....in frequency band fmin < f < fmax
 c
-      call open_eigen(dbname,nrecl,ieig,idat,dir,'r',ierr)
-      call read_eigen(ieig,ierr)
+      ifl = 0
+      call open_eigen(dbname,ieig,idat,nrecl,dir,'r',ierr)
       
   10  ifl = ifl+1
       call read_eigen(ieig,ierr)
@@ -418,14 +456,45 @@ c
          if (w.lt.fmin) goto 10
          if (w.le.fmax) goto 11
           goto 10
-  11  read(idat,rec=eigid_eigen) n,l,w,q,
-     +     ((buf(ll,lll),ll=1,ncol_eigen),lll=1,nraw_eigen)
+  11  read(idat,rec=eigid_eigen) n,l,w,q,rn,vn,accn,
+     +     (r(lll),(buf(ll,lll),ll=1,ncol_eigen-1),lll=1,nraw_eigen)
+c swap bytes if necessary
+      tendia = endian()
+      if(datatype_eigen.ne.tendia) then
+      write(*,*) 'XXX'
+        call swap1(fnl,4,2)
+        call swap1(w,4,1)
+        call swap1(q,4,1)
+        call swap1(rn,4,1)
+        call swap1(vn,4,1)
+        call swap1(accn,4,1)
+        call swap1(r,4,mk)
+        call swap1(buf,4,6*mk)
+      endif
       npts = nraw_eigen
-      if (typeo_eigen.eq.'S') then
+      wn = vn/rn
 c
+c  find radius interpolation points
+c
+      rs=rn/1000.
+      r0=1.-(d0/rs)
+      do 5 i=1,npts
+         if(r(i).lt.r0)is=i
+    5    continue
+      x1=r(is)
+      js=is+1
+      x2=r(js)
+
+      if (typeo_eigen.eq.'S') then
+C
 c  get source scalars for S mode
 c
          nmodes=nmodes+1
+         if(nmodes.ge.meig) then
+           write(*,*) 'ERR012: green: # sph. modes in band exceed ',
+     *           'max allowed number ',meig
+         stop '  '
+         endif
          om(nmodes)=w
          a0(nmodes)=q
          lmax = max0(l,lmax)
@@ -466,6 +535,11 @@ c
 c  get source scalars for T mode
 c
          nmodet=nmodet+1
+         if(nmodet.ge.meig) then
+           write(*,*) 'ERR012: green: # tor. modes in band exceed ',
+     *           'max allowed number ',meig
+         stop '  '
+         endif
          omt(nmodet)=w
          a0t(nmodet)=q
          lmax = max0(l,lmax)
@@ -488,74 +562,15 @@ c
          vecnlt(4,nmodet)=-4.*aw*wr
 c         print 801,n,l,(vecnlt(i,nmodet),i=3,4)
   801    format(2i4,6e15.7)
+c 665    continue
       endif
       goto 10
   30  goto 8
    9  close(7)
-      print *,'# sph. modes in band =',nmodes,'  must be .le. ',meig
-      print *,'# tor. modes in band =',nmodet,'  must be .le. ',meig
-      return
-      end
-
-
-      subroutine grnflt(grn,iscan,ifilt)
-c
-c....multiply green's functions by instrument response
-c
-      real*8 s,sh
-      complex resp,zed
-      common/respX/resp(4501)
-      common/workX/s(9002)
-      common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,spare(20)
-      dimension grn(*)
-      nh=iscan/2
-      nha=nh+1
-      sh=dt
-      do 10 j=1,ifilt
-         k1=(j-1)*iscan
-         do 15 i=1,iscan
-   15       s(i) = grn(k1+i)
-         isn = -1
-         call fftldp(s,iscan,isn,sh,kerr)
-         if (kerr.ne.0) stop 'fft failed'
-         i = 1
-         do 20 jj=2,nha
-            i=i+2
-            zed   = cmplx(s(i),s(i+1)) * resp(jj)
-            s(i)  = real(zed)
-   20       s(i+1)= aimag(zed)
-         s(1)=0.0d0
-         s(2)=0.0d0
-         isn=-2
-         call fftldp(s,iscan,isn,sh,kerr)
-         if (kerr.ne.0) stop 'fft failed'
-         do 25 i=1,iscan
-   25       grn(k1+i)=s(i)
-   10    continue
-      return
-      end
-
-      subroutine inresp(iscan)
-c
-c....instrument response
-c
-      real*8 df,pi,sh
-cxx (MB)      complex evresh,resp,z
-      complex evresh,resp
-      common/respX/resp(4501)
-      common/myhed/nscan,nsta,nchn,ntyp,iy,id,ih,im,ss,dt,spare(20)
-      data pi/3.14159265358979d0/
-      character*4 ntyp,nsta,nchn
-      call pznall(nsta,nchn,ntyp,iy,id,istat)
-      nh=iscan/2
-      nha=nh+1
-      sh=dt
-      df=2.d0*pi/(sh*iscan)
-      resp(1)=(1.,0.)
-      do i=2,nha
-         wr      = (i-1)*df
-         resp(i) = evresh(wr)/cmplx(0.,wr)
-      enddo
+      write(*,*) 'green: # sph. modes in band =',nmodes,
+     *          '  must be .le. ',meig
+      write(*,*) 'green: # tor. modes in band =',nmodet,
+     *          '  must be .le. ',meig
       return
       end
 
@@ -709,98 +724,3 @@ c          G&D = Gilbert & Dziewonski
    10 elpmm1=elpmm1+1d0
       return
       end
-      subroutine panlsp(a,len,n1,n2,np)
-c   find gaps of bad data, previously flagged, zero them and index them.
-c   the resulting time series consists of np panels of good data indexed
-c   from n1(i) to n2(i), i=1 to np.
-      dimension a(*),n1(*),n2(*)
-      data zero/0./,badun/3.5e15/
-      id=2
-      np=0
-      do 30 i=1,len
-      go to (15,20),id
-   15 if(a(i).lt.badun) goto 30
-      a(i)=zero
-      n2(np)=i-1
-      id=2
-      go to 30
-   20 if(a(i).gt.badun) goto 25
-      np=np+1
-      n1(np)=i
-      id=1     
-      goto 30
-   25 a(i)=zero
-   30 continue
-      if(id.eq.2) return
-      n2(np)=len
-      return
-      end
-
-
-      integer function lenb(pathname)
-c counts number of non-blank characters in the name and left justifies
-c if there are leading blanks
-      character*(*) pathname
-      lenb=0
-      jchar=len(pathname)
-      do 5 i=1,jchar
-        k=i
-        if(pathname(i:i).ne.' ') goto 10
-    5   continue
-      return
-   10 do 20 i=k,jchar
-        if(pathname(i:i).eq.' ') goto 30
-   20   lenb=lenb+1
-   30 if(k.eq.1) return
-      do 40 i=1,lenb
-        j=k+i-1
-   40   pathname(i:i)=pathname(j:j)
-      return
-      end
-
-      subroutine newsta(nsta,nchn,iy,id,th,ph,azim)
-      character*90 filename
-      character*4 tsta,nchn,nsta
-      character*3 tchn
-      integer ty1,td1,ty2,td2,nix
-      parameter(ix=100000)
-      common/staXXX/nix,tsta(ix),tchn(ix),
-     &    ty1(ix),td1(ix),ty2(ix),td2(ix),
-     &    tlat(ix),tlon(ix),tele(ix),azi(ix)
-      DATA RAD/.0174532/
-      data iflag/1/
-      if(iflag.eq.1) then
-cxx (MB)  filename='/Users/guy/resp.dir/LIST.STA'
-        filename='LIST.STA'
-        open(99,file=filename(1:lenb2(filename)))
-        n=1
-   98   read(99,96,end=97) tsta(n),tchn(n),ty1(n),td1(n),
-     &      ty2(n),td2(n),tlat(n),tlon(n),tele(n),azi(n)
-cxx (MB) 96   format(a4,1x,a3,2x,i4,1x,i3,1x,i4,1x,i3,1x,f10.5,1x,f10.5,1x,
-   96   format(a4,2x,a3,2x,i4,1x,i3,1x,i4,1x,i3,1x,f10.5,1x,f10.5,1x,
-     +       f6.0,1x,f10.5)
-        n=n+1
-        go to 98
-   97   close(99)
-        nix=n-1
-        if(nix.gt.ix) stop 'resize dimension of newsta'
-        iflag=0
-      end if
-      do 94 i=1,nix
-        if(nsta.ne.tsta(i)) goto 94
-        if(nchn(1:3).ne.tchn(i)) goto 94
-        if(iy.lt.ty1(i)) goto 94
-        if(iy.gt.ty2(i)) goto 94
-        if(iy.eq.ty1(i).and.id.lt.td1(i)) goto 94
-        if(iy.eq.ty2(i).and.id.ge.td2(i)) goto 94
-        th=(90.-tlat(i))*rad
-        ph=tlon(i)
-        if(ph.lt.0.) ph=360+ph
-        ph=ph*rad
-        azim=azi(i)*rad
-        return
-   94 continue
-      print *, 'station not found in newsta',nsta
-      return
-      end
-
