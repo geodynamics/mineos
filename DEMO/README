@@ -1,0 +1,17 @@
+
+              DEMO AND TESTIND
+
+Step 1. Uncompress and untar the file DEMO.tar.gz with the command
+
+      ...> gunzip -c DEMO.tar.gz | tar xvf -
+
+      You will see four directories with the following contents:
+
+      models  - 1D model examples;
+      DEMO1   - pecompiled synthetic seismograms (30 modes);
+      DEMO2   - precompiled MINEOS test results;
+      DEMO3   - scripts and input data for testing installed
+                MINEOS package. Results must be the same as in
+                DEMO2 directory.
+Step 2. Make visit in the  directories listed above and follow the README
+        files.

@@ -1,19 +1,36 @@
-      program eigcon
 c
-c=====converts eigenfunction files ( output from minos )
-c      into into .eigen relation containing only info about the
-c      upper most dmax km ( 0 < dmax < Rn), where, RO is radius of
-c         the free surface in km.
-c    ---this version works for all modes: spheroidal, toroidal, and radial.
+c MINEOS version 1.0 by Guy Masters, John Woodhouse, and Freeman Gilbert
+c
+c This program is free software; you can redistribute it and/or modify
+c it under the terms of the GNU General Public License as published by
+c the Free Software Foundation; either version 2 of the License, or
+c (at your option) any later version.
+c
+c This program is distributed in the hope that it will be useful,
+c but WITHOUT ANY WARRANTY; without even the implied warranty of
+c MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c GNU General Public License for more details.
+c
+c You should have received a copy of the GNU General Public License
+c along with this program; if not, write to the Free Software
+c Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+c
+c***************************************************************************
+c
+c  converts eigenfunction files (output from minos_bran) into
+c  .eigen relation containing only info about the upper most dmax km 
+c  ( 0 < dmax < Rn), where, RO is radius of the free surface in km.
+c  This version works for all modes: spheroidal, toroidal, and radial.
 c   
-***************************************************************************
-*     designed:                                                           *
-*     changes:       15.08.91 spheroidal and toroidal modes               *
-*                             parameter mnl for max no. layers in model   *
-*                             variable  irecl for reclength of eigfun file*
-*     changes:       19.08.91 subroutines    for sph, rad and tor modes   *
-*     latest change: 09.01.06 output is .eigen relation.
-***************************************************************************
+c**************************************************************************
+c     designed:
+c     changes:       15.08.91 spheroidal and toroidal modes 
+c                             parameter mnl for max no. layers in model
+c                             variable  irecl for reclength of eigfun file
+c     changes:       19.08.91 subroutines    for sph, rad and tor modes 
+c     latest change: 09.01.06 output is .eigen relation.
+c**************************************************************************
+      program eigcon
       implicit none
       integer*4 mk
       parameter (mk=350)
@@ -222,7 +239,11 @@ c additional normalization V, V' or W, W' by sqrt(l(l+1))
           enddo
         enddo
       endif
-      qq=0.5*ww/qq
+      if(qq.gt.0.01) then
+         qq=0.5*ww/qq
+      else
+         qq = 0.0
+      endif
       call write_eigen(ieig,ierr)
 c
 c  Form output buffer

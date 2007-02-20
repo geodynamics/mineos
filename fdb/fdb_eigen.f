@@ -1,4 +1,25 @@
-c ******************************************************************
+c
+c MINEOS version 1.0 by Guy Masters, John Woodhouse, and Freeman Gilbert
+c
+c This program is free software; you can redistribute it and/or modify
+c it under the terms of the GNU General Public License as published by
+c the Free Software Foundation; either version 2 of the License, or
+c (at your option) any later version.
+c
+c This program is distributed in the hope that it will be useful,
+c but WITHOUT ANY WARRANTY; without even the implied warranty of
+c MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c GNU General Public License for more details.
+c
+c You should have received a copy of the GNU General Public License
+c along with this program; if not, write to the Free Software
+c Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+c
+c**************************************************************************
+c
+c Utilities routines for eigen relation
+c
+c**************************************************************************
 c Relation: eigen
 c Description: Eigenfunction and eigenvalue.
 c attribute field storage external character  attribure
@@ -20,7 +41,7 @@ c dir      14      c64     a64      131-194   directory
 c dfile    15      c32     a32      196-227   file name
 c commid   16      i4      i8       229-236   comment id
 c lddate   17     date     a17      238-254   load date
-c ******************************************************************
+c**************************************************************************
       subroutine open_eigen(name,ieig,idat,n,dir,mode,ierr)
       implicit none
       character mode *(*)

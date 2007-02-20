@@ -1,7 +1,7 @@
 dnl                                               -*- Autoconf -*-
 dnl Process this file with autoconf to produce a configure script.
 dnl
-dnl SynDat by Guy Masters, John Woodhouse, and Freeman Gilbert
+dnl MINEOS by Guy Masters, John Woodhouse, and Freeman Gilbert
 dnl
 dnl This program is free software; you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ dnl
 # $Id: configure.ac 2450 2005-10-19 19:34:15Z leif $
 
 AC_PREREQ(2.59)
-AC_INIT([SynDat], [1.0.0], [cig-seismo@geodynamics.org])
+AC_INIT([MINEOS], [1.0.0], [cig-seismo@geodynamics.org])
 AC_CONFIG_AUX_DIR([./aux-config])
 AC_CONFIG_SRCDIR([syndat.f])
 AC_CONFIG_HEADER([config.h])

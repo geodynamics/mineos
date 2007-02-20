@@ -12,7 +12,7 @@ c ---
       parameter (ml=6000)
 c ---
       integer*4 meig
-      parameter (meig=200000)
+      parameter (meig=300000)
 c ---
       integer*4 mseis
       parameter (mseis=30000)

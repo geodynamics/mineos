@@ -1,4 +1,25 @@
-c**** program minos_bran ****
+c
+c MINEOS version 1.0 by Guy Masters, John Woodhouse, and Freeman Gilbert
+c
+c This program is free software; you can redistribute it and/or modify
+c it under the terms of the GNU General Public License as published by
+c the Free Software Foundation; either version 2 of the License, or
+c (at your option) any later version.
+c
+c This program is distributed in the hope that it will be useful,
+c but WITHOUT ANY WARRANTY; without even the implied warranty of
+c MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c GNU General Public License for more details.
+c
+c You should have received a copy of the GNU General Public License
+c along with this program; if not, write to the Free Software
+c Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+c
+c****************************************************************************
+c  minos_bran program produces the solution of the seismic normal mode
+c  eigenvalue-eigenfunction problem.
+c
+c****************************************************************************
 c  this program uses one input and two output files
 c  the input file contains the model 
 c  the output files are 1) a model listing + a summary of mode properties
@@ -6,7 +27,7 @@ c  and 2) a file for the eigenfunctions
 c  the program then asks for some control info described below
 c
 c structure of model file
-c  card 1  :   title (80 chars)                (20a4 format)
+c  card 1  :   title (up to 256 chars long) 
 c  card 2  :   ifanis,tref,ifdeck              (unformatted)
 c           ifanis=1 for anisotropic model, 0 for isotropic
 c           tref=ref period(secs) of model for dispersion correction.
@@ -89,6 +110,7 @@ c      acceleration normalisation = pi*g*rhobar*rn
 c      velocity normalisation     = rn*sqrt(pi*g*rhobar)= vn
 c      frequency normalization    = vn/rn
 c
+c**************************************************************************
       character*256 filnam
       print *,'input model file:'
       read(5,100) filnam
@@ -2458,8 +2480,9 @@ c    integrating to the icb or the mcb.
       common/arem/a(6,3,mk)
       common/rindx/nic,noc,nsl,nicp1,nocp1,nslp1,n
       dimension af(4,2),as(6,3),afr(4)
-      print 900,ls
-  900 format('in remedy with start level : ',i4)
+c MB commented two next lines
+cx    print 900,ls
+cx900 format('in remedy with start level : ',i4)
       iexp=0
       do k=1,2
         do j=1,4

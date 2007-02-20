@@ -1,8 +1,28 @@
-We are pleased to announce the version 1 release of SynDat.
+We are pleased to announce the version 1 release of MINEOS.
 
 See the file INSTALL for building and installation instructions.
 
 Please send all bug reports by electronic mail to:
     cig-seismo@geodynamics.org
 
-SynDat is free software.  See the file COPYING for copying conditions.
+MINEOS is free software.  See the file COPYING for copying conditions.
+
+==============================================================
+
+NOTES for FORTRAN compilation.
+
+Due to heavy computations in MINEOS package, it is recommended
+to setup optimization option for FORTRAN compiler high as possible,
+for example,
+
+... > ./configure F77=g77 FFLAGS=-O2 --prefix=.....
+
+for Linux/g77 compiler, or
+
+... > ./configure F77=f77 FFLAGS=-fast --prefix=....
+
+for SUN/f77 compiler.
+
+Command make install creates directory bin for executable modules
+and directory share for demo and testing MINEOS package.
+Go to share directory after installation and follow README files.

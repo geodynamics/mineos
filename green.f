@@ -1,9 +1,26 @@
-c.....program green
-c       common blocks :
-c          dheadX : source info
-c          modeX  : complex eigenfrequencies
-c          vecnlX : exitations of modes
 c
+c MINEOS version 1.0 by Guy Masters, John Woodhouse, and Freeman Gilbert
+c
+c This program is free software; you can redistribute it and/or modify
+c it under the terms of the GNU General Public License as published by
+c the Free Software Foundation; either version 2 of the License, or
+c (at your option) any later version.
+c
+c This program is distributed in the hope that it will be useful,
+c but WITHOUT ANY WARRANTY; without even the implied warranty of
+c MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c GNU General Public License for more details.
+c
+c You should have received a copy of the GNU General Public License
+c along with this program; if not, write to the Free Software
+c Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+c
+c**************************************************************************
+c
+c  green program computes for a single event and a given set of stations,
+c  the Green functions.
+c
+c**************************************************************************
       program green
       implicit none
       include "green.h"
@@ -31,7 +48,7 @@ c--- local variables ---
      *          t0,p0,c0,s0,t1,p1,dp,del,azim
       integer*4 i,lmax,nmodes,nmodet,j,lp1,indx,
      *          jy,jd,jh,jm,nscan,iy,id,ih,im,jys,jds,jhs,jms,
-     *          n,l,len,mchn,icomp,itype1,iscan,ifl,isq
+     *          n,l,len,mchn,icomp,itype1,iscan,ifl,isq,ii
       integer*4 nchan,inchn,iseq,jdate,ierr,nc(100),ns(100)
       real*4    ang(3)
       character*8 ename
@@ -90,7 +107,9 @@ c convert human time to epoch time
       jdate = jys*1000+jds
 c--
       d0=sdep
-      th=90.-slat
+cxx   th=90.-slat
+c.....convert event geographic latitude to geocentric
+      th = 90.0-atan(0.99329534*tan(slat/rad))*rad
       ph=slon
       jy=jys
       jd=jds
@@ -137,6 +156,9 @@ c.....select channel sequence ---
 c.....choose new single or triple of station(s)
   6   iseq = 1
 cxx
+      do ii = 1,12*iscan
+        grn(ii) = 0.0
+      enddo
 cxx   if(ifl.ge.30) goto 88
   66  if(inchn.gt.nchan) goto 88
       nc(iseq) = iabs(numchan(inchn))
@@ -193,7 +215,9 @@ c.....extract channel parameters from relation tables
       ih = jh
       im = jm
       ss = sec
-      t1 = (90.0-lat_site(ns(1)))/rad
+cxx   t1 = (90.0-lat_site(ns(1)))/rad
+c.....convert station geographic latitude to geocentric
+      t1 = (90.0-atan(0.99329534*tan(lat_site(ns(1))/rad))*rad)/rad
       p1 = lon_site(ns(1))
       if(p1.lt.0.0) p1 = 360.0+p1
       p1 = p1/rad
@@ -315,6 +339,8 @@ c write wfdisc relation with green functions
       jdate_wfdisc(1) = jdate
       endtime_wfdisc(1) = time+(nscan-1)/dt
       nsamp_wfdisc(1) = nscan
+      calib_wfdisc(1) = 1.0
+      calper_wfdisc(1) = 20.0
       samprate_wfdisc(1) = 1.0/dt
       segtype_wfdisc(1) = 'g'
       foff_wfdisc(1) = 0
@@ -324,6 +350,9 @@ c write wfdisc relation with green functions
         if(efname(i:i).eq.' ') efname(i:i) = '0'
       enddo
       dfile_wfdisc(1) = efname
+      do i = 1,nscan
+         grn(indx+i) = -grn(indx+i)
+      enddo
       call put_wfdisc(1,nscan,grn(indx+1),ierr)
       call write_wfdisc
    90 continue
@@ -412,7 +441,7 @@ c --- other variables
       real*4    pi2,fot,vn,rs,fl,fl1,fl3,u,v
       real*4    wsq,e14,au,av,wr,aw
       integer*4 npts,nrecl,ieig,idat,ierr,ifl,i,is,j,js
-      integer*4 ll,lll,m,l,n
+      integer*4 ll,lll,m,l,n,ik
       character*2 tendia,endian
 c ---
       character*64 dir
@@ -458,10 +487,15 @@ c
           goto 10
   11  read(idat,rec=eigid_eigen) n,l,w,q,rn,vn,accn,
      +     (r(lll),(buf(ll,lll),ll=1,ncol_eigen-1),lll=1,nraw_eigen)
+      if(ncol_eigen.eq.3) then
+         do ik = 1,nraw_eigen
+            buf(3,ik) = 0.0
+            buf(4,ik) =0.0
+         enddo
+      endif
 c swap bytes if necessary
       tendia = endian()
       if(datatype_eigen.ne.tendia) then
-      write(*,*) 'XXX'
         call swap1(fnl,4,2)
         call swap1(w,4,1)
         call swap1(q,4,1)
@@ -622,6 +656,7 @@ c 665    continue
       pi2=0.5d0*pi
       len=6*nscan
       if(az1.eq.0.0.and.abs(az2-pi2).lt.1.d-4) then
+cxx     write(*,*)'Standard position.'
         do i=1,len
            j=len+i
            d1=-grn(i)*cz-grn(j)*sz

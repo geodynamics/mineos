@@ -1,6 +1,26 @@
 c
-c.....syndat makes up synthetic seismograms from green's functions
+c MINEOS version 1.0 by Guy Masters, John Woodhouse, and Freeman Gilbert
 c
+c This program is free software; you can redistribute it and/or modify
+c it under the terms of the GNU General Public License as published by
+c the Free Software Foundation; either version 2 of the License, or
+c (at your option) any later version.
+c
+c This program is distributed in the hope that it will be useful,
+c but WITHOUT ANY WARRANTY; without even the implied warranty of
+c MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c GNU General Public License for more details.
+c
+c You should have received a copy of the GNU General Public License
+c along with this program; if not, write to the Free Software
+c Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+c
+c**************************************************************************
+c
+c  syndat program makes synthetic seismograms by convolutions of
+c  Green functions with the seismic moment tensor of the choosen event.
+c
+c**************************************************************************
       program syndat
       implicit none
       include 'fdb/fdb_wfdisc.h'
@@ -13,7 +33,7 @@ c----
       common/rhs/rh1(mseis)
       real*4 dt,fnorm
       integer*4 nscan, itptens, jys, jds, jhs, jms
-      integer*4 l, i, nfw, ifl, ierr, j, ib, nh
+      integer*4 l, i, nfw, ifl, ierr, j, ib, nh, idout
       integer*4 iscan, iscan2, np1, isn, kerr,lnblnk
       real*8    pi,sss,slat,slon,sdep,tconst,dm0,fscal,ww
       real*8    si,df,wr,con,arg,sinc2,frp,dati,fip,datr,sol(6)
@@ -106,9 +126,11 @@ c.....read input wfdisc relation
         do i=1,nscan
           a(i)=rh1(i)
         enddo
-  
-        if(tconst.le.0.d0) goto 90
-  
+c
+c make correction for halfduratio, if tconst > 0
+c convert data to velocity or displacement, if it necessarily
+c  
+        if(tconst.le.0.d0.and.idout.eq.0) goto 90
         si=dt
         nh=(nscan+1)/2
         call facdwn(nh)
@@ -125,19 +147,29 @@ c.....read input wfdisc relation
         do i=3,iscan2,2
            j=j+1
            wr=j*df
-           con=0.5d0*tconst*wr
-           arg=0.5d0*con
-           sinc2=(dsin(arg)/arg)**2
-           frp=sinc2*dcos(con)
-           fip=-sinc2*dsin(con)
-           datr=a(i)*frp-a(i+1)*fip
-           dati=a(i)*fip+a(i+1)*frp
-           a(i)=datr
-           a(i+1)=dati
+           if(tconst.ge.0.d0) then
+             con=0.5d0*tconst*wr
+             arg=0.5d0*con
+             sinc2=(dsin(arg)/arg)**2
+             frp=sinc2*dcos(con)
+             fip=-sinc2*dsin(con)
+             datr=a(i)*frp-a(i+1)*fip
+             dati=a(i)*fip+a(i+1)*frp
+             a(i)=datr
+             a(i+1)=dati
+           endif
 c convert from acceleration to velocity
-           ww = a(i)
-           a(i) = a(i+1)/wr
-           a(i+1) = -ww/wr
+           if(idout.gt.0) then
+             ww = a(i)
+             a(i) = a(i+1)/wr
+             a(i+1) = -ww/wr
+           endif
+c convert from velocity to displacement
+           if(idout.gt.1) then
+             ww = a(i)
+             a(i) = a(i+1)/wr
+             a(i+1) = -ww/wr
+           endif
         enddo
         isn=-2
         call fftl(a,iscan,isn,kerr)
