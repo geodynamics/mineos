@@ -28,7 +28,7 @@ bin_SCRIPTS = scripts/creat_origin
 
 # docs
 
-nobase_data_DATA = doc/tex/Figures/* doc/tex/*.tex
+nobase_data_DATA = doc/tex/Figures/* doc/tex/*.tex doc/UserManual.pdf
 data_DATA = DEMO/DEMO.tar.gz DEMO/README
 
 # main programs
