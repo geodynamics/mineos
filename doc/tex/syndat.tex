@@ -1,0 +1,72 @@
+\section{syndat program}
+
+{\bf syndat} program makes synthetic seismograms by convolution
+of Green functions ({\bf green} program output) with the
+seismic moment tensor of the chosen event.
+
+\subsection {Command line}
+                                                                               
+\noindent {\bf syndat}
+
+\noindent {\bf syndat} $<$ {\it parameter\_file}
+
+\noindent {\bf syndat} $<<$ WORD \\
+\noindent ........  \\
+\noindent ........  \\
+\noindent WORD
+
+\noindent There are three different ways to start the {\bf syndat} program:
+\begin{itemize}
+\item interactive dialog for setting input parameters;
+\item single shell command with redirection of the standard input from a parameter
+file {\it parameter\_file} containing exactly the same information and
+in the same order as in the interactive dialog - one answer per line;
+\item direct shell script. In this case, the contents of the parameter file are
+directly included in the shell script between the delimiters ``WORD". See examples.
+\end{itemize}
+\noindent The parameter file consists of four lines:
+\begin{description}
+\item[Line 1:] {\it cmt\_event}\\
+  This is the path to the file with the CMT solution for a single event. It must be the same
+  {\it cmt\_event} file as used in the construction of the Green functions by the
+ {\bf green} program. It uses part of the file
+  defining the seismic moment tensor components, scalar moment, and focal planes. \\
+  {\bf Format:} Any string up to 256 characters long.
+\item[Line 2:] {\it in\_dbname } \\
+{\it in\_dbname } is the input database name for the input Green functions. The {\it .wfdisc} relation of the
+  {\it in\_dbname } database must be the output {\it .wfdisc} relation of the
+  {\bf green} program. \\
+  {\bf Format:} Any string up to 256 characters long. 
+\item[Line 3:] {\it plane} \\
+  This defines the method for introducing the moment tensor components.
+  If $plane=0$, the tensor components come in directly from the {\it cmt\_event}
+  file as is. If $plane=1$, the program takes the scalar moment and angles from
+  focal plane 1 and computes the moment tensor components. For $plane=2$,
+  the program computes the tensor components using the scalar moment and
+  focal plane 2. \\
+  {\bf Format:} Unformatted.
+\item[Line 4:] {\it out\_dbname} \\
+  This is the output database name for the {\it .wfdisc} relation for 
+  synthetic seismograms. Each row of the {\it .wfdisc} relation refers to 
+  a binary file with synthetic data in nm/sec. \\
+  {\bf Format:} Any string up to 256 characters long.
+\item[Line 5:] {\it datatype} \\
+  This defines the type of synthetic data. If $datatype=0$ the 
+  output synthetic waveforms are accelerograms in $nm/s^2$. This is 
+  recommended native {\bf Mineos} output. If $datatype=1$ the
+  output is velocity waveform in $nm/s$, and if $datatype=2$ the
+  output is displacement in $nm$. This is done by additional
+  conversation of accelerograms to velocity or displacement.
+\end{description}
+%
+% Input data
+%
+\subsection {Input data}
+
+\textbf{\large \emph{cmt\_event.}} See description in section 5.2. \\
+\textbf{\large \emph{in\_dbname.}} {\it out\_dbname} database for the {\it .wfdisc}
+relation from the  {\bf green} program. 
+\subsection {Output data}
+\textbf{\large \emph{out\_dbname.}} Database name for the final synthetic seismograms
+referenced by the {\it .wfdisc} relation.
+

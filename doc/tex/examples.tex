@@ -1,0 +1,295 @@
+%
+% MINOS\_BRAN
+%
+\section{Examples}
+
+This section contains examples of the interaction with each of the
+four programs of the {\bf Mineos} package. Each program can be
+run in three different ways: by interactive dialog, redirection from 
+an input file, or direct use of a shell script. In each subsection,
+examples of running the program in each way are presented. The output
+from each approach should be the same. The programs are run in order:
+{\bf minos\_bran}, {\bf eigcon}, {\bf green}, {\bf syndat}.
+
+All of the input files named here are included in the standard distribution
+of the {\bf Mineos} package.
+
+\subsection{minos\_bran}
+
+In the example given here, {\bf minos\_bran} reads in a model file
+called {\it prem\_noocean.txt}, which is a tabular listing of the
+PREM model with the ocean filled in with solid crust. The program 
+outputs two files: {\it prem\_noocean\_S} and {\it eprem\_noocean\_S}.
+The first file contains a listing of some normal mode properties (n, $l$,
+frequency, period, phase and group speed, etc) and the second file
+contains the eigenfunctions. Both files are needed to be read into 
+the eigenfunction renormalization program, {\bf eigcon}. In this example,
+the numerical tolerance parameter eps is set to $10^{-10}$ and gravity is taken
+into consideration in computing the eigenfunctions only if the frequency
+is less than 10 mHz. The  output normal mode properties will be
+for spheroidal modes with angular order $l$ values ranging between 1 and 6000, frequencies
+ranging between 0 and 166 mHz (i.e., 6 sec), and  radial orders $n$ ranging from 0
+to 0 -- that is, only fundamental modes will be computed in this example.
+
+{\bf\emph{Example 1.}} Interactive dialog
+\begin{quote}
+\texttt{ mathis\% minos\_bran \\ 
+input model file: \\
+{\bf \emph{prem\_noocean.txt}} \\
+output file: \\
+{\bf \emph{prem\_noocean\_S}} \\
+eigenfunction file (output): \\
+{\bf \emph{eprem\_noocean\_S}} \\
+enter eps and wgrav \\
+{\bf \emph{1e-10 10}} \\
+enter jcom (1=rad;2=tor;3=sph;4=ictor) \\
+{\bf \emph{3}} \\
+enter lmin,lmax,wmin,wmax,nmin,nmax \\
+{\bf \emph{1 6000 0.0 166.0 0 0}} \\
+mathis\%  }
+\end{quote}
+
+\newpage
+{\bf\emph{Example 2.}} Redirection of input file \\
+Create in the working directory a parameter file named {\tt Param} with
+the following contents:
+\begin{quote}
+\texttt{prem\_noocean.txt \\
+prem\_noocean\_S \\
+eprem\_noocean\_S \\
+1e-10 10 \\
+3 \\
+1 6000 0.0 166.0 0 0 }
+\end{quote}
+and start the following command:
+
+\texttt{...\% minos\_bran $<$ Param}
+
+
+\noindent {\bf\emph{Example 3.}} Direct shell script \\
+Include in your sh/csh script the following lines:
+\begin{quote}
+\texttt{............. \\
+minos\_bran $<<$ EOF \\
+prem\_noocean.txt \\
+prem\_noocean\_S \\
+eprem\_noocean\_S \\
+1e-10 10 \\
+3 \\
+1 6000 0.0 166.0 0 0 \\
+EOF \\
+............. }
+\end{quote}
+
+\newpage
+%
+% EIGCON
+%
+
+\subsection{eigcon}
+
+In this example, the two files computed by {\bf minos\_bran} are read in as input,
+{\it prem\_noocean\_S} and {\it eprem\_noocean\_S},
+together with the input model file {\it prem\_noocean.txt}. {\bf eigcon} renormalizes
+the eigenfunctions and outputs them to a depth of 1000 km, in this example. The
+renormalized eigenfunctions are placed in an extension of the CSS3.0 data base,
+using the relation {\it test\_S.eigen}. This relation points to a file called {\it eigen}
+located in a subdirectory called {\it test\_S.dat}. The file {\it eigen} is non-encapsulated,
+which allows greater flexibility in access from different platforms and code  from
+different compilers. Information about the eigenfunction's byte order is contained
+in the {\it .eigen} relation, which is used in subsequent programs to swap bytes appropriately.
+Eigenfunctions are computed here to 1000 km for plotting purposes, but for runs
+in which earthquakes are no deeper than say 40 km, then 40 would be input here.
+
+
+{\bf\emph{Example 1.}} Interactive dialog
+\begin{quote}
+\texttt{mathis\% eigcon \\
+spheroidals (3) or toroidals (2) or radial (1) or \\
+inner core toroidals (4) modes \\
+{\bf \emph{3}} \\
+enter name of model file \\
+{\bf \emph{prem\_noocean.txt}} \\
+enter max depth [km] : \\
+{\bf \emph{1000}} \\
+enter name of minos\_bran output text file \\
+{\bf \emph{prem\_noocean\_S}} \\
+minos\_bran output binary unformatted file name \\
+{\bf \emph{eprem\_noocean\_S}} \\
+enter path\/dbase\_name or dbase\_name to store eigenfunctions: \\
+{\bf \emph{test\_S}} \\
+mathis\%  }
+\end{quote}
+
+{\bf\emph{Example 2.}} Redirection of input file \\
+Create in the working directory a parameter file named {\tt Param} with
+the following contents:
+\begin{quote}
+\texttt{3 \\
+prem\_noocean.txt \\
+1000 \\
+prem\_noocean\_S \\
+eprem\_noocean\_S \\
+test\_S }
+\end{quote}
+and start the following command:
+
+\texttt{...\% eigcon $<$ Param}
+
+\noindent {\bf\emph{Example 3.}} Direct shell script \\
+Include in your sh/csh script the following lines:
+\begin{quote}
+\texttt{............. \\
+eigcon $<<$ EOF \\
+3 \\
+prem\_noocean.txt \\
+1000 \\
+prem\_noocean\_S \\
+eprem\_noocean\_S \\
+test\_S \\
+EOF \\
+............. }
+\end{quote}
+\newpage
+%
+% GREEN
+%
+\subsection{green}
+
+In this example, there are three principal input files. 
+
+(1) The first input file is the data base name of the {\it .site} and {\it .sitechan}
+relations. The entries of the {\it .sitechan} file determine which stations and
+channels are used for constructing the Green functions. Channel orientations are
+in the {\it .sitechan} file, by station coordinates are in the {\it .site} file.
+The data base name for these relations in this example is {\it short}.
+There must be, therefore, two pre-constructed files: {\it short.site} and {\it short.sitechan}.
+
+(2) The second input file is the file {\it dblist}.
+This file contains the listing of all data base names for the eigenfunction files.
+In the previous subsection, the {\it .eigen} relation {\it prem\_noocean\_S.eigen}
+was created. So, if that file contains the only normal modes to be used in the
+construction of the Green functions, then the file {\it db\_list} would have a 
+single entry: prem\_noocean\_S. Note, that only the data base name is included and
+not the relation name suffix {\it .eigen}. If other modes are desired, then the file
+{\it db\_list} would include the data base names of the other modes. For example,
+toroidal modes are usually included in synthetic or SH motions will be ignored. In
+this simple example, {\it db\_list} can be considered to have a single entry.
+
+(3) The third input file is the file {\it china\_cmt\_evt}, which is a single-lined listing
+containing the coordinates and event parameters of an earthquake in China. The moment tensor
+is not used by this program, but by the program {\bf syndat} which follows.
+
+This example will choose modes only between frequencies of 0 and 166 mHz
+(i.e., periods greater than 6 sec). It will produce Green functions that are 8000 samples
+long. The time sampling specified in the {\it china\_cmt\_evt} file is 1 sec, so this
+is a time series length of a little over 2 hours. In many cases, both the minor and
+major arc arrivals can be seen.
+
+The program will output a {\it .wfdisc} relation in the data base called {\it green};
+that is, a file called {\it green.wfdisc} which points to the waveforms on disk in a default
+location.
+
+
+{\bf\emph{Example 1.}} Interactive dialog
+\begin{quote}
+\texttt{mathis\% green \\
+enter path to db with sta \& stachan: \\
+{\bf \emph{short}} \\
+enter name of file within list of nmodes db: \\
+{\bf \emph{db\_list}} \\
+enter input CMT file name: \\
+{\bf \emph{china\_cmt\_event}} \\
+min and max frequencies to be considered (mHz) : \\
+{\bf \emph{ 0 166.}} \\
+enter \# pts in greens fns .le.  30000 : \\
+{\bf \emph{8000}} \\
+enter Green functions output db file name: \\
+{\bf \emph{green}} \\
+mathis\%  }
+\end{quote}
+{\bf\emph{Example 2.}} Redirection of input file \\
+Create in the working directory a parameter file with the name {\tt Param} with
+the following contents:
+\begin{quote}
+\texttt{short \\
+db\_list \\
+china\_cmt\_event \\
+ 0.  166. \\
+8000 \\
+green }
+\end{quote}
+and start the following command:
+
+\texttt{...\% green $<$ Param}
+\noindent {\bf\emph{Example 3.}} Direct shell script \\
+Include in your sh/csh script the following lines:
+\begin{quote}
+\texttt{............. \\
+green $<<$ EOF \\
+short \\
+db\_list \\
+china\_cmt\_event \\
+ 0.  166. \\
+8000 \\
+green \\
+EOF \\
+............. }
+\end{quote}
+%
+% SYNDAT
+%
+\newpage
+
+\subsection{syndat}
+
+In this example, {\bf syndat} reads in two files. First, there is the event file that
+contains the CMT: {\it china\_cmt\_event}. Second, there is the output from the program
+{\bf green}: {\it green.wfdisc}. Only the data base name, {\it green}, is input rather
+than the whole file name. The output data base name is also specified, which in this
+example is {\it Syndat}. The program will output a {\it .wfdisc} relation, {\it Syndat.wfdisc}
+in this example, pointing to the waveforms on disk.
+
+
+{\bf\emph{Example 1.}} Interactive dialog
+\begin{quote}
+\texttt{mathis\% syndat \\
+enter input CMT file name: \\
+{\bf \emph{china\_cmt\_event}} \\
+enter tensor type: 0 - moment, 1 - nodal plane 1, 2 - nodal plane 2 \\
+{\bf \emph{0}} \\
+enter input dbname \\
+{\bf \emph{green}} \\
+enter output dbname \\
+{\bf \emph{Syndat}} \\
+enter output datatype: 0 -accn, 1 -vel, 2 -displ \\
+{\bf \emph{0}} \\
+mathis\%  }
+\end{quote}
+{\bf\emph{Example 2.}} Redirection of input file \\
+Create in working directory parameter file with the name {\tt Param} with
+the following contents:
+\begin{quote}
+\texttt{china\_cmt\_event \\
+0 \\
+green \\
+Syndat \\
+0}
+\end{quote}
+and start the following command:
+
+\texttt{...\% syndat $<$ Param}
+\newpage
+\noindent {\bf\emph{Example 3.}} Direct shell script \\
+Include in your sh/csh script the following lines:
+\begin{quote}
+\texttt{............. \\
+syndat $<<$ EOF \\
+china\_cmt\_event \\
+0 \\
+green \\
+Syndat \\
+0 \\
+EOF \\
+............. }
+\end{quote}

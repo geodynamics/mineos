@@ -28,7 +28,7 @@ bin_SCRIPTS = scripts/creat_origin
 
 # docs
 
-nobase_data_DATA = doc/UserManual.pdf
+nobase_data_DATA = doc/tex/Figures/* doc/tex/*.tex
 data_DATA = DEMO/DEMO.tar.gz DEMO/README
 
 # main programs
@@ -60,9 +60,9 @@ cucss2sac_SOURCES = utils/cucss2sac.c utils/swap.c utils/cucss2sac.h
 eigen2asc_SOURCES = utils/eigen2asc.f $(fdb) $(time)
 
 EXTRA_DIST = \
-	scripts/creat_origin \
-	doc/UserManual.pdf \
-	DEMO/README \
-	DEMO/DEMO.tar.gz
+	scripts \
+	doc \
+	DEMO/DEMO.tar.gz \
+	DEMO/README
 
 ## end of Makefile.am

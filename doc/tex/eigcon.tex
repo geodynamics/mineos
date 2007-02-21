@@ -1,0 +1,229 @@
+\section{eigcon program}
+
+{\bf eigcon} program makes postprocessing of the {\bf minos\_bran} results and
+creates the {\it .eigen} relation table in {\it dbname.eigen},
+where {\it dbname} is the database name. 
+The program creates a directory called {\it dbname.eigen.dat} in the same directory
+where the file {\it dbname.eigen} is located. Under {\it dbname.eigen.dat}
+it creates a binary file with a fixed name, {\it eigen}, for storing
+the eigenfunctions. This binary file consists of segments with a
+fixed length - one segment per eigenfunction.
+The {\it eigen} binary file is a portable file. Unlike
+the {\bf minos\_bran} binary file it does not have any encapsulation and
+can be
+easily treated by programs written in various high level languages 
+such as C, C++, Perl, etc.
+Access to a segment is provided through the {\it .eigen} relation table, namely,
+by referencing the path, length,  byte offset, and by type of data. 
+The {\it .eigen}
+relation table, Section 8, has the structure of an external database file
+and can be easily incorporated into relational databases such as
+ORACLE, Postgress, MySql, etc.
+
+\subsection {Command line}
+
+\noindent {\bf eigcon}
+
+\noindent {\bf eigcon} $<$ {\it parameter\_file}
+
+\noindent {\bf eigcon} $<<$ WORD \\
+\noindent ........  \\
+\noindent ........  \\
+\noindent WORD
+
+\noindent There are three different ways to start the {\bf eigcon} program:
+\begin{itemize}
+\item interactive dialog for setting input parameters;
+\item single shell command with redirection of the standard input from a parameter
+file {\it parameter\_file} containing exactly the same information and
+in the same order as in the interactive dialog - one answer per line;
+\item direct shell script. In this case, the contents of the parameter file are
+directly included in the shell script between delimiters ``WORD". See examples.
+\end{itemize}
+\noindent The parameter file consists of six lines:
+\begin{description}
+\item[Line 1:] {\it jcom} \\
+{\it jcom} is the type of oscillation.  $jcom=1$ for radial modes, $=2$ for
+  toroidal modes, $=3$ for spheroidal modes, and $=4$ for inner core toroidal
+  modes. \\
+  {\bf Format:} unformatted.
+\item[Line 2:] {\it model\_file} \\
+  {\it model\_file} is the path to the 1-D input model file. Text string up to
+  256 characters long.
+\item[Line 3:] {\it max\_depth}\\
+  {\it max\_depth} is the depth to cut all output eigenfunctions (in km). All output
+  values exists in the interval $[r_n,r_n - max\_depth]$ only. $r_n$ is the radius
+  of the  free surface in km. \\
+  {\bf Format:} unformatted.
+\item[Line 4:] {\it in\_plain\_file} is the path to the input ASCII file. 
+  The file is the output model listing  {\it out\_plain\_file} of the
+  program {\bf minos\_bran}. See section 3.3.
+  Text string up to 256 characters long.
+\item[Line 5:] {\it in\_bin\_file} \\
+  {\it in\_bin\_file} is the  path to the input FORTRAN binary unformatted file,
+which was produced by the program {\bf minos\_bran}.
+ See section 1.3.
+\item[Line 6:] {\it dbname} \\
+  {\it dbname} is the path to the output database name. The path is a string up to 256
+  characters long. The path should not
+  end with a backslash, ``/". The part of string after the last ``/" or from the
+  beginning of the string, if string does not have ``/" at all, is the
+  data base name. The data base name must be at least one character long.
+\end{description}
+%
+% Input data
+%
+\subsection {Input data}
+
+\textbf{\large \emph{model\_file.}} See description in Section 3.2, 
+\textbf{\emph{model\_file}}.
+
+\noindent \textbf{\large \emph{in\_plain\_file.}}
+This file has been created by {\bf minos\_bran} as an output file.
+See description of the file in Section 3.3, \textbf{\emph{out\_plain\_file}}.
+Actually, {\bf eigcon} uses only normal mode properties from this file to create
+some part of {\bf .eigen} relation table.
+
+\noindent \textbf{\large \emph{in\_bin\_file.}}
+This file has been created by {\bf minos\_bran} as an output file.
+See description of the file in Section 3.3, \textbf{\emph{out\_bin\_file}}.
+
+\subsection {Output data}
+
+As mentioned above, {\bf eigcon} creates three objects in the file system:
+a relational table \\
+{\it dbname.eigen}, a directory {\it dbname.eigen.dat}, and a
+binary file {\it dbname.eigen.dat/eigen}.
+
+\textbf{\large \emph{dbname.eigen}} file format is described in Section 8 as
+the relation table {\it .eigen}. Each line of this file describes the modal
+properties of a single eigenfunction and references the binary data
+segment in the {\it dbname.eigen.dat/eigen} file.
+
+\textbf{\large \emph{dbname.eigen.dat/eigen}} binary file consists of segments.
+Each segment stores normalized eigenfunctions for a single normal mode ($n,l$). 
+It consists of words 4 bytes long containing real*4 or integer*4 variables
+in the internal computer
+format. The field {\it datatype} in {\it .eigen} describes numeric memory
+storage data (byte order). There are two common byte orders
+for most of computer architectures:
+BIG\_ENDIAN (straight order 1-2-3-4) and LOW\_ENDIAN (reverse order 4-3-2-1).
+BIG\_ENDIAN is used by SUNS and RISC-oriented platforms, and LOW\_ENDIAN is 
+used by PC, VAX and DEC hardware. {\bf eigcon} automaticaly detects the byte order
+and places the text strings ``t4" (BIG\_ENDIAN) or ``f4" (LOW\_ENDIAN) into the
+{\it datatype} field in the {\it .eigen} relation.
+
+Each segment is logically divided into two parts -  the header and the body. \\
+{\bf \emph{The header.}} This part of the segment stores   scalar 
+parameters  and normalization coefficients
+for the modal properties.
+\begin{quote}
+\begin{description}
+\item[{\bf word 1:} {\tt integer*4}, $n$] - normal mode radial order number $n$. Must
+  be equal to {\it norder} in the referencing {\it .eigen} relation.
+\item[{\bf word 2:} {\tt integer*4}, $l$] - normal mode angular order 
+(harmonic degree) number $l$. Must
+  be equal to {\it lorder} in the referencing {\it .eigen} relation.
+\item[{\bf word 3:} {\tt real*4}, $\omega$] Normal mode frequency (eigenvalue) in
+  physical units rad/s, \mbox{$\;\omega=2\pi/per$}. $per$ is the period field in the
+  {\it .eigen} relation.
+\item[{\bf word 4:} {\tt real*4}, $q$] - part of the exponential term in the
+  attenuation
+  expression, \mbox{$e^{-qt}$}, \mbox{$q=0.5*\omega/Q$}, rad/sec.
+\item[{\bf word 5:} {\tt real*4}, $r_n$] - the radius normalization coefficient 
+  in meters, equal to the radius of the model's free surface.
+\item[{\bf word 6:} {\tt real*4}, $v_n$] - the velocity normalization 
+  coefficient, $v_n=r_n\;(\pi G\rho_n)^{-1/2}$, where,
+$G$ is the gravitational potential constant 
+($G=6.6723\cdot 10^{-11}$ $\rm m^3/kg/s^2$),
+$\rho_n$ is the density normalization coefficient ($\rho_n=5515$ $\rm kg/m^3$).
+The circular frequency normalization coefficient $\omega_n$ is given by
+$\omega_n=v_n/r_n$.
+\item[{\bf word 7:} {\tt real*4}, $a_n$] - the acceleration normalization 
+  coefficient, \mbox{$a_n=10^{20}/(\rho_n r_n^4)$}.
+\end{description}
+\end{quote}
+%
+\noindent {\bf \emph{The body - eigenfunction grid.}}
+%
+\begin{quote}
+\begin{description}
+\item[{\bf word 8$\;-\;$end:}] {\tt real*4}, $E(nrow,ncol)$ - matrix 
+  of $nrow$ rows and $ncol$ columns to store the normalized eigenfunctions. 
+  The first column is radius. The other columns are the
+  eigenfunctions.
+  The number of eigenfunctions depends on modal type. For spheroidal
+  modes, it should be 7 columns ($r,\;U,\;U^\prime,\;V,\; V^\prime,\;P,
+  \;P^\prime$), for toroidal and others, it should be 3 columns ($r,\;W,\;W^\prime$).
+  The matrix is stored in segments by the second index, by columns.
+\end{description}
+\end{quote}
+
+\noindent Note that {\bf eigcon} performs an additional eigenfunction
+normalization. Eigenfunctions for toroidal and the horizontal  
+part of spheroidal modes are divided by $(l(l+1))^{1/2}$.
+This is done in accordance with theory developed by
+Woodhouse \& Dahlen (1978).
+The new normalization of eigenfunctions is given by
+\[       \omega^2 \int_0^{r_n} \rho(r)\; l(l+1)\;W^{2}(r)r^{2}\;dr = 1 \]
+for toroidal modes and
+\[       \omega^2 \int_0^{r_n} \rho(r)\; [U^{2}(r)+l(l+1)\;V^{2}(r)]r^{2}\;dr = 1 \]
+for spheroidal modes.
+%
+\subsection{Messages}
+Program {\bf eigcon} prints out on the standad output 
+device the following messages:
+
+\noindent \textbf {\emph{Dialog messages}}. Copy of input/output dialog
+or parameter file in dialog form. For example,
+
+\noindent \texttt {spheroidals (3) or toroidals (2) or radial (1) or  \\
+inner core toroidals (4) modes \\
+\emph{3} \\
+enter name of model file \\
+\emph{model\_PREM.txt} \\
+enter max depth [km] : \\
+\emph{40.} \\
+enter name of minos\_bran output text file \\
+\emph{PREM\_S} \\
+minos\_bran output binary unformatted file name \\
+\emph{ePREM\_S} \\
+enter path/dbase\_name or dbase\_name to store eigenfunctions: \\
+\emph{test\_S} } 
+
+\noindent \textbf {\emph{Info and error messages}}. 
+
+\noindent 1. \texttt{============= Program eigcon ====================} 
+\begin{quote}  
+Info message. Shows that program {\bf eigcon} starts.
+\end{quote}
+\noindent 2. \texttt{eigcon: n,nstart,nrad = nnn, mmm, kkk}
+\begin{quote}  
+Info message. {\tt nnn} is the total number of nodes  of eigenfunction,
+{\tt mmm} is the number of staring node after cutting eigenfunction by depth,
+and {\tt kkk} is the rest number of nodes after cutting.
+\end{quote}
+\noindent 3. \texttt{ERR001: eigcon: Input plane and binary files differ: nn, ll, n, l }
+\begin{quote}  
+\noindent Order numbers of some eigenfunctions {\tt nn} and {\tt ll} in the text 
+file differ from the numbers {\tt n, l} in the binary data segment. 
+Program is terminated. Check {\it .eigen} relation or create it again.
+\end{quote}
+\noindent 4. \texttt{ERR002: eigcon: Unknown jcom nnn}
+\begin{quote}  
+\noindent Error message. The parameter {\tt jcom} with value {\tt nnn} 
+is out of range.  Program is terminated. Provide {\tt jcom} with right value.
+\end{quote}
+\noindent 5. \texttt{ERR003: eigcon: jcom = nnn does not fit mode sss}
+\begin{quote}  
+\noindent Error message. Impossible combination of jcom and mode. For example,
+jcom=2 (toroidal modes) can not used together with {\bf minos\_bran} 
+unformatted file for spheroidal modes.
+Program is terminated. Provide right jcom and unformatted file.
+\end{quote}
+\noindent 6. \texttt{ERR004:eigcon: Wrong minos\_bran output text file}
+\begin{quote}  
+\noindent Error message. Probably the {\bf minos\_bran} plain file was edited.
+Never change this file. Program is terminated. Rerun {\bf minos\_bran} again
+to create proper plain file.
+\end{quote}

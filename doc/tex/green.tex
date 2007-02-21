@@ -1,0 +1,296 @@
+\section{green program}
+
+{\bf green} program computes for a single event and a given
+set of stations, the Green functions. For each station,
+a station-channel list specifying the orientation of the sensors must
+be input.
+The program can optionally compute Green functions (a) for
+the Z component alone, (b) for 3-components  with the standard ZNE sensor
+orientation (see Appendix C), or (c) for 3-components with the Z component 
+directed ''up" and two orthogonal horizontal components oriented 
+arbitrarily. To set up station information, it is necessary to create 
+a flat file database consisting of the two relations
+{\it .site}, and {\it .sitechan} in the CSS 3.0 database format.
+It is preferable to create the relations by a program, for example, by
+IRIS's {\bf rdseed} program or by selection from a global database.
+Other input includes the eigenfunctions which are collected from various databases
+containing {\it .eigen} relations for spheroidal or toroidal modes. 
+For each sensor, {\bf green} computes and stores in an output {\it .wfdisc} relation
+six Green functions, one per moment tensor component. 
+
+\subsection {Command line}
+
+\noindent {\bf green}
+
+\noindent {\bf green} $<$ {\it parameter\_file}
+
+\noindent {\bf green} $<<$ WORD \\
+\noindent ........  \\
+\noindent ........  \\
+\noindent WORD
+
+\noindent There are three different ways to start the {\bf green} program:
+\begin{itemize}
+\item interactive dialog for setting the input parameters;
+\item single shell command with redirection of the standard input to a parameter
+file {\it parameter\_file} containing exactly the same information and
+in the same order as in the interactive dialog - one answer per line;
+\item direct shell script. In this case, the contents of the parameter file are
+directly included in the shell script between the delimiters ``WORD". See examples.
+\end{itemize}
+\noindent The input parameter file consists of six lines:
+\begin{description}
+\item[Line 1:] {\it in\_dbname } \\
+{\it in\_dbname } is the input database name for the {\it .site} and {\it .sitechan} relations. \\
+  {\bf Format:} Any string up to 256 characters long.
+\item[Line 2:] {\it db\_list} \\
+  This is the path to the file defining  the list of database names containing
+the eigenfunctions - one
+  name per line. 
+  Each name refers to the database in which the {\it .eigen} relation resides. \\
+  {\bf Format:} Any string up to 256 characters long.
+\item[Line 3:] {\it cmt\_event}\\
+  This is the path to the file with the CMT solution for a single event. It includes 
+  the CMT location, the seismic moment tensor components, the scalar moment, the focal 
+  planes, the source half duration time, and the output time step of the synthetic 
+  seismograms. \\
+  {\bf Format:} Any string up to 256 characters long.
+\item[Line 4:] {\it fmin, fmax} \\
+  {\it fmin, fmax} define the frequency range to be selected from the input
+  eigenfunction databases. All modes with frequences out of this range are 
+  rejected. \\
+  {\bf Format:} Unformatted.
+\item[Line 5:] {\it nsamples} \\
+  This is the number of samples in the synthetic seismograms. All synthetic 
+  seismograms start from the source time. \\
+  {\bf Format:} Unformatted.
+\item[Line 6:] {\it out\_dbname} \\
+  This is the output database name including only the {\it .wfdisc} relation for 
+  unit Green functions. Each row of the {\it .wfdisc} relation refers to the binary 
+  file with 6 multiplexed Green functions; i.e., one tensor component. \\
+  {\bf Format:} Any string up to 256 characters long.
+\end{description}
+%
+% Input data
+%
+\subsection {Input data}
+
+\textbf{\large \emph{in\_dbname.}} 
+  This database must exist and must include
+  {\it .site} and {\it .sitechan} relations. 
+  The {\it .sitechan} relation provides the station-channel list used
+by the program. Using these relations, the
+  {\bf green} program defines for each station 
+  a certain number of channel groups. Each group consists of the single 
+  Z-component channel or a triple of channels (Z-component, and two horizontal 
+  components with sensor directions defined by the {\it hang} field in the
+sitechan relation).
+  Before grouping, the {\bf green} program sorts the {\it .sitechan} file
+by its ({\it sta, chan}) fields. After sorting, it also removes all duplicate 
+  rows (equal station and channel code). Note that the channel field,
+  {\it chan}, in the {\it .sitechan} relation is a
+  three-character channel name following the SEED format convention. 
+  The first two characters define the type of channel (e.g., BH, LH, etc.)
+unique, for each
+  station's group.
+  The third character must be the component name: Z (upper case, for vertical) 
+  and other symbols (any case, for the horizontals). \\
+\\
+\textbf{\large \emph{db\_list.}} This file allows 
+  joining an unlimited number of {\bf eigcon} outputs for spheroidal, toroidal, or
+  radial modes. The single requirement is that intersection between these
+files is null. Each desired eigenfunction must be present and unique in
+  some {\bf eigcon} output. \\
+\\
+\textbf{\large \emph{cmt\_event.}} This file consists of a single line with the 
+  following fields:  \\
+\begin{quote}
+{\it evid, year, jday, hour, min, sec, lat, lon,
+  depth, step, halfd, }\\
+  $M_0$, $M_{rr},\;M_{\theta \theta},\;M_{\varphi\varphi},\;
+  M_{r \theta},\; M_{r \varphi},\; M_{\theta\varphi},$ \\
+  $M_{n},$ {\it strike1, dip1, slip1, strike2, dip2, slip2,}.
+\end{quote}
+where, 
+\begin{quote}
+\begin{description}
+\item[{\it evid}] is the event identifier, 8 characters long 
+\item[{\it year}] is the event year of form {\bf yyyy} 
+\item[{\it jday}] is the event day starting from the beginning of the year 
+\item[{\it hour}] is the event hour
+\item[{\it min}] is the event minutes
+\item[{\it sec}] is the event seconds with decimal fraction
+\item[{\it lat}] is the event geographical latitude, (degree)
+\item[{\it lon}] is the event geographical longitude, (degree)
+\item[{\it depth}] is the event depth, (km)
+\item[{\it step}] is the time step for Green functions and seismograms, sec
+\item[{\it halfd}] is the source half time duration, sec
+\item[$M_0$] is the scalar tensor moment, (dyn$\cdot$cm)
+\item[$M_{rr},$] $M_{\theta \theta},\;M_{\varphi\varphi},\;
+M_{r \theta},\; M_{r \varphi},\; M_{\theta\varphi}$ are moment 
+  tensor components normalized by the coefficient $M_n$.
+\item[$M_n$] is the normalization coefficient for the tensor components,
+(dyn$\cdot$cm)
+\item[{\it strike1,}] {\it dip1, slip1} are the first fault plane
+  solution, (degree)
+\item[{\it strike2,}] {\it dip2, slip2} are the second fault plane
+  solution, (degree)
+\end{description}
+\end{quote}
+
+\subsection {Output data}
+
+\textbf{\large \emph{out\_dbname.}} Program {\bf green} creates a {\it .wfdisc}
+relation in database {\it out\_dbname} and a  multiplexed binary file contained
+the Green function waveforms.
+The binary file contains six Green functions in  an order corresponding to the
+tensor components:
+$M_{rr},\; M_{\theta \theta},\;M_{\varphi\varphi},\;
+M_{r \theta},\; M_{r \varphi},\; M_{\theta\varphi}$. The total length,
+$nsamp$, of the file is equal to $6*nsamples$. 
+
+\subsection{Messages}
+Program {\bf green} prints out on the standard output
+device the following messages:
+
+\noindent \textbf {\emph{Dialog messages}}. Copy of input/output dialog
+or parameter file in dialog form. For example,
+
+\noindent \texttt {enter path to db with sta \& stachan: \\
+\emph{RDSEED\_rdseed} \\
+enter name of file within list of nmodes db: \\
+\emph{db\_list} \\
+enter input CMT file name: \\
+\emph{cmt\_event} \\
+min and max frequencies to be considered (mHz) : \\
+\emph{0.  260.} \\
+enter \# pts in greens fns .le.  30000 : \\
+\emph{4000} \\
+enter Green functions output db file name: \\
+\emph{green}}
+
+\noindent \textbf {\emph{Warning, error, and info messages}}.
+
+\noindent 1. \texttt{ ============= Program green ====================}
+\begin{quote}
+Info message. Shows that program {\bf green} starts.
+\end{quote}
+\noindent 2. \texttt{WARNING: green: \# of points in Green functions is stripped to nnn}
+\begin{quote}
+Warning message. The number of requested points for the Green functions
+exceeds the maximum allowed value {\tt mseis}. The number is reduced to {\tt mseis}
+and the program continues to run. To increase the maximum value, change  {\tt mseis} to
+a new bigger value in the {\tt green.h} header and recompile the {\bf green} program.
+By default, {\tt mseis=30000}.
+\end{quote}
+\noindent 3. \texttt{WARNING: green: \# of channels is stripped to 3}
+\begin{quote}
+Warning message. Number of sensors (channels, components) in a group cannot 
+be greater than 3.
+Only the three first sensors are taken into account. 
+\end{quote}
+\noindent 4. \texttt{WARNING: green: \# of channels is stripped to 1}
+\begin{quote}
+Warning message. Number of sensors in a group cannot be equal to 2.
+Only the first sensor is taken into account. 
+\end{quote}
+\noindent 5. \texttt{WARNING: green: Channel: \# 1 is not vertical. Sequence ignored}
+\begin{quote}
+Warning message. Channel with Z component must be the first in the group.
+The group of channels is rejected.
+\end{quote}
+\noindent 6. \texttt{WARNING: green: Channel: \# nnn is not horizontal. Sequence ignored}
+\begin{quote}
+Warning message. Second and third channels in the group must be horizontal
+components. nnn is the channel number in the group. The group of channels is rejected.
+\end{quote}
+\noindent 7. \texttt{ERR010: green: max l = nnn, must be .le. ml}
+\begin{quote}
+Error message. The max angular order number {\tt nnn} for some mode {\tt n}
+exceeds the parameter {\tt ml} set up in the {\tt green.h} header.
+Program is terminated.
+To avoid the problem, make {\tt ml} bigger than {\tt nnn} in the {\tt green.h} header
+and recompile the program. It is not recommended to make {\tt ml} greater than
+10000, which leads to inaccuracy in computing the associated Legendre polynomials.
+By default, {\tt ml = 6000}.
+\end{quote}
+\noindent 8. \texttt{ERR011:eigen: flat and bin indices are different}
+\begin{quote}
+Error message. Broken input {\it .eigen} relation. Program is
+terminated. Check or create {\it .eigen} again.
+\end{quote}
+\noindent 9. \texttt{ERR012: green: \# sph. modes in band exceed max 
+allowed number nnn}
+\begin{quote}
+Error message. The total number of spheroidal modes in the band exceeds the
+maximum allowed
+number of {\tt nnn}. Program is terminated. Increase parameter {\tt meig} in the
+{\tt green.h} header and recompile the program. By default, {\tt meig = 200000}.
+\end{quote}
+\noindent 10. \texttt{ERR012: green: \# tor. modes in band exceed max allowed number nnn}
+\begin{quote}
+Error message. The total number of toroidal modes in the band exceeds 
+the maximum allowed
+number {\tt nnn}. Program is terminated. Increase parameter {\tt meig} in the
+{\tt green.h} header and recompile the program. By default, {\tt meig = 200000}.
+\end{quote}
+\noindent 11. \texttt{green: \# sph. modes in band = nnn  must be .le. meig}
+\begin{quote}
+Info message. \texttt{nnn} is the total number of spheroidal modes in all
+input databases. \texttt{meig} is the maximum allowed number of spheroidal modes.
+\end{quote}
+\noindent 12. \texttt{green: \# tor. modes in band = nnn  must be .le. meig}
+\begin{quote}
+Info message. \texttt{nnn} is the total number of toroidal modes in all
+input databases. \texttt{meig} is the maximum allowed number of toroidal modes.
+\end{quote}
+\begin{description}
+\item[13.] \texttt{green: evid date\&time lat = $\pm$dd.ddd, lon = $\pm$ddd.ddd}
+\item[$\;\;\;\;\;$] \texttt{green:        source depth = ddd.d km}
+\item[$\;\;\;\;\;$] \texttt{green: step =    d.ddd sec, nsamples =  ddddd}
+\end{description}
+\begin{quote}
+Info message. This message outputs part of the {\it cmt\_event} file: 
+event information, Green function's time step and number of samples. 
+See description of the {\it cmt\_event} file in Section 5.2.
+\end{quote}
+\noindent 14. \texttt{green: Input dbname : xxxxx}
+\begin{quote}
+Info message. xxxxx is the name of the input database for the {\it .site} and 
+{\it .sitechan} relations.
+\end{quote}
+\noindent 15. \texttt{green: Station: code     lat   lon , Channels: nnn}
+\begin{quote}
+Info message. This message specifies the station code, station coordinates, 
+and number of components nnn for the selected group of sensors.
+\end{quote}
+\noindent 16. \texttt{green: Channel: \#  nnn  code   chan  hang vang}
+\begin{quote}
+Info message. This message specifies a separate sensor (channel) for
+the group of sensors. nnn is the current number in the group, code is the
+station code, chan is the channel name. hang (horizontal angle) and vang 
+(vertical angle) are sensor orientation
+in space. See {\it .sitechan} relation in Section 8.
+\end{quote}
+\noindent 17. \texttt{green: Epicentral Distance :    ddd.ddd}
+\begin{quote}
+Info message. ddd.ddd is the station-event distance in degrees.
+\end{quote}
+\noindent 18. \texttt{green: Azimuth of Source :    ddd.ddd}
+\begin{quote}
+Info message. ddd.ddd is the azimuth of a station to the source point.
+in degree.
+\end{quote}
+\noindent 19. \texttt{green: Azimuth of Source :    ddd.ddd}
+\begin{quote}
+Info message. ddd.ddd is the azimuth of  the station to the source point
+ in degrees.
+\end{quote}
+\noindent 20. \texttt{green:   nnn code    chan  date\&time  step   mmm}
+\begin{quote}
+Info message. This message informs about some attributes specifying the
+Green functions. nnn is the global number of Green functions set, code is the
+station name, chan is the channel name, date\&time is the event origin 
+time, step is the Green function sampling step in seconds, and mmm is 
+the total number of samples for the block of 6 Green functions. 
+\end{quote}

@@ -1,0 +1,368 @@
+\section{The Utilities User's Manual}
+\subsection{cucss2sac}
+\noindent {\bf NAME}
+\vred
+\begin{itemize}
+\vred
+\item[]{\bf cucss2sac} - convert CSS 3.0 waveforms to SAC binary or ASCII files
+\vred
+\end{itemize}
+\vred
+\noindent {\bf SYNOPSIS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf cucss2sac [-a [-n]] db\_name out\_SAC\_dir}
+\vred
+\end{itemize}
+\vred
+{\bf OPTIONS}
+\vred
+\begin{itemize}
+\vred
+\item[]    {\bf -a} - generate ASCII files
+\vred
+\item[]    {\bf -n} - suppress header output in ASCII files. Used together with {\bf -a} option.
+\vred
+\end{itemize}
+\vred
+{\bf DESCRIPTION}
+\vred
+\begin{quote}
+\vred
+{\bf cucss2sac} utility converts a CSS 3.0 {\it .wfdisc} relation into a set 
+of SAC binary files or  ASCII files. Output files are stored in 
+{\bf out\_SAC\_dir} directory. This program has been designed 
+especially for the {\bf Mineos} package due to bugs in the standard IRIS 
+{\bf css2sac} utility. {\bf cucss2sac} supports limited capabilities 
+and is not a complete substitution of the standard {\bf css2sac} 
+utility. For example, {\bf cucss2sac} only supports the CSS3.0 schema 
+and two input CSS binary data formats: ``t4" (BIG\_ENDIAN, single 
+precision floating point) and ``f4" ( LOW\_ENDIAN, single precision 
+floating point). {\bf cucss2sac} converts CSS binary data ``as is" 
+without any corrections or modifications. For the {\bf Mineos} package, 
+{\bf cucss2sac} may be used for the conversation of Green functions 
+or synthetic seismograms to binary SAC or ASCII files.
+
+A CSS database {\bf db\_name} must include at least one file 
+db\_name.wfdisc file containing CSS format information about the 
+waveforms. It is also desirable to add to the database {\it .origin} and 
+{\it .site} relation tables (files db\_name.origin and db\_name.site) 
+to get a more complete SAC header.
+Note that the {\it .origin} relation keeps information about event location 
+and the {\it .site} relation keeps station locations. If {\it .origin} is present 
+in the database, {\bf cucss2sac} uses only the first line from this 
+file. In the case of ASCII output, all available parameters go to the
+ASCII header - three lines in the beginning of the file. 
+For example, output file for a synthetic seismogram looks as follows:
+
+\texttt{EVENT:   2000(014)-23:37:10.800 947893030.80000 25.3900 101.4000 33.0000 \\
+   STATION: ALE     LHE       82.5033  -62.3500  0.0000 \\
+   DATA:    2000(014)-23:37:10.800  947893030.80000  8000 1.000000 \\
+     0.0000000E+00   5.7025738E+00 \\
+     1.0000000E+00   1.9508668E+00 \\
+     2.0000000E+00  -4.1160989E+00 \\
+     3.0000000E+00  -4.1094885E+00 \\
+          ...... \\
+          ...... \\
+          ...... \\
+     7.9970000E+03   1.5211651E+01 \\
+     7.9980000E+03   2.7408613E+01 \\
+     7.9990000E+03   3.5795624E+01}
+
+where,
+the \texttt{EVENT} line represents event information: origin time 
+(human and epoch), latitude (deg), longitude (deg), and depth (km); 
+the \texttt{STATION} line represents station information: station code,
+channel name, latitude (deg), longitude (deg), and depth = 0; the 
+\texttt{DATA} line represents data parameters: waveform 
+starting time (human and epoch), number of samples, and sampling step 
+(sec). The rest of the lines, the body, is two columns table. The first 
+column represents relative time from the beginning of waveform in 
+seconds and the second ones waveform samples in nm, nm/s or nm/s$^2$, 
+according to the {\bf syndat} output format.
+
+If the presence of the header is not desired, suppress it with option 
+{\bf -n} (no header).
+
+The output ASCII file format for the Green functions is different. 
+The header is the same, but the body is a 7 column table. The first 
+column is relative time, as before, and the other 6 columns are the 6 
+unit Green functions ($G_{rr}, G_{\theta\theta}, G_{\varphi\varphi}, 
+G_{r\theta}, G_{r\varphi}, G_{\theta\varphi}$) for the chosen 
+component - vertical or some horizontal. The order of the components 
+is the same as the order of the seismic moment tensor components 
+$M_{ij}$ defined in the {\bf syndat} program. So, the corresponding 
+synthetic seismogram S (IN ACCELERATION !!!, nm/s$^2$) is given by 
+the formula
+
+            \[ S = 10^{-18}\;\sum_{ij} G_{ij}\;M_{ij} \]
+
+where $M_{ij}$ are given in dyne*cm for $ij = rr, \theta\theta,
+\varphi\varphi, r\theta, r\varphi, \theta\varphi$.
+
+NOTE: According to SAC complaince, event depth is stored in the SAC 
+header in meters.
+\end{quote}
+\vred
+{\bf EXAMPLES}
+\vred
+\begin{quote}
+\vred
+\textbf{cucss2sac Syndat Syndat\_SAC  \\
+    cucss2sac green  green\_SAC \\
+    cucss2sac -a Syndat Syndat\_ASC \\
+    cucss2sac -a -n Syndat Syndat\_ASC\_NOHEADER} 
+\vred
+\end{quote}
+\newpage
+% EIGEN2ASC
+\subsection{eigen2asc}
+\noindent {\bf NAME}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf eigen2asc} - convert {\it .eigen} relation table to ASCII files
+\vred
+\end{itemize}
+\vred
+\noindent {\bf SYNOPSIS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf eigen2asc [-n] nmin nmax lmin lmax db\_name out\_dir}
+\vred
+\end{itemize}
+\vred
+\noindent {\bf OPTIONS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf -n} - suppress header output in ASCII files.
+\vred
+\end{itemize}
+\vred
+\noindent {\bf DESCRIPTION}
+\vred
+\begin{quote}
+\vred
+{\bf eigen2asc} utility converts some part or the whole {\it .eigen} 
+relation into a set of ASCII files. Program {\bf eigen2asc} searches 
+in the db\_name.eigen file for all eigenfunctions whith mode numbers 
+n, l satisfyng the following conditions: {\bf nmin} $\le$ n $\le$ 
+{\bf nmax}, {\bf lmin} $\le$ l $\le$ {\bf lmax}, and converts 
+eigenfunctions to ASCII files. Output files are stored in 
+{\bf out\_dir}. Each output file  consists of the header and the body.
+The header is a single line including the first 10 fields of the {\it .eigen}
+relation, see  Section 8. The option {\bf -n} excludes the header 
+output. The body is a three-column (radial, toroidal modes) or seven 
+column (speroidal mode) table. The first body column is radius in 
+meters and the others columns contain the eigen functions and their 
+derivatives by radius (in the internal, normalized units) - 
+U, U', V, V', P, P'   for spheroidal modes and W, W' for other modes. 
+For more deails, see Section 3.  The output file name has form of 
+{\bf X.nnnnnnn.mmmmmmm.ASC}, where, letter {\bf X} is ``S" for 
+spheroidal modes or ``T" for toroidal modes, {\bf nnnnnnn}
+is the number n, and {\bf mmmmmmm} is the mode number l.
+\end{quote}
+\vred
+{\bf EXAMPLES}
+\vred
+\begin{quote}
+\vred
+{\bf eigen2asc 0 1 2 500 test\_S Eigen\_S\_ASC \\
+eigen2asc -n 0 1 2 500 test\_S Eigen\_S\_no\_headers\_ASC }
+\end{quote}
+% ENDI
+\subsection{endi}
+\vred
+{\bf NAME}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf endi} - in-place file swapping with fixed width
+\vred
+\end{itemize}
+\vred
+{\bf SYNOPSIS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf endi nw file1 [ file2 ... filen]}
+\end{itemize}
+\vred
+{\bf DESCRIPTION}
+\vred
+\begin{quote}
+This utility is used when you transfer binary files of {\it .wfdisc} or
+{\it .eigen} relations to a platform with  a different byte order.
+The utility changes the bytes order from BIG\_ENDIAN to LOW\_ENDIAN
+and vice versa. {\bf endi} sequentionally reads the file from the 
+list {\bf file1 [ file2 ... filen] } into memory as an unsigned 
+character string , swaps sequential groups of {\bf nw} bytes long 
+starting from the beginning of file, and stores the
+swapped data into the same place as before (swapping in-place).
+If the last group has a length less than {\bf nw} it stays unswapped.
+\end{quote}
+\vred
+{\bf EXAMPLES}
+\vred
+\begin{quote}
+Example 1. Let w.00001 and w.00002 the binary real*4 data files from 
+some {\it .wfdisc} relation created on a PC computer. These files have 
+internal LOW\_ENDIAN data representation created, for example, by 
+a direct access FORTRAN WRITE statement. After applying the command:
+
+  $...>$ {\bf endi} 4 w.00001 w.00002
+
+we change the order of 4 byte words to BIG\_ENDIAN for transfering
+these files on a computer with BIG\_ENDIAN byte order, say SUN Ultra
+machine,  where we may use a direct access READ statement to read 
+data as real*4 variables.
+\end{quote}
+% SIMPLEDIT
+\subsection{simpledit}
+\vred
+{\bf NAME}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf simpledit} - filter to create {\it .site} and {\it .sitechan} CSS 
+relations from an input ASCII file
+\vred
+\end{itemize}
+\vred
+{\bf SYNOPSIS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf simpledit ascii\_file db\_name}
+\end{itemize}
+\vred
+{\bf DESCRIPTION}
+\vred
+\begin{quote}
+\vred
+{\bf simpledit} is a simple filter program. It converts a manually created
+(text editor) unformatted ASCII file {\bf ascii\_file} with station and
+channel information into CSS3.0 {\bf db\_name.site} and 
+{\bf db\_name.sitechan} relation tables (files). The prefix {\bf db\_name}, 
+coming from the command line, is the database name.
+In the case of real data, there is another way to create  these relations. 
+Use the IRIS {\bf rdseed} program, which provides  SEED volume conversation
+to CSS format. Note, CSS format is strictly defined, so do not
+create {\it .site} and {\it .sitechan} tables manually. This leads to numerous
+format errors and as a result to crash the {\bf Mineos} programs. 
+In case of a lot of station data, a better solution is to write a program,
+which creates {\bf ascii\_file} or {\it .site} and {\it .sitechan} files directly.
+
+{\bf \emph{Description of the {\bf ascii\_file} file.}} The {\bf ascii\_file}
+file is a set of ASCII text lines. Each line describes a single station or a
+single channel. All channel lines, placed after some station line, belong
+to that station. 
+\newpage
+For example, consider the following file: 
+
+\texttt{ANMO 34.9502 -106.4602    1.6890 'Albuquerque, New Mexico, USA' \\
+@ LH1  150.0000  280.0   90.0 \\
+@ LH2  150.0000   10.0   90.0 \\
+@ LHZ   89.3000    0.0    0.0 \\
+BJT  40.0183  116.1679    0.1370 'Baijiatuan, Beijing, China' \\
+@  LHE   60.0000   90.0   90.0 \\
+@  LHN   60.0000    0.0   90.0 \\
+@  LHZ   60.0000    0.0    0.0 \\
+@  BHE   60.0000   90.0   90.0 \\
+@  BHN   60.0000    0.0   90.0 \\
+@  BHZ   60.0000    0.0    180.0 \\
+BILL  68.0651  166.4524    0.2990 'Bilibino, Russia' \\
+@       LHZ   0.0000    0.0    0.0 \\
+CCM  38.0557  -91.2446    0.1710 'Cathedral Cave, Missouri, USA' \\
+@   LHE   51.0000   90.0   90.0 \\
+@   LHN   51.0000    0.0   90.0 \\
+@   LHZ   51.0000    0.0    0.0 }
+\end{quote}
+Each line in the file consists of some number of fields separated with
+one or more space characters. If a field has an internal space 
+character, like in station full name, it must be surrounded with  
+single quotes.  The first field starts with the first position in the 
+line. A station line has the fields:
+{\it sta, lat, lon, elev, staname}. See description in Section 8, {\it .site}
+relation table. A channel line starts with text field ``@". The other
+fields are: {\it chan, edepth, hang, vang}. See description in Section 
+8, {\it .sitechan} relation. The standard orientation of a sensor ''XX"
+is defined as
+\begin{quote}
+\texttt{@   XXE   dd.dddd   90.0   90.0 \\
+@   XXN   dd.dddd    0.0   90.0 \\
+@   XXZ   dd.dddd    0.0    0.0 }
+\end{quote}
+where, \texttt{dd.dddd} is a sensor {\it edepth}.
+Note that the order of channels for the given station is not important.
+\newpage
+% CREATE_ORIG
+\subsection{create\_origin}
+\vred
+{\bf NAME}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf create\_origin} - convert an event text file into the CSS3.0 {\it .origin} relation.
+\vred
+\end{itemize}
+\vred
+{\bf SYNOPSIS}
+\vred
+\begin{itemize}
+\vred
+\item[] {\bf create\_origin cmt\_event db\_name}
+\end{itemize}
+\vred
+{\bf DESCRIPTION}
+\vred
+\begin{quote}
+\vred
+The shell script {\bf create\_origin} reads from the {\bf cmt\_event} ASCII 
+file the first line written in format of input cmt\_event file for 
+program {\bf green}, converts the source time and location into a single row 
+CSS3.0 relation table, and stores it into {\bf db\_name.origin} file.
+The script {\bf create\_origin} only fills out in the {\it .origin} relation 
+the following fields: {\it lat, lon, depth, time, orid, jdate, auth}, and
+{\it lddate}. The other fields are not important for the {\bf Mineos} package
+and they are filled with default values. For more details about the {\it .origin}
+relation see below, or the complete description see in (Anderson, J,.et al., 1990).
+\vred
+\begin{center}
+\begin{tabular*}{1.0\textwidth}{@{\extracolsep{\fill}}|lccccl|}  \hline
+\multicolumn{2}{|l}{{\it Relation:}} & \multicolumn{4}{l|}{{\bf origin}} \\
+\multicolumn{2}{|l}{{\it Description:}} & \multicolumn{4}{l|}{Data on event location and confidence bounds} \\ \cline{1-6}
+\multicolumn{1}{|l}{attribute \vspace{-0.07 in}} & \multicolumn{1}{c}{field} & \multicolumn{1}{c}{storage} & \multicolumn{1}{c}{external} & \multicolumn{1}{c}{character} & \multicolumn{1}{l|}{attribute} \\
+\multicolumn{1}{|l}{name} &  \multicolumn{1}{c}{no.} & \multicolumn{1}{c}{type} & \multicolumn{1}{c}{format} & \multicolumn{1}{c}{position} & \multicolumn{1}{l|}{description} \\ \hline\hline
+lat       &  1 & f4  &  f9.4 & 1-9     & estimated latitude \\
+lon       &  2 & f4  &  f9.4 & 11-19   & estimated longitude \\
+depth     &  3 & f4  &  f9.4 & 21-29   & estimated depth \\
+time      &  4 & f8  &  f17.5& 31-47   & epoch time \\
+orid      &  5 & i4  &  i8   & 49-56   & origin id \\
+evid      &  6 & i4  &  i8   & 58-65   & event id \\
+jdate     &  7 & i4  &  i8   & 67-74   & julian date \\
+nass      &  8 & i4  &  i4   & 76-79   & number of associated phases \\
+ndef      &  9 & i4  &  i4   & 81-84   & number of lacating phases \\
+ndp       & 10 & i4  &  i4   & 86-89   & number of depth phases \\
+grn       & 11 & i4  &  i8   & 91-98   & geographic region number \\
+srn       & 12 & i4  &  i8   & 100-107 & seismic region number \\
+etype     & 13 & c7  &  a7   & 109-115 & event type \\
+depdp     & 14 & f4  &  f9.4 & 117-125 & estimated depth from depth phases \\
+dtype     & 15 & c1  &  a1   & 127-127 & depth method used \\
+mb        & 16 & f4  &  f7.2 & 129-135 & body wave magnitude \\
+mbid      & 17 & i4  &  i8   & 137-144 & mb magid \\
+ms        & 18 & f4  &  f7.2 & 146-152 & surface wave magnitude \\
+msid      & 19 & i4  &  i8   & 154-161 & ms magidd latitude \\
+ml        & 20 & f4  &  f7.2 & 163-169 & local magnitude \\
+mlid      & 21 & i4  &  i8   & 171-178 & ml magid \\
+algorithm & 22 & c15 &  a15  & 180-194 & location algorithm used \\
+auth      & 23 & c15 &  a15  & 196-210 & source/originator \\
+commid    & 24 & i4  &  i8   & 212-219 & comment id \\
+lddate    & 25 & date &  a17 & 221-237 &  load date \\ \cline{1-6}
+\end{tabular*}
+\end{center}
+\vspace{20pt}
+\end{quote}
