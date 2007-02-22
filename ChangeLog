@@ -1,0 +1,92 @@
+2007-02-22 21:19  leif
+
+	* [r6060] Added Guy Masters's SIO227B class notes as additional
+	  documentation for the Mineos package. This includes 'cig.ppt',
+	  which is the PowerPoint presentation that Guy Masters gave on
+	  Wednesday, November 1st, 2006 at the Earthscope Imaging
+	  Science/CIG Seismology Joint Workshop on Computational
+	  Seismology. This check-in is simply a snapshot of this web page:
+	  http://mahi.ucsd.edu/Guy/sio227b/
+
+2007-02-22 21:04  leif
+
+	* [r6059] Moved syndat -> mineos, because the package is, as it
+	  turns out, called MINEOS. (This is consistent with Guy's slides
+	  from his talk at the Earthscope Imaging Science/CIG Seismology
+	  Joint Workshop on Computational Seismology.)
+
+2007-02-21 17:04  barmin
+
+	* [r6057] added UserManual.pdf
+
+2007-02-21 06:55  barmin
+
+	* [r6056] Deleted from repository aclocal.m4 aux-config
+	  config.h.in configure Makefile.in
+
+2007-02-21 06:43  barmin
+
+	* [r6055] Added aclocal.m4 aux-config config.h.in configure
+	  Makefile.in This is done to create distribution set without
+	  autoreconf, just only with configure script.
+
+2007-02-21 06:29  barmin
+
+	* [r6054] Added tex subdirectory to doc directory. tex dir
+	  includes Latex code of MINEOS User Manual/
+
+2007-02-20 22:55  barmin
+
+	* [r6053] added script directory to repository
+
+2007-02-20 01:28  barmin
+
+	* [r6051] The final MINEOS upgrade. To create distribution set use
+	  command ...> make dist
+
+2006-10-29 07:09  barmin
+
+	* [r5114] The new version without fdb suppori. This version
+	  corresponds CIG workshop in St Louis, Oct 30, 2006.
+
+2006-10-02 23:20  barmin
+
+	* [r4679] Fixed ploblem with mk variable and zfcns subroutine
+
+2006-09-08 21:40  barmin
+
+	* [r4503] Fixed maximum l in green.f module.
+
+2006-09-08 17:13  barmin
+
+	* [r4496] Upgraded eigcon and green programs. They work with a new
+	  format eigen functions flat dbase.
+
+2006-08-14 16:27  barmin
+
+	* [r4283] Initial completely compiled version by
+	  autoconf/automake. Changed input in green program from gfs dbase
+	  to flat file green_in. Removed response function evaluation.
+	  Some minor changes to remove compilation bugs. Added minos_bran
+	  program to repository.
+
+2006-07-20 20:50  leif
+
+	* [r4040] Use F77_FUNC in 'leolib' files.
+
+2006-07-20 03:05  leif
+
+	* [r4038] Added GNU build system, and boilerplate GNU info files.
+	  Got all the programs to build on my Linux system. I had to hunt
+	  down xvertext-5.0 on the web to replace the missing "rotated.h".
+	  Also, I whipped-up a replacement for the missing "leolib.col"
+	  include file, based upon an examination of the surrounding
+	  source. For now, I hard-coded the X11 link flags for 'curse'
+	  (maybe there's a good Autoconf macro for this out there... or
+	  not).
+
+2006-07-20 00:18  leif
+
+	* [r4037] Initial import of Guy Master's eigcon/green/syndat
+	  synthetic seismogram programs.
+
