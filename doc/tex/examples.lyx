@@ -1,0 +1,1436 @@
+#LyX file created by  tex2lyx 0.1.2
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% MINOS
+\backslash
+_BRAN
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+
+Examples
+\end_layout
+
+\begin_layout Standard
+
+This section contains examples of the interaction with each of the four programs of the 
+\series bold
+Mineos
+\family default
+\series default
+\shape default
+ package. Each program can be run in three different ways: by interactive dialog, redirection from an input file, or direct use of a shell script. In each subsection, examples of running the program in each way are presented. The output from each approach should be the same. The programs are run in order: 
+\series bold
+minos_bran
+\family default
+\series default
+\shape default
+, 
+\series bold
+eigcon
+\family default
+\series default
+\shape default
+, 
+\series bold
+green
+\family default
+\series default
+\shape default
+, 
+\series bold
+syndat
+\family default
+\series default
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+
+All of the input files named here are included in the standard distribution of the 
+\series bold
+Mineos
+\family default
+\series default
+\shape default
+ package.
+\end_layout
+
+\begin_layout Subsection
+
+minos_bran
+\end_layout
+
+\begin_layout Standard
+
+In the example given here, 
+\series bold
+minos_bran
+\family default
+\series default
+\shape default
+ reads in a model file called 
+\shape italic
+prem_noocean.txt
+\family default
+\series default
+\shape default
+, which is a tabular listing of the PREM model with the ocean filled in with solid crust. The program outputs two files: 
+\shape italic
+prem_noocean_S
+\family default
+\series default
+\shape default
+ and 
+\shape italic
+eprem_noocean_S
+\family default
+\series default
+\shape default
+. The first file contains a listing of some normal mode properties (n, 
+\begin_inset Formula $l$
+\end_inset
+
+, frequency, period, phase and group speed, etc) and the second file contains the eigenfunctions. Both files are needed to be read into the eigenfunction renormalization program, 
+\series bold
+eigcon
+\family default
+\series default
+\shape default
+. In this example, the numerical tolerance parameter eps is set to 
+\begin_inset Formula $10^{-10}$
+\end_inset
+
+ and gravity is taken into consideration in computing the eigenfunctions only if the frequency is less than 10 mHz. The output normal mode properties will be for spheroidal modes with angular order 
+\begin_inset Formula $l$
+\end_inset
+
+ values ranging between 1 and 6000, frequencies ranging between 0 and 166 mHz (i.e., 6 sec), and radial orders 
+\begin_inset Formula $n$
+\end_inset
+
+ ranging from 0 to 0 -- that is, only fundamental modes will be computed in this example.
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 1.
+\emph default
+
+\family default
+\series default
+\shape default
+ Interactive dialog 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+ mathis% minos_bran 
+\newline
+ input model file: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+prem_noocean.txt
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ output file: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+prem_noocean_S
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ eigenfunction file (output): 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+eprem_noocean_S
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter eps and wgrav 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+1e-10 10
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter jcom (1=rad;2=tor;3=sph;4=ictor) 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+3
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter lmin,lmax,wmin,wmax,nmin,nmax 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+1 6000 0.0 166.0 0 0
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+ 
+\series bold
+
+\emph on
+Example 2.
+\emph default
+
+\family default
+\series default
+\shape default
+ Redirection of input file 
+\newline
+ Create in the working directory a parameter file named 
+\family typewriter
+Param
+\family default
+\series default
+\shape default
+ with the following contents: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+prem_noocean.txt 
+\newline
+ prem_noocean_S 
+\newline
+ eprem_noocean_S 
+\newline
+ 1e-10 10 
+\newline
+ 3 
+\newline
+ 1 6000 0.0 166.0 0 0 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+and start the following command:
+\end_layout
+
+\begin_layout Standard
+
+
+\family typewriter
+...% minos_bran 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+
+\emph on
+Example 3.
+\emph default
+
+\family default
+\series default
+\shape default
+ Direct shell script 
+\newline
+ Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+............. 
+\newline
+ minos_bran 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\newline
+ prem_noocean.txt 
+\newline
+ prem_noocean_S 
+\newline
+ eprem_noocean_S 
+\newline
+ 1e-10 10 
+\newline
+ 3 
+\newline
+ 1 6000 0.0 166.0 0 0 
+\newline
+ EOF 
+\newline
+ ............. 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% EIGCON
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+eigcon
+\end_layout
+
+\begin_layout Standard
+
+In this example, the two files computed by 
+\series bold
+minos_bran
+\family default
+\series default
+\shape default
+ are read in as input, 
+\shape italic
+prem_noocean_S
+\family default
+\series default
+\shape default
+ and 
+\shape italic
+eprem_noocean_S
+\family default
+\series default
+\shape default
+, together with the input model file 
+\shape italic
+prem_noocean.txt
+\family default
+\series default
+\shape default
+. 
+\series bold
+eigcon
+\family default
+\series default
+\shape default
+ renormalizes the eigenfunctions and outputs them to a depth of 1000 km, in this example. The renormalized eigenfunctions are placed in an extension of the CSS3.0 data base, using the relation 
+\shape italic
+test_S.eigen
+\family default
+\series default
+\shape default
+. This relation points to a file called 
+\shape italic
+eigen
+\family default
+\series default
+\shape default
+ located in a subdirectory called 
+\shape italic
+test_S.dat
+\family default
+\series default
+\shape default
+. The file 
+\shape italic
+eigen
+\family default
+\series default
+\shape default
+ is non-encapsulated, which allows greater flexibility in access from different platforms and code from different compilers. Information about the eigenfunction's byte order is contained in the 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relation, which is used in subsequent programs to swap bytes appropriately. Eigenfunctions are computed here to 1000 km for plotting purposes, but for runs in which earthquakes are no deeper than say 40 km, then 40 would be input here.
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 1.
+\emph default
+
+\family default
+\series default
+\shape default
+ Interactive dialog 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+mathis% eigcon 
+\newline
+ spheroidals (3) or toroidals (2) or radial (1) or 
+\newline
+ inner core toroidals (4) modes 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+3
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter name of model file 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+prem_noocean.txt
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter max depth [km] : 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+1000
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter name of minos_bran output text file 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+prem_noocean_S
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ minos_bran output binary unformatted file name 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+eprem_noocean_S
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter path
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+/
+\end_layout
+
+\end_inset
+
+dbase_name or dbase_name to store eigenfunctions: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+test_S
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 2.
+\emph default
+
+\family default
+\series default
+\shape default
+ Redirection of input file 
+\newline
+ Create in the working directory a parameter file named 
+\family typewriter
+Param
+\family default
+\series default
+\shape default
+ with the following contents: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+3 
+\newline
+ prem_noocean.txt 
+\newline
+ 1000 
+\newline
+ prem_noocean_S 
+\newline
+ eprem_noocean_S 
+\newline
+ test_S 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+and start the following command:
+\end_layout
+
+\begin_layout Standard
+
+
+\family typewriter
+...% eigcon 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\series bold
+
+\emph on
+Example 3.
+\emph default
+
+\family default
+\series default
+\shape default
+ Direct shell script 
+\newline
+ Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+............. 
+\newline
+ eigcon 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\newline
+ 3 
+\newline
+ prem_noocean.txt 
+\newline
+ 1000 
+\newline
+ prem_noocean_S 
+\newline
+ eprem_noocean_S 
+\newline
+ test_S 
+\newline
+ EOF 
+\newline
+ ............. 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% GREEN
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+green
+\end_layout
+
+\begin_layout Standard
+
+In this example, there are three principal input files.
+\end_layout
+
+\begin_layout Standard
+
+(1) The first input file is the data base name of the 
+\shape italic
+.site
+\family default
+\series default
+\shape default
+ and 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ relations. The entries of the 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ file determine which stations and channels are used for constructing the Green functions. Channel orientations are in the 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ file, by station coordinates are in the 
+\shape italic
+.site
+\family default
+\series default
+\shape default
+ file. The data base name for these relations in this example is 
+\shape italic
+short
+\family default
+\series default
+\shape default
+. There must be, therefore, two pre-constructed files: 
+\shape italic
+short.site
+\family default
+\series default
+\shape default
+ and 
+\shape italic
+short.sitechan
+\family default
+\series default
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+
+(2) The second input file is the file 
+\shape italic
+dblist
+\family default
+\series default
+\shape default
+. This file contains the listing of all data base names for the eigenfunction files. In the previous subsection, the 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relation 
+\shape italic
+prem_noocean_S.eigen
+\family default
+\series default
+\shape default
+ was created. So, if that file contains the only normal modes to be used in the construction of the Green functions, then the file 
+\shape italic
+db_list
+\family default
+\series default
+\shape default
+ would have a single entry: prem_noocean_S. Note, that only the data base name is included and not the relation name suffix 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+. If other modes are desired, then the file 
+\shape italic
+db_list
+\family default
+\series default
+\shape default
+ would include the data base names of the other modes. For example, toroidal modes are usually included in synthetic or SH motions will be ignored. In this simple example, 
+\shape italic
+db_list
+\family default
+\series default
+\shape default
+ can be considered to have a single entry.
+\end_layout
+
+\begin_layout Standard
+
+(3) The third input file is the file 
+\shape italic
+china_cmt_evt
+\family default
+\series default
+\shape default
+, which is a single-lined listing containing the coordinates and event parameters of an earthquake in China. The moment tensor is not used by this program, but by the program 
+\series bold
+syndat
+\family default
+\series default
+\shape default
+ which follows.
+\end_layout
+
+\begin_layout Standard
+
+This example will choose modes only between frequencies of 0 and 166 mHz (i.e., periods greater than 6 sec). It will produce Green functions that are 8000 samples long. The time sampling specified in the 
+\shape italic
+china_cmt_evt
+\family default
+\series default
+\shape default
+ file is 1 sec, so this is a time series length of a little over 2 hours. In many cases, both the minor and major arc arrivals can be seen.
+\end_layout
+
+\begin_layout Standard
+
+The program will output a 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ relation in the data base called 
+\shape italic
+green
+\family default
+\series default
+\shape default
+; that is, a file called 
+\shape italic
+green.wfdisc
+\family default
+\series default
+\shape default
+ which points to the waveforms on disk in a default location.
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 1.
+\emph default
+
+\family default
+\series default
+\shape default
+ Interactive dialog 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+mathis% green 
+\newline
+ enter path to db with sta & stachan: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+short
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter name of file within list of nmodes db: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+db_list
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter input CMT file name: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+china_cmt_event
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ min and max frequencies to be considered (mHz) : 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+ 0 166.
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter # pts in greens fns .le. 30000 : 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+8000
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter Green functions output db file name: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+green
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 2.
+\emph default
+
+\family default
+\series default
+\shape default
+ Redirection of input file 
+\newline
+ Create in the working directory a parameter file with the name 
+\family typewriter
+Param
+\family default
+\series default
+\shape default
+ with the following contents: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+short 
+\newline
+ db_list 
+\newline
+ china_cmt_event 
+\newline
+ 0. 166. 
+\newline
+ 8000 
+\newline
+ green 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+and start the following command:
+\end_layout
+
+\begin_layout Standard
+
+
+\family typewriter
+...% green 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+ 
+\series bold
+
+\emph on
+Example 3.
+\emph default
+
+\family default
+\series default
+\shape default
+ Direct shell script 
+\newline
+ Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+............. 
+\newline
+ green 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\newline
+ short 
+\newline
+ db_list 
+\newline
+ china_cmt_event 
+\newline
+ 0. 166. 
+\newline
+ 8000 
+\newline
+ green 
+\newline
+ EOF 
+\newline
+ ............. 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SYNDAT
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\newpage
+
+\end_layout
+
+\begin_layout Subsection
+
+syndat
+\end_layout
+
+\begin_layout Standard
+
+In this example, 
+\series bold
+syndat
+\family default
+\series default
+\shape default
+ reads in two files. First, there is the event file that contains the CMT: 
+\shape italic
+china_cmt_event
+\family default
+\series default
+\shape default
+. Second, there is the output from the program 
+\series bold
+green
+\family default
+\series default
+\shape default
+: 
+\shape italic
+green.wfdisc
+\family default
+\series default
+\shape default
+. Only the data base name, 
+\shape italic
+green
+\family default
+\series default
+\shape default
+, is input rather than the whole file name. The output data base name is also specified, which in this example is 
+\shape italic
+Syndat
+\family default
+\series default
+\shape default
+. The program will output a 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ relation, 
+\shape italic
+Syndat.wfdisc
+\family default
+\series default
+\shape default
+ in this example, pointing to the waveforms on disk.
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 1.
+\emph default
+
+\family default
+\series default
+\shape default
+ Interactive dialog 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+mathis% syndat 
+\newline
+ enter input CMT file name: 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+china_cmt_event
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter tensor type: 0 - moment, 1 - nodal plane 1, 2 - nodal plane 2 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+0
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter input dbname 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+green
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter output dbname 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+Syndat
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ enter output datatype: 0 -accn, 1 -vel, 2 -displ 
+\newline
+ 
+\family default
+
+\series bold
+
+\emph on
+0
+\emph default
+
+\family typewriter
+\series default
+\shape default
+ 
+\newline
+ mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+
+\emph on
+Example 2.
+\emph default
+
+\family default
+\series default
+\shape default
+ Redirection of input file 
+\newline
+ Create in working directory parameter file with the name 
+\family typewriter
+Param
+\family default
+\series default
+\shape default
+ with the following contents: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+china_cmt_event 
+\newline
+ 0 
+\newline
+ green 
+\newline
+ Syndat 
+\newline
+ 0
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+
+and start the following command:
+\end_layout
+
+\begin_layout Standard
+
+
+\family typewriter
+...% syndat 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+ 
+\newpage
+ 
+\series bold
+
+\emph on
+Example 3.
+\emph default
+
+\family default
+\series default
+\shape default
+ Direct shell script 
+\newline
+ Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout Quote
+
+
+\family typewriter
+............. 
+\newline
+ syndat 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\newline
+ china_cmt_event 
+\newline
+ 0 
+\newline
+ green 
+\newline
+ Syndat 
+\newline
+ 0 
+\newline
+ EOF 
+\newline
+ ............. 
+\family default
+ 
+\end_layout
+
+\end_body
+\end_document

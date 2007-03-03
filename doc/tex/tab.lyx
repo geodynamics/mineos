@@ -1,0 +1,8371 @@
+#LyX file created by  tex2lyx 0.1.2
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+
+Flat file database tables
+\end_layout
+
+\begin_layout Standard
+
+This chapter defines the tables (relations) in the flat file database. The name of each relation appears in bold print at the top of each table. The format of the flat files specify fixed field widths and precisions in FORTRAN style. Fields are separated in these files with exactly one blank space.
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% EIGEN relation
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+1.0
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+@
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+extracolsep{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+|lccccl|
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Relation:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{{
+\backslash
+bf eigen}}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Description:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{Eigenfunction and eigenvalue file header}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{attribute 
+\backslash
+vspace{-0.07 in}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{field}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{storage}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{external}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{character}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{attribute}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{name}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{no.}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{type}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{format}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{position}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{description}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ norder & 1 & i4 & i8 & 1-8 & radial order number n 
+\newline
+ lorder & 2 & i4 & i8 & 10-17 & angular order number l 
+\newline
+ typeo & 3 & i4 & a1 & 19-19 & type of modes 
+\newline
+ eigid & 4 & i4 & i8 & 21-28 & eigen id 
+\newline
+ per & 5 & f4 & f16.5 & 30-45 & eigenvalue, period 
+\newline
+ phvel & 6 & f4 & f16.5 & 47-62 & phase velocity 
+\newline
+ grvel & 7 & f4 & f16.5 & 64-79 & group velocity 
+\newline
+ attn & 8 & f4 & f16.5 & 81-96 & attenuation 
+\newline
+ nrow & 9 & i4 & i8 & 98-105 & number of rows 
+\newline
+ ncol &10 & i4 & i4 & 107-110 & number of columns 
+\newline
+ npar &11 & i4 & i4 & 112-115 & number of parameters 
+\newline
+ datatype&12 & c2 & a2 & 117-118 & numeric storage 
+\newline
+ foff &13 & i4 & i10 & 120-129 & byte offset 
+\newline
+ dir &14 & c64 & a64 & 131-194 & directory 
+\newline
+ dfile &15 & c32 & a32 & 196-227 & file name 
+\newline
+ commid &16 & i4 & i8 & 229-236 & comment id 
+\newline
+ lddate &17 & date & a17 & 238-254 & load date 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SITE relation
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+1.0
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+@
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+extracolsep{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+|lccccl|
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Relation:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{{
+\backslash
+bf site}}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Description:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{Station location information}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{attribute 
+\backslash
+vspace{-0.07 in}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{field}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{storage}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{external}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{character}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{attribute}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{name}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{no.}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{type}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{format}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{position}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{description}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ sta & 1 & c6 & a6 & 1-6 & station identifier 
+\newline
+ ondate & 2 & i4 & i8 & 8-15 & Julian start date 
+\newline
+ offdate & 3 & i4 & i8 & 17-24 & Julian off date 
+\newline
+ lat & 4 & f4 & f9.4 & 26-34 & latitude 
+\newline
+ lon & 5 & f4 & f9.4 & 36-44 & longitude 
+\newline
+ elev & 6 & f4 & f9.4 & 46-54 & elevation 
+\newline
+ staname & 7 & c50 & a50 & 56-105 & station description 
+\newline
+ statype & 8 & c4 & a4 & 107-110 & station type: single station, array, etc. 
+\newline
+ refsta & 9 & c6 & a6 & 112-117 & reference station for array members 
+\newline
+ dnorth &10 & f4 & f9.4 & 119-127 & offset from array reference (km) 
+\newline
+ deast &11 & f4 & f9.4 & 129-137 & offset from array reference (km) 
+\newline
+ lddate &12 & date & a17 & 139-155 & load date 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset VSpace 20pt
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SITECHAN relation
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+1.0
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+@
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+extracolsep{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+|lccccl|
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Relation:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{{
+\backslash
+bf sitechan}}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Description:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{Station-channel information}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{attribute 
+\backslash
+vspace{-0.07 in}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{field}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{storage}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{external}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{character}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{attribute}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{name}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{no.}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{type}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{format}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{position}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{description}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ sta & 1 & c6 & a6 & 1-6 & station identifier 
+\newline
+ chan & 2 & c8 & a8 & 8-15 & channel identifier 
+\newline
+ ondate & 3 & i4 & i8 & 17-24 & Julian start date 
+\newline
+ chanid & 4 & i4 & i8 & 26-33 & channel id 
+\newline
+ offdate & 5 & i4 & i8 & 35-42 & Julian off date 
+\newline
+ ctype & 6 & c4 & a4 & 44-47 & channel type 
+\newline
+ cdepth & 7 & f4 & f9.4 & 49-57 & emplacement depth 
+\newline
+ hang & 8 & f4 & f6.1 & 59-64 & horizontal angle 
+\newline
+ vang & 9 & f4 & f6.1 & 66-71 & vertical angle 
+\begin_inset Formula $\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;$
+\end_inset
+
+
+\newline
+ descrip &10 & c50 & a50 & 73-122 & channel description 
+\newline
+ lddate &11 & date & a17 & 124-140 & load date 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% WFDISC relation
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+1.0
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+@
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+extracolsep{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+|lccccl|
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Relation:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{{
+\backslash
+bf wfdisc}}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{2}{|l}{{
+\backslash
+it Description:}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{4}{l|}{Waveform file header and descriptive information}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{attribute 
+\backslash
+vspace{-0.07 in}}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{field}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{storage}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{external}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{character}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{attribute}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{|l}{name}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{no.}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{type}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{format}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{c}{position}
+\end_layout
+
+\end_inset
+
+ & 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+multicolumn{1}{l|}{description}
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ sta & 1 & c6 & a6 & 1-6 & station identifier 
+\newline
+ chan & 2 & c8 & a8 & 8-15 & channel identifier 
+\newline
+ time & 3 & f8 & f17.5 & 17-33 & epoch time of the first sample in file 
+\newline
+ wfid & 4 & i4 & i8 & 35-42 & waveform id 
+\newline
+ chanid & 5 & i4 & i8 & 44-51 & channel operation id 
+\newline
+ jdate & 6 & i4 & i8 & 53-60 & Julian date 
+\newline
+ endtime & 7 & f8 & f17.5 & 62-78 & time*(nsamp-1)/samprate 
+\newline
+ nsamp & 8 & i4 & i8 & 80-87 & number of samples 
+\newline
+ samprate& 9 & f4 & f11.7 & 89-99 & sampling rate in samples/sec 
+\newline
+ calib &10 & f4 & f16.6 & 101-116 & nominal calibration 
+\newline
+ calper &11 & f4 & f16.6 & 118-133 & nominal calibration period 
+\newline
+ instype &12 & c6 & a6 & 135-140 & instrument code 
+\newline
+ segtype &13 & c1 & a1 & 142-142 & indexing method 
+\newline
+ datatype&14 & c2 & a2 & 144-145 & numerical storage 
+\newline
+ clip &15 & c1 & a1 & 147-147 & clipped flag 
+\newline
+ dir &16 & c64 & a64 & 149-212 & directory 
+\newline
+ dfile &17 & c32 & a32 & 214-245 & data file 
+\newline
+ foff &18 & i4 & i10 & 247-256 & byte offset 
+\newline
+ commid &19 & i4 & i8 & 258-265 & comment id 
+\newline
+ lddate &20 & date & a17 & 267-283 & load date 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+cline{1-6}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+
+\newpage
+
+\end_layout
+
+\begin_layout Section
+
+Attribute description
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% ATTN
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+attn
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Attenuation coefficient 
+\begin_inset Formula $Q$
+\end_inset
+
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ Range: & 
+\begin_inset Formula $attn > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CALIB
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+calib
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Calibration factor. This is the conversation factor that maps digital 
+\newline
+ & data to earth displacement. The factor holds true at the oscillation period 
+\newline
+ & specified by the attribute 
+\shape italic
+calper
+\family default
+\series default
+\shape default
+. A positive value means ground 
+\newline
+ & motion increasing in component direction (up, north, east) is indicated by 
+\newline
+ & increasing counts. A negative value means the opposite. 
+\shape italic
+Calib
+\family default
+\series default
+\shape default
+ generally 
+\newline
+ & reflects the best calibration information available at time of recording. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Nanometers/digital count 
+\newline
+ Range: & Any nonzero floating point number. 
+\newline
+ & 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CLIP
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+clip
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Clipped data flag. This is a single-character flag to indicate whether 
+\newline
+ & (c) or not (n) the data were clipped. 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & { c 
+\begin_inset Formula $|$
+\end_inset
+
+ n}, lower case 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CALPER
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+calper
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Calibration period. This gives the period for which 
+\shape italic
+calib
+\family default
+\series default
+\shape default
+ is valid. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Seconds 
+\newline
+ Range: & 
+\begin_inset Formula $calper > 0$
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CHAN
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+chan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Channel identifier. This is a three-character code, which taken together 
+\newline
+ & with 
+\shape italic
+sta, jdate
+\family default
+\series default
+\shape default
+ and 
+\shape italic
+time
+\family default
+\series default
+\shape default
+, uniquely identifies the source of seismic data, 
+\newline
+ & including the geographic location, spatial orientation, sensor and subsequent 
+\newline
+ & data processing. The first two character are define channel name and the third 
+\newline
+ & channel component. 
+\begin_inset Quotes eld
+\end_inset
+
+Z" character is for vertical component, other characters 
+\newline
+ & are for horizontal components. 
+\newline
+ NA Value: & A valid entry is required. 
+\newline
+ Range: & Any sequence of 3 upper case characters. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CHANID
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+chanid 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Channel recording identifier. This is the surrogate key used to uniquely identify 
+\newline
+ & a specific recording. 
+\shape italic
+Chanid 
+\family default
+\series default
+\shape default
+duplicates the information of the compound 
+\newline
+ & key 
+\shape italic
+sta, chan, time
+\family default
+\series default
+\shape default
+. As a single identifier it is often convenient. 
+\newline
+ & 
+\shape italic
+Sta, chan, time
+\family default
+\series default
+\shape default
+ is more appropriate to the human interface. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+ 
+\newline
+ Range: & 
+\begin_inset Formula $chanid > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% COMMID
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+commid
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Data file. Comment identification. This is the integer key used to point to 
+\newline
+ & free-form comments in the predefined remark list. Not implemented yet. 
+\newline
+ NA Value: & -1 NO ANY REMARKS. 
+\newline
+ Range: & 
+\begin_inset Formula $ commid \geq 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% CTYPE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+ctype 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & This attribute specifies thr type of data channel: n (normal , a normal instrument 
+\newline
+ & response), b (beam, a coherent beam firmed with array data), or i (an incoherent 
+\newline
+ & beam of energy stack). 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & { n 
+\begin_inset Formula $|$
+\end_inset
+
+ b 
+\begin_inset Formula $|$
+\end_inset
+
+ i }, lower case 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DATATYPE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+datatype
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen,wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Numeric storage data. This attribute specifies the format of data series in the 
+\newline
+ & file system. Currently only the data type t4 and f4 are supported. 
+\newline
+ & Attribute is used to make swapping four bytes real numbers if necessary. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & The currently recognized types (lover case) are: 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quotation
+
+
+\begin_inset Tabular 
+<lyxtabular version="3" rows="5" columns="3">
+<features>
+<column alignment="left" valignment="top" leftline="true">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" rightline="true">
+<row topline="true">
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" usebox="none" special="|c|">
+\begin_inset Text
+
+\begin_layout Standard
+
+
+\series bold
+legal datatype values
+\family default
+\series default
+\shape default
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" usebox="none" special="|l">
+\begin_inset Text
+
+\begin_layout Standard
+
+datatype 
+\begin_inset VSpace -0.07in
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+size
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" usebox="none" special="l|">
+\begin_inset Text
+
+\begin_layout Standard
+
+description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="|l">
+\begin_inset Text
+
+\begin_layout Standard
+
+value
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+(byte)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+t4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+SUN IEEE single precision real 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+f4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+4 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+PC/DEC/VAX IEEE single precision real 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DESCRIP
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+descrip 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Channel description. This is a description of the data channel. For 
+\newline
+ & non-instrument channels (e.g. beams) this is the only quantitative description 
+\newline
+ & of channel operations in the core tables. 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & Any free-format string up to 50 character long. 
+\newline
+ & 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DEAST
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+deast 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Distance east. This attribute gives the 
+\begin_inset Quotes eld
+\end_inset
+
+easting" or relative position of an array 
+\newline
+ & element, east of the array center specified by the value of 
+\shape italic
+refsta
+\family default
+\series default
+\shape default
+. 
+\newline
+ & See 
+\shape italic
+dnorth
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $0.0$
+\end_inset
+
+ 
+\newline
+ Units: & Kilometers. 
+\newline
+ Range: & 
+\begin_inset Formula $-20,000.00 \leq deast \leq +20,000.00$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DFILE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+dfile
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Data file. In 
+\begin_inset Formula $wfdisc$
+\end_inset
+
+ this is the file name of a disk waveform or single component 
+\newline
+ & green function. In 
+\begin_inset Formula $eigen$
+\end_inset
+
+ this is the name of a multiplexed eigenfunction file. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & Any string up to 32 character long. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DIR
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+dir
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Directory. This attribute is the directory-part of a path name. 
+\newline
+ & This is a relative path for the current directory containing the 
+\begin_inset Formula $eigen$
+\end_inset
+
+ relation. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & Any string up to 64 character. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% DNORTH
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+dnorth 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Distance north. This attribute gives the 
+\begin_inset Quotes eld
+\end_inset
+
+northing" or relative position of an array 
+\newline
+ & element, north of the array center specified by the value of 
+\shape italic
+refsta
+\family default
+\series default
+\shape default
+. 
+\newline
+ & See 
+\shape italic
+deast
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $0.0$
+\end_inset
+
+ 
+\newline
+ Units: & Kilometers. 
+\newline
+ Range: & 
+\begin_inset Formula $-20,000.00 \leq dnorth \leq +20,000.00$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% EDEPTH
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+edepth 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Emplacement depth. This attribute gives the depth at which the instrument 
+\newline
+ & is positioned, relative the value of 
+\shape italic
+elev
+\family default
+\series default
+\shape default
+ in the 
+\series bold
+site
+\family default
+\series default
+\shape default
+ relation. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Kilometers 
+\newline
+ Range: & 
+\begin_inset Formula $edepth \geq 0.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% EIGID
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+eigid
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Eigenfunction identifier. The key field is a unique identifier for an eigenfunction 
+\newline
+ & data defined by mode numbers 
+\begin_inset Formula $n$
+\end_inset
+
+, 
+\begin_inset Formula $l$
+\end_inset
+
+ and type of mode. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% ELEV
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+elev
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Elevation. This attribute is the elevation of a seismic station relative 
+\newline
+ & mean see level. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-999.0$
+\end_inset
+
+ 
+\newline
+ Units: & Kilometers 
+\newline
+ Range: & 
+\begin_inset Formula $-10.0 \leq elev \leq +10.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% ENDTIME
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+endtime
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Time of last datum. This attribute is the time of the last sample in the 
+\newline
+ & in the waveform file. 
+\shape italic
+Endtime
+\family default
+\series default
+\shape default
+ is equivalent to 
+\begin_inset Formula $time+(nsamp-1)/samprate$
+\end_inset
+
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $+9999999999.999$
+\end_inset
+
+ 
+\newline
+ Range: & 
+\begin_inset Formula $endtime > time$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% FOFF
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+foff
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & File offset. This is the byte offset of eigenfunctions segments within data file. 
+\newline
+ & See 
+\begin_inset Formula $dir$
+\end_inset
+
+ and 
+\begin_inset Formula $dfile$
+\end_inset
+
+. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & 
+\begin_inset Formula $foff \geq  0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% GRVEL
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+grvel
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Group velocity. This gives the magnitude value of group velocity for attribute 
+\newline
+ & 
+\begin_inset Formula $per$
+\end_inset
+
+. Evaluated only for S, T, and C modes. See 
+\begin_inset Formula $typeo$
+\end_inset
+
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ Units: & kilometers/seconds 
+\newline
+ Range: & 
+\begin_inset Formula $grvel > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% HANG
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+hang 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Horizontal orientation of seismometer. This attribute specifies the 
+\newline
+ & orientation of the seismometer in the horizontal plane, measured clockwise 
+\newline
+ & from North. For a North-South orientation with the seismometer pointing 
+\newline
+ & toward the north, 
+\begin_inset Formula $hang = 0.$
+\end_inset
+
+; for Easr-West orientation with seismometer 
+\newline
+ & pointing toward the west, 
+\begin_inset Formula $hang=270$
+\end_inset
+
+. See 
+\shape italic
+vang
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Degrees 
+\newline
+ Range: & 
+\begin_inset Formula $0.0 \leq vang \leq 360.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% INSTYPE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+instype 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Instrument type. This character string is used to indicate the 
+\newline
+ & instrument type. Some examples are: SRO, ASRO, and S-750. 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & Upper case, and too numerous to mention. For details see "Directory of World 
+\newline
+ & Digital Seismic Station", Ganse & Hutt, WDC A, Report SE-32, August, 1982. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% JDATE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+jdate
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Julian date. This attribute is the date of seismic recording. The same 
+\newline
+ & information is available in epoch time, but the Julian date format is more 
+\newline
+ & convenient for many type of searches. Dates B.C. are negative. Note: there is no 
+\newline
+ & year = 0000 or day = 000. Where only the year is known, day of the year = 001; 
+\newline
+ & where only year and month are known, day of year = first day of month. 
+\newline
+ & For example, Jan 1 of 10 BC is -0010001. See 
+\shape italic
+time
+\family default
+\series default
+\shape default
+. 
+\newline
+ attribute 
+\newline
+ & 
+\begin_inset Formula $per$
+\end_inset
+
+. Evaluated only for S, T, and C modes. See 
+\begin_inset Formula $typeo$
+\end_inset
+
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ Range: & Julian dates of the form yyyyddd. Must be consistent with the accompanying 
+\newline
+ & 
+\shape italic
+time
+\family default
+\series default
+\shape default
+ attribute. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% LAT
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+lat
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Latitude. This attribute is the geographic latitude. Locations 
+\newline
+ & north of the equator have positive latitudes. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Degrees 
+\newline
+ Range: & 
+\begin_inset Formula $-90.0 \leq lat \leq +90.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% LDDATE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+lddate
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+all
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Load date. This is the date and time the record was created. 
+\newline
+ & Not implemented yet. 
+\newline
+ Range: & Any value. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% LON
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+lon
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Longitude. This attribute is the geographic longitude. Longitudes 
+\newline
+ & are measured positive east of Greenwich meridian. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Degrees 
+\newline
+ Range: & 
+\begin_inset Formula $-180.0 \leq lon \leq +180.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% LORDER
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+lorder
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Angular order number (harmonic degree) 
+\begin_inset Formula $l$
+\end_inset
+
+ of a normal mode. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% NCOL
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+ncol
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & This attribute is the number of columns in the eigenfunction grid stored in binary data. 
+\newline
+ FORTRAN: & i4 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & { 
+\begin_inset Formula $2\; |\; 4\; |\;6$
+\end_inset
+
+ } 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% NORDER
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+norder
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Radial order number 
+\begin_inset Formula $n$
+\end_inset
+
+ of a normal mode. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% NPAR
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+npar
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & This attribute is the number of parameters stored in the binary data. 
+\newline
+ NA Value: & 
+\begin_inset Formula $0$
+\end_inset
+
+ 
+\newline
+ Range: & 
+\begin_inset Formula $npar > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% NRAW
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+nrow
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & This attribute is the number of rows in the eigenfunction grid stored in the binary data. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & 
+\begin_inset Formula $nrow > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% NSAMP
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+nsamp
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Number of samples. This quantity is the number of samples in waveform segment. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Range: & 
+\begin_inset Formula $nsamp > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% OFFDATE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+offdate
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site, sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Turn off date. This attribute is the Julian Date on which the 
+\newline
+ & station or sensor indicated was turned off, dismantled, or removed. 
+\newline
+ & 
+\shape italic
+See ondate.
+\family default
+\series default
+\shape default
+ 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+ 
+\newline
+ Range: & Julian date of the form yyyyddd 
+\newline
+ & 
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% ONDATE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+ondate
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site, sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Turn on date. This attribute is the Julian Date on which the 
+\newline
+ & station or sensor indicated was began operated. 
+\shape italic
+Offdate
+\family default
+\series default
+\shape default
+ or 
+\shape italic
+ondate
+\family default
+\series default
+\shape default
+ 
+\newline
+ & are not intended to accommodate temporary downtimes, but rather to 
+\newline
+ & indicate the time period for which the attributes of the station 
+\newline
+ & 
+\shape italic
+lat, lon, elev
+\family default
+\series default
+\shape default
+ are valid for the given station code, Station 
+\newline
+ & are often moved, but with the station code remaining unchanged. 
+\newline
+ NA Value: & NOT ALLOWED, A valid entry is required. 
+\newline
+ Range: & Julian date of the form yyyyddd 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% PER
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+per
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Eigenvalue - period. The frequency is 
+\begin_inset Formula $\omega=2*\pi/per$
+\end_inset
+
+. The normalized 
+\newline
+ & value of 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is located in associated binary data.
+\newline
+ NA Value & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ Units: & seconds 
+\newline
+ Range: & 
+\begin_inset Formula $per > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% PHVEL
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+phvel
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Phase velocity. This gives the magnitude value of phase velocity for attribute 
+\newline
+ & 
+\begin_inset Formula $per$
+\end_inset
+
+. Evaluated only for S, T, and C modes. See 
+\begin_inset Formula $typeo$
+\end_inset
+
+. 
+\newline
+ NA Value: & 
+\begin_inset Formula $-1$
+\end_inset
+
+. 
+\newline
+ Units: & kilometers/seconds 
+\newline
+ Range: & 
+\begin_inset Formula $phvel > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SAMPRATE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+samprate
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Sampling rate. The attribute is the sample rate in samples/second. 
+\newline
+ & This value may vary slightly from the nominal to reflect clock drift. 
+\newline
+ NA Value: & NOT ALLOWED, Avalid entry is required. 
+\newline
+ Units: & 1/seconds 
+\newline
+ Range: & 
+\begin_inset Formula $samprate > 0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SEGTYPE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+segtype
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Segment type. The attribute indicates if a waveform is o (original), 
+\newline
+ & v (virtual), s (segmented), d (duplicate), g (green function), and 
+\newline
+ & w (synthetic waveform). 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & { o 
+\begin_inset Formula $|$
+\end_inset
+
+ v 
+\begin_inset Formula $|$
+\end_inset
+
+ s 
+\begin_inset Formula $|$
+\end_inset
+
+ d 
+\begin_inset Formula $|$
+\end_inset
+
+ g 
+\begin_inset Formula $|$
+\end_inset
+
+ w } 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% STA
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+sta
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site, sitechan, wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Station code. This is common code-name of seismic observatory. 
+\newline
+ & Generally only three or four characters are used. 
+\newline
+ NA Value: & A valid entry is required. 
+\newline
+ Range: & Any upper case string up to 6 character long. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% STANAME
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+staname
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Station name/description. This is the full name of the station whose 
+\newline
+ & code-name is in 
+\shape italic
+sta
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & Any upper-case string up to 50 characters long. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% STATYPE
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+statype
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Station type. This character string specifies the station type. Recommended 
+\newline
+ & type are ss (single stations) or ar (array). 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & { ss 
+\begin_inset Formula $|$
+\end_inset
+
+ ar }, lower case 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% TIME
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+time
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+wfdisc
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Epoch time. Epochal time given as seconds and fraction of second since 
+\newline
+ & hour 
+\begin_inset Formula $0$
+\end_inset
+
+ January 1, 1970, and stored in a double precision floating number. 
+\newline
+ & Refers to start time data. The double precision floating number allows 15 decimal 
+\newline
+ & digits. At 1 millisecond accuracy this is range of 
+\begin_inset Formula $3 \times 10^4$
+\end_inset
+
+ years. 
+\newline
+ & Generally only three or four characters are used. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Seconds 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% TYPEO
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+typeo
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+eigen
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Type of binary data. This single character indicates the type of data. 
+\newline
+ & The values are R (radial), S (spheroidal), T (toroidal) or C (inner core 
+\newline
+ & toroidal) modes. The character P indicates that data includes constants, 
+\newline
+ & normalization parameters, and radius samples. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% REFSTA
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+refsta 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+site
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Reference station. This string specifies the reference station with respect 
+\newline
+ & to which array member are located. See 
+\shape italic
+deast, dnorth
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & - (a dash) 
+\newline
+ Range: & Any 
+\shape italic
+sta
+\family default
+\series default
+\shape default
+ from 
+\series bold
+site
+\family default
+\series default
+\shape default
+. 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% VANG
+\end_layout
+
+\begin_layout Standard
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+begin{tabular*}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+6.5 in
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+ll
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+hline
+\end_layout
+
+\end_inset
+
+ 
+\newline
+ Name: & 
+\shape italic
+vang 
+\family default
+\series default
+\shape default
+ 
+\newline
+ Relation: & 
+\series bold
+sitechan
+\family default
+\series default
+\shape default
+ 
+\newline
+ Description: & Vertical orientation of seismometer. This attribute measures the 
+\newline
+ & angle between the sensitive axis of a seismometer and the outward-pointing 
+\newline
+ & vertical direction. For a vertically oriented seismometer, 
+\begin_inset Formula $vang =0$
+\end_inset
+
+. For a 
+\newline
+ & horizontally oriented seismometer, 
+\begin_inset Formula $vang=90$
+\end_inset
+
+. See 
+\shape italic
+hang
+\family default
+\series default
+\shape default
+. 
+\newline
+ NA Value: & NOT ALLOWED. A valid entry is required. 
+\newline
+ Units: & Degrees 
+\newline
+ Range: & 
+\begin_inset Formula $0.0 \leq vang \leq 90.0$
+\end_inset
+
+ 
+\newline
+ &
+\newline
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+end{tabular*}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\end_body
+\end_document

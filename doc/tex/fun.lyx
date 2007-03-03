@@ -1,0 +1,608 @@
+#LyX file created by  tex2lyx 0.1.2
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+
+fdb and time subroutines/functions
+\end_layout
+
+\begin_layout Subsection
+
+fdb subprograms
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+fdb
+\family default
+\series default
+\shape default
+ (fortran data base) subroutines/functions come from the CU-Boulder 
+\series bold
+fdb 
+\family default
+\series default
+\shape default
+ FORTRAN 77 library. They provide a FORTRAN interface to 
+\shape italic
+.site, .sitechan, .wfdisc
+\family default
+\series default
+\shape default
+, and 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relations. Most of 
+\series bold
+fdb
+\family default
+\series default
+\shape default
+ subroutines/functions have very short and simple source code. The list of function names with a brief description are listed below: 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine read_site
+\family default
+\series default
+\shape default
+ reads 
+\shape italic
+.site
+\family default
+\series default
+\shape default
+ relation from file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine write_site
+\family default
+\series default
+\shape default
+ writes 
+\shape italic
+.site
+\family default
+\series default
+\shape default
+ relation to file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine default_site
+\family default
+\series default
+\shape default
+ sets up default (empty) tuple of 
+\shape italic
+.site
+\family default
+\series default
+\shape default
+ relation in memory 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine read_sitechan
+\family default
+\series default
+\shape default
+ reads 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ relation from file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine write_sitechan
+\family default
+\series default
+\shape default
+ writes 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ relation to file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine default_sitechan
+\family default
+\series default
+\shape default
+ sets up default (empty) tuple of 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ relation in memory 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine read_wfdisc
+\family default
+\series default
+\shape default
+ reads 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ relation from file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine write_wfdisc
+\family default
+\series default
+\shape default
+ writes 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ relation to file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine put_wfdisc
+\family default
+\series default
+\shape default
+ writes for selected 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ tuple associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine get_wfdisc
+\family default
+\series default
+\shape default
+ reads for selected 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ tuple associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine select_sitechan
+\family default
+\series default
+\shape default
+ - grouping 
+\shape italic
+.sitechan
+\family default
+\series default
+\shape default
+ relation by components (single channel or) 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine default_wfdisc
+\family default
+\series default
+\shape default
+ sets up default (empty) tuple of 
+\shape italic
+.wfdisc
+\family default
+\series default
+\shape default
+ relation in memory triple of channels) 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine open_eigen
+\family default
+\series default
+\shape default
+ opens an 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ file and associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine close_eigen
+\family default
+\series default
+\shape default
+ closes an 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ file and associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine write_eigen
+\family default
+\series default
+\shape default
+ writes a single tuple into the 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine read_eigen
+\family default
+\series default
+\shape default
+ reads a single tuple from the 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine null_eigen
+\family default
+\series default
+\shape default
+ sets up default (empty) tuple of 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relation in memory 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine get_eigen
+\family default
+\series default
+\shape default
+ reads current 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relation's tuple associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine put_eigen
+\family default
+\series default
+\shape default
+ writes current 
+\shape italic
+.eigen
+\family default
+\series default
+\shape default
+ relation's tuple associated binary file 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+integer*4 factor2
+\family default
+\series default
+\shape default
+ factors an integer number into two factors. 
+\end_layout
+
+\begin_layout Subsection
+
+time subprograms
+\end_layout
+
+\begin_layout Standard
+
+
+\series bold
+time
+\family default
+\series default
+\shape default
+ subroutines/functions perform conversation from human to epoch time and vice versa. Function 
+\series bold
+loctime
+\family default
+\series default
+\shape default
+ returns local system time as a text string. A short description is the following: 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine epochtoh(t, year, doy, hour, min, sec)
+\family default
+\series default
+\shape default
+ converts epoch time, 
+\series bold
+double* t
+\family default
+\series default
+\shape default
+, into human time , 
+\series bold
+integer*4 year,doy,hour,min
+\family default
+\series default
+\shape default
+, 
+\series bold
+real*8 sec
+\family default
+\series default
+\shape default
+. 
+\series bold
+doy
+\family default
+\series default
+\shape default
+ is a day starting from the beginning of year 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+real*8 function htoepoch (year, doy, hour, min, sec)
+\family default
+\series default
+\shape default
+ returns epoch time. Input arguments are 
+\series bold
+year, doy, hour
+\family default
+\series default
+\shape default
+, minutes (
+\series bold
+min
+\family default
+\series default
+\shape default
+), 
+\series bold
+sec
+\family default
+\series default
+\shape default
+. Here, 
+\series bold
+integer*4 year,doy,hour,min
+\family default
+\series default
+\shape default
+ and 
+\newline
+ 
+\series bold
+real*8 sec
+\family default
+\series default
+\shape default
+ 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+subroutine doytom(year, doy, mon, day)
+\family default
+\series default
+\shape default
+ converts 
+\series bold
+year
+\family default
+\series default
+\shape default
+ and day of year (
+\series bold
+doy
+\family default
+\series default
+\shape default
+) into month (
+\series bold
+mon
+\family default
+\series default
+\shape default
+) and day of month(
+\series bold
+day
+\family default
+\series default
+\shape default
+). The type of all arguments is 
+\series bold
+integer*4
+\family default
+\series default
+\shape default
+. 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+integer*4 function mtodoy(year, mon, day)
+\family default
+\series default
+\shape default
+ returns days of year. Input arguments are 
+\series bold
+year
+\family default
+\series default
+\shape default
+, month (
+\series bold
+mon
+\family default
+\series default
+\shape default
+), and 
+\series bold
+day
+\family default
+\series default
+\shape default
+. The type of all arguments is 
+\series bold
+integer*4
+\family default
+\series default
+\shape default
+. 
+\end_layout
+
+\begin_layout Description
+
+
+\series bold
+character*17 function loctime()
+\family default
+\series default
+\shape default
+ returns local system time of form 
+\series bold
+mm/dd/yy-hh:mm:ss
+\family default
+\series default
+\shape default
+ 
+\end_layout
+
+\end_body
+\end_document
