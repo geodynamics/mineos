@@ -1,0 +1,1194 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+eigcon program
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+eigcon
+\series default
+ program makes postprocessing of the 
+\series bold
+minos_bran
+\series default
+ results and creates the 
+\shape italic
+.eigen
+\shape default
+ relation table in 
+\shape italic
+dbname.eigen
+\shape default
+, where 
+\shape italic
+dbname
+\shape default
+ is the database name.
+ The program creates a directory called 
+\shape italic
+dbname.eigen.dat
+\shape default
+ in the same directory where the file 
+\shape italic
+dbname.eigen
+\shape default
+ is located.
+ Under 
+\shape italic
+dbname.eigen.dat
+\shape default
+ it creates a binary file with a fixed name, 
+\shape italic
+eigen
+\shape default
+, for storing the eigenfunctions.
+ This binary file consists of segments with a fixed length - one segment
+ per eigenfunction.
+ The 
+\shape italic
+eigen
+\shape default
+ binary file is a portable file.
+ Unlike the 
+\series bold
+minos_bran
+\series default
+ binary file it does not have any encapsulation and can be easily treated
+ by programs written in various high level languages such as C, C++, Perl,
+ etc.
+ Access to a segment is provided through the 
+\shape italic
+.eigen
+\shape default
+ relation table, namely, by referencing the path, length, byte offset, and
+ by type of data.
+ The 
+\shape italic
+.eigen
+\shape default
+ relation table, Section 8, has the structure of an external database file
+ and can be easily incorporated into relational databases such as ORACLE,
+ Postgress, MySql, etc.
+\end_layout
+
+\begin_layout Subsection
+Command line
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+eigcon
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+eigcon
+\series default
+ 
+\begin_inset Formula $<$
+\end_inset
+
+ 
+\shape italic
+parameter_file
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+eigcon
+\series default
+ 
+\begin_inset Formula $<<$
+\end_inset
+
+ WORD 
+\newline
+ ........
+ 
+\newline
+ ........
+ 
+\newline
+ WORD
+\end_layout
+
+\begin_layout Standard
+\noindent
+There are three different ways to start the 
+\series bold
+eigcon
+\series default
+ program: 
+\end_layout
+
+\begin_layout Itemize
+interactive dialog for setting input parameters; 
+\end_layout
+
+\begin_layout Itemize
+single shell command with redirection of the standard input from a parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as in the
+ interactive dialog - one answer per line; 
+\end_layout
+
+\begin_layout Itemize
+direct shell script.
+ In this case, the contents of the parameter file are directly included
+ in the shell script between delimiters 
+\begin_inset Quotes eld
+\end_inset
+
+WORD".
+ See examples.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+The parameter file consists of six lines: 
+\end_layout
+
+\begin_layout Description
+Line 1: 
+\shape italic
+jcom
+\shape default
+ 
+\newline
+ 
+\shape italic
+jcom
+\shape default
+ is the type of oscillation.
+ 
+\begin_inset Formula $jcom=1$
+\end_inset
+
+ for radial modes, 
+\begin_inset Formula $=2$
+\end_inset
+
+ for toroidal modes, 
+\begin_inset Formula $=3$
+\end_inset
+
+ for spheroidal modes, and 
+\begin_inset Formula $=4$
+\end_inset
+
+ for inner core toroidal modes.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ unformatted.
+ 
+\end_layout
+
+\begin_layout Description
+Line 2: 
+\shape italic
+model_file
+\shape default
+ 
+\newline
+ 
+\shape italic
+model_file
+\shape default
+ is the path to the 1-D input model file.
+ Text string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line 3: 
+\shape italic
+max_depth
+\shape default
+
+\newline
+ 
+\shape italic
+max_depth
+\shape default
+ is the depth to cut all output eigenfunctions (in km).
+ All output values exists in the interval 
+\begin_inset Formula $[r_{n},r_{n}-max\_depth]$
+\end_inset
+
+ only.
+ 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ is the radius of the free surface in km.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ unformatted.
+ 
+\end_layout
+
+\begin_layout Description
+Line 4: 
+\shape italic
+in_plain_file
+\shape default
+ is the path to the input ASCII file.
+ The file is the output model listing 
+\shape italic
+out_plain_file
+\shape default
+ of the program 
+\series bold
+minos_bran
+\series default
+.
+ See section 3.3.
+ Text string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line 5: 
+\shape italic
+in_bin_file
+\shape default
+ 
+\newline
+ 
+\shape italic
+in_bin_file
+\shape default
+ is the path to the input FORTRAN binary unformatted file, which was produced
+ by the program 
+\series bold
+minos_bran
+\series default
+.
+ See section 1.3.
+ 
+\end_layout
+
+\begin_layout Description
+Line 6: 
+\shape italic
+dbname
+\shape default
+ 
+\newline
+ 
+\shape italic
+dbname
+\shape default
+ is the path to the output database name.
+ The path is a string up to 256 characters long.
+ The path should not end with a backslash, 
+\begin_inset Quotes eld
+\end_inset
+
+/".
+ The part of string after the last 
+\begin_inset Quotes eld
+\end_inset
+
+/" or from the beginning of the string, if string does not have 
+\begin_inset Quotes eld
+\end_inset
+
+/" at all, is the data base name.
+ The data base name must be at least one character long.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% Input data
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Input data
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size large
+\emph on
+model_file.
+
+\series default
+\emph default
+ See description in Section 3.2, 
+\series bold
+\emph on
+model_file
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\size large
+\emph on
+in_plain_file.
+
+\series default
+\emph default
+ This file has been created by 
+\series bold
+minos_bran
+\series default
+ as an output file.
+ See description of the file in Section 3.3, 
+\series bold
+\emph on
+out_plain_file
+\series default
+\emph default
+.
+ Actually, 
+\series bold
+eigcon
+\series default
+ uses only normal mode properties from this file to create some part of
+ 
+\series bold
+.eigen
+\series default
+ relation table.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\size large
+\emph on
+in_bin_file.
+
+\series default
+\emph default
+ This file has been created by 
+\series bold
+minos_bran
+\series default
+ as an output file.
+ See description of the file in Section 3.3, 
+\series bold
+\emph on
+out_bin_file
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection
+Output data
+\end_layout
+
+\begin_layout Standard
+As mentioned above, 
+\series bold
+eigcon
+\series default
+ creates three objects in the file system: a relational table 
+\newline
+ 
+\shape italic
+dbname.eigen
+\shape default
+, a directory 
+\shape italic
+dbname.eigen.dat
+\shape default
+, and a binary file 
+\shape italic
+dbname.eigen.dat/eigen
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size large
+\emph on
+dbname.eigen
+\series default
+\emph default
+ file format is described in Section 8 as the relation table 
+\shape italic
+.eigen
+\shape default
+.
+ Each line of this file describes the modal properties of a single eigenfunction
+ and references the binary data segment in the 
+\shape italic
+dbname.eigen.dat/eigen
+\shape default
+ file.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size large
+\emph on
+dbname.eigen.dat/eigen
+\series default
+\emph default
+ binary file consists of segments.
+ Each segment stores normalized eigenfunctions for a single normal mode
+ (
+\begin_inset Formula $n,l$
+\end_inset
+
+).
+ It consists of words 4 bytes long containing real*4 or integer*4 variables
+ in the internal computer format.
+ The field 
+\shape italic
+datatype
+\shape default
+ in 
+\shape italic
+.eigen
+\shape default
+ describes numeric memory storage data (byte order).
+ There are two common byte orders for most of computer architectures: BIG_ENDIAN
+ (straight order 1-2-3-4) and LOW_ENDIAN (reverse order 4-3-2-1).
+ BIG_ENDIAN is used by SUNS and RISC-oriented platforms, and LOW_ENDIAN
+ is used by PC, VAX and DEC hardware.
+ 
+\series bold
+eigcon
+\series default
+ automaticaly detects the byte order and places the text strings 
+\begin_inset Quotes eld
+\end_inset
+
+t4" (BIG_ENDIAN) or 
+\begin_inset Quotes eld
+\end_inset
+
+f4" (LOW_ENDIAN) into the 
+\shape italic
+datatype
+\shape default
+ field in the 
+\shape italic
+.eigen
+\shape default
+ relation.
+\end_layout
+
+\begin_layout Standard
+Each segment is logically divided into two parts - the header and the body.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+
+\series bold
+\emph on
+The header
+\end_layout
+
+\begin_layout Standard
+This part of the segment stores scalar parameters and normalization coefficients
+ for the modal properties.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 1: 
+\family typewriter
+\size small
+integer*4
+\family default
+\size default
+, 
+\begin_inset Formula $n$
+\end_inset
+
+ - normal mode radial order number 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Must be equal to 
+\shape italic
+norder
+\shape default
+ in the referencing 
+\shape italic
+.eigen
+\shape default
+ relation.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 2: 
+\family typewriter
+\size small
+integer*4
+\family default
+\size default
+, 
+\begin_inset Formula $l$
+\end_inset
+
+ - normal mode angular order (harmonic degree) number 
+\begin_inset Formula $l$
+\end_inset
+
+.
+ Must be equal to 
+\shape italic
+lorder
+\shape default
+ in the referencing 
+\shape italic
+.eigen
+\shape default
+ relation.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 3: 
+\family typewriter
+\size small
+real*4
+\family default
+\size default
+, 
+\begin_inset Formula $\omega$
+\end_inset
+
+ Normal mode frequency (eigenvalue) in physical units rad/s, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+mbox{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\;\omega=2\pi/per$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset Formula $per$
+\end_inset
+
+ is the period field in the 
+\shape italic
+.eigen
+\shape default
+ relation.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 4: 
+\family typewriter
+\size small
+ real*4
+\family default
+\size default
+, 
+\begin_inset Formula $q$
+\end_inset
+
+ - part of the exponential term in the attenuation expression, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+mbox{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $e^{-qt}$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+mbox{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $q=0.5*\omega/Q$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+, rad/sec.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 5: 
+\family typewriter
+\size small
+ real*4
+\family default
+\size default
+, 
+\begin_inset Formula $r_{n}$
+\end_inset
+
+ - the radius normalization coefficient in meters, equal to the radius of
+ the model's free surface.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 6: 
+\family typewriter
+\size small
+real*4
+\family default
+\size default
+, 
+\begin_inset Formula $v_{n}$
+\end_inset
+
+ - the velocity normalization coefficient, 
+\begin_inset Formula $v_{n}=r_{n}\;(\pi G\rho_{n})^{-1/2}$
+\end_inset
+
+, where, 
+\begin_inset Formula $G$
+\end_inset
+
+ is the gravitational potential constant (
+\begin_inset Formula $G=6.6723\cdot10^{-11}$
+\end_inset
+
+ 
+\begin_inset Formula ${\rm m^{3}/kg/s^{2}}$
+\end_inset
+
+), 
+\begin_inset Formula $\rho_{n}$
+\end_inset
+
+ is the density normalization coefficient (
+\begin_inset Formula $\rho_{n}=5515$
+\end_inset
+
+ 
+\begin_inset Formula ${\rm kg/m^{3}}$
+\end_inset
+
+).
+ The circular frequency normalization coefficient 
+\begin_inset Formula $\omega_{n}$
+\end_inset
+
+ is given by 
+\begin_inset Formula $\omega_{n}=v_{n}/r_{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Itemize
+word 7: 
+\family typewriter
+\size small
+real*4
+\family default
+\size default
+, 
+\begin_inset Formula $a_{n}$
+\end_inset
+
+ - the acceleration normalization coefficient, 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+mbox{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $a_{n}=10^{20}/(\rho_{n}r_{n}^{4})$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+\noindent
+
+\series bold
+\emph on
+The body - eigenfunction grid
+\end_layout
+
+\begin_layout Itemize
+word 8
+\begin_inset Formula $\;-\;$
+\end_inset
+
+end: 
+\family typewriter
+real*4
+\family default
+, 
+\begin_inset Formula $E(nrow,ncol)$
+\end_inset
+
+ - matrix of 
+\begin_inset Formula $nrow$
+\end_inset
+
+ rows and 
+\begin_inset Formula $ncol$
+\end_inset
+
+ columns to store the normalized eigenfunctions.
+ The first column is radius.
+ The other columns are the eigenfunctions.
+ The number of eigenfunctions depends on modal type.
+ For spheroidal modes, it should be 7 columns (
+\begin_inset Formula $r,\; U,\; U^{\prime},\; V,\; V^{\prime},\; P,\; P^{\prime}$
+\end_inset
+
+), for toroidal and others, it should be 3 columns (
+\begin_inset Formula $r,\; W,\; W^{\prime}$
+\end_inset
+
+).
+ The matrix is stored in segments by the second index, by columns.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Note that 
+\series bold
+eigcon
+\series default
+ performs an additional eigenfunction normalization.
+ Eigenfunctions for toroidal and the horizontal part of spheroidal modes
+ are divided by 
+\begin_inset Formula $(l(l+1))^{1/2}$
+\end_inset
+
+.
+ This is done in accordance with theory developed by Woodhouse & Dahlen
+ (1978).
+ The new normalization of eigenfunctions is given by 
+\begin_inset Formula \[
+\omega^{2}\int_{0}^{r_{n}}\rho(r)\; l(l+1)\; W^{2}(r)r^{2}\; dr=1\]
+
+\end_inset
+
+ for toroidal modes and 
+\begin_inset Formula \[
+\omega^{2}\int_{0}^{r_{n}}\rho(r)\;[U^{2}(r)+l(l+1)\; V^{2}(r)]r^{2}\; dr=1\]
+
+\end_inset
+
+ for spheroidal modes.
+ 
+\end_layout
+
+\begin_layout Subsection
+Messages
+\end_layout
+
+\begin_layout Standard
+Program 
+\series bold
+eigcon
+\series default
+ prints out on the standad output device the following messages:
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Dialog messages
+\series default
+\emph default
+.
+ Copy of input/output dialog or parameter file in dialog form.
+ For example,
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+spheroidals (3) or toroidals (2) or radial (1) or 
+\newline
+ inner core toroidals
+ (4) modes 
+\newline
+ 
+\emph on
+3
+\emph default
+ 
+\newline
+ enter name of model file 
+\newline
+ 
+\emph on
+model_PREM.txt
+\emph default
+ 
+\newline
+ enter max depth [km] : 
+\newline
+ 
+\emph on
+40.
+
+\emph default
+ 
+\newline
+ enter name of minos_bran output text file 
+\newline
+ 
+\emph on
+PREM_S
+\emph default
+ 
+\newline
+ minos_bran output binary unformatted file name 
+\newline
+ 
+\emph on
+ePREM_S
+\emph default
+ 
+\newline
+ enter path/dbase_name or dbase_name to store eigenfunctions: 
+\newline
+ 
+\emph on
+test_S
+\emph default
+ 
+\end_layout
+
+\begin_layout Subsubsection
+\noindent
+
+\series bold
+\emph on
+Info and error messages
+\end_layout
+
+\begin_layout Standard
+\noindent
+1.
+ 
+\family typewriter
+============= Program eigcon ====================
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ Shows that program 
+\series bold
+eigcon
+\series default
+ starts.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+2.
+ 
+\family typewriter
+eigcon: n,nstart,nrad = nnn, mmm, kkk
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ 
+\family typewriter
+nnn
+\family default
+ is the total number of nodes of eigenfunction, 
+\family typewriter
+mmm
+\family default
+ is the number of staring node after cutting eigenfunction by depth, and
+ 
+\family typewriter
+kkk
+\family default
+ is the rest number of nodes after cutting.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+3.
+ 
+\family typewriter
+ERR001: eigcon: Input plane and binary files differ: nn, ll, n, l 
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+\noindent
+Order numbers of some eigenfunctions 
+\family typewriter
+nn
+\family default
+ and 
+\family typewriter
+ll
+\family default
+ in the text file differ from the numbers 
+\family typewriter
+n, l
+\family default
+ in the binary data segment.
+ Program is terminated.
+ Check 
+\shape italic
+.eigen
+\shape default
+ relation or create it again.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+4.
+ 
+\family typewriter
+ERR002: eigcon: Unknown jcom nnn
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+\noindent
+Error message.
+ The parameter 
+\family typewriter
+jcom
+\family default
+ with value 
+\family typewriter
+nnn
+\family default
+ is out of range.
+ Program is terminated.
+ Provide 
+\family typewriter
+jcom
+\family default
+ with right value.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+5.
+ 
+\family typewriter
+ERR003: eigcon: jcom = nnn does not fit mode sss
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+\noindent
+Error message.
+ Impossible combination of jcom and mode.
+ For example, jcom=2 (toroidal modes) can not used together with 
+\series bold
+minos_bran
+\series default
+ unformatted file for spheroidal modes.
+ Program is terminated.
+ Provide right jcom and unformatted file.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+6.
+ 
+\family typewriter
+ERR004:eigcon: Wrong minos_bran output text file
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+\noindent
+Error message.
+ Probably the 
+\series bold
+minos_bran
+\series default
+ plain file was edited.
+ Never change this file.
+ Program is terminated.
+ Rerun 
+\series bold
+minos_bran
+\series default
+ again to create proper plain file.
+ 
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,1582 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\usepackage{hyperref}
+
+\let\myUrl\url
+\renewcommand{\url}[1]{(\myUrl{#1})}
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry true
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% MINOS
+\backslash
+_BRAN
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Examples
+\end_layout
+
+\begin_layout Standard
+This section contains examples of the interaction with each of the four
+ programs of the 
+\series bold
+Mineos
+\series default
+ package.
+ Each program can be run in three different ways: by interactive dialog,
+ redirection from an input file, or direct use of a shell script.
+ In each subsection, examples of running the program in each way are presented.
+ The output from each approach should be the same.
+ The programs are run in order: 
+\series bold
+minos_bran
+\series default
+, 
+\series bold
+eigcon
+\series default
+, 
+\series bold
+green
+\series default
+, 
+\series bold
+syndat
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+All of the input files named here are included in the standard distribution
+ of the 
+\series bold
+Mineos
+\series default
+ package.
+\end_layout
+
+\begin_layout Section
+minos_bran
+\end_layout
+
+\begin_layout Standard
+In the example given here, 
+\series bold
+minos_bran
+\series default
+ reads in a model file called 
+\shape italic
+prem_noocean.txt
+\shape default
+, which is a tabular listing of the PREM model with the ocean filled in
+ with solid crust.
+ The program outputs two files: 
+\shape italic
+prem_noocean_S
+\shape default
+ and 
+\shape italic
+eprem_noocean_S
+\shape default
+.
+ The first file contains a listing of some normal mode properties (n, 
+\begin_inset Formula $l$
+\end_inset
+
+, frequency, period, phase and group speed, etc) and the second file contains
+ the eigenfunctions.
+ Both files are needed to be read into the eigenfunction renormalization
+ program, 
+\series bold
+eigcon
+\series default
+.
+ In this example, the numerical tolerance parameter eps is set to 
+\begin_inset Formula $10^{-10}$
+\end_inset
+
+ and gravity is taken into consideration in computing the eigenfunctions
+ only if the frequency is less than 10 mHz.
+ The output normal mode properties will be for spheroidal modes with angular
+ order 
+\begin_inset Formula $l$
+\end_inset
+
+ values ranging between 1 and 6000, frequencies ranging between 0 and 166
+ mHz (i.e., 6 sec), and radial orders 
+\begin_inset Formula $n$
+\end_inset
+
+ ranging from 0 to 0 -- that is, only fundamental modes will be computed
+ in this example.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 1.
+
+\series default
+\emph default
+ Interactive dialog 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% minos_bran 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+input model file: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+prem_noocean.txt
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+output file: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+prem_noocean_S
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eigenfunction file (output): 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+eprem_noocean_S
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter eps and wgrav 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+1e-10 10
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter jcom (1=rad;2=tor;3=sph;4=ictor) 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+3
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter lmin,lmax,wmin,wmax,nmin,nmax 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+1 6000 0.0 166.0 0 0
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 2.
+
+\series default
+\emph default
+ Redirection of input file 
+\end_layout
+
+\begin_layout Standard
+Create in the working directory a parameter file named 
+\family typewriter
+Param
+\family default
+ with the following contents: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean.txt 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eprem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1e-10 10 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+3 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1 6000 0.0 166.0 0 0 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+and start the following command:
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+...% minos_bran 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\end_layout
+
+\begin_layout Subsection
+\noindent
+
+\series bold
+\emph on
+Example 3.
+
+\series default
+\emph default
+ Direct shell script 
+\end_layout
+
+\begin_layout Standard
+Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+minos_bran 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean.txt 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eprem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1e-10 10 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+3 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1 6000 0.0 166.0 0 0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% EIGCON
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+eigcon
+\end_layout
+
+\begin_layout Standard
+In this example, the two files computed by 
+\series bold
+minos_bran
+\series default
+ are read in as input, 
+\shape italic
+prem_noocean_S
+\shape default
+ and 
+\shape italic
+eprem_noocean_S
+\shape default
+, together with the input model file 
+\shape italic
+prem_noocean.txt
+\shape default
+.
+ 
+\series bold
+eigcon
+\series default
+ renormalizes the eigenfunctions and outputs them to a depth of 1000 km,
+ in this example.
+ The renormalized eigenfunctions are placed in an extension of the CSS3.0
+ data base, using the relation 
+\shape italic
+test_S.eigen
+\shape default
+.
+ This relation points to a file called 
+\shape italic
+eigen
+\shape default
+ located in a subdirectory called 
+\shape italic
+test_S.dat
+\shape default
+.
+ The file 
+\shape italic
+eigen
+\shape default
+ is non-encapsulated, which allows greater flexibility in access from different
+ platforms and code from different compilers.
+ Information about the eigenfunction's byte order is contained in the 
+\shape italic
+.eigen
+\shape default
+ relation, which is used in subsequent programs to swap bytes appropriately.
+ Eigenfunctions are computed here to 1000 km for plotting purposes, but
+ for runs in which earthquakes are no deeper than say 40 km, then 40 would
+ be input here.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 1.
+
+\series default
+\emph default
+ Interactive dialog 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% eigcon 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+spheroidals (3) or toroidals (2) or radial (1) or 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+inner core toroidals (4) modes 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+3
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter name of model file 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+prem_noocean.txt
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter max depth [km] : 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+1000
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter name of minos_bran output text file 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+prem_noocean_S
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+minos_bran output binary unformatted file name 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+eprem_noocean_S
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter path
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+
+\backslash
+/
+\end_layout
+
+\end_inset
+
+dbase_name or dbase_name to store eigenfunctions: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+test_S
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 2.
+
+\series default
+\emph default
+ Redirection of input file 
+\end_layout
+
+\begin_layout Standard
+Create in the working directory a parameter file named 
+\family typewriter
+Param
+\family default
+ with the following contents: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+3 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean.txt 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eprem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+test_S 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+and start the following command:
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+...% eigcon 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\end_layout
+
+\begin_layout Subsection
+\noindent
+
+\series bold
+\emph on
+Example 3.
+
+\series default
+\emph default
+ Direct shell script 
+\end_layout
+
+\begin_layout Standard
+\noindent
+Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eigcon 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+3 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean.txt 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+prem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+eprem_noocean_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+test_S 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% GREEN
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+green
+\end_layout
+
+\begin_layout Standard
+In this example, there are three principal input files.
+\end_layout
+
+\begin_layout Standard
+(1) The first input file is the data base name of the 
+\shape italic
+.site
+\shape default
+ and 
+\shape italic
+.sitechan
+\shape default
+ relations.
+ The entries of the 
+\shape italic
+.sitechan
+\shape default
+ file determine which stations and channels are used for constructing the
+ Green functions.
+ Channel orientations are in the 
+\shape italic
+.sitechan
+\shape default
+ file, by station coordinates are in the 
+\shape italic
+.site
+\shape default
+ file.
+ The data base name for these relations in this example is 
+\shape italic
+short
+\shape default
+.
+ There must be, therefore, two pre-constructed files: 
+\shape italic
+short.site
+\shape default
+ and 
+\shape italic
+short.sitechan
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+(2) The second input file is the file 
+\shape italic
+dblist
+\shape default
+.
+ This file contains the listing of all data base names for the eigenfunction
+ files.
+ In the previous subsection, the 
+\shape italic
+.eigen
+\shape default
+ relation 
+\shape italic
+prem_noocean_S.eigen
+\shape default
+ was created.
+ So, if that file contains the only normal modes to be used in the construction
+ of the Green functions, then the file 
+\shape italic
+db_list
+\shape default
+ would have a single entry: prem_noocean_S.
+ Note, that only the data base name is included and not the relation name
+ suffix 
+\shape italic
+.eigen
+\shape default
+.
+ If other modes are desired, then the file 
+\shape italic
+db_list
+\shape default
+ would include the data base names of the other modes.
+ For example, toroidal modes are usually included in synthetic or SH motions
+ will be ignored.
+ In this simple example, 
+\shape italic
+db_list
+\shape default
+ can be considered to have a single entry.
+\end_layout
+
+\begin_layout Standard
+(3) The third input file is the file 
+\shape italic
+china_cmt_evt
+\shape default
+, which is a single-lined listing containing the coordinates and event parameter
+s of an earthquake in China.
+ The moment tensor is not used by this program, but by the program 
+\series bold
+syndat
+\series default
+ which follows.
+\end_layout
+
+\begin_layout Standard
+This example will choose modes only between frequencies of 0 and 166 mHz
+ (i.e., periods greater than 6 sec).
+ It will produce Green functions that are 8000 samples long.
+ The time sampling specified in the 
+\shape italic
+china_cmt_evt
+\shape default
+ file is 1 sec, so this is a time series length of a little over 2 hours.
+ In many cases, both the minor and major arc arrivals can be seen.
+\end_layout
+
+\begin_layout Standard
+The program will output a 
+\shape italic
+.wfdisc
+\shape default
+ relation in the data base called 
+\shape italic
+green
+\shape default
+; that is, a file called 
+\shape italic
+green.wfdisc
+\shape default
+ which points to the waveforms on disk in a default location.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 1.
+
+\series default
+\emph default
+ Interactive dialog 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% green 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter path to db with sta & stachan: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+short
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter name of file within list of nmodes db: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+db_list
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter input CMT file name: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+china_cmt_event
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+min and max frequencies to be considered (mHz) : 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+0 166.
+
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter # pts in greens fns .le.
+ 30000 : 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+8000
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter Green functions output db file name: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+green
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 2.
+
+\series default
+\emph default
+ Redirection of input file 
+\end_layout
+
+\begin_layout Standard
+Create in the working directory a parameter file with the name 
+\family typewriter
+Param
+\family default
+ with the following contents: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+short 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+db_list 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+china_cmt_event 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0.
+ 166.
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+8000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+green 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+and start the following command:
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+...% green 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 3.
+
+\series default
+\emph default
+ Direct shell script 
+\end_layout
+
+\begin_layout Standard
+Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+green 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+short 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+db_list 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+china_cmt_event 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0.
+ 166.
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+8000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+green 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% SYNDAT
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+syndat
+\end_layout
+
+\begin_layout Standard
+In this example, 
+\series bold
+syndat
+\series default
+ reads in two files.
+ First, there is the event file that contains the CMT: 
+\shape italic
+china_cmt_event
+\shape default
+.
+ Second, there is the output from the program 
+\series bold
+green
+\series default
+: 
+\shape italic
+green.wfdisc
+\shape default
+.
+ Only the data base name, 
+\shape italic
+green
+\shape default
+, is input rather than the whole file name.
+ The output data base name is also specified, which in this example is 
+\shape italic
+Syndat
+\shape default
+.
+ The program will output a 
+\shape italic
+.wfdisc
+\shape default
+ relation, 
+\shape italic
+Syndat.wfdisc
+\shape default
+ in this example, pointing to the waveforms on disk.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 1.
+
+\series default
+\emph default
+ Interactive dialog 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% syndat 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter input CMT file name: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+china_cmt_event
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter tensor type: 0 - moment, 1 - nodal plane 1, 2 - nodal plane 2 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+0
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter input dbname 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+green
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter output dbname 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+Syndat
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+enter output datatype: 0 -accn, 1 -vel, 2 -displ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+\emph on
+0
+\family typewriter
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+mathis% 
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 2.
+
+\series default
+\emph default
+ Redirection of input file 
+\end_layout
+
+\begin_layout Standard
+Create in working directory parameter file with the name 
+\family typewriter
+Param
+\family default
+ with the following contents: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+china_cmt_event 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+green 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+Syndat 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0
+\family default
+ 
+\end_layout
+
+\begin_layout Standard
+and start the following command:
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+...% syndat 
+\begin_inset Formula $<$
+\end_inset
+
+ Param
+\family default
+ 
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+\emph on
+Example 3.
+
+\series default
+\emph default
+ Direct shell script 
+\end_layout
+
+\begin_layout Standard
+Include in your sh/csh script the following lines: 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+syndat 
+\begin_inset Formula $<<$
+\end_inset
+
+ EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+china_cmt_event 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+green 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+Syndat 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+EOF 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+.............
+ 
+\family default
+ 
+\end_layout
+
+\end_body
+\end_document

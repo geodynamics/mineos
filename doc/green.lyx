@@ -1,0 +1,1275 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\usepackage{hyperref}
+
+\let\myUrl\url
+\renewcommand{\url}[1]{(\myUrl{#1})}
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+green program
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+green
+\series default
+ program computes for a single event and a given set of stations, the Green
+ functions.
+ For each station, a station-channel list specifying the orientation of
+ the sensors must be input.
+ The program can optionally compute Green functions (a) for the Z component
+ alone, (b) for 3-components with the standard ZNE sensor orientation (see
+ Appendix C), or (c) for 3-components with the Z component directed 
+\begin_inset Quotes erd
+\end_inset
+
+up" and two orthogonal horizontal components oriented arbitrarily.
+ To set up station information, it is necessary to create a flat file database
+ consisting of the two relations 
+\shape italic
+.site
+\shape default
+, and 
+\shape italic
+.sitechan
+\shape default
+ in the CSS 3.0 database format.
+ It is preferable to create the relations by a program, for example, by
+ IRIS's 
+\series bold
+rdseed
+\series default
+ program or by selection from a global database.
+ Other input includes the eigenfunctions which are collected from various
+ databases containing 
+\shape italic
+.eigen
+\shape default
+ relations for spheroidal or toroidal modes.
+ For each sensor, 
+\series bold
+green
+\series default
+ computes and stores in an output 
+\shape italic
+.wfdisc
+\shape default
+ relation six Green functions, one per moment tensor component.
+\end_layout
+
+\begin_layout Subsection
+Command line
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+green
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+green
+\series default
+ 
+\begin_inset Formula $<$
+\end_inset
+
+ 
+\shape italic
+parameter_file
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+green
+\series default
+ 
+\begin_inset Formula $<<$
+\end_inset
+
+ WORD 
+\newline
+ ........
+ 
+\newline
+ ........
+ 
+\newline
+ WORD
+\end_layout
+
+\begin_layout Standard
+\noindent
+There are three different ways to start the 
+\series bold
+green
+\series default
+ program: 
+\end_layout
+
+\begin_layout Itemize
+interactive dialog for setting the input parameters; 
+\end_layout
+
+\begin_layout Itemize
+single shell command with redirection of the standard input to a parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as in the
+ interactive dialog - one answer per line; 
+\end_layout
+
+\begin_layout Itemize
+direct shell script.
+ In this case, the contents of the parameter file are directly included
+ in the shell script between the delimiters 
+\begin_inset Quotes eld
+\end_inset
+
+WORD".
+ See examples.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+The input parameter file consists of six lines: 
+\end_layout
+
+\begin_layout Description
+Line 1: 
+\shape italic
+in_dbname 
+\shape default
+ 
+\newline
+ 
+\shape italic
+in_dbname 
+\shape default
+ is the input database name for the 
+\shape italic
+.site
+\shape default
+ and 
+\shape italic
+.sitechan
+\shape default
+ relations.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Any string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line 2: 
+\shape italic
+db_list
+\shape default
+ 
+\newline
+ This is the path to the file defining the list of database names containing
+ the eigenfunctions - one name per line.
+ Each name refers to the database in which the 
+\shape italic
+.eigen
+\shape default
+ relation resides.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Any string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line 3: 
+\shape italic
+cmt_event
+\shape default
+
+\newline
+ This is the path to the file with the CMT solution for a single event.
+ It includes the CMT location, the seismic moment tensor components, the
+ scalar moment, the focal planes, the source half duration time, and the
+ output time step of the synthetic seismograms.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Any string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line 4: 
+\shape italic
+fmin, fmax
+\shape default
+ 
+\newline
+ 
+\shape italic
+fmin, fmax
+\shape default
+ define the frequency range to be selected from the input eigenfunction
+ databases.
+ All modes with frequences out of this range are rejected.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Unformatted.
+ 
+\end_layout
+
+\begin_layout Description
+Line 5: 
+\shape italic
+nsamples
+\shape default
+ 
+\newline
+ This is the number of samples in the synthetic seismograms.
+ All synthetic seismograms start from the source time.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Unformatted.
+ 
+\end_layout
+
+\begin_layout Description
+Line 6: 
+\shape italic
+out_dbname
+\shape default
+ 
+\newline
+ This is the output database name including only the 
+\shape italic
+.wfdisc
+\shape default
+ relation for unit Green functions.
+ Each row of the 
+\shape italic
+.wfdisc
+\shape default
+ relation refers to the binary file with 6 multiplexed Green functions;
+ i.e., one tensor component.
+ 
+\newline
+ 
+\series bold
+Format:
+\series default
+ Any string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% Input data
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Input data
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size large
+\emph on
+in_dbname.
+
+\series default
+\emph default
+ This database must exist and must include 
+\shape italic
+.site
+\shape default
+ and 
+\shape italic
+.sitechan
+\shape default
+ relations.
+ The 
+\shape italic
+.sitechan
+\shape default
+ relation provides the station-channel list used by the program.
+ Using these relations, the 
+\series bold
+green
+\series default
+ program defines for each station a certain number of channel groups.
+ Each group consists of the single Z-component channel or a triple of channels
+ (Z-component, and two horizontal components with sensor directions defined
+ by the 
+\shape italic
+hang
+\shape default
+ field in the sitechan relation).
+ Before grouping, the 
+\series bold
+green
+\series default
+ program sorts the 
+\shape italic
+.sitechan
+\shape default
+ file by its (
+\shape italic
+sta, chan
+\shape default
+) fields.
+ After sorting, it also removes all duplicate rows (equal station and channel
+ code).
+ Note that the channel field, 
+\shape italic
+chan
+\shape default
+, in the 
+\shape italic
+.sitechan
+\shape default
+ relation is a three-character channel name following the SEED format convention.
+ The first two characters define the type of channel (e.g., BH, LH, etc.) unique,
+ for each station's group.
+ The third character must be the component name: Z (upper case, for vertical)
+ and other symbols (any case, for the horizontals).
+ 
+\newline
+ 
+\newline
+ 
+\series bold
+\emph on
+db_list.
+
+\series default
+\emph default
+ This file allows joining an unlimited number of 
+\series bold
+eigcon
+\series default
+ outputs for spheroidal, toroidal, or radial modes.
+ The single requirement is that intersection between these files is null.
+ Each desired eigenfunction must be present and unique in some 
+\series bold
+eigcon
+\series default
+ output.
+ 
+\newline
+ 
+\newline
+ 
+\series bold
+\emph on
+cmt_event.
+
+\series default
+\emph default
+ This file consists of a single line with the following fields: 
+\newline
+ 
+\end_layout
+
+\begin_layout Quote
+
+\shape italic
+evid, year, jday, hour, min, sec, lat, lon, depth, step, halfd, 
+\shape default
+
+\newline
+ 
+\begin_inset Formula $M_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $M_{rr},\; M_{\theta\theta},\; M_{\varphi\varphi},\; M_{r\theta},\; M_{r\varphi},\; M_{\theta\varphi},$
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset Formula $M_{n},$
+\end_inset
+
+ 
+\shape italic
+strike1, dip1, slip1, strike2, dip2, slip2,
+\shape default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+where, 
+\end_layout
+
+\begin_layout Description
+\InsetSpace ~
+\InsetSpace ~
+\InsetSpace ~
+\InsetSpace ~
+\InsetSpace ~
+\InsetSpace ~
+\InsetSpace ~
+evid is the event identifier, 8 characters long 
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+year is the event year of form 
+\series bold
+yyyy
+\series default
+ 
+\end_layout
+
+\begin_layout Description
+jday is the event day starting from the beginning of the year 
+\end_layout
+
+\begin_layout Description
+hour is the event hour 
+\end_layout
+
+\begin_layout Description
+min is the event minutes 
+\end_layout
+
+\begin_layout Description
+sec is the event seconds with decimal fraction 
+\end_layout
+
+\begin_layout Description
+lat is the event geographical latitude, (degree) 
+\end_layout
+
+\begin_layout Description
+lon is the event geographical longitude, (degree) 
+\end_layout
+
+\begin_layout Description
+depth is the event depth, (km) 
+\end_layout
+
+\begin_layout Description
+step is the time step for Green functions and seismograms, sec 
+\end_layout
+
+\begin_layout Description
+halfd is the source half time duration, sec 
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $M_{0}$
+\end_inset
+
+ is the scalar tensor moment, (dyn
+\begin_inset Formula $\cdot$
+\end_inset
+
+cm) 
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $ $
+\end_inset
+
+
+\begin_inset Formula $M_{rr},{\, M}_{\theta\theta},\; M_{\varphi\varphi},\; M_{r\theta},\; M_{r\varphi},\; M_{\theta\varphi}$
+\end_inset
+
+ are moment tensor components normalized by the coefficient 
+\begin_inset Formula $M_{n}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $M_{n}$
+\end_inset
+
+ is the normalization coefficient for the tensor components, (dyn
+\begin_inset Formula $\cdot$
+\end_inset
+
+cm) 
+\end_layout
+
+\begin_layout Description
+strike1,
+\shape italic
+\InsetSpace ~
+
+\emph on
+dip1,\InsetSpace ~
+slip1
+\shape default
+\emph default
+ are the first fault plane solution, (degree) 
+\end_layout
+
+\begin_layout Description
+strike2,
+\shape italic
+\InsetSpace ~
+
+\emph on
+dip2,\InsetSpace ~
+slip2
+\shape default
+\emph default
+ are the second fault plane solution, (degree) 
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Output data
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\size large
+\emph on
+out_dbname.
+
+\series default
+\emph default
+ Program 
+\series bold
+green
+\series default
+ creates a 
+\shape italic
+.wfdisc
+\shape default
+ relation in database 
+\shape italic
+out_dbname
+\shape default
+ and a multiplexed binary file contained the Green function waveforms.
+ The binary file contains six Green functions in an order corresponding
+ to the tensor components: 
+\begin_inset Formula $M_{rr},\; M_{\theta\theta},\; M_{\varphi\varphi},\; M_{r\theta},\; M_{r\varphi},\; M_{\theta\varphi}$
+\end_inset
+
+.
+ The total length, 
+\begin_inset Formula $nsamp$
+\end_inset
+
+, of the file is equal to 
+\begin_inset Formula $6*nsamples$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Messages
+\end_layout
+
+\begin_layout Standard
+Program 
+\series bold
+green
+\series default
+ prints out on the standard output device the following messages:
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Dialog messages
+\series default
+\emph default
+.
+ Copy of input/output dialog or parameter file in dialog form.
+ For example,
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\family typewriter
+enter path to db with sta & stachan: 
+\newline
+ 
+\emph on
+RDSEED_rdseed
+\emph default
+ 
+\newline
+ enter name of file within list of nmodes db: 
+\newline
+ 
+\emph on
+db_list
+\emph default
+ 
+\newline
+ enter input CMT file name: 
+\newline
+ 
+\emph on
+cmt_event
+\emph default
+ 
+\newline
+ min and max frequencies to be considered (mHz) : 
+\newline
+ 
+\emph on
+0.
+ 260.
+
+\emph default
+ 
+\newline
+ enter # pts in greens fns .le.
+ 30000 : 
+\newline
+ 
+\emph on
+4000
+\emph default
+ 
+\newline
+ enter Green functions output db file name: 
+\newline
+ 
+\emph on
+green
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Warning, error, and info messages
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+1.
+ 
+\family typewriter
+ ============= Program green ====================
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ Shows that program 
+\series bold
+green
+\series default
+ starts.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+2.
+ 
+\family typewriter
+WARNING: green: # of points in Green functions is stripped to nnn
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Warning message.
+ The number of requested points for the Green functions exceeds the maximum
+ allowed value 
+\family typewriter
+mseis
+\family default
+.
+ The number is reduced to 
+\family typewriter
+mseis
+\family default
+ and the program continues to run.
+ To increase the maximum value, change 
+\family typewriter
+mseis
+\family default
+ to a new bigger value in the 
+\family typewriter
+green.h
+\family default
+ header and recompile the 
+\series bold
+green
+\series default
+ program.
+ By default, 
+\family typewriter
+mseis=30000
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+3.
+ 
+\family typewriter
+WARNING: green: # of channels is stripped to 3
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Warning message.
+ Number of sensors (channels, components) in a group cannot be greater than
+ 3.
+ Only the three first sensors are taken into account.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+4.
+ 
+\family typewriter
+WARNING: green: # of channels is stripped to 1
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Warning message.
+ Number of sensors in a group cannot be equal to 2.
+ Only the first sensor is taken into account.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+5.
+ 
+\family typewriter
+WARNING: green: Channel: # 1 is not vertical.
+ Sequence ignored
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Warning message.
+ Channel with Z component must be the first in the group.
+ The group of channels is rejected.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+6.
+ 
+\family typewriter
+WARNING: green: Channel: # nnn is not horizontal.
+ Sequence ignored
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Warning message.
+ Second and third channels in the group must be horizontal components.
+ nnn is the channel number in the group.
+ The group of channels is rejected.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+7.
+ 
+\family typewriter
+ERR010: green: max l = nnn, must be .le.
+ ml
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Error message.
+ The max angular order number 
+\family typewriter
+nnn
+\family default
+ for some mode 
+\family typewriter
+n
+\family default
+ exceeds the parameter 
+\family typewriter
+ml
+\family default
+ set up in the 
+\family typewriter
+green.h
+\family default
+ header.
+ Program is terminated.
+ To avoid the problem, make 
+\family typewriter
+ml
+\family default
+ bigger than 
+\family typewriter
+nnn
+\family default
+ in the 
+\family typewriter
+green.h
+\family default
+ header and recompile the program.
+ It is not recommended to make 
+\family typewriter
+ml
+\family default
+ greater than 10000, which leads to inaccuracy in computing the associated
+ Legendre polynomials.
+ By default, 
+\family typewriter
+ml = 6000
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+8.
+ 
+\family typewriter
+ERR011:eigen: flat and bin indices are different
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Error message.
+ Broken input 
+\shape italic
+.eigen
+\shape default
+ relation.
+ Program is terminated.
+ Check or create 
+\shape italic
+.eigen
+\shape default
+ again.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+9.
+ 
+\family typewriter
+ERR012: green: # sph.
+ modes in band exceed max allowed number nnn
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Error message.
+ The total number of spheroidal modes in the band exceeds the maximum allowed
+ number of 
+\family typewriter
+nnn
+\family default
+.
+ Program is terminated.
+ Increase parameter 
+\family typewriter
+meig
+\family default
+ in the 
+\family typewriter
+green.h
+\family default
+ header and recompile the program.
+ By default, 
+\family typewriter
+meig = 200000
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+10.
+ 
+\family typewriter
+ERR012: green: # tor.
+ modes in band exceed max allowed number nnn
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Error message.
+ The total number of toroidal modes in the band exceeds the maximum allowed
+ number 
+\family typewriter
+nnn
+\family default
+.
+ Program is terminated.
+ Increase parameter 
+\family typewriter
+meig
+\family default
+ in the 
+\family typewriter
+green.h
+\family default
+ header and recompile the program.
+ By default, 
+\family typewriter
+meig = 200000
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+11.
+ 
+\family typewriter
+green: # sph.
+ modes in band = nnn must be .le.
+ meig
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ 
+\family typewriter
+nnn
+\family default
+ is the total number of spheroidal modes in all input databases.
+ 
+\family typewriter
+meig
+\family default
+ is the maximum allowed number of spheroidal modes.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+12.
+ 
+\family typewriter
+green: # tor.
+ modes in band = nnn must be .le.
+ meig
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ 
+\family typewriter
+nnn
+\family default
+ is the total number of toroidal modes in all input databases.
+ 
+\family typewriter
+meig
+\family default
+ is the maximum allowed number of toroidal modes.
+ 
+\end_layout
+
+\begin_layout Description
+13.
+ 
+\family typewriter
+green: evid date&time lat = 
+\begin_inset Formula $\pm$
+\end_inset
+
+dd.ddd, lon = 
+\begin_inset Formula $\pm$
+\end_inset
+
+ddd.ddd
+\family default
+ 
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $\;\;\;\;\;$
+\end_inset
+
+ 
+\family typewriter
+green: source depth = ddd.d km
+\family default
+ 
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula $\;\;\;\;\;$
+\end_inset
+
+ 
+\family typewriter
+green: step = d.ddd sec, nsamples = ddddd
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ This message outputs part of the 
+\shape italic
+cmt_event
+\shape default
+ file: event information, Green function's time step and number of samples.
+ See description of the 
+\shape italic
+cmt_event
+\shape default
+ file in Section 5.2.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+14.
+ 
+\family typewriter
+green: Input dbname : xxxxx
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ xxxxx is the name of the input database for the 
+\shape italic
+.site
+\shape default
+ and 
+\shape italic
+.sitechan
+\shape default
+ relations.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+15.
+ 
+\family typewriter
+green: Station: code lat lon , Channels: nnn
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ This message specifies the station code, station coordinates, and number
+ of components nnn for the selected group of sensors.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+16.
+ 
+\family typewriter
+green: Channel: # nnn code chan hang vang
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ This message specifies a separate sensor (channel) for the group of sensors.
+ nnn is the current number in the group, code is the station code, chan
+ is the channel name.
+ hang (horizontal angle) and vang (vertical angle) are sensor orientation
+ in space.
+ See 
+\shape italic
+.sitechan
+\shape default
+ relation in Section 8.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+17.
+ 
+\family typewriter
+green: Epicentral Distance : ddd.ddd
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ ddd.ddd is the station-event distance in degrees.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+18.
+ 
+\family typewriter
+green: Azimuth of Source : ddd.ddd
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ ddd.ddd is the azimuth of a station to the source point.
+ in degree.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+19.
+ 
+\family typewriter
+green: Azimuth of Source : ddd.ddd
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ ddd.ddd is the azimuth of the station to the source point in degrees.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+20.
+ 
+\family typewriter
+green: nnn code chan date&time step mmm
+\family default
+ 
+\end_layout
+
+\begin_layout Quote
+Info message.
+ This message informs about some attributes specifying the Green functions.
+ nnn is the global number of Green functions set, code is the station name,
+ chan is the channel name, date&time is the event origin time, step is the
+ Green function sampling step in seconds, and mmm is the total number of
+ samples for the block of 6 Green functions.
+ 
+\end_layout
+
+\end_body
+\end_document

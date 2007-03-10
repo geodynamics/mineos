@@ -1,0 +1,1741 @@
+#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 245
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\usepackage{hyperref}
+
+\let\myUrl\url
+\renewcommand{\url}[1]{(\myUrl{#1})}
+\end_preamble
+\language english
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize 11
+\spacing single
+\papersize default
+\use_geometry true
+\use_amsmath 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Benchmarking
+\end_layout
+
+\begin_layout Standard
+Due to modification of the 
+\series bold
+Mineos
+\series default
+ codes, the revised version has been benchmarked again.
+ Three benchmark tests were performed: test against the original code at
+ UCSD, test against Bob Hermann's eigenfunction and synthetic seismogram
+ code for fundamental modes, and test against SPECFEM3D_GLOBE v3.6 code designed
+ for simulation of three-dimensional global seismic wave propagation based
+ upon the spectral-element method (SEM).
+\end_layout
+
+\begin_layout Section
+Benchmark test #1: Revised version vs.
+ UCSD version.
+\end_layout
+
+\begin_layout Standard
+This test consists of computation by both codes of eigenvalues and eigenfunction
+s for all types of oscillation (spheroidal, toroidal, inner core toroidal,
+ and radial), and, finally, synthetic seismograms for spheroidal, toroidal
+ and radial oscillations.
+ Eigenvalues and eigenfunctions were computed for the first four branches
+ (
+\begin_inset Formula $n=0,1,2,3$
+\end_inset
+
+) in the frequency range from zero to 0.25 Hz.
+ The test showed a perfect matching of the eigenvalues, eigenfunctions and
+ synthetic seismograms for both codes.
+ Differences did not exceed the last significant digit.
+ The most important difference of the revised version against the UCSD code
+ is that the revised code uses sensor orientation 
+\begin_inset Quotes eld
+\end_inset
+
+Up" instead of 
+\begin_inset Quotes eld
+\end_inset
+
+Down".
+ The revised code uses the coordinate system 
+\begin_inset Quotes eld
+\end_inset
+
+Up", 
+\begin_inset Quotes eld
+\end_inset
+
+South", and 
+\begin_inset Quotes eld
+\end_inset
+
+East", so we need to reverse the sign of all Green functions and synthetic
+ seismograms of the UCSD code to get the revised code results.
+ Also note that the revised 
+\series bold
+Mineos
+\series default
+ version uses geographic coordinates for the input data; i.e, station and
+ event locations, instead of geocentric ones as in the old version.
+ 
+\series bold
+Mineos
+\series default
+ automatically converts geographic coordinates to geocentric for internal
+ computations.
+\end_layout
+
+\begin_layout Section
+Benchmark test #2: Mineos code vs.
+ plane Herrmann's code for fundamental modes
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Mineos
+\series default
+ synthetic seismograms were benchmarked against Herrmann's plane code seismogram
+s for the fundamental spheroidal and toroidal modes in the period range
+ 6 - 100 seconds.
+ For testing purposes, there were taken 8 1D models: 6 vertical profiles
+ of the global 3D CUB2.0 CU Earth model, PREM model with 3 km water layer,
+ and PREM model with water layer filled with upper crust.
+ The chosen 6 points are located at places characterized by different tectonics,
+ namely: 
+\end_layout
+
+\begin_layout Itemize
+Korean Peninsula, (36N, 128E); 
+\end_layout
+
+\begin_layout Itemize
+Uta, USA, seismo-tectonic region, (40N, 112W); 
+\end_layout
+
+\begin_layout Itemize
+near Hudson bay, Cananda, craton, (56N, 90W); 
+\end_layout
+
+\begin_layout Itemize
+center of Hudson Bay, Canada, craton, (58N, 86N); 
+\end_layout
+
+\begin_layout Itemize
+young Pacific Ocean, (0N, 100W); 
+\end_layout
+
+\begin_layout Itemize
+old Pacific Ocean, (40N, 160E).
+ 
+\end_layout
+
+\begin_layout Standard
+To take into account the Earth's sphericity, the original version of the
+ Herrmann's plane code (Herrmann, 1978) had been modified using the Earth
+ flattening exact formulas for Love waves (Biswas & Knopoff, 1970) and Earth
+ flattening approximation for Rayleigh waves (Biswas, 1972).
+ All input information in Herrmann's code is in geocentric coordinates.
+\end_layout
+
+\begin_layout Standard
+\noindent
+As an example, Figures 
+\begin_inset LatexCommand \ref{fig:1a}
+
+\end_inset
+
+ - 
+\begin_inset LatexCommand \ref{fig:3a}
+
+\end_inset
+
+ illustrate plane (blue) and spherical (red) three-component synthetic seismogra
+m for the three different seismic stations: BJT, TLY, and BILL.
+ The event location (CMT solution) is (25.39N, 101.40E), depth is 33 km.
+ The station coordinates (geographic), epicentral distances (geocentric),
+ and source azimuths (geocentric) are shown in the Table 1; units are degrees.
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="6">
+<features>
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="center" valignment="top" rightline="true" width="0">
+<column alignment="right" valignment="top" rightline="true" width="0">
+<column alignment="right" valignment="top" rightline="true" width="0">
+<column alignment="right" valignment="top" rightline="true" width="0">
+<column alignment="right" valignment="top" rightline="true" width="0">
+<row>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="c">
+\begin_inset Text
+
+\begin_layout Standard
+
+\series bold
+Table 1.
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="none" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Cod 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Station name 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Latitude 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Longitude 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Distance 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+Azimuth 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topline="true">
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+BJT 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" topline="true" usebox="none" special="l|">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Beijing, China
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+40.0183N 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+116.1679E 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+19.123 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+-135.267 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+TLY 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="l|">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Talaya, Russia
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+51.6807N 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+103.6438E 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+26.308 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+-175.417 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row bottomline="true">
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+BILL 
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="none" valignment="top" bottomline="true" usebox="none" special="l|">
+\begin_inset Text
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+{
+\end_layout
+
+\end_inset
+
+Bilibino, Russia
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+68.0651N 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+166.4524E 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+57.417 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Standard
+-103.266 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moment tensor components are: 
+\end_layout
+
+\begin_layout Quote
+\begin_inset Formula $M_{rr}=-0.60e24,\; M_{\theta\theta}=-6.29e24,\; M_{\varphi\varphi}=6.89e24,$
+\end_inset
+
+ 
+\newline
+ 
+\begin_inset Formula $M_{r\theta}=-1.85e24,\; M_{r\varphi}=0.12e24,\; M_{\theta\varphi}=-4.73e24$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The input model is isotropic double-layered crust PREM in which the water
+ layer is filled with the upper crust's velocities.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Computations for the both codes were performed without attenuation and gravity
+ effects.
+ Srtictly speaking, plane code does not support gravity computation at all,
+ so, gravity was turned off for the 
+\series bold
+Mineos
+\series default
+ code.
+ The 
+\series bold
+Mineos
+\series default
+ synthetic accelerograms were converted to displacement.
+ All seismograms were computed in the period range 5 - 200 seconds.
+ The spectral range was tapered with half-cosine windows with corner frequencies
+: (1/200, 1/100) Hz and (1/6, 1/5) Hz.
+\end_layout
+
+\begin_layout Standard
+\noindent
+The dispersion curves of the phase and group velocities obtained from the
+ two codes (Figure 
+\begin_inset LatexCommand \ref{fig:4a}
+
+\end_inset
+
+) are practically indentical, the maximum absolute difference of velocities
+ doesn't exceed 0.8 m/s.
+ Synthetic seismograms are very close, except the long period earlier part
+ of the records.
+ This difference is due to the significant increasing noise level after
+ acceleration-displacement transformation (proportional to 
+\begin_inset Formula $1/\omega^{2}$
+\end_inset
+
+) and due to differences in the deeper parts of the input models.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 1
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/Fig1a.eps
+	width 5in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Station BJT.
+ Comparison with Herrmann's plane code.
+ Three-component synthetic seismogram for the fundamental spheroidal and
+ toroidal modes.
+ 
+\series bold
+Mineos
+\series default
+ seismogram is plotted in red, Herrmann's in blue.
+ Earthquake is 25.39N, 101.40E (Southern China), depth is 33 km.
+ Model is PREM, in which the water layer is filled with the upper crust's
+ velocities.
+ The crust has only two layers.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:1a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 2
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/Fig2a.eps
+	width 5in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Comparison with Herrmann's plane code, as in Figure 
+\begin_inset LatexCommand \ref{fig:1a}
+
+\end_inset
+
+, but for station TLY.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:2a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 3
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/Fig3a.eps
+	width 5in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Comparison with Herrmann's plane code, as in Figure 
+\begin_inset LatexCommand \ref{fig:1a}
+
+\end_inset
+
+, but for station BILL.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:3a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 4
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/Fig4a.eps
+	width 5in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Dispersion curves of phase and group velocities for spheroidal and totoidal
+ fundamental modes.
+ The solid color lines are the 
+\series bold
+Mineos
+\series default
+ results, the black dotted lines are for the Herrmann's plane code.
+ The solid lines color are: blue for Rayleigh phase velocity, red for Rayleigh
+ group velocity, green for Love phase velocity, and magneta for group Love
+ velocity.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:4a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% MINEOS VS SPECFM
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Benchmark test #3: Mineos vs.
+ SPECFEM3D_GLOBE
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Mineos
+\series default
+ synthetic seismograms were tested against SPECFEM3D_GLOBE synthetic seismograms
+ for the same event and station set as described in the previous section.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Input 1D model.
+
+\series default
+\emph default
+ The input model is an anisotropic, single-layered crust PREM with attenuation.
+ The 3 km water layer is filled with crustal properties.
+ SPECFEM3D_GLOBE has a special subroutine for evaluation of the model parameters
+ by polynomial interpolation across a fixed number of layers from the center
+ of the Earth up to the free surface at radius 6371 km.
+ This polynomial representation was converted by a special program to a
+ plain input file in 
+\series bold
+Mineos
+\series default
+ format.
+ The total number of vertical nodes is 237.
+ The tabulated step by depth in the crust and upper mantle is close to 1
+ km.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+SPECFEM3D_GLOBE run notes.
+
+\series default
+\emph default
+ SPECFEM3D_GLOBE was configured to make the synthetic seismogram (displacement,
+ nm) 1 hour long.
+ The Earth was split into 6 chunks.
+ Each chunk consisted of \InsetSpace ~
+480x480 elements.
+ So, the average lateral size of the elements near to the surface was \InsetSpace ~
+20x20
+ km.
+ The state of some important run parameters were: ELLIPTICITY - off, TOPOGRAPHY
+ - off, ROTATION - off, and GRAVITY - on.
+ As with 
+\series bold
+Mineos
+\series default
+, input coordinates are geographic and geocentric coordinates are used internall
+y.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Mineos run notes.
+
+\series default
+\emph default
+ 
+\series bold
+Mineos
+\series default
+ was configured to compute all normal modes in the frequency range 
+\begin_inset Formula $0-0.2$
+\end_inset
+
+ Hz and the radial mode range 
+\begin_inset Formula $0\le n\le400$
+\end_inset
+
+.
+ In total, the program computed 247565 spheroidal normal modes, 162154 toroidal
+ modes, and 240 radial modes.
+ Synthetic seismograms (acceleration, nm/s
+\begin_inset Formula $^{2}$
+\end_inset
+
+) 1 hour long were simulated.
+ All seismograms were converted from acceleration to displacement in nm.
+\end_layout
+
+\begin_layout Standard
+\noindent
+
+\series bold
+\emph on
+Tapering, results discussion.
+
+\series default
+\emph default
+ To reduce noise at spectral edges, all seismograms were half cosine tapered
+ with corner frequencies 
+\begin_inset Formula $(1/200,\;1/100)$
+\end_inset
+
+ Hz and 
+\begin_inset Formula $(1/12,\;1/10)$
+\end_inset
+
+ Hz.
+ Figures 
+\begin_inset LatexCommand \ref{fig:5a}
+
+\end_inset
+
+ - 
+\begin_inset LatexCommand \ref{fig:16a}
+
+\end_inset
+
+ illustrate three-component seismograms and amplitude spectra for the BJT,
+ TLY, and BILL stations.
+ SPECFEM3D_GLOBE results are plotted in red, 
+\series bold
+Mineos
+\series default
+ in blue.
+\end_layout
+
+\begin_layout Standard
+\noindent
+The test shows that synthetic seismograms and spectra for both methods are
+ close.
+ Attempts to increase the high cut frequency, say to 5 sec, lead to differences
+ in some places with periods close to 8 sec.
+ This probably resulted because the SPECFEM3D_GLOBE spectral elements were
+ not small enough.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% Station BJT
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 5
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBJTLHZ.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Synthetic seismograms for SPECFEM3D_GLOBE (red) and 
+\series bold
+Mineos
+\series default
+ (blue).
+ Station BJT, chan LHZ.
+ Distance = 
+\begin_inset Formula $19.123^{o}$
+\end_inset
+
+, Az = 
+\begin_inset Formula $-135.267^{o}$
+\end_inset
+
+.
+ The top plot shows the whole record, the others plot separate fragments.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:5a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 6
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBJTLHN.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+ The same as Figure 
+\begin_inset LatexCommand \ref{fig:5a}
+
+\end_inset
+
+, but for LHN channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:6a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 7
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBJTLHE.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+The same as Figure 
+\begin_inset LatexCommand \ref{fig:5a}
+
+\end_inset
+
+, but for LHE channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:7a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 8
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FspBJT.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Amplitude spectra for the station BJT.
+ Red color - SPECFEM3D_GLOBE spectra, blue - 
+\series bold
+Mineos
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:8a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% Station TLY 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 9
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsTLYLHZ.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Synthetic seismograms for SPECFEM3D_GLOBE (red) and 
+\series bold
+Mineos
+\series default
+ (blue).
+ Station TLY, chan LHZ.
+ Distance = 
+\begin_inset Formula $26.308^{o}$
+\end_inset
+
+, Az = 
+\begin_inset Formula $-175,417^{o}$
+\end_inset
+
+.
+ The top plot shows the whole record, the others plot separate fragments.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:9a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 10
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsTLYLHN.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+ The same as Figure 
+\begin_inset LatexCommand \ref{fig:9a}
+
+\end_inset
+
+, but for LHN channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:10a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 11
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsTLYLHE.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+ The same as Figure 
+\begin_inset LatexCommand \ref{fig:9a}
+
+\end_inset
+
+, but for LHE channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:11a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 12
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FspTLY.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Amplitude spectra for the station TLY.
+ Red color - SPECFEM3D_GLOBE spectra, blue - 
+\series bold
+Mineos
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:12a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+% Station BILL
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 13
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBILLLHZ.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Synthetic seismograms for SPECFEM3D_GLOBE (red) and 
+\series bold
+Mineos
+\series default
+ (blue).
+ Station BILL, chan LHZ.
+ Distance = 
+\begin_inset Formula $57.417^{o}$
+\end_inset
+
+, Az = 
+\begin_inset Formula $-103.266^{o}$
+\end_inset
+
+.
+ The top plot shows the whole record, the others plot separate fragments.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:13a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 14
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBILLLHN.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+ The same as Figure 
+\begin_inset LatexCommand \ref{fig:13a}
+
+\end_inset
+
+, but for LHN channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:14a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 15
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FigsBILLLHE.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+ The same as Figure 
+\begin_inset LatexCommand \ref{fig:13a}
+
+\end_inset
+
+, but for LHE channel.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:15a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Standard
+
+%Figure 16
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename Figures/FspBILL.eps
+	width 7in
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Caption
+Amplitude spectra for the station BILL.
+ Red color - SPECFEM3D_GLOBE spectra, blue - 
+\series bold
+Mineos
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset LatexCommand \label{fig:16a}
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

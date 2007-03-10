@@ -124,15 +124,7 @@ today
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-
-\backslash
-raggedbottom
-\end_layout
+\begin_inset FloatList table
 
 \end_inset
 
@@ -174,7 +166,7 @@ Who Will Use Mineos?
 \end_layout
 
 \begin_layout Standard
-The main audience for Gale is research scientists interested in modeling
+The main audience for Mineos is research scientists interested in modeling
  tectonic processes on long time scales.
  Examples of problems that can be solved are the development of tectonic
  structure associated with extension and compression, especially where localizat
@@ -205,43 +197,15 @@ The code is based on the method described in
 \end_layout
 
 \begin_layout Itemize
-Moresi, L.N., F.
- Dufour, and H.-B.
- Mühlhaus (2003), A Lagrangian integration point finite element method for
- large deformation modeling of viscoelastic geomaterials, 
-\emph on
-J.
- Comp.
- Phys., 184
-\series bold
-,
-\series default
-\emph default
- 476-497.
- 
+citation needed
 \end_layout
 
 \begin_layout Standard
-The code was originally developed by the Victorian Partnership for Advanced
- Computing (VPAC) and Louis Moresi's group at Monash University.
- Walter Landry of CIG and Luke Hodkinson of VPAC have enhanced the code
- to satisfy the requirements of the long-term tectonics community.
- Roger Buck, Gus Correa, and Robert Bialas from the Lamont-Doherty Earth
- Observatory, Columbia University, provided valuable user testing.
- The Gale team requests that in your oral presentations and in your papers
- that you indicate your use of this code and acknowledge the authors of
- the code, 
-\begin_inset LatexCommand \htmlurl[CIG]{www.geodynamics.org}
-
-\end_inset
-
-, 
-\begin_inset LatexCommand \htmlurl[Victoria Partnership for Advanced Computing]{www.vpac.org}
-
-\end_inset
-
-, and 
-\begin_inset LatexCommand \htmlurl[Monash University]{www.monash.edu}
+The code was originally developed by [ADD MORE].
+ CIG requests that in your oral presentations and in your papers that you
+ indicate your use of this code and acknowledge the authors of the code
+ and 
+\begin_inset LatexCommand \htmlurl[CIG]{geodynamics.org}
 
 \end_inset
 
@@ -253,10 +217,45 @@ Support
 \end_layout
 
 \begin_layout Standard
-Gale development is supported by a grant from the National Science Foundation
+Mineos development is supported by a grant from the National Science Foundation
  to CIG, managed by the California Institute of Technology.
- However, most of the software components below Gale have been developed
- by the Victoria Partnership for Advanced Computing (VPAC) and Monash University.
+ 
+\end_layout
+
+\begin_layout Standard
+The primary point of support for Mineos is the 
+\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
+
+\end_inset
+
+.
+ Feel free to send questions, comments, feature requests, and bugs to the
+ list.
+ The mailing list is archived at
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You may also use the bug tracker
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+to submit bugs and requests for new features.
 \end_layout
 
 \begin_layout Chapter
@@ -268,124 +267,150 @@ Mineos Package Overview
 \end_layout
 
 \begin_layout Standard
-The 
-\series bold
-Mineos Package
-\series default
-, by Guy Masters, consists of four programs: 
-\series bold
-minos_bran, eigcon, green,
-\series default
- and 
-\series bold
-syndat
-\series default
-.
- Functionally, the programs break into two sub-groups.
- The first sub-group contains the programs that produce the normal mode
- eigenfunctions and eigenfrequencies, 
-\series bold
-minos_bran
-\series default
- and 
-\series bold
-eigcon
-\series default
-.
+The Mineos Package by Guy Masters consists of four programs: minos_bran,
+ eigcon, green, and syndat.
+ Functionally, the programs break into two subgroups.
+ The first subgroup contains the programs that produce the normal eigenfunctions
+ and eigenfrequencies, minos_bran and eigcon.
  Information flow into and out of these two programs, which we call the
- 
-\shape italic
-eigenfunction system
-\shape default
-, is summarized in Figure 1.
- The second sub-group, referred to as the 
-\shape italic
-synthetic seismogram system
-\shape default
-, comprises the programs that read the output from 
-\series bold
-eigcon
-\series default
- and compute Green functions and synthetic seismograms.
- These programs are 
-\series bold
-green
-\series default
- and 
-\series bold
-syndat
-\series default
- and information flow through these programs is summarized in Figure 2.
+ eigenfunction system, is summarized in 
+\begin_inset LatexCommand \ref{fig:1}
+
+\end_inset
+
+.
+ The second subgroup, referred to as the synthetic seismogram system, comprises
+ the programs that read the output from eigcon and compute Green functions
+ and synthetic seismograms.
+ These programs are green and syndat, and information flow through these
+ programs is summarized in 
+\begin_inset LatexCommand \ref{fig:2}
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 The four programs are executed in sequence.
- Some of the most important files that are produced along the way and at
- the end are formatted into an extension of the CSS-3.0 relational data base
+ Some of the more important files that are produced along the way and at
+ the end are formatted into an extension of the CSS-3.0 relational database
  schema.
- Each file is an ascii flat file that can be read with a text editor, but
- has the advantage of also being subsumable into a data base system such
- as ORACLE, Postgress, MySql, or Antelope.
- This 
-\shape italic
-multi-tiered access
-\shape default
- is a design goal of the I/O system of the 
-\series bold
-Mineos
-\series default
+ Each file is an ASCII flat file that can be read with a text editor, but
+ has the advantage of also being subsumable into a database system such
+ as ORACLE, Postgress, MySQL, or Antelope.
+ This multi-tiered access is a design goal of the I/O system of the Mineos
  package.
  The potential disadvantage of using the relational database framework is
- that the files in the schema are formatted ascii files that are better
+ that the files in the schema are formatted ASCII files that are better
  generated programmatically than by hand.
 \end_layout
 
 \begin_layout Standard
 Under the CSS schema, the files are identified by a database name (
+\family typewriter
 \shape italic
+\size small
+\emph on
 dbname
+\family default
 \shape default
+\size default
+\emph default
 ) and a suffix that specifies a particular type of file (or relation).
  An example would be 
-\begin_inset Formula ${\it mineos.site}$
-\end_inset
-
-, which is a site table (or relation) for the data base named 
+\family typewriter
+\size small
+mineos.site
+\family default
+\size default
+, which is a site table (or relation) for the database named 
+\family typewriter
 \shape italic
+\size small
+\emph on
 mineos
+\family default
 \shape default
+\size default
+\emph default
 .
  To the many users of Antelope, some of these files will be transparent
  as they are part of the core CSS-3.0 definition.
  Examples include the 
+\family typewriter
 \shape italic
+\size small
+\emph on
 .site
+\family default
 \shape default
+\size default
+\emph default
 , 
+\family typewriter
 \shape italic
+\size small
+\emph on
 sitechan
+\family default
 \shape default
+\size default
+\emph default
 , and 
+\family typewriter
 \shape italic
+\size small
+\emph on
 .wfdisc
+\family default
 \shape default
+\size default
+\emph default
  relations.
  Other tables are extensions to CSS, such as the 
+\family typewriter
 \shape italic
+\size small
+\emph on
 .eigen
+\family default
 \shape default
+\size default
+\emph default
  relation which contains parametric information for the eigenfunctions and
  points to a much larger direct access file containing the eigenfunctions.
  The package does not slavishly adhere to CSS, however.
  For example, event information is summarized into a single flat file that
  summarizes the information that would be contained in the 
+\family typewriter
 \shape italic
-.origin, .centryd
+\size small
+\emph on
+.origin
+\family default
+\size default
+,
+\emph default
+ 
+\family typewriter
+\size small
+\emph on
+.centryd
+\family default
 \shape default
+\size default
+\emph default
 , and 
+\family typewriter
 \shape italic
+\size small
+\emph on
 .moment
+\family default
 \shape default
+\size default
+\emph default
  relations in CSS.
  The input 1D model file also is not part of the CSS schema.
  File formats, therefore, are a hybrid with CSS and extensions to the CSS
@@ -394,19 +419,37 @@ sitechan
 
 \begin_layout Standard
 The final output synthetic seismograms are represented by a 
+\family typewriter
 \shape italic
+\size small
+\emph on
 .wfdisc
+\family default
 \shape default
+\size default
+\emph default
  relation, which points to binary waveform files.
  The synthetic, therefore, can be read and displayed by Antelope programs
  such as 
+\family typewriter
 \shape italic
+\size small
+\emph on
 dbpick
+\family default
 \shape default
+\size default
+\emph default
  or 
+\family typewriter
 \shape italic
+\size small
+\emph on
 dbe
+\family default
 \shape default
+\size default
+\emph default
 .
  The binary waveform files themselves, however, can be converted upon completion
  into the SAC format, with the SAC headers sufficiently populated so that
@@ -423,6 +466,10 @@ Mineos History
 Need
 \end_layout
 
+\begin_layout Standard
+
+\end_layout
+
 \begin_layout Section
 Eigenfunction System of Programs
 \end_layout
@@ -431,6 +478,7 @@ Eigenfunction System of Programs
 \noindent
 \align center
 \begin_inset Float figure
+placement h
 wide false
 sideways false
 status open
@@ -569,25 +617,13 @@ Synthetic Seismogram System of Programs
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-%Figure 2
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-
-
+\noindent
+\align center
 \begin_inset Float figure
+placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -755,27 +791,11 @@ cmt_event
  with data are not part of the package.
 \end_layout
 
-\begin_layout Standard
-\noindent
-\align center
- 
-\end_layout
-
 \begin_layout Chapter
 Installation and Getting Help
 \end_layout
 
 \begin_layout Section
-Introduction
-\end_layout
-
-\begin_layout Standard
-Installation of Mineos on a desktop or laptop machine is, in most cases,
- very easy.
- TODO: more here?
-\end_layout
-
-\begin_layout Subsection
 Getting Started
 \end_layout
 
@@ -788,7 +808,8 @@ There are examples for running the four programs in section 10.
 \begin_layout Description
 
 \series bold
-Model files
+Model\InsetSpace ~
+files
 \series default
 .
  Four model files are presented: 
@@ -810,7 +831,8 @@ prem_noocean.txt, prem_ocean.txt, NRussia.txt, CPacific.txt
 \begin_layout Description
 
 \series bold
-Eigenfunction files
+Eigenfunction\InsetSpace ~
+files
 \series default
 .
  Output from 
@@ -856,7 +878,8 @@ prem_noocean_T.eigen.dat
 \begin_layout Description
 
 \series bold
-Event files
+Event\InsetSpace ~
+files
 \series default
 .
  There is a single event file called 
@@ -870,7 +893,8 @@ china_cmt_event.txt
 \begin_layout Description
 
 \series bold
-Station:Channel files
+Station:Channel\InsetSpace ~
+files
 \series default
 .
  Two sets of station:channel files are included: (1) 
@@ -1194,6 +1218,10 @@ Now you can run one of the demo input files, e.g.,
 \end_layout
 
 \end_deeper
+\begin_layout Chapter
+Running the Mineos Programs
+\end_layout
+
 \begin_layout Section
 minos_bran program
 \end_layout
@@ -3615,27 +3643,6 @@ minos_bran
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-%1.
- 
-\backslash
-texttt{in remedy with start level :   ??}
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Include \include{eigcon.lyx}
 preview false
 
@@ -3654,70 +3661,166 @@ preview false
 \end_inset
 
  
+\end_layout
+
+\begin_layout Standard
 \begin_inset Include \include{utilities.lyx}
 preview false
 
 \end_inset
 
- 
+
 \begin_inset Include \include{fun.lyx}
 preview false
 
 \end_inset
 
- 
+
 \begin_inset Include \include{tab.lyx}
 preview false
 
 \end_inset
 
- 
+
 \begin_inset Include \include{examples.lyx}
 preview false
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-11}
+Anderson, J., Farrell, W.E., et al.
+ Center for Seismic Studies version 3 database: Schema reference manual.
+ Technical Report C90-01, DARPA, September 1990.
  
 \end_layout
 
-\begin_layout Chapter
-Support
+\begin_layout Bibliography
+
+\bibitem {key-12}
+Biswas, N.N., Knopoff L., 1970.
+ Exact earth-flattening calculations for Love wave.
+ 
+\shape italic
+Bull.
+ Seismol.
+ Soc.
+ Amer.
+\shape default
+, 
+\emph on
+60
+\emph default
+, 1123-1127.
+ 
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-13}
+ Biswas, N.N., 1972.
+ Earth-flattening procedure for propagation of Rayleigh wave.
+ 
+\shape italic
+PAGEOPH
+\shape default
+, 
+\emph on
+96
+\emph default
+, 61-74.
+ 
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-14}
+ Gilbert, F., Dziewonski, A.M., 1975.
+ An application of normal mode theory to the retrieval of structural parameters
+ and source mechanisms from seismic spectra.
+ 
+\shape italic
+Phil.
+ Trans.
+ R.
+ Soc
+\shape default
+., 
+\emph on
+A278
+\emph default
+, 187-269.
+ 
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-15}
+ Herrmann, R.B., 1978.
+ 
+\shape italic
+Computer programs in earthquake seismology.
+
+\shape default
+ Vol.
+ 2, St.
+ Louis: St.
+ Louis University.
+ 
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-16}
+ Woodhouse, J.H., Dahlen, F.A., 1978.
+ The effect of a general aspherical perturbation on the free oscillation
+ of the Earth.
+ 
+\shape italic
+Geophys.
+ J.R.
+ astr Soc.
+\shape default
+, 
+\emph on
+53
+\emph default
+, 335-354.
+ 
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {key-17}
+SPECFEM3D_GLOBE, Version 3.6.
+ User Manual.
+ CIG/CIT, October 24, 2006 
 \end_layout
 
 \begin_layout Standard
-The primary point of support for Gale is the 
-\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
-
-\end_inset
-
-.
- Feel free to send questions, comments, feature requests, and bugs to the
- list.
- The mailing list is archived at
-\end_layout
-
-\begin_layout LyX-Code
-\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
+\start_of_appendix
+\begin_inset Include \include{model.lyx}
+preview false
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-You may also use the bug tracker
-\end_layout
-
-\begin_layout LyX-Code
-\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
+\begin_inset Include \include{benchmark.lyx}
+preview false
 
 \end_inset
 
 
-\end_layout
+\begin_inset Include \include{frame.lyx}
+preview false
 
-\begin_layout Standard
-to submit bugs and requests for new features.
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
@@ -4335,123 +4438,6 @@ This General Public License does not permit incorporating your program into
  to permit linking proprietary applications with the library.
  If this is what you want to do, use the GNU Library General Public License
  instead of this License.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Fullsack}
-Fullsack, Phillipe (1995).
- An arbitrary Lagrangian-Eulerian formulation for creeping flows and its
- application in tectonic models, 
-\emph on
-Geophys.
- J.
- Int., 120
-\emph default
-, 1-23.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {VPAC}
-Quenette, S., B.
- Appelbe, M.
- Gurnis, L.
- Hodkinson, L.
- Moresi, and P.
- Sunter (2005), An Investigation into Design for Performance and Code Maintainab
-ility in High Performance Computing, 
-\emph on
-ANZIAM J
-\emph default
-.
-\emph on
-, 46(e),
-\emph default
- C1001-C1016.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Underworld}
-Moresi, L.N., F.
- Dufour, and H.-B.
- Mühlhaus (2003), A Lagrangian integration point finite element method for
- large deformation modeling of viscoelastic geomaterials, 
-\emph on
-J.
- Comp.
- Phys., 184
-\series bold
-,
-\series default
-\emph default
- 476-497.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Moresi faulting}
-Moresi, L.N., and H.-B.
- Mühlhaus (2006), Anisotropic viscous models of large-deformation MohrCoulomb
- failure, 
-\emph on
-Philosophical Magazine, 86,
-\emph default
- 3287-3305.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Uzawa}
- Moresi, L.N., and V.S.
- Solomatov (1995), Numerical investigation of 2D convection with extremely
- large viscosity variations, 
-\emph on
-Phys.
- Fluids,
-\emph default
- 
-\emph on
-7(9),
-\emph default
- 2154-2162.
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Ellipsis}
-O'Neill, C., Moresi, L., Müller, D., Albert, R., Dufour, F.
- (2006), Ellipsis 3D: a particle-in-cell finite element hybrid code for
- modelling mantle convection and lithospheric deformation, 
-\shape italic
-Computers & Geosciences
-\shape default
-, 
-\shape italic
-32(10)
-\shape default
-, 1769-1779
-\end_layout
-
-\begin_layout Bibliography
-
-\bibitem {Citcom}
-Zhong, S., M.T.
- Zuber, L.N.
- Moresi, and M.
- Gurnis (2000), The role of temperature-dependent viscosity and surface
- plates in spherical shell models of mantle convection, 
-\shape italic
-J.
- Geophys.
- Res.
-\shape default
-, 
-\shape italic
-105
-\shape default
-, 11, 063-11, 082 
 \end_layout
 
 \end_body
