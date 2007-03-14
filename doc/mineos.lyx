@@ -463,7 +463,62 @@ Mineos History
 \end_layout
 
 \begin_layout Standard
-Need
+The original algorithm was based on direct numerical integration of the
+ governing differential equations (variable order, variable step-size Runge-Kutt
+a, up to the eighth order).
+\begin_inset LatexCommand \cite{Shanks 1966}
+
+\end_inset
+
+ This initial version was coded by J.
+ Freeman Gilbert circa 1966 while at the Institute of Geophysics and Planetary
+ Physics (IGPP), University of California, San Diego.
+ Tests showed the code, then called EOS, was superior to Burlisch-Stoer
+ (despite claims to the contrary in Numerical Recipes).
+ The variable step size was based on the growth rate approximated from estimates
+ of the eigenvalues of the matrix A.
+\begin_inset LatexCommand \cite{Gilbert, Backus 1966}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finding the solution for spheroidal modes was computationally unstable,
+ Gilbert and Backus suggested using the method of minors.
+\begin_inset LatexCommand \cite{Gilbert, Backus 1969}
+
+\end_inset
+
+ This was implemented in 1980 by John Woodhouse of Harvard University, who
+ included a clever method of computing eigenfunctions and, later, a mode
+ counter for spheroidals.
+ Shortly thereafter Guy Masters of IGPP, UC San Diego, began working with
+ the code, adding counters for toroidals and radials.
+ 
+\end_layout
+
+\begin_layout Standard
+The codes were benchmarked against the Rayleigh-Ritz code of Ray Buland
+ circa 1981.
+ Slight differences discovered were tracked down to the use of a slightly
+ different value of the gravitational constant.
+ Around 1985, the code was modified to compute accurate eigenfunctions of
+ ``difficult'' modes, e.g., Stoneley and IC modes, and the code was renamed
+ Mineos.
+\end_layout
+
+\begin_layout Standard
+The Mineos code has been uncopyrighted and handed down from investigator
+ to investigator until donated to the community with an open source license
+ (via CIG) in 2006 by Guy Masters and Michael Ritzwoller of University of
+ Colorado at Boulder.
+ At that time, the code was cleaned up and placed under source control,
+ and its user documentation assembled and revised, by Misha Barmine (U.
+ Colorado at Boulder).
+ CIG released Mineos under a GNU free software license in March 2007.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -487,7 +542,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename tex/Figures/Fig1.eps
+	filename Figures/Fig1.eps
 	width 5in
 
 \end_inset
@@ -623,12 +678,12 @@ Synthetic Seismogram System of Programs
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename tex/Figures/Fig2.eps
+	filename Figures/Fig2.eps
 	width 5in
 
 \end_inset
@@ -3692,8 +3747,8 @@ preview false
 
 \begin_layout Bibliography
 
-\bibitem {key-11}
-Anderson, J., Farrell, W.E., et al.
+\bibitem {Anderson, Farrell, et al 1990}
+ Anderson, J., Farrell, W.E., et al.
  Center for Seismic Studies version 3 database: Schema reference manual.
  Technical Report C90-01, DARPA, September 1990.
  
@@ -3701,8 +3756,9 @@ Anderson, J., Farrell, W.E., et al.
 
 \begin_layout Bibliography
 
-\bibitem {key-12}
-Biswas, N.N., Knopoff L., 1970.
+\bibitem {Biswas, Knopoff 1970}
+ Biswas, N.N., Knopoff L.
+ (1970).
  Exact earth-flattening calculations for Love wave.
  
 \shape italic
@@ -3721,8 +3777,9 @@ Bull.
 
 \begin_layout Bibliography
 
-\bibitem {key-13}
- Biswas, N.N., 1972.
+\bibitem {Biswas 1972}
+ Biswas, N.N.
+ (1972).
  Earth-flattening procedure for propagation of Rayleigh wave.
  
 \shape italic
@@ -3738,8 +3795,9 @@ PAGEOPH
 
 \begin_layout Bibliography
 
-\bibitem {key-14}
- Gilbert, F., Dziewonski, A.M., 1975.
+\bibitem {Gilbert, Dziewonski 1975}
+ Gilbert, F., and A.M.
+ Dziewonski (1975).
  An application of normal mode theory to the retrieval of structural parameters
  and source mechanisms from seismic spectra.
  
@@ -3759,8 +3817,32 @@ A278
 
 \begin_layout Bibliography
 
-\bibitem {key-15}
- Herrmann, R.B., 1978.
+\bibitem {Gilbert, Backus 1969}
+ Gilbert, F., and G.E.
+ Backus (1969).
+ Proceedings of AFIPS Fall Joint Computer Conference, San Francisco, CA,
+ December 1968.
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {Gilbert, Backus 1966}
+ Gilbert, F., and G.E.
+ Backus (1966).
+ Propagator matrices in elastic wave and vibration problems.
+
+\emph on
+ Geophys.
+ 31(2),
+\emph default
+ 326-332.
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {Hermann 1978}
+ Herrmann, R.B.
+ (1978).
  
 \shape italic
 Computer programs in earthquake seismology.
@@ -3775,8 +3857,23 @@ Computer programs in earthquake seismology.
 
 \begin_layout Bibliography
 
-\bibitem {key-16}
- Woodhouse, J.H., Dahlen, F.A., 1978.
+\bibitem {Shanks 1966}
+ Shanks, E.B.
+ (1966).
+ Solutions of differential equations by evaluations of functions, 
+\emph on
+Math.
+ Comp.
+ 20
+\emph default
+, 21-38 MR 32:4858
+\end_layout
+
+\begin_layout Bibliography
+
+\bibitem {Woodhouse, Dahlen 1978}
+ Woodhouse, J.H., and F.A.
+ Dahlen (1978).
  The effect of a general aspherical perturbation on the free oscillation
  of the Earth.
  
@@ -3795,8 +3892,8 @@ Geophys.
 
 \begin_layout Bibliography
 
-\bibitem {key-17}
-SPECFEM3D_GLOBE, Version 3.6.
+\bibitem {SPECFEM3D_GLOBE}
+ SPECFEM3D_GLOBE, Version 3.6.
  User Manual.
  CIG/CIT, October 24, 2006 
 \end_layout
