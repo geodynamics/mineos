@@ -355,7 +355,7 @@ subroutine epochtoh(t, year, doy, hour, min, sec)
 \series bold
 double* t
 \series default
-, into human time , 
+, into human time, 
 \series bold
 integer*4 year,doy,hour,min
 \series default

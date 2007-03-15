@@ -115,7 +115,7 @@ Mineos
 
 \begin_layout Section
 Benchmark test #2: Mineos code vs.
- plane Herrmann's code for fundamental modes
+ Herrmann's plane code for fundamental modes
 \end_layout
 
 \begin_layout Standard
@@ -134,35 +134,47 @@ s for the fundamental spheroidal and toroidal modes in the period range
 \end_layout
 
 \begin_layout Itemize
-Korean Peninsula, (36N, 128E); 
+Korean Peninsula, (36N, 128E)
 \end_layout
 
 \begin_layout Itemize
-Uta, USA, seismo-tectonic region, (40N, 112W); 
+Utah, U.S., seismo-tectonic region, (40N, 112W)
 \end_layout
 
 \begin_layout Itemize
-near Hudson bay, Cananda, craton, (56N, 90W); 
+Near Hudson bay, Canada, craton, (56N, 90W) 
 \end_layout
 
 \begin_layout Itemize
-center of Hudson Bay, Canada, craton, (58N, 86N); 
+Center of Hudson Bay, Canada, craton, (58N, 86N)
 \end_layout
 
 \begin_layout Itemize
-young Pacific Ocean, (0N, 100W); 
+Young Pacific Ocean, (0N, 100W)
 \end_layout
 
 \begin_layout Itemize
-old Pacific Ocean, (40N, 160E).
- 
+Old Pacific Ocean, (40N, 160E)
 \end_layout
 
 \begin_layout Standard
 To take into account the Earth's sphericity, the original version of the
- Herrmann's plane code (Herrmann, 1978) had been modified using the Earth
- flattening exact formulas for Love waves (Biswas & Knopoff, 1970) and Earth
- flattening approximation for Rayleigh waves (Biswas, 1972).
+ Herrmann's plane code
+\begin_inset LatexCommand \cite{Hermann 1978}
+
+\end_inset
+
+ had been modified using the Earth flattening exact formulas for Love waves
+\begin_inset LatexCommand \cite{Biswas, Knopoff 1970}
+
+\end_inset
+
+ and Earth flattening approximation for Rayleigh waves
+\begin_inset LatexCommand \cite{Biswas 1972}
+
+\end_inset
+
+.
  All input information in Herrmann's code is in geocentric coordinates.
 \end_layout
 
@@ -182,13 +194,22 @@ As an example, Figures
 m for the three different seismic stations: BJT, TLY, and BILL.
  The event location (CMT solution) is (25.39N, 101.40E), depth is 33 km.
  The station coordinates (geographic), epicentral distances (geocentric),
- and source azimuths (geocentric) are shown in the Table 1; units are degrees.
+ and source azimuths (geocentric) are shown in Table; units are degrees.
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
+\begin_inset Float table
+wide false
+sideways false
+status collapsed
+
+\begin_layout Standard
+\noindent
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="6">
+<lyxtabular version="3" rows="4" columns="6">
 <features>
 <column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
 <column alignment="center" valignment="top" rightline="true" width="0">
@@ -196,64 +217,6 @@ m for the three different seismic stations: BJT, TLY, and BILL.
 <column alignment="right" valignment="top" rightline="true" width="0">
 <column alignment="right" valignment="top" rightline="true" width="0">
 <column alignment="right" valignment="top" rightline="true" width="0">
-<row>
-<cell multicolumn="1" alignment="none" valignment="top" usebox="none" special="c">
-\begin_inset Text
-
-\begin_layout Standard
-
-\series bold
-Table 1.
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-</cell>
-<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="none" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
 <row topline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
@@ -548,6 +511,18 @@ status collapsed
 
 \end_layout
 
+\begin_layout Caption
+\noindent
+Station coordinates (geographic), epicentral distances (geocentric), and
+ source azimuths (geocentric) for Benchmark test #2, Mineos vs.
+ Herrmnn's plane code for fundamental modes.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Moment tensor components are: 
 \end_layout
@@ -798,7 +773,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
