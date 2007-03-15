@@ -137,10 +137,6 @@ today
 
 \end_layout
 
-\begin_layout Chapter
-Preface
-\end_layout
-
 \begin_layout Standard
 \begin_inset ERT
 status collapsed
@@ -161,103 +157,6 @@ raggedbottom
 
 \end_layout
 
-\begin_layout Section
-Who Will Use Mineos?
-\end_layout
-
-\begin_layout Standard
-The main audience for Mineos is research scientists interested in modeling
- tectonic processes on long time scales.
- Examples of problems that can be solved are the development of tectonic
- structure associated with extension and compression, especially where localizat
-ion is important.
- You do not have to be an expert in finite element analysis or scientific
- computing to use this software.
-\end_layout
-
-\begin_layout Section
-Citation
-\end_layout
-
-\begin_layout Standard
-Computational Infrastructure for Geodynamics (CIG) is making this source
- code available to you in the hope that the software will enhance your research
- in geophysics.
- The underlying C code for the finite element package was donated to CIG
- in July of 2005.
- A number of individuals have contributed a significant portion of their
- careers toward the development of Gale.
- It is essential that you recognize these individuals in the normal scientific
- practice by making appropriate acknowledgements.
- 
-\end_layout
-
-\begin_layout Standard
-The code is based on the method described in 
-\end_layout
-
-\begin_layout Itemize
-citation needed
-\end_layout
-
-\begin_layout Standard
-The code was originally developed by [ADD MORE].
- CIG requests that in your oral presentations and in your papers that you
- indicate your use of this code and acknowledge the authors of the code
- and 
-\begin_inset LatexCommand \htmlurl[CIG]{geodynamics.org}
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Section
-Support
-\end_layout
-
-\begin_layout Standard
-Mineos development is supported by a grant from the National Science Foundation
- to CIG, managed by the California Institute of Technology.
- 
-\end_layout
-
-\begin_layout Standard
-The primary point of support for Mineos is the 
-\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
-
-\end_inset
-
-.
- Feel free to send questions, comments, feature requests, and bugs to the
- list.
- The mailing list is archived at
-\end_layout
-
-\begin_layout LyX-Code
-\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-You may also use the bug tracker
-\end_layout
-
-\begin_layout LyX-Code
-\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-to submit bugs and requests for new features.
-\end_layout
-
 \begin_layout Chapter
 Introduction
 \end_layout
@@ -267,23 +166,56 @@ Mineos Package Overview
 \end_layout
 
 \begin_layout Standard
-The Mineos Package by Guy Masters consists of four programs: minos_bran,
- eigcon, green, and syndat.
+The Mineos Package by Guy Masters consists of four programs: 
+\series bold
+minos_bran
+\series default
+, 
+\series bold
+eigcon
+\series default
+, 
+\series bold
+green
+\series default
+, and 
+\series bold
+syndat
+\series default
+.
  Functionally, the programs break into two subgroups.
  The first subgroup contains the programs that produce the normal eigenfunctions
- and eigenfrequencies, minos_bran and eigcon.
+ and eigenfrequencies, 
+\series bold
+minos_bran
+\series default
+ and 
+\series bold
+eigcon
+\series default
+.
  Information flow into and out of these two programs, which we call the
- eigenfunction system, is summarized in 
+ eigenfunction system, is summarized in Figure 
 \begin_inset LatexCommand \ref{fig:1}
 
 \end_inset
 
 .
  The second subgroup, referred to as the synthetic seismogram system, comprises
- the programs that read the output from eigcon and compute Green functions
- and synthetic seismograms.
- These programs are green and syndat, and information flow through these
- programs is summarized in 
+ the programs that read the output from 
+\series bold
+eigcon
+\series default
+ and compute Green functions and synthetic seismograms.
+ These programs are 
+\series bold
+green
+\series default
+ and 
+\series bold
+syndat
+\series default
+, and information flow through these programs is summarized in Figure 
 \begin_inset LatexCommand \ref{fig:2}
 
 \end_inset
@@ -352,7 +284,7 @@ mineos
 \shape italic
 \size small
 \emph on
-sitechan
+.sitechan
 \family default
 \shape default
 \size default
@@ -522,6 +454,20 @@ The Mineos code has been uncopyrighted and handed down from investigator
 \end_layout
 
 \begin_layout Standard
+Computational Infrastructure for Geodynamics (CIG) is making this source
+ code available to you in the hope that the software will enhance your research
+ in geophysics.
+ CIG requests that in your oral presentations and in your papers that you
+ indicate your use of this code and acknowledge the authors of the code
+ and 
+\begin_inset LatexCommand \htmlurl[CIG]{geodynamics.org}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 
 \end_layout
 
@@ -536,7 +482,7 @@ Eigenfunction System of Programs
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \noindent
@@ -1273,6 +1219,52 @@ Now you can run one of the demo input files, e.g.,
 \end_layout
 
 \end_deeper
+\begin_layout Section
+Support
+\end_layout
+
+\begin_layout Standard
+Mineos development is supported by a grant from the National Science Foundation
+ to CIG, managed by the California Institute of Technology.
+ 
+\end_layout
+
+\begin_layout Standard
+The primary point of support for Mineos is the 
+\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
+
+\end_inset
+
+.
+ Feel free to send questions, comments, feature requests, and bugs to the
+ list.
+ The mailing list is archived at
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You may also use the bug tracker
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+to submit bugs and requests for new features.
+\end_layout
+
 \begin_layout Chapter
 Running the Mineos Programs
 \end_layout
