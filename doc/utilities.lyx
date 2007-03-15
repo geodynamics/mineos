@@ -47,7 +47,7 @@ The Utilities User's Manual
 cucss2sac
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
 
 \series bold
@@ -56,15 +56,15 @@ NAME
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 cucss2sac
 \series default
- - convert CSS 3.0 waveforms to SAC binary or ASCII files 
+ Convert CSS 3.0 waveforms to SAC binary or ASCII files 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 SYNOPSIS
@@ -72,7 +72,7 @@ SYNOPSIS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \series bold
 cucss2sac [-a [-n]] db_name out_SAC_dir
@@ -80,29 +80,29 @@ cucss2sac [-a [-n]] db_name out_SAC_dir
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
- 
+
 \series bold
 OPTIONS
 \series default
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 -a
 \series default
- - generate ASCII files 
+ Generate ASCII files 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 -n
 \series default
- - suppress header output in ASCII files.
+ Suppress header output in ASCII files.
  Used together with 
 \series bold
 -a
@@ -111,7 +111,7 @@ OPTIONS
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 DESCRIPTION
@@ -119,8 +119,8 @@ DESCRIPTION
  
 \end_layout
 
-\begin_layout Quote
-
+\begin_layout Standard
+The 
 \series bold
 cucss2sac
 \series default
@@ -161,11 +161,11 @@ cucss2sac
 \begin_inset Quotes eld
 \end_inset
 
-t4" (BIG_ENDIAN, single precision floating point) and 
+t4'' (BIG_ENDIAN, single precision floating point) and 
 \begin_inset Quotes eld
 \end_inset
 
-f4" ( LOW_ENDIAN, single precision floating point).
+f4'' ( LOW_ENDIAN, single precision floating point).
  
 \series bold
 cucss2sac
@@ -174,7 +174,7 @@ cucss2sac
 \begin_inset Quotes eld
 \end_inset
 
-as is" without any corrections or modifications.
+as is'' without any corrections or modifications.
  For the 
 \series bold
 Mineos
@@ -187,7 +187,7 @@ cucss2sac
  to binary SAC or ASCII files.
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 A CSS database 
 \series bold
 db_name
@@ -223,48 +223,92 @@ cucss2sac
 \series default
  uses only the first line from this file.
  In the case of ASCII output, all available parameters go to the ASCII header
- - three lines in the beginning of the file.
+ -- three lines in the beginning of the file.
  For example, output file for a synthetic seismogram looks as follows:
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \family typewriter
 EVENT: 2000(014)-23:37:10.800 947893030.80000 25.3900 101.4000 33.0000 
-\newline
- STATION:
- ALE LHE 82.5033 -62.3500 0.0000 
-\newline
- DATA: 2000(014)-23:37:10.800 947893030.80000
- 8000 1.000000 
-\newline
- 0.0000000E+00 5.7025738E+00 
-\newline
- 1.0000000E+00 1.9508668E+00 
-\newline
- 2.0000000E+0
-0 -4.1160989E+00 
-\newline
- 3.0000000E+00 -4.1094885E+00 
-\newline
- ......
- 
-\newline
- ......
- 
-\newline
- ......
- 
-\newline
- 7.9970000E+03 1.5211651E+01 
-\newline
- 7.9980000E+03 2.7408613E+01 
-\newline
- 7.9990000E+03 3.5795624E+0
-1
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
+
+\family typewriter
+STATION: ALE LHE 82.5033 -62.3500 0.0000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+DATA: 2000(014)-23:37:10.800 947893030.80000 8000 1.000000 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+0.0000000E+00 5.7025738E+00 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+1.0000000E+00 1.9508668E+00 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+2.0000000E+00 -4.1160989E+00 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+3.0000000E+00 -4.1094885E+00 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+......
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+......
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+......
+ 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+7.9970000E+03 1.5211651E+01 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+7.9980000E+03 2.7408613E+01 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+7.9990000E+03 3.5795624E+01
+\end_layout
+
+\begin_layout Standard
 where, the 
 \family typewriter
 EVENT
@@ -294,7 +338,7 @@ syndat
  output format.
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 If the presence of the header is not desired, suppress it with option 
 \series bold
 -n
@@ -302,7 +346,7 @@ If the presence of the header is not desired, suppress it with option
  (no header).
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 The output ASCII file format for the Green functions is different.
  The header is the same, but the body is a 7 column table.
  The first column is relative time, as before, and the other 6 columns are
@@ -337,7 +381,7 @@ S=10^{-18}\;\sum_{ij}G_{ij}\; M_{ij}\]
 
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 where 
 \begin_inset Formula $M_{ij}$
 \end_inset
@@ -355,7 +399,7 @@ NOTE: According to SAC complaince, event depth is stored in the SAC header
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 EXAMPLES
@@ -363,17 +407,17 @@ EXAMPLES
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \series bold
 cucss2sac Syndat Syndat_SAC 
 \newline
- cucss2sac green green_SAC 
+cucss2sac green green_SAC 
 \newline
- cucss2sac -a Syndat
+cucss2sac -a Syndat
  Syndat_ASC 
 \newline
- cucss2sac -a -n Syndat Syndat_ASC_NOHEADER
+cucss2sac -a -n Syndat Syndat_ASC_NOHEADER
 \series default
  
 \end_layout
@@ -400,7 +444,7 @@ status collapsed
 eigen2asc
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
 
 \series bold
@@ -409,19 +453,19 @@ NAME
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 eigen2asc
 \series default
- - convert 
+ Converts 
 \shape italic
 .eigen
 \shape default
  relation table to ASCII files 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 SYNOPSIS
@@ -429,7 +473,7 @@ SYNOPSIS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \series bold
 eigen2asc [-n] nmin nmax lmin lmax db_name out_dir
@@ -437,7 +481,7 @@ eigen2asc [-n] nmin nmax lmin lmax db_name out_dir
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
 
 \series bold
@@ -446,16 +490,16 @@ OPTIONS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 -n
 \series default
- - suppress header output in ASCII files.
+ Suppress header output in ASCII files.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
 
 \series bold
@@ -464,8 +508,8 @@ DESCRIPTION
  
 \end_layout
 
-\begin_layout Quote
-
+\begin_layout Standard
+The 
 \series bold
 eigen2asc
 \series default
@@ -478,8 +522,8 @@ eigen2asc
 \series bold
 eigen2asc
 \series default
- searches in the db_name.eigen file for all eigenfunctions whith mode numbers
- n, l satisfyng the following conditions: 
+ searches in the db_name.eigen file for all eigenfunctions with mode numbers
+ n, l satisfying the following conditions: 
 \series bold
 nmin
 \series default
@@ -522,20 +566,25 @@ out_dir
 \shape italic
 .eigen
 \shape default
- relation, see Section 8.
+ relation, see Table 
+\begin_inset LatexCommand \ref{tab:Relation:-eigen.-Description:}
+
+\end_inset
+
+.
  The option 
 \series bold
 -n
 \series default
  excludes the header output.
- The body is a three-column (radial, toroidal modes) or seven column (speroidal
+ The body is a three-column (radial, toroidal modes) or seven-column (spheroidal
  mode) table.
  The first body column is radius in meters and the others columns contain
  the eigen functions and their derivatives by radius (in the internal, normalize
 d units) - U, U', V, V', P, P' for spheroidal modes and W, W' for other
  modes.
- For more deails, see Section 3.
- The output file name has form of 
+ For more details, see Section 4.1.
+ The output file name has the form 
 \series bold
 X.nnnnnnn.mmmmmmm.ASC
 \series default
@@ -547,11 +596,11 @@ X
 \begin_inset Quotes eld
 \end_inset
 
-S" for spheroidal modes or 
+S'' for spheroidal modes or 
 \begin_inset Quotes eld
 \end_inset
 
-T" for toroidal modes, 
+T'' for toroidal modes, 
 \series bold
 nnnnnnn
 \series default
@@ -563,7 +612,7 @@ mmmmmmm
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 \noindent
 
 \series bold
@@ -572,13 +621,16 @@ EXAMPLES
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \series bold
 eigen2asc 0 1 2 500 test_S Eigen_S_ASC 
-\newline
- eigen2asc -n 0 1 2 500 test_S Eigen_S_no
-_headers_ASC 
+\end_layout
+
+\begin_layout LyX-Code
+
+\series bold
+eigen2asc -n 0 1 2 500 test_S Eigen_S_no_headers_ASC 
 \series default
  
 \end_layout
@@ -587,7 +639,7 @@ _headers_ASC
 endi
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 NAME
@@ -595,15 +647,15 @@ NAME
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 endi
 \series default
- - in-place file swapping with fixed width 
+ In-place file swapping with fixed width 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 SYNOPSIS
@@ -611,7 +663,7 @@ SYNOPSIS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \series bold
 endi nw file1 [ file2 ...
@@ -620,7 +672,7 @@ endi nw file1 [ file2 ...
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 DESCRIPTION
@@ -628,7 +680,7 @@ DESCRIPTION
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 This utility is used when you transfer binary files of 
 \shape italic
 .wfdisc
@@ -638,23 +690,23 @@ This utility is used when you transfer binary files of
 .eigen
 \shape default
  relations to a platform with a different byte order.
- The utility changes the bytes order from BIG_ENDIAN to LOW_ENDIAN and vice
+ The utility changes the byte order from BIG_ENDIAN to LOW_ENDIAN and vice
  versa.
  
 \series bold
 endi
 \series default
- sequentionally reads the file from the list 
+ sequentially reads the file from the list 
 \series bold
 file1 [ file2 ...
  filen] 
 \series default
- into memory as an unsigned character string , swaps sequential groups of
+ into memory as an unsigned character string, swaps sequential groups of
  
 \series bold
 nw
 \series default
- bytes long starting from the beginning of file, and stores the swapped
+ bytes long starting from the beginning of the file, and stores the swapped
  data into the same place as before (swapping in-place).
  If the last group has a length less than 
 \series bold
@@ -664,7 +716,7 @@ nw
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 EXAMPLES
@@ -672,7 +724,7 @@ EXAMPLES
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 Example 1.
  Let w.00001 and w.00002 the binary real*4 data files from some 
 \shape italic
@@ -684,7 +736,7 @@ Example 1.
  After applying the command:
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 \begin_inset Formula $...>$
 \end_inset
 
@@ -695,9 +747,9 @@ endi
  4 w.00001 w.00002
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 we change the order of 4 byte words to BIG_ENDIAN for transfering these
- files on a computer with BIG_ENDIAN byte order, say SUN Ultra machine,
+ files on a computer with BIG_ENDIAN byte order, e.g., a SUN Ultra machine,
  where we may use a direct access READ statement to read data as real*4
  variables.
  
@@ -707,7 +759,7 @@ we change the order of 4 byte words to BIG_ENDIAN for transfering these
 simpledit
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 NAME
@@ -715,12 +767,12 @@ NAME
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 simpledit
 \series default
- - filter to create 
+ Filter to create 
 \shape italic
 .site
 \shape default
@@ -731,7 +783,7 @@ simpledit
  CSS relations from an input ASCII file 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 SYNOPSIS
@@ -739,7 +791,7 @@ SYNOPSIS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \series bold
 simpledit ascii_file db_name
@@ -747,7 +799,7 @@ simpledit ascii_file db_name
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 DESCRIPTION
@@ -755,8 +807,8 @@ DESCRIPTION
  
 \end_layout
 
-\begin_layout Quote
-
+\begin_layout Standard
+The 
 \series bold
 simpledit
 \series default
@@ -784,7 +836,7 @@ db_name
 \series bold
 rdseed
 \series default
- program, which provides SEED volume conversation to CSS format.
+ program, which provides SEED volume conversion to CSS format.
  Note, CSS format is strictly defined, so do not create 
 \shape italic
 .site
@@ -794,7 +846,7 @@ rdseed
 .sitechan
 \shape default
  tables manually.
- This leads to numerous format errors and as a result to crash the 
+ This leads to numerous format errors and as a result can crash the 
 \series bold
 Mineos
 \series default
@@ -815,70 +867,129 @@ ascii_file
  files directly.
 \end_layout
 
-\begin_layout Quote
+\begin_layout Description
 
 \series bold
 \emph on
-Description of the ascii_file file.
-
+Description\InsetSpace ~
+of\InsetSpace ~
+ascii_file
 \series default
 \emph default
  The 
 \series bold
 ascii_file
 \series default
- file is a set of ASCII text lines.
+ is a set of ASCII text lines.
  Each line describes a single station or a single channel.
  All channel lines, placed after some station line, belong to that station.
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 For example, consider the following file:
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \family typewriter
 ANMO 34.9502 -106.4602 1.6890 'Albuquerque, New Mexico, USA' 
-\newline
- @ LH1 150.0000
- 280.0 90.0 
-\newline
- @ LH2 150.0000 10.0 90.0 
-\newline
- @ LHZ 89.3000 0.0 0.0 
-\newline
- BJT 40.0183 116.1679
- 0.1370 'Baijiatuan, Beijing, China' 
-\newline
- @ LHE 60.0000 90.0 90.0 
-\newline
- @ LHN 60.0000
- 0.0 90.0 
-\newline
- @ LHZ 60.0000 0.0 0.0 
-\newline
- @ BHE 60.0000 90.0 90.0 
-\newline
- @ BHN 60.0000 0.0 90.0 
-\newline
+\end_layout
 
- @ BHZ 60.0000 0.0 180.0 
-\newline
- BILL 68.0651 166.4524 0.2990 'Bilibino, Russia' 
-\newline
- @ LHZ
- 0.0000 0.0 0.0 
-\newline
- CCM 38.0557 -91.2446 0.1710 'Cathedral Cave, Missouri, USA' 
-\newline
+\begin_layout LyX-Code
 
- @ LHE 51.0000 90.0 90.0 
-\newline
- @ LHN 51.0000 0.0 90.0 
-\newline
- @ LHZ 51.0000 0.0 0.0 
+\family typewriter
+@ LH1 150.0000 280.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LH2 150.0000 10.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHZ 89.3000 0.0 0.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+BJT 40.0183 116.1679 0.1370 'Baijiatuan, Beijing, China' 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHE 60.0000 90.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHN 60.0000 0.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHZ 60.0000 0.0 0.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ BHE 60.0000 90.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ BHN 60.0000 0.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ BHZ 60.0000 0.0 180.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+BILL 68.0651 166.4524 0.2990 'Bilibino, Russia' 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHZ 0.0000 0.0 0.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+CCM 38.0557 -91.2446 0.1710 'Cathedral Cave, Missouri, USA' 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHE 51.0000 90.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHN 51.0000 0.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ LHZ 51.0000 0.0 0.0 
 \family default
  
 \end_layout
@@ -886,30 +997,40 @@ ANMO 34.9502 -106.4602 1.6890 'Albuquerque, New Mexico, USA'
 \begin_layout Standard
 Each line in the file consists of some number of fields separated with one
  or more space characters.
- If a field has an internal space character, like in station full name,
- it must be surrounded with single quotes.
+ If a field has an internal space character, e.g., as in a station's full
+ name, it must be surrounded with single quotes.
  The first field starts with the first position in the line.
  A station line has the fields: 
 \shape italic
 sta, lat, lon, elev, staname
 \shape default
 .
- See description in Section 8, 
+ See the description in the 
 \shape italic
 .site
 \shape default
- relation table.
+ relation table, Table 
+\begin_inset LatexCommand \ref{tab:Relation:-site.-Description:}
+
+\end_inset
+
+ .
  A channel line starts with text field 
 \begin_inset Quotes eld
 \end_inset
 
-@".
+@''.
  The other fields are: 
 \shape italic
 chan, edepth, hang, vang
 \shape default
 .
- See description in Section 8, 
+ See description in Table 
+\begin_inset LatexCommand \ref{tab:Relation:-sitechan.-Description:}
+
+\end_inset
+
+, 
 \shape italic
 .sitechan
 \shape default
@@ -918,23 +1039,31 @@ chan, edepth, hang, vang
 \begin_inset Quotes erd
 \end_inset
 
-XX" is defined as 
+XX'' is defined as 
 \end_layout
 
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \family typewriter
 @ XXE dd.dddd 90.0 90.0 
-\newline
- @ XXN dd.dddd 0.0 90.0 
-\newline
- @ XXZ dd.dddd 0.0 0.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ XXN dd.dddd 0.0 90.0 
+\end_layout
+
+\begin_layout LyX-Code
+
+\family typewriter
+@ XXZ dd.dddd 0.0 0.0 
 \family default
  
 \end_layout
 
 \begin_layout Standard
-where, 
+where 
 \family typewriter
 dd.dddd
 \family default
@@ -951,7 +1080,7 @@ edepth
 create_origin
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 NAME
@@ -959,12 +1088,12 @@ NAME
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 
 \series bold
 create_origin
 \series default
- - convert an event text file into the CSS3.0 
+ Convert an event text file into the CSS3.0 
 \shape italic
 .origin
 \shape default
@@ -972,7 +1101,7 @@ create_origin
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 SYNOPSIS
@@ -980,7 +1109,7 @@ SYNOPSIS
  
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Standard
 
 \series bold
 create_origin cmt_event db_name
@@ -988,7 +1117,7 @@ create_origin cmt_event db_name
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection*
 
 \series bold
 DESCRIPTION
@@ -996,7 +1125,7 @@ DESCRIPTION
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 The shell script 
 \series bold
 create_origin
@@ -1005,13 +1134,16 @@ create_origin
 \series bold
 cmt_event
 \series default
- ASCII file the first line written in format of input cmt_event file for
- program 
+ ASCII file the first line written in format of input 
+\series bold
+cmt_event
+\series default
+ file for program 
 \series bold
 green
 \series default
 , converts the source time and location into a single row CSS3.0 relation
- table, and stores it into 
+ table, and stores it into the 
 \series bold
 db_name.origin
 \series default
@@ -1037,17 +1169,21 @@ lddate
 \series bold
 Mineos
 \series default
- package and they are filled with default values.
+ package and are filled with default values.
  For more details about the 
 \shape italic
 .origin
 \shape default
- relation see below, or the complete description see in (Anderson, J,.et
- al., 1990).
+ relation see below, or for the complete description see Anderson, J,.
+ et al., 1990.
+\begin_inset LatexCommand \cite{Anderson, Farrell, et al 1990}
+
+\end_inset
+
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 \noindent
 \align center
 \begin_inset Float table

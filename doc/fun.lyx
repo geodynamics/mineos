@@ -64,7 +64,7 @@ fdb
 \series bold
 fdb
 \series default
- (fortran data base) subroutines/functions come from the CU-Boulder 
+ (fortran database) subroutines/functions come from the CU-Boulder 
 \series bold
 fdb 
 \series default
@@ -83,7 +83,7 @@ fdb
 fdb
 \series default
  subroutines/functions have very short and simple source code.
- The list of function names with a brief description are listed below: 
+ The list of function names with a brief description is listed below: 
 \end_layout
 
 \begin_layout Description
@@ -319,8 +319,7 @@ subroutine put_eigen
 \series bold
 integer*4 factor2
 \series default
- factors an integer number into two factors.
- 
+ factors an integer number into two factors
 \end_layout
 
 \begin_layout Section
@@ -332,24 +331,30 @@ time
 \end_layout
 
 \begin_layout Standard
-
+The 
 \series bold
 time
 \series default
- subroutines/functions perform conversation from human to epoch time and
+ subroutines/functions perform conversions from human to epoch time and
  vice versa.
  Function 
 \series bold
 loctime
 \series default
  returns local system time as a text string.
- A short description is the following: 
+ A short description follows: 
 \end_layout
 
 \begin_layout Description
 
 \series bold
-subroutine epochtoh(t, year, doy, hour, min, sec)
+subroutine\InsetSpace ~
+epochtoh(t,\InsetSpace ~
+year,\InsetSpace ~
+doy,\InsetSpace ~
+hour,\InsetSpace ~
+min,\InsetSpace ~
+sec)
 \series default
  converts epoch time, 
 \series bold
@@ -357,10 +362,12 @@ double* t
 \series default
 , into human time, 
 \series bold
-integer*4 year,doy,hour,min
+integer*4\InsetSpace ~
+year,doy,hour,min
 \series default
-, 
+,
 \series bold
+\InsetSpace ~
 real*8 sec
 \series default
 .
@@ -374,7 +381,14 @@ doy
 \begin_layout Description
 
 \series bold
-real*8 function htoepoch (year, doy, hour, min, sec)
+real*8\InsetSpace ~
+function\InsetSpace ~
+htoepoch\InsetSpace ~
+(year,\InsetSpace ~
+doy,\InsetSpace ~
+hour,\InsetSpace ~
+min,\InsetSpace ~
+sec)
 \series default
  returns epoch time.
  Input arguments are 
@@ -395,18 +409,21 @@ sec
 integer*4 year,doy,hour,min
 \series default
  and 
-\newline
- 
 \series bold
 real*8 sec
 \series default
- 
+ (TODO: is this sentence incomplete?)
 \end_layout
 
 \begin_layout Description
 
 \series bold
-subroutine doytom(year, doy, mon, day)
+subroutine\InsetSpace ~
+doytom\InsetSpace ~
+(year,\InsetSpace ~
+doy,\InsetSpace ~
+mon,\InsetSpace ~
+day)
 \series default
  converts 
 \series bold
@@ -420,7 +437,7 @@ doy
 \series bold
 mon
 \series default
-) and day of month(
+) and day of month (
 \series bold
 day
 \series default
@@ -436,7 +453,12 @@ integer*4
 \begin_layout Description
 
 \series bold
-integer*4 function mtodoy(year, mon, day)
+integer*4\InsetSpace ~
+function\InsetSpace ~
+mtodoy\InsetSpace ~
+(year,\InsetSpace ~
+mon,\InsetSpace ~
+day)
 \series default
  returns days of year.
  Input arguments are 
@@ -463,7 +485,9 @@ integer*4
 \begin_layout Description
 
 \series bold
-character*17 function loctime()
+character*17\InsetSpace ~
+function\InsetSpace ~
+loctime()
 \series default
  returns local system time of form 
 \series bold

@@ -61,6 +61,10 @@ sideways false
 status open
 
 \begin_layout Caption
+\begin_inset LatexCommand \label{tab:Relation:-eigen.-Description:}
+
+\end_inset
+
 Relation: 
 \series bold
 eigen
@@ -1113,9 +1117,13 @@ load date
 placement H
 wide false
 sideways true
-status collapsed
+status open
 
 \begin_layout Caption
+\begin_inset LatexCommand \label{tab:Relation:-site.-Description:}
+
+\end_inset
+
 Relation: 
 \series bold
 site.
@@ -1883,9 +1891,13 @@ load date
 placement H
 wide false
 sideways true
-status collapsed
+status open
 
 \begin_layout Caption
+\begin_inset LatexCommand \label{tab:Relation:-sitechan.-Description:}
+
+\end_inset
+
 Relation: 
 \series bold
 sitechan
@@ -2600,6 +2612,10 @@ sideways true
 status collapsed
 
 \begin_layout Caption
+\begin_inset LatexCommand \label{tab:Relation:-wfdisc.-Description:}
+
+\end_inset
+
 Relation: 
 \series bold
 wfdisc

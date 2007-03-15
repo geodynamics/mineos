@@ -44,17 +44,22 @@ green program
 \end_layout
 
 \begin_layout Standard
-
+The 
 \series bold
 green
 \series default
- program computes for a single event and a given set of stations, the Green
- functions.
+ program computes the Green functions for a single event and a given set
+ of stations.
  For each station, a station-channel list specifying the orientation of
  the sensors must be input.
  The program can optionally compute Green functions (a) for the Z component
  alone, (b) for 3-components with the standard ZNE sensor orientation (see
- Appendix C), or (c) for 3-components with the Z component directed 
+ Appendix 
+\begin_inset LatexCommand \ref{cha:Reference-Frame-Convention}
+
+\end_inset
+
+), or (c) for 3-components with the Z component directed 
 \begin_inset Quotes erd
 \end_inset
 
@@ -98,12 +103,38 @@ Command line
 
 \begin_layout Standard
 \noindent
+There are three different ways to start the 
+\series bold
+green
+\series default
+ program: 
+\end_layout
+
+\begin_layout Enumerate
+Interactive dialog for setting the input parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+\noindent
 
 \series bold
 green
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Single shell command with redirection of the standard input to a parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as in the
+ interactive dialog - one answer per line
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -118,7 +149,19 @@ green
 parameter_file
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Direct shell script.
+ In this case, the contents of the parameter file are directly included
+ in the shell script between the delimiters 
+\begin_inset Quotes eld
+\end_inset
+
+WORD'':
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -139,49 +182,17 @@ green
  WORD
 \end_layout
 
-\begin_layout Standard
-\noindent
-There are three different ways to start the 
-\series bold
-green
-\series default
- program: 
-\end_layout
-
-\begin_layout Itemize
-interactive dialog for setting the input parameters; 
-\end_layout
-
-\begin_layout Itemize
-single shell command with redirection of the standard input to a parameter
- file 
-\shape italic
-parameter_file
-\shape default
- containing exactly the same information and in the same order as in the
- interactive dialog - one answer per line; 
-\end_layout
-
-\begin_layout Itemize
-direct shell script.
- In this case, the contents of the parameter file are directly included
- in the shell script between the delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD".
- See examples.
- 
-\end_layout
-
+\end_deeper
 \begin_layout Standard
 \noindent
 The input parameter file consists of six lines: 
 \end_layout
 
 \begin_layout Description
-Line 1: 
+Line\InsetSpace ~
+1:
 \shape italic
+\InsetSpace ~
 in_dbname 
 \shape default
  
@@ -200,42 +211,42 @@ in_dbname
 \shape default
  relations.
  
-\newline
- 
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 2: 
+Line\InsetSpace ~
+2:
 \shape italic
+\InsetSpace ~
 db_list
 \shape default
  
 \newline
  This is the path to the file defining the list of database names containing
- the eigenfunctions - one name per line.
+ the eigenfunctions, one name per line.
  Each name refers to the database in which the 
 \shape italic
 .eigen
 \shape default
  relation resides.
  
-\newline
- 
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3:
 \shape italic
+\InsetSpace ~
 cmt_event
 \shape default
 
@@ -245,19 +256,20 @@ cmt_event
  scalar moment, the focal planes, the source half duration time, and the
  output time step of the synthetic seismograms.
  
-\newline
- 
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 4: 
+Line\InsetSpace ~
+4:
 \shape italic
-fmin, fmax
+\InsetSpace ~
+fmin,\InsetSpace ~
+fmax
 \shape default
  
 \newline
@@ -269,8 +281,6 @@ fmin, fmax
  databases.
  All modes with frequences out of this range are rejected.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -279,8 +289,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 5: 
+Line\InsetSpace ~
+5:
 \shape italic
+\InsetSpace ~
 nsamples
 \shape default
  
@@ -288,8 +300,6 @@ nsamples
  This is the number of samples in the synthetic seismograms.
  All synthetic seismograms start from the source time.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -298,13 +308,15 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 6: 
+Line\InsetSpace ~
+6:
 \shape italic
+\InsetSpace ~
 out_dbname
 \shape default
  
 \newline
- This is the output database name including only the 
+This is the output database name including only the 
 \shape italic
 .wfdisc
 \shape default
@@ -313,15 +325,13 @@ out_dbname
 \shape italic
 .wfdisc
 \shape default
- relation refers to the binary file with 6 multiplexed Green functions;
+ relation refers to the binary file with 6 multiplexed Green functions,
  i.e., one tensor component.
- 
-\newline
  
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
@@ -344,16 +354,18 @@ status collapsed
 \end_layout
 
 \begin_layout Subsection
+\begin_inset LatexCommand \label{sub:Input-data (green)}
+
+\end_inset
+
 Input data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
-in_dbname.
-
+in_dbname
 \series default
 \emph default
  This database must exist and must include 
@@ -411,14 +423,13 @@ chan
  The third character must be the component name: Z (upper case, for vertical)
  and other symbols (any case, for the horizontals).
  
-\newline
- 
-\newline
- 
+\end_layout
+
+\begin_layout Description
+
 \series bold
 \emph on
-db_list.
-
+db_list
 \series default
 \emph default
  This file allows joining an unlimited number of 
@@ -433,22 +444,20 @@ eigcon
 \series default
  output.
  
-\newline
- 
-\newline
- 
+\end_layout
+
+\begin_layout Description
+
 \series bold
 \emph on
-cmt_event.
-
+cmt_event
 \series default
 \emph default
  This file consists of a single line with the following fields: 
-\newline
- 
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 
 \shape italic
 evid, year, jday, hour, min, sec, lat, lon, depth, step, halfd, 
@@ -471,28 +480,17 @@ evid, year, jday, hour, min, sec, lat, lon, depth, step, halfd,
 
  
 \shape italic
-strike1, dip1, slip1, strike2, dip2, slip2,
-\shape default
-.
- 
+strike1, dip1, slip1, strike2, dip2, slip2
 \end_layout
 
 \begin_layout Standard
-where, 
+where 
 \end_layout
 
 \begin_layout Description
-\InsetSpace ~
-\InsetSpace ~
-\InsetSpace ~
-\InsetSpace ~
-\InsetSpace ~
-\InsetSpace ~
-\InsetSpace ~
 evid is the event identifier, 8 characters long 
 \end_layout
 
-\begin_deeper
 \begin_layout Description
 year is the event year of form 
 \series bold
@@ -518,41 +516,37 @@ sec is the event seconds with decimal fraction
 \end_layout
 
 \begin_layout Description
-lat is the event geographical latitude, (degree) 
+lat is the event geographical latitude (degree) 
 \end_layout
 
 \begin_layout Description
-lon is the event geographical longitude, (degree) 
+lon is the event geographical longitude (degree) 
 \end_layout
 
 \begin_layout Description
-depth is the event depth, (km) 
+depth is the event depth (km) 
 \end_layout
 
 \begin_layout Description
-step is the time step for Green functions and seismograms, sec 
+step is the time step for Green functions and seismograms (sec)
 \end_layout
 
 \begin_layout Description
-halfd is the source half time duration, sec 
+halfd is the source half time duration (sec)
 \end_layout
 
 \begin_layout Description
 \begin_inset Formula $M_{0}$
 \end_inset
 
- is the scalar tensor moment, (dyn
+ is the scalar tensor moment (dyn
 \begin_inset Formula $\cdot$
 \end_inset
 
-cm) 
+cm)
 \end_layout
 
 \begin_layout Description
-\begin_inset Formula $ $
-\end_inset
-
-
 \begin_inset Formula $M_{rr},{\, M}_{\theta\theta},\; M_{\varphi\varphi},\; M_{r\theta},\; M_{r\varphi},\; M_{\theta\varphi}$
 \end_inset
 
@@ -567,7 +561,7 @@ cm)
 \begin_inset Formula $M_{n}$
 \end_inset
 
- is the normalization coefficient for the tensor components, (dyn
+ is the normalization coefficient for the tensor components (dyn
 \begin_inset Formula $\cdot$
 \end_inset
 
@@ -584,7 +578,7 @@ dip1,\InsetSpace ~
 slip1
 \shape default
 \emph default
- are the first fault plane solution, (degree) 
+ are the first fault plane solution (degree) 
 \end_layout
 
 \begin_layout Description
@@ -597,7 +591,7 @@ dip2,\InsetSpace ~
 slip2
 \shape default
 \emph default
- are the second fault plane solution, (degree) 
+ are the second fault plane solution (degree) 
 \end_layout
 
 \end_deeper
@@ -605,13 +599,11 @@ slip2
 Output data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
-out_dbname.
-
+out_dbname
 \series default
 \emph default
  Program 
@@ -656,74 +648,124 @@ green
  prints out on the standard output device the following messages:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
 \noindent
 
 \series bold
 \emph on
 Dialog messages
-\series default
-\emph default
-.
- Copy of input/output dialog or parameter file in dialog form.
- For example,
 \end_layout
 
 \begin_layout Standard
 \noindent
+Copy of input/output dialog or parameter file in dialog form.
+ For example,
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
 
 \family typewriter
 enter path to db with sta & stachan: 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 RDSEED_rdseed
 \emph default
  
-\newline
- enter name of file within list of nmodes db: 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter name of file within list of nmodes db: 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 db_list
 \emph default
  
-\newline
- enter input CMT file name: 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter input CMT file name: 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 cmt_event
 \emph default
  
-\newline
- min and max frequencies to be considered (mHz) : 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+min and max frequencies to be considered (mHz) : 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 0.
  260.
 
 \emph default
  
-\newline
- enter # pts in greens fns .le.
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter # pts in greens fns .le.
  30000 : 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 4000
 \emph default
  
-\newline
- enter Green functions output db file name: 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter Green functions output db file name: 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 green
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
 \noindent
 
 \series bold
@@ -734,17 +776,17 @@ Warning, error, and info messages
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 \noindent
-1.
- 
+
 \family typewriter
- ============= Program green ====================
+============= Program green ====================
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  Shows that program 
 \series bold
@@ -754,17 +796,18 @@ green
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-2.
- 
+
 \family typewriter
 WARNING: green: # of points in Green functions is stripped to nnn
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Warning message.
  The number of requested points for the Green functions exceeds the maximum
  allowed value 
@@ -798,45 +841,47 @@ mseis=30000
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-3.
- 
+
 \family typewriter
 WARNING: green: # of channels is stripped to 3
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Warning message.
  Number of sensors (channels, components) in a group cannot be greater than
  3.
- Only the three first sensors are taken into account.
+ Only the first three sensors are taken into account.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-4.
- 
+
 \family typewriter
 WARNING: green: # of channels is stripped to 1
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Warning message.
  Number of sensors in a group cannot be equal to 2.
  Only the first sensor is taken into account.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-5.
- 
+
 \family typewriter
 WARNING: green: Channel: # 1 is not vertical.
  Sequence ignored
@@ -844,17 +889,18 @@ WARNING: green: Channel: # 1 is not vertical.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Warning message.
  Channel with Z component must be the first in the group.
  The group of channels is rejected.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-6.
- 
+
 \family typewriter
 WARNING: green: Channel: # nnn is not horizontal.
  Sequence ignored
@@ -862,7 +908,8 @@ WARNING: green: Channel: # nnn is not horizontal.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Warning message.
  Second and third channels in the group must be horizontal components.
  nnn is the channel number in the group.
@@ -870,10 +917,10 @@ Warning message.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-7.
- 
+
 \family typewriter
 ERR010: green: max l = nnn, must be .le.
  ml
@@ -881,7 +928,8 @@ ERR010: green: max l = nnn, must be .le.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Error message.
  The max angular order number 
 \family typewriter
@@ -928,17 +976,18 @@ ml = 6000
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-8.
- 
+
 \family typewriter
 ERR011:eigen: flat and bin indices are different
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Error message.
  Broken input 
 \shape italic
@@ -954,10 +1003,10 @@ Error message.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-9.
- 
+
 \family typewriter
 ERR012: green: # sph.
  modes in band exceed max allowed number nnn
@@ -965,7 +1014,8 @@ ERR012: green: # sph.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Error message.
  The total number of spheroidal modes in the band exceeds the maximum allowed
  number of 
@@ -993,8 +1043,7 @@ meig = 200000
 
 \begin_layout Standard
 \noindent
-10.
- 
+
 \family typewriter
 ERR012: green: # tor.
  modes in band exceed max allowed number nnn
@@ -1002,7 +1051,7 @@ ERR012: green: # tor.
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 Error message.
  The total number of toroidal modes in the band exceeds the maximum allowed
  number 
@@ -1028,10 +1077,10 @@ meig = 200000
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-11.
- 
+
 \family typewriter
 green: # sph.
  modes in band = nnn must be .le.
@@ -1040,7 +1089,8 @@ green: # sph.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  
 \family typewriter
@@ -1055,10 +1105,10 @@ meig
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-12.
- 
+
 \family typewriter
 green: # tor.
  modes in band = nnn must be .le.
@@ -1067,7 +1117,8 @@ green: # tor.
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  
 \family typewriter
@@ -1082,9 +1133,9 @@ meig
  
 \end_layout
 
-\begin_layout Description
-13.
- 
+\end_deeper
+\begin_layout Enumerate
+
 \family typewriter
 green: evid date&time lat = 
 \begin_inset Formula $\pm$
@@ -1099,29 +1150,24 @@ ddd.ddd
  
 \end_layout
 
-\begin_layout Description
-\begin_inset Formula $\;\;\;\;\;$
-\end_inset
+\begin_deeper
+\begin_layout Standard
 
- 
 \family typewriter
 green: source depth = ddd.d km
 \family default
  
 \end_layout
 
-\begin_layout Description
-\begin_inset Formula $\;\;\;\;\;$
-\end_inset
+\begin_layout Standard
 
- 
 \family typewriter
 green: step = d.ddd sec, nsamples = ddddd
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_layout Standard
 Info message.
  This message outputs part of the 
 \shape italic
@@ -1132,21 +1178,27 @@ cmt_event
 \shape italic
 cmt_event
 \shape default
- file in Section 5.2.
+ file in Section 
+\begin_inset LatexCommand \ref{sub:Input-data (green)}
+
+\end_inset
+
+.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-14.
- 
+
 \family typewriter
 green: Input dbname : xxxxx
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  xxxxx is the name of the input database for the 
 \shape italic
@@ -1160,34 +1212,36 @@ Info message.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-15.
- 
+
 \family typewriter
 green: Station: code lat lon , Channels: nnn
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  This message specifies the station code, station coordinates, and number
  of components nnn for the selected group of sensors.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-16.
- 
+
 \family typewriter
 green: Channel: # nnn code chan hang vang
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  This message specifies a separate sensor (channel) for the group of sensors.
  nnn is the current number in the group, code is the station code, chan
@@ -1198,76 +1252,67 @@ Info message.
 \shape italic
 .sitechan
 \shape default
- relation in Section 8.
+ relation, Table 
+\begin_inset LatexCommand \ref{tab:Relation:-sitechan.-Description:}
+
+\end_inset
+
+.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-17.
- 
+
 \family typewriter
 green: Epicentral Distance : ddd.ddd
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  ddd.ddd is the station-event distance in degrees.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-18.
- 
+
 \family typewriter
 green: Azimuth of Source : ddd.ddd
 \family default
  
 \end_layout
 
-\begin_layout Quote
-Info message.
- ddd.ddd is the azimuth of a station to the source point.
- in degree.
- 
-\end_layout
-
+\begin_deeper
 \begin_layout Standard
-\noindent
-19.
- 
-\family typewriter
-green: Azimuth of Source : ddd.ddd
-\family default
- 
-\end_layout
-
-\begin_layout Quote
 Info message.
- ddd.ddd is the azimuth of the station to the source point in degrees.
+ ddd.ddd is the azimuth of a station to the source point in degrees.
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-20.
- 
+
 \family typewriter
 green: nnn code chan date&time step mmm
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  This message informs about some attributes specifying the Green functions.
  nnn is the global number of Green functions set, code is the station name,
  chan is the channel name, date&time is the event origin time, step is the
  Green function sampling step in seconds, and mmm is the total number of
- samples for the block of 6 Green functions.
+ samples for the block of six Green functions.
  
 \end_layout
 

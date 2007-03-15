@@ -37,9 +37,9 @@ eigcon program
 \end_layout
 
 \begin_layout Standard
-
+The
 \series bold
-eigcon
+ eigcon
 \series default
  program makes postprocessing of the 
 \series bold
@@ -100,9 +100,13 @@ minos_bran
 \shape italic
 .eigen
 \shape default
- relation table, Section 8, has the structure of an external database file
- and can be easily incorporated into relational databases such as ORACLE,
- Postgress, MySql, etc.
+ relation table (
+\begin_inset LatexCommand \ref{tab:Relation:-eigen.-Description:}
+
+\end_inset
+
+) has the structure of an external database file and can be easily incorporated
+ into relational databases such as ORACLE, Postgress, MySql, etc.
 \end_layout
 
 \begin_layout Subsection
@@ -111,12 +115,38 @@ Command line
 
 \begin_layout Standard
 \noindent
+There are three different ways to start the 
+\series bold
+eigcon
+\series default
+ program: 
+\end_layout
+
+\begin_layout Enumerate
+Interactive dialog for setting input parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+\noindent
 
 \series bold
 eigcon
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Single shell command with redirection of the standard input from a parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as in the
+ interactive dialog - one answer per line:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -131,7 +161,19 @@ eigcon
 parameter_file
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Direct shell script.
+ In this case, the contents of the parameter file are directly included
+ in the shell script between delimiters 
+\begin_inset Quotes eld
+\end_inset
+
+WORD''
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -152,50 +194,17 @@ eigcon
  WORD
 \end_layout
 
-\begin_layout Standard
-\noindent
-There are three different ways to start the 
-\series bold
-eigcon
-\series default
- program: 
-\end_layout
-
-\begin_layout Itemize
-interactive dialog for setting input parameters; 
-\end_layout
-
-\begin_layout Itemize
-single shell command with redirection of the standard input from a parameter
- file 
-\shape italic
-parameter_file
-\shape default
- containing exactly the same information and in the same order as in the
- interactive dialog - one answer per line; 
-\end_layout
-
-\begin_layout Itemize
-direct shell script.
- In this case, the contents of the parameter file are directly included
- in the shell script between delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD".
- See examples.
- 
-\end_layout
-
+\end_deeper
 \begin_layout Standard
 \noindent
 The parameter file consists of six lines: 
 \end_layout
 
 \begin_layout Description
-Line 1: 
+Line\InsetSpace ~
+1:
 \shape italic
-jcom
+ jcom
 \shape default
  
 \newline
@@ -222,8 +231,6 @@ jcom
 
  for inner core toroidal modes.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -232,7 +239,8 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 2: 
+Line\InsetSpace ~
+2: 
 \shape italic
 model_file
 \shape default
@@ -248,13 +256,14 @@ model_file
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3: 
 \shape italic
 max_depth
 \shape default
 
 \newline
- 
+
 \shape italic
 max_depth
 \shape default
@@ -270,8 +279,6 @@ max_depth
 
  is the radius of the free surface in km.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -280,7 +287,8 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 4: 
+Line\InsetSpace ~
+4: 
 \shape italic
 in_plain_file
 \shape default
@@ -300,7 +308,8 @@ minos_bran
 \end_layout
 
 \begin_layout Description
-Line 5: 
+Line\InsetSpace ~
+5: 
 \shape italic
 in_bin_file
 \shape default
@@ -321,7 +330,8 @@ minos_bran
 \end_layout
 
 \begin_layout Description
-Line 6: 
+Line\InsetSpace ~
+6: 
 \shape italic
 dbname
 \shape default
@@ -373,14 +383,10 @@ status collapsed
 Input data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
-\series bold
-\size large
 \emph on
-model_file.
-
-\series default
+model_file
 \emph default
  See description in Section 3.2, 
 \series bold
@@ -391,14 +397,12 @@ model_file
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 \noindent
 
 \series bold
-\size large
 \emph on
-in_plain_file.
-
+in_plain_file
 \series default
 \emph default
  This file has been created by 
@@ -425,14 +429,12 @@ eigcon
  relation table.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 \noindent
 
 \series bold
-\size large
 \emph on
-in_bin_file.
-
+in_bin_file
 \series default
 \emph default
  This file has been created by 
@@ -459,8 +461,6 @@ As mentioned above,
 eigcon
 \series default
  creates three objects in the file system: a relational table 
-\newline
- 
 \shape italic
 dbname.eigen
 \shape default
@@ -475,19 +475,25 @@ dbname.eigen.dat/eigen
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
 dbname.eigen
 \series default
 \emph default
- file format is described in Section 8 as the relation table 
+\InsetSpace ~
+file\InsetSpace ~
+format is described as the relation table 
 \shape italic
 .eigen
 \shape default
-.
+ (Table 
+\begin_inset LatexCommand \ref{tab:Relation:-eigen.-Description:}
+
+\end_inset
+
+).
  Each line of this file describes the modal properties of a single eigenfunction
  and references the binary data segment in the 
 \shape italic
@@ -496,15 +502,16 @@ dbname.eigen.dat/eigen
  file.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
 dbname.eigen.dat/eigen
 \series default
 \emph default
- binary file consists of segments.
+\InsetSpace ~
+binary\InsetSpace ~
+file consists of segments.
  Each segment stores normalized eigenfunctions for a single normal mode
  (
 \begin_inset Formula $n,l$
@@ -522,9 +529,9 @@ datatype
 .eigen
 \shape default
  describes numeric memory storage data (byte order).
- There are two common byte orders for most of computer architectures: BIG_ENDIAN
+ There are two common byte orders for most computer architectures: BIG_ENDIAN
  (straight order 1-2-3-4) and LOW_ENDIAN (reverse order 4-3-2-1).
- BIG_ENDIAN is used by SUNS and RISC-oriented platforms, and LOW_ENDIAN
+ BIG_ENDIAN is used by Suns and RISC-oriented platforms, and LOW_ENDIAN
  is used by PC, VAX and DEC hardware.
  
 \series bold
@@ -550,7 +557,7 @@ datatype
 \end_layout
 
 \begin_layout Standard
-Each segment is logically divided into two parts - the header and the body.
+Each segment is logically divided into two parts -- the header and the body.
  
 \end_layout
 
@@ -567,18 +574,21 @@ This part of the segment stores scalar parameters and normalization coefficients
  
 \end_layout
 
-\begin_layout Itemize
-word 1: 
+\begin_layout Description
+word\InsetSpace ~
+1:
 \family typewriter
 \size small
+\InsetSpace ~
 integer*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $n$
 \end_inset
 
- - normal mode radial order number 
+ Normal mode radial order number 
 \begin_inset Formula $n$
 \end_inset
 
@@ -595,18 +605,21 @@ norder
  
 \end_layout
 
-\begin_layout Itemize
-word 2: 
+\begin_layout Description
+word\InsetSpace ~
+2:
 \family typewriter
 \size small
+\InsetSpace ~
 integer*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $l$
 \end_inset
 
- - normal mode angular order (harmonic degree) number 
+ Normal mode angular order (harmonic degree) number 
 \begin_inset Formula $l$
 \end_inset
 
@@ -623,14 +636,17 @@ lorder
  
 \end_layout
 
-\begin_layout Itemize
-word 3: 
+\begin_layout Description
+word\InsetSpace ~
+3:
 \family typewriter
 \size small
+\InsetSpace ~
 real*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $\omega$
 \end_inset
 
@@ -675,18 +691,21 @@ status collapsed
  
 \end_layout
 
-\begin_layout Itemize
-word 4: 
+\begin_layout Description
+word\InsetSpace ~
+4:
 \family typewriter
 \size small
- real*4
+\InsetSpace ~
+real*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $q$
 \end_inset
 
- - part of the exponential term in the attenuation expression, 
+ Part of the exponential term in the attenuation expression, 
 \begin_inset ERT
 status collapsed
 
@@ -746,34 +765,40 @@ status collapsed
  
 \end_layout
 
-\begin_layout Itemize
-word 5: 
+\begin_layout Description
+word\InsetSpace ~
+5:
 \family typewriter
 \size small
- real*4
+\InsetSpace ~
+real*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $r_{n}$
 \end_inset
 
- - the radius normalization coefficient in meters, equal to the radius of
+ The radius normalization coefficient in meters, equal to the radius of
  the model's free surface.
  
 \end_layout
 
-\begin_layout Itemize
-word 6: 
+\begin_layout Description
+word\InsetSpace ~
+6:
 \family typewriter
 \size small
+\InsetSpace ~
 real*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $v_{n}$
 \end_inset
 
- - the velocity normalization coefficient, 
+ The velocity normalization coefficient, 
 \begin_inset Formula $v_{n}=r_{n}\;(\pi G\rho_{n})^{-1/2}$
 \end_inset
 
@@ -814,18 +839,21 @@ real*4
  
 \end_layout
 
-\begin_layout Itemize
-word 7: 
+\begin_layout Description
+word\InsetSpace ~
+7:
 \family typewriter
 \size small
+\InsetSpace ~
 real*4
 \family default
 \size default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $a_{n}$
 \end_inset
 
- - the acceleration normalization coefficient, 
+ The acceleration normalization coefficient, 
 \begin_inset ERT
 status collapsed
 
@@ -865,20 +893,23 @@ status collapsed
 The body - eigenfunction grid
 \end_layout
 
-\begin_layout Itemize
-word 8
+\begin_layout Description
+word\InsetSpace ~
+8
 \begin_inset Formula $\;-\;$
 \end_inset
 
-end: 
+end:
 \family typewriter
+\InsetSpace ~
 real*4
 \family default
-, 
+,\InsetSpace ~
+
 \begin_inset Formula $E(nrow,ncol)$
 \end_inset
 
- - matrix of 
+ Matrix of 
 \begin_inset Formula $nrow$
 \end_inset
 
@@ -917,7 +948,12 @@ eigcon
 
 .
  This is done in accordance with theory developed by Woodhouse & Dahlen
- (1978).
+ (1978) 
+\begin_inset LatexCommand \cite{Woodhouse, Dahlen 1978}
+
+\end_inset
+
+.
  The new normalization of eigenfunctions is given by 
 \begin_inset Formula \[
 \omega^{2}\int_{0}^{r_{n}}\rho(r)\; l(l+1)\; W^{2}(r)r^{2}\; dr=1\]
@@ -943,23 +979,24 @@ Program
 \series bold
 eigcon
 \series default
- prints out on the standad output device the following messages:
+ prints out on the standard output device the following messages:
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
 \noindent
 
 \series bold
 \emph on
 Dialog messages
-\series default
-\emph default
-.
- Copy of input/output dialog or parameter file in dialog form.
- For example,
 \end_layout
 
 \begin_layout Standard
+\noindent
+Copy of input/output dialog or parameter file in dialog form.
+ For example,
+\end_layout
+
+\begin_layout LyX-Code
 \noindent
 
 \family typewriter
@@ -967,49 +1004,96 @@ spheroidals (3) or toroidals (2) or radial (1) or
 \newline
  inner core toroidals
  (4) modes 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 3
 \emph default
  
-\newline
- enter name of model file 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter name of model file
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 model_PREM.txt
-\emph default
- 
-\newline
- enter max depth [km] : 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter max depth [km] : 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 40.
 
 \emph default
  
-\newline
- enter name of minos_bran output text file 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter name of minos_bran output text file 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 PREM_S
 \emph default
  
-\newline
- minos_bran output binary unformatted file name 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+minos_bran output binary unformatted file name 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 ePREM_S
 \emph default
  
-\newline
- enter path/dbase_name or dbase_name to store eigenfunctions: 
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
+enter path/dbase_name or dbase_name to store eigenfunctions: 
+\end_layout
+
+\begin_layout LyX-Code
+\noindent
+
+\family typewriter
 \emph on
 test_S
 \emph default
@@ -1024,17 +1108,17 @@ test_S
 Info and error messages
 \end_layout
 
-\begin_layout Standard
+\begin_layout Enumerate
 \noindent
-1.
- 
+
 \family typewriter
 ============= Program eigcon ====================
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  Shows that program 
 \series bold
@@ -1044,17 +1128,18 @@ eigcon
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-2.
- 
+
 \family typewriter
 eigcon: n,nstart,nrad = nnn, mmm, kkk
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 Info message.
  
 \family typewriter
@@ -1073,17 +1158,18 @@ kkk
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-3.
- 
+
 \family typewriter
 ERR001: eigcon: Input plane and binary files differ: nn, ll, n, l 
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 \noindent
 Order numbers of some eigenfunctions 
 \family typewriter
@@ -1107,17 +1193,18 @@ n, l
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-4.
- 
+
 \family typewriter
 ERR002: eigcon: Unknown jcom nnn
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 \noindent
 Error message.
  The parameter 
@@ -1138,21 +1225,22 @@ jcom
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-5.
- 
+
 \family typewriter
 ERR003: eigcon: jcom = nnn does not fit mode sss
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 \noindent
 Error message.
  Impossible combination of jcom and mode.
- For example, jcom=2 (toroidal modes) can not used together with 
+ For example, jcom=2 (toroidal modes) cannot be used together with a 
 \series bold
 minos_bran
 \series default
@@ -1162,17 +1250,18 @@ minos_bran
  
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
 \noindent
-6.
- 
+
 \family typewriter
 ERR004:eigcon: Wrong minos_bran output text file
 \family default
  
 \end_layout
 
-\begin_layout Quote
+\begin_deeper
+\begin_layout Standard
 \noindent
 Error message.
  Probably the 
@@ -1186,7 +1275,7 @@ minos_bran
 \series bold
 minos_bran
 \series default
- again to create proper plain file.
+ again to create a proper plain file.
  
 \end_layout
 

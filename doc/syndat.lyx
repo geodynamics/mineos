@@ -40,7 +40,7 @@ syndat program
 \end_layout
 
 \begin_layout Standard
-
+The 
 \series bold
 syndat
 \series default
@@ -57,12 +57,38 @@ Command line
 
 \begin_layout Standard
 \noindent
+There are three different ways to start the 
+\series bold
+syndat
+\series default
+ program: 
+\end_layout
+
+\begin_layout Enumerate
+Interactive dialog for setting input parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+\noindent
 
 \series bold
 syndat
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Single shell command with redirection of the standard input from a parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as in the
+ interactive dialog - one answer per line:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -77,7 +103,19 @@ syndat
 parameter_file
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Direct shell script.
+ In this case, the contents of the parameter file are directly included
+ in the shell script between the delimiters 
+\begin_inset Quotes eld
+\end_inset
+
+WORD'':
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -98,49 +136,17 @@ syndat
  WORD
 \end_layout
 
-\begin_layout Standard
-\noindent
-There are three different ways to start the 
-\series bold
-syndat
-\series default
- program: 
-\end_layout
-
-\begin_layout Itemize
-interactive dialog for setting input parameters; 
-\end_layout
-
-\begin_layout Itemize
-single shell command with redirection of the standard input from a parameter
- file 
-\shape italic
-parameter_file
-\shape default
- containing exactly the same information and in the same order as in the
- interactive dialog - one answer per line; 
-\end_layout
-
-\begin_layout Itemize
-direct shell script.
- In this case, the contents of the parameter file are directly included
- in the shell script between the delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD".
- See examples.
- 
-\end_layout
-
+\end_deeper
 \begin_layout Standard
 \noindent
 The parameter file consists of four lines: 
 \end_layout
 
 \begin_layout Description
-Line 1: 
+Line\InsetSpace ~
+1:
 \shape italic
+\InsetSpace ~
 cmt_event
 \shape default
 
@@ -158,18 +164,18 @@ green
  It uses part of the file defining the seismic moment tensor components,
  scalar moment, and focal planes.
  
-\newline
- 
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 2: 
+Line\InsetSpace ~
+2:
 \shape italic
+\InsetSpace ~
 in_dbname 
 \shape default
  
@@ -197,18 +203,18 @@ green
 \series default
  program.
  
-\newline
- 
 \series bold
 Format:
 \series default
- Any string up to 256 characters long.
+ Any string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3:
 \shape italic
+\InsetSpace ~
 plane
 \shape default
  
@@ -236,8 +242,6 @@ cmt_event
 , the program computes the tensor components using the scalar moment and
  focal plane 2.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -246,8 +250,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 4: 
+Line\InsetSpace ~
+4:
 \shape italic
+\InsetSpace ~
 out_dbname
 \shape default
  
@@ -263,8 +269,6 @@ out_dbname
 \shape default
  relation refers to a binary file with synthetic data in nm/sec.
  
-\newline
- 
 \series bold
 Format:
 \series default
@@ -273,13 +277,15 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line 5: 
+Line\InsetSpace ~
+5:\InsetSpace ~
+
 \shape italic
 datatype
 \shape default
  
 \newline
- This defines the type of synthetic data.
+This defines the type of synthetic data.
  If 
 \begin_inset Formula $datatype=0$
 \end_inset
@@ -338,23 +344,27 @@ status collapsed
 Input data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
-cmt_event.
-
+cmt_event
 \series default
 \emph default
- See description in section 5.2.
+ See description in Section 
+\begin_inset LatexCommand \ref{sub:Input-data (green)}
+
+\end_inset
+
+.
  
-\newline
- 
+\end_layout
+
+\begin_layout Description
+
 \series bold
 \emph on
-in_dbname.
-
+in_dbname
 \series default
 \emph default
  
@@ -377,13 +387,11 @@ green
 Output data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
-out_dbname.
-
+out_dbname
 \series default
 \emph default
  Database name for the final synthetic seismograms referenced by the 
