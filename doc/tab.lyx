@@ -58,7 +58,7 @@ This chapter defines the tables (relations) in the flat file database.
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-eigen.-Description:}
@@ -1117,7 +1117,7 @@ load date
 placement H
 wide false
 sideways true
-status open
+status collapsed
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-site.-Description:}
@@ -1891,7 +1891,7 @@ load date
 placement H
 wide false
 sideways true
-status open
+status collapsed
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-sitechan.-Description:}
@@ -3900,22 +3900,22 @@ wfdisc
 
 \begin_layout Description
 Description: Calibration factor.
- This is the conversation factor that maps digital data to earth displacement.
+ This is the conversion factor that maps digital data to earth displacement.
  The factor holds true at the oscillation period specified by the attribute
  
 \shape italic
 calper
 \shape default
 .
- A positive value means ground motion increasing in component direction
+ A positive value means ground motion increasing in a component direction
  (up, north, east) is indicated by increasing counts.
  A negative value means the opposite.
  
 \shape italic
 Calib
 \shape default
- generally reflects the best calibration information available at time of
- recording.
+ generally reflects the best calibration information available at a time
+ of recording.
  
 \end_layout
 
@@ -4060,14 +4060,10 @@ time
 \shape default
 , uniquely identifies the source of seismic data,  including the geographic
  location, spatial orientation, sensor and subsequent  data processing.
- The first two character are define channel name and the third  channel
+ The first two character define the channel name, and the third, the channel
  component.
- 
-\begin_inset Quotes eld
-\end_inset
-
-Z" character is for vertical component, other characters  are for horizontal
- components.
+ ``Z'' character is for the vertical component; other characters are for
+ horizontal components.
  
 \end_layout
 
@@ -4078,7 +4074,7 @@ Value:  A valid entry is required.
 \end_layout
 
 \begin_layout Description
-Range:  Any sequence of 3 upper case characters.
+Range:  Any sequence of 3 uppercase characters.
  
 \end_layout
 
@@ -4210,7 +4206,7 @@ sitechan
 \end_layout
 
 \begin_layout Description
-Description:  This attribute specifies thr type of data channel: n (normal
+Description:  This attribute specifies the type of data channel: n (normal
  , a normal instrument  response), b (beam, a coherent beam firmed with
  array data), or i (an incoherent  beam of energy stack).
  
@@ -4230,7 +4226,7 @@ Range:  { n
 \begin_inset Formula $|$
 \end_inset
 
- i }, lower case 
+ i }, lowercase 
 \end_layout
 
 \begin_layout Standard
@@ -4250,16 +4246,16 @@ datatype
 \begin_layout Description
 Relation:  
 \series bold
-eigen,wfdisc
+eigen, wfdisc
 \series default
  
 \end_layout
 
 \begin_layout Description
 Description:  Numeric storage data.
- This attribute specifies the format of data series in the  file system.
+ This attribute specifies the format of data series in the file system.
  Currently only the data type t4 and f4 are supported.
-  Attribute is used to make swapping four bytes real numbers if necessary.
+  Attribute is used to enable swapping four bytes in real numbers if necessary.
  
 \end_layout
 
@@ -4271,7 +4267,7 @@ Value:  NOT ALLOWED.
 \end_layout
 
 \begin_layout Description
-Range:  The currently recognized types (lover case) are: 
+Range:  The currently recognized types (lowercase) are: 
 \end_layout
 
 \begin_layout Quotation
@@ -4464,9 +4460,8 @@ sitechan
 \begin_layout Description
 Description:  Channel description.
  This is a description of the data channel.
- For  non-instrument channels (e.g.
- beams) this is the only quantitative description  of channel operations
- in the core tables.
+ For  non-instrument channels (e.g., beams) this is the only quantitative
+ description  of channel operations in the core tables.
  
 \end_layout
 
@@ -4476,7 +4471,7 @@ Value:  - (a dash)
 \end_layout
 
 \begin_layout Description
-Range:  Any free-format string up to 50 character long.
+Range:  Any free-format string of up to 50 characters long.
  
 \end_layout
 
@@ -4504,12 +4499,8 @@ site
 
 \begin_layout Description
 Description:  Distance east.
- This attribute gives the 
-\begin_inset Quotes eld
-\end_inset
-
-easting" or relative position of an array  element, east of the array center
- specified by the value of 
+ This attribute gives the ``easting'' or relative position of an array 
+ element, east of the array center specified by the value of 
 \shape italic
 refsta
 \shape default
@@ -4572,7 +4563,7 @@ Description:  Data file.
 \begin_inset Formula $wfdisc$
 \end_inset
 
- this is the file name of a disk waveform or single component  green function.
+ this is the file name of a disk waveform or single component Green function.
  In 
 \begin_inset Formula $eigen$
 \end_inset
@@ -4589,7 +4580,7 @@ Value:  NOT ALLOWED.
 \end_layout
 
 \begin_layout Description
-Range:  Any string up to 32 character long.
+Range:  Any string of up to 32 characters long.
  
 \end_layout
 
@@ -4617,7 +4608,7 @@ eigen, wfdisc
 
 \begin_layout Description
 Description:  Directory.
- This attribute is the directory-part of a path name.
+ This attribute is the directory part of a path name.
   This is a relative path for the current directory containing the 
 \begin_inset Formula $eigen$
 \end_inset
@@ -4634,7 +4625,7 @@ Value:  NOT ALLOWED.
 \end_layout
 
 \begin_layout Description
-Range:  Any string up to 64 character.
+Range:  Any string of up to 64 characters.
  
 \end_layout
 
@@ -4662,12 +4653,8 @@ site
 
 \begin_layout Description
 Description:  Distance north.
- This attribute gives the 
-\begin_inset Quotes eld
-\end_inset
-
-northing" or relative position of an array  element, north of the array
- center specified by the value of 
+ This attribute gives the ``northing'' or relative position of an array
+ element, north of the array center specified by the value of 
 \shape italic
 refsta
 \shape default
@@ -4727,7 +4714,7 @@ sitechan
 \begin_layout Description
 Description:  Emplacement depth.
  This attribute gives the depth at which the instrument  is positioned,
- relative the value of 
+ relative to the value of 
 \shape italic
 elev
 \shape default
@@ -4791,7 +4778,7 @@ Description:  Eigenfunction identifier.
 \begin_inset Formula $l$
 \end_inset
 
- and type of mode.
+ and the type of mode.
  
 \end_layout
 
@@ -4826,7 +4813,7 @@ site
 
 \begin_layout Description
 Description:  Elevation.
- This attribute is the elevation of a seismic station relative  mean see
+ This attribute is the elevation of a seismic station relative to mean sea
  level.
  
 \end_layout
@@ -4876,7 +4863,7 @@ wfdisc
 
 \begin_layout Description
 Description:  Time of last datum.
- This attribute is the time of the last sample in the  in the waveform file.
+ This attribute is the time of the last sample in the waveform file.
  
 \shape italic
 Endtime
@@ -4930,7 +4917,7 @@ eigen, wfdisc
 
 \begin_layout Description
 Description:  File offset.
- This is the byte offset of eigenfunctions segments within data file.
+ This is the byte offset of eigenfunction segments within data file.
   See 
 \begin_inset Formula $dir$
 \end_inset
@@ -5043,12 +5030,12 @@ sitechan
 Description:  Horizontal orientation of seismometer.
  This attribute specifies the  orientation of the seismometer in the horizontal
  plane, measured clockwise  from North.
- For a North-South orientation with the seismometer pointing  toward the
+ For a North-South orientation with the seismometer pointing toward the
  north, 
-\begin_inset Formula $hang=0.$
+\begin_inset Formula $hang=0$
 \end_inset
 
-; for Easr-West orientation with seismometer  pointing toward the west,
+; for East-West orientation with seismometer  pointing toward the west,
  
 \begin_inset Formula $hang=270$
 \end_inset
@@ -5074,7 +5061,7 @@ Units:  Degrees
 \end_layout
 
 \begin_layout Description
-Range:  
+Range: 
 \begin_inset Formula $0.0\leq vang\leq360.0$
 \end_inset
 
@@ -5088,7 +5075,7 @@ Range:
 \end_layout
 
 \begin_layout Description
-Name:  
+Name: 
 \shape italic
 instype 
 \shape default
@@ -5116,7 +5103,7 @@ Value:  - (a dash)
 \end_layout
 
 \begin_layout Description
-Range:  Upper case, and too numerous to mention.
+Range: Uppercase, and too numerous to mention.
  For details see ``Directory of World Digital Seismic Station,'' Ganse 
  Hutt, WDC A, Report SE-32, August, 1982.
  
@@ -5129,7 +5116,7 @@ Range:  Upper case, and too numerous to mention.
 \end_layout
 
 \begin_layout Description
-Name:  
+Name: 
 \shape italic
 jdate
 \shape default
@@ -5148,8 +5135,8 @@ wfdisc
 Description:  Julian date.
  This attribute is the date of seismic recording.
  The same  information is available in epoch time, but the Julian date format
- is more  convenient for many type of searches.
- Dates B.C.
+ is more convenient for many types of searches.
+ Dates B.C.E.
  are negative.
  Note: there is no  year = 0000 or day = 000.
  Where only the year is known, day of the year = 001;  where only year and
@@ -5159,8 +5146,7 @@ Description:  Julian date.
 \shape italic
 time
 \shape default
-.
- attribute  
+ and attribute 
 \begin_inset Formula $per$
 \end_inset
 
@@ -5185,7 +5171,7 @@ Value:
 \end_layout
 
 \begin_layout Description
-Range:  Julian dates of the form yyyyddd.
+Range: Julian dates of the form yyyyddd.
  Must be consistent with the accompanying  
 \shape italic
 time
@@ -5201,7 +5187,7 @@ time
 \end_layout
 
 \begin_layout Description
-Name:  
+Name: 
 \shape italic
 lat
 \shape default
@@ -5655,8 +5641,8 @@ site, sitechan
 
 \begin_layout Description
 Description:  Turn on date.
- This attribute is the Julian Date on which the  station or sensor indicated
- was began operated.
+ This attribute is the Julian Date on which the station or sensor indicated
+ was began operation.
  
 \shape italic
 Offdate
@@ -5665,19 +5651,20 @@ Offdate
 \shape italic
 ondate
 \shape default
-  are not intended to accommodate temporary downtimes, but rather to  indicate
- the time period for which the attributes of the station  
+ is not intended to accommodate temporary downtimes, but rather to indicate
+ the time period for which the attributes of the station 
 \shape italic
 lat, lon, elev
 \shape default
- are valid for the given station code, Station  are often moved, but with
- the station code remaining unchanged.
+ are valid for the given station code.
+ Stations are often moved, but usually the station code remains unchanged.
  
 \end_layout
 
 \begin_layout Description
 NA\InsetSpace ~
-Value:  NOT ALLOWED, A valid entry is required.
+Value:  NOT ALLOWED.
+ A valid entry is required.
  
 \end_layout
 
@@ -5708,7 +5695,7 @@ eigen
 \end_layout
 
 \begin_layout Description
-Description:  Eigenvalue - period.
+Description:  Eigenvalue period.
  The frequency is 
 \begin_inset Formula $\omega=2*\pi/per$
 \end_inset
@@ -5718,7 +5705,7 @@ Description:  Eigenvalue - period.
 \begin_inset Formula $\omega$
 \end_inset
 
- is located in associated binary data.
+ is located in the associated binary data.
 \end_layout
 
 \begin_layout Description
@@ -5762,7 +5749,11 @@ Relation:
 \series bold
 eigen
 \series default
- Description:  Phase velocity.
+ 
+\end_layout
+
+\begin_layout Description
+Description:  Phase velocity.
  This gives the magnitude value of phase velocity for attribute  
 \begin_inset Formula $per$
 \end_inset
@@ -5792,7 +5783,7 @@ Units:  kilometers/seconds
 \end_layout
 
 \begin_layout Description
-Range:  
+Range: 
 \begin_inset Formula $phvel>0$
 \end_inset
 
@@ -5814,7 +5805,7 @@ samprate
 \end_layout
 
 \begin_layout Description
-Relation:  
+Relation: 
 \series bold
 wfdisc
 \series default
@@ -5822,19 +5813,25 @@ wfdisc
 \end_layout
 
 \begin_layout Description
-Description:  Sampling rate.
+Description: Sampling rate.
  The attribute is the sample rate in samples/second.
   This value may vary slightly from the nominal to reflect clock drift.
- NA Value:  NOT ALLOWED, Avalid entry is required.
  
 \end_layout
 
 \begin_layout Description
-Units:  1/seconds 
+NA\InsetSpace ~
+Value: NOT ALLOWED.
+ A valid entry is required.
+ 
 \end_layout
 
 \begin_layout Description
-Range:  
+Units: 1/seconds 
+\end_layout
+
+\begin_layout Description
+Range: 
 \begin_inset Formula $samprate>0$
 \end_inset
 
@@ -5848,7 +5845,7 @@ Range:
 \end_layout
 
 \begin_layout Description
-Name:  
+Name: 
 \shape italic
 segtype
 \shape default
@@ -5856,7 +5853,7 @@ segtype
 \end_layout
 
 \begin_layout Description
-Relation:  
+Relation: 
 \series bold
 wfdisc
 \series default
@@ -5864,9 +5861,9 @@ wfdisc
 \end_layout
 
 \begin_layout Description
-Description:  Segment type.
- The attribute indicates if a waveform is o (original),  v (virtual), s
- (segmented), d (duplicate), g (green function), and  w (synthetic waveform).
+Description: Segment type.
+ The attribute indicates if a waveform is o (original), v (virtual), s (segmente
+d), d (duplicate), g (Green function), or w (synthetic waveform).
  
 \end_layout
 
@@ -5922,9 +5919,8 @@ site, sitechan, wfdisc
 \end_layout
 
 \begin_layout Description
-Description:  Station code.
- This is common code-name of seismic observatory.
-  Generally only three or four characters are used.
+Description:  Station code, or common code name for a seismic observatory.
+ Generally only three or four characters are used.
  
 \end_layout
 
@@ -5935,7 +5931,7 @@ Value:  A valid entry is required.
 \end_layout
 
 \begin_layout Description
-Range:  Any upper case string up to 6 character long.
+Range:  Any uppercase string of up to 6 characters.
  
 \end_layout
 
@@ -5963,7 +5959,7 @@ site
 
 \begin_layout Description
 Description:  Station name/description.
- This is the full name of the station whose  code-name is in 
+ This is the full name of the station whose code name is in 
 \shape italic
 sta
 \shape default
@@ -5977,7 +5973,7 @@ Value:  - (a dash)
 \end_layout
 
 \begin_layout Description
-Range:  Any upper-case string up to 50 characters long.
+Range:  Any uppercase string of up to 50 characters.
  
 \end_layout
 
@@ -6020,7 +6016,7 @@ Range:  { ss
 \begin_inset Formula $|$
 \end_inset
 
- ar }, lower case 
+ ar }, lowercase 
 \end_layout
 
 \begin_layout Standard
@@ -6047,14 +6043,14 @@ wfdisc
 
 \begin_layout Description
 Description:  Epoch time.
- Epochal time given as seconds and fraction of second since  hour 
+ Epochal time given as seconds and fractions of a second since hour 
 \begin_inset Formula $0$
 \end_inset
 
  January 1, 1970, and stored in a double precision floating number.
-  Refers to start time data.
- The double precision floating number allows 15 decimal  digits.
- At 1 millisecond accuracy this is range of 
+ Refers to start time data.
+ The double precision floating number allows 15 decimal digits.
+ At 1 millisecond accuracy this is a range of 
 \begin_inset Formula $3\times10^{4}$
 \end_inset
 
@@ -6137,8 +6133,8 @@ site
 
 \begin_layout Description
 Description:  Reference station.
- This string specifies the reference station with respect   to which array
- member are located.
+ This string specifies the reference station with respect to which array
+ members are located.
  See 
 \shape italic
 deast, dnorth
@@ -6149,7 +6145,7 @@ deast, dnorth
 
 \begin_layout Description
 NA\InsetSpace ~
-Value:  - (a dash) 
+Value: - (a dash) 
 \end_layout
 
 \begin_layout Description
@@ -6211,7 +6207,7 @@ hang
 
 \begin_layout Description
 NA\InsetSpace ~
-Value:  NOT ALLOWED.
+Value: NOT ALLOWED.
  A valid entry is required.
  
 \end_layout

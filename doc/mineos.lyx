@@ -409,7 +409,7 @@ a, up to the eighth order).
  (despite claims to the contrary in Numerical Recipes).
  The variable step size was based on the growth rate approximated from estimates
  of the eigenvalues of the matrix A.
-\begin_inset LatexCommand \cite{Gilbert, Backus 1966}
+\begin_inset LatexCommand \cite{Gilbert Backus 1966}
 
 \end_inset
 
@@ -419,7 +419,7 @@ a, up to the eighth order).
 \begin_layout Standard
 Finding the solution for spheroidal modes was computationally unstable,
  Gilbert and Backus suggested using the method of minors.
-\begin_inset LatexCommand \cite{Gilbert, Backus 1969}
+\begin_inset LatexCommand \cite{Gilbert Backus 1969}
 
 \end_inset
 
@@ -528,8 +528,8 @@ minos_bran
 Mineos
 \series default
  Package.
- Given a 1D model of the earth and the normal mode band of interest (defined
- in terms of a range of frequencies (
+ Given a 1D model of the earth and the normal mode band of interest, i.e.,
+ defined in terms of a range of frequencies (
 \shape italic
 fmin, fmax
 \shape default
@@ -537,7 +537,7 @@ fmin, fmax
 \shape italic
 nmin, nmax, lmin, lmax
 \shape default
-)), 
+), 
 \series bold
 minos_bran
 \series default
@@ -547,9 +547,9 @@ minos_bran
 \series bold
 minos_bran
 \series default
- is in an informally defined pair of files, one an ascii file containing
+ is in an informally defined pair of files, one an ASCII file containing
  the input model and output normal mode parameters and the other a binary
- file containing the eigenfunctions from the free surface to the earth's
+ file containing the eigenfunctions from the free surface to the Earth's
  center.
  The size of the output depends on 
 \shape italic
@@ -569,7 +569,12 @@ The eigenfunctions themselves may be interesting to some users if sensitivity
 \series bold
 minos_bran
 \series default
- is discussed in section 3.
+ is discussed in Section 
+\begin_inset LatexCommand \ref{sec:Running_minos_bran-program}
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -578,8 +583,8 @@ The program
 eigcon
 \series default
  repackages the eigenfunctions in two principal ways.
- It, first, renormalizes the eigenfunctions and, second, truncates the tabulatio
-n to extend only to a cut-off depth which is intended to be the depth of
+ First it renormalizes the eigenfunctions and then truncates the tabulation
+ to extend only to a cut-off depth which is intended to be the depth of
  the deepest earthquake considered.
  This truncation greatly reduces the size of the eigenfunction file and
  speeds computation of the Green functions.
@@ -729,8 +734,9 @@ green
  desired by the user.
  The user must strictly adhere to the format of these files.
  A natural way to do this is to order a dataless (or data-full) SEED volume
- (for example from the IRIS DMC) for the stations of interest, and run RDSEED
- or an Antelope product (e.g., sd2de, seed2db) to convert to the two CSS tables.
+ (for example, from the IRIS DMC) for the stations of interest, and run
+ RDSEED or an Antelope product (e.g., sd2de, seed2db) to convert to the two
+ CSS tables.
  Event coordinates and depth are contained in an unformatted, single lines
  file that we call 
 \shape italic
@@ -757,8 +763,8 @@ green
 \shape italic
 .wfdisc
 \shape default
- file (in the CSS-3.0 data base schema) in which each row corresponds to
- a given station:channel pair and points to the Green function on disk.
+ file (in the CSS-3.0 database schema) in which each row corresponds to a
+ given station:channel pair and points to the Green function on disk.
  Antelope products can be used to view the Green functions in which each
  station:channel set of six waveforms is multiplexed into a single waveform.
 \end_layout
@@ -797,11 +803,20 @@ Installation and Getting Help
 \end_layout
 
 \begin_layout Section
+\begin_inset LatexCommand \label{sec:Getting-Started}
+
+\end_inset
+
 Getting Started
 \end_layout
 
 \begin_layout Standard
-There are examples for running the four programs in section 10.
+There are examples for running the four programs in Chapter 
+\begin_inset LatexCommand \ref{cha:Examples}
+
+\end_inset
+
+.
  In addition, to help the user get started, the standard installation comes
  with several input files.
 \end_layout
@@ -823,9 +838,13 @@ prem_noocean.txt, prem_ocean.txt, NRussia.txt, CPacific.txt
  The other two model files are a continental and an ocean point, in N.
  Russia and the C.
  Pacific, respectively.
- The model in the latter two cases is the CU-Boulder 3-D model in the top
- 400 km, a 3-D model from Harvard through the rest of the mantle, underlain
- by PREM in the core, presented on a 2x2 deg grid world-wide.
+ The model in the latter two cases is the CU-Boulder 3D model in the top
+ 400 km, a 3D model from Harvard through the rest of the mantle, underlain
+ by PREM in the core, presented on a 
+\begin_inset Formula $2\times2$
+\end_inset
+
+ degree grid worldwide.
  
 \end_layout
 
@@ -915,15 +934,8 @@ short.site
 short.sitechan
 \series default
 .
- The 
-\begin_inset Quotes eld
-\end_inset
-
-long" files are a long list of about 150 stations and the 
-\begin_inset Quotes eld
-\end_inset
-
-short" list is about 15 stations at various distances from the event S.
+ The ``long'' files are a long list of about 150 stations and the ``short''
+ list is about 15 stations at various distances from the event in S.
  China.
  
 \end_layout
@@ -968,16 +980,17 @@ cucss2sac
 \shape default
  relation pointing to binary formatted waveforms on disk) into SAC or ASCII
  formatted waveform files.
- Note that seismological coommunity provides us with another CSS to SAC
- converters, and you may use them for your own risk.
+ Note that the seismological community provides us with other CSS to SAC
+ converters, and you may use them at your own risk.
  For example, for the SUN platform, the distribution set 
 \family typewriter
 css2sac-3.0.3.tar.z
 \family default
  is available from 
-\shape italic
-http://www.iris.edu
-\shape default
+\begin_inset LatexCommand \htmlurl[IRIS]{www.iris.edu}
+
+\end_inset
+
 .
  The utility from that site, however, doesn't work under Linux or Windows
  platforms.
@@ -990,7 +1003,7 @@ css2sac_082006.zip
 http://www.sunrisear.com/download.html
 \shape default
 .
- 
+ (TODO: web page offline, in fact entire domain; asked Misha if he has file.)
 \end_layout
 
 \begin_layout Itemize
@@ -998,19 +1011,19 @@ http://www.sunrisear.com/download.html
 \series bold
 eigen2asc
 \series default
- prints out on a standard output device requested eigenfunctions from 
+ prints out on the standard output device the requested eigenfunctions from
+ 
 \shape italic
 .eigen
 \shape default
  relation (CSS3.0 extension).
- The eigenfunctions might be requested by order numbers, (n, l), or by (n,
- T).
- In second case 
+ The eigenfunctions can be requested by order numbers (n, l) or by (n, T).
+ In the second case, 
 \series bold
 eigen2asc
 \series default
  matches the order number l with the closest period to T.
- Output might be redirected to file for further usage.
+ Output can be redirected to file for further usage.
  
 \end_layout
 
@@ -1019,14 +1032,14 @@ eigen2asc
 \series bold
 endi
 \series default
- swaps order of words bytes in binary files.
+ swaps order of word bytes in binary files.
  The length of word is any integer number, for example, 2, 4, 6, 16, etc.
  
 \series bold
 endi
 \series default
- might be used for BIG_ENDIAN-LOW_ENDIAN binary data conversation.
- Note, that this program upgrades files in place.
+ can be used for BIG_ENDIAN-LOW_ENDIAN binary data conversion.
+ Note that this program upgrades files in place.
  
 \end_layout
 
@@ -1036,7 +1049,7 @@ endi
 simpledit
 \series default
  is a simple filter program.
- It converts a manually created (text editor) unformatted ascii file with
+ It converts a manually created (text editor) unformatted ASCII file with
  station and channel information into CSS3.0 
 \shape italic
 .site
@@ -1067,7 +1080,12 @@ china_cmt_event.txt
 \end_layout
 
 \begin_layout Standard
-For more details see Section 7 of this Manual.
+For more details see Chapter 
+\begin_inset LatexCommand \ref{cha:The-Utilities-User's}
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1175,7 +1193,11 @@ Run configure
 
 \begin_deeper
 \begin_layout LyX-Code
-./configure --prefix=/home/YourHomeDirectory/mineos-bin
+./configure --prefix=/home/
+\emph on
+YourHomeDirectory
+\emph default
+/mineos-bin
 \end_layout
 
 \end_deeper
@@ -1215,18 +1237,16 @@ Now you can run one of the demo input files, e.g.,
 
 \begin_deeper
 \begin_layout LyX-Code
-/home/YourHomeDirectory/mineos-bin/bin/minos_bran < prem_noocean.txt
+/home/
+\emph on
+YourHomeDirectory
+\emph default
+/mineos-bin/bin/minos_bran < prem_noocean.txt
 \end_layout
 
 \end_deeper
 \begin_layout Section
 Support
-\end_layout
-
-\begin_layout Standard
-Mineos development is supported by a grant from the National Science Foundation
- to CIG, managed by the California Institute of Technology.
- 
 \end_layout
 
 \begin_layout Standard
@@ -1270,11 +1290,15 @@ Running the Mineos Programs
 \end_layout
 
 \begin_layout Section
+\begin_inset LatexCommand \label{sec:Running_minos_bran-program}
+
+\end_inset
+
 minos_bran program
 \end_layout
 
 \begin_layout Standard
-
+The 
 \series bold
 minos_bran
 \series default
@@ -1284,8 +1308,6 @@ on problem.
  (S) and toroidal (T) modes.
  The model of the earth is self-gravitating, spherically symmetric, transversely
  isotropic, and attenuative.
- 
-\newline
  
 \series bold
 minos_bran
@@ -1300,12 +1322,38 @@ Command line
 
 \begin_layout Standard
 \noindent
+There are three different ways to start the 
+\series bold
+minos_bran
+\series default
+ program: 
+\end_layout
+
+\begin_layout Enumerate
+Interactive dialog for setting input parameters:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
+\noindent
 
 \series bold
 minos_bran
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Single shell command with redirection of the standard input to the parameter
+ file 
+\shape italic
+parameter_file
+\shape default
+ containing exactly the same information and in the same order as an interactive
+ dialog -- one answer per line:
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -1320,7 +1368,15 @@ minos_bran
 parameter_file
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Enumerate
+Direct shell script.
+ In this case, the contents of the parameter file are directly included
+ into the shell script between the delimiters ``WORD'':
+\end_layout
+
+\begin_deeper
+\begin_layout LyX-Code
 \noindent
 
 \series bold
@@ -1332,133 +1388,107 @@ minos_bran
 
  WORD 
 \newline
- ........
+........
  
 \newline
- ........
+........
  
 \newline
- WORD
+WORD
 \end_layout
 
-\begin_layout Standard
-\noindent
-There are three different ways to start the 
-\series bold
-minos_bran
-\series default
- program: 
-\end_layout
-
-\begin_layout Itemize
-interactive dialog for setting input parameters; 
-\end_layout
-
-\begin_layout Itemize
-single shell command with redirection of the standard input to the parameter
- file 
-\shape italic
-parameter_file
-\shape default
- containing exactly the same information and in the same order as an interactive
- dialog - one answer per line; 
-\end_layout
-
-\begin_layout Itemize
-direct shell script.
- In this case, the contents of the parameter file are directly included
- into the shell script between the delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD".
- See examples.
- 
-\end_layout
-
+\end_deeper
 \begin_layout Standard
 \noindent
 The parameter file consists of six lines: 
 \end_layout
 
 \begin_layout Description
-Line 1: 
+Line\InsetSpace ~
+1: 
 \shape italic
 model_file
 \shape default
  
 \newline
- 
+
 \shape italic
 model_file
 \shape default
- is the path to the 1-D input model file.
- Text string up to 256 characters long.
+ is the path to the 1D input model file.
+ 
+\series bold
+Format:
+\series default
+ Text string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 2: 
+Line\InsetSpace ~
+2: 
 \shape italic
 out_plain_file
 \shape default
  
 \newline
- 
+
 \shape italic
 out_plain_file
 \shape default
  is the path to the output ASCII file.
  The file contains a model listing and a summary of mode properties.
- Text string up to 256 characters long.
+ 
+\series bold
+Format:
+\series default
+ Text string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3: 
 \shape italic
 out_bin_file
 \shape default
  
 \newline
- 
+
 \shape italic
 out_bin_file
 \shape default
  is the path to the output FORTRAN unformatted binary file.
  The file is a collection of eigenfunctions in a binary representation.
- The file name 
-\begin_inset Quotes eld
-\end_inset
-
-none" is a special name.
+ The file name ``none'' is a special name.
+ ``none'' will suppress the calculation of eigenfunctions.
  
-\begin_inset Quotes eld
-\end_inset
-
-none" will suppress the calculation of eigenfunctions.
- Text string up to 256 characters long.
+\series bold
+Format:
+\series default
+ Text string of up to 256 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 4: 
+Line\InsetSpace ~
+4: 
 \shape italic
 eps, wgrav
 \shape default
  
 \newline
- Parameter 
+The parameter 
 \shape italic
 eps
 \shape default
  controls the accuracy of the Runge-Kutta integration scheme.
- The relative accuracy of an eigenfrequency is a factor 2-3 times 
+ The relative accuracy of an eigenfrequency is a factor 2 to 3 times 
 \shape italic
 eps
 \shape default
 .
- 
+ Parameter 
 \shape italic
 eps
 \shape default
@@ -1479,23 +1509,24 @@ eps
 wgrav
 \shape default
  is the frequency in millihertz (mHz) above which gravitational terms are
- neglected - this gives about a factor of 3 increase in speed.
+ neglected; this gives about a factor of 3 increase in speed.
  
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
 \begin_layout Description
-Line 5: 
+Line\InsetSpace ~
+5: 
 \shape italic
 jcom
 \shape default
  
 \newline
- 
+
 \shape italic
 jcom
 \shape default
@@ -1521,18 +1552,19 @@ jcom
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
 \begin_layout Description
-Line 6: 
+Line\InsetSpace ~
+6: 
 \shape italic
 lmin, lmax, wmin, wmax, nmin, nmax
 \shape default
  
 \newline
- 
+
 \begin_inset Formula $lmin,\; lmax$
 \end_inset
 
@@ -1573,42 +1605,26 @@ lmin, lmax, wmin, wmax, nmin, nmax
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-% Input data
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
+\begin_layout Subsection
+\begin_inset LatexCommand \label{sub:Input-data (minor_bran)}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Subsection
 Input data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Description
 
 \series bold
-\size large
 \emph on
-model_file.
-
+model_file
 \series default
 \emph default
- The model file is a plain ASCII file that may be either given in tabular
+ The model file is a plain ASCII file that may be given in either tabular
  or polynomial form.
  The first two lines in the model file are common.
  The rest of the file depends on the setting and file type.
@@ -1616,24 +1632,26 @@ model_file.
 \end_layout
 
 \begin_layout Description
-Line 1: 
+Line\InsetSpace ~
+1: 
 \shape italic
 title
 \shape default
  
 \newline
- Any text up to 80 characters long.
+ Any text of up to 80 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line 2: 
+Line\InsetSpace ~
+2: 
 \shape italic
 ifanis, tref, ifdeck
 \shape default
  
 \newline
- 
+
 \begin_inset Formula $ifanis=1$
 \end_inset
 
@@ -1652,7 +1670,7 @@ ifanis, tref, ifdeck
 \begin_inset Formula $tref\leq0$
 \end_inset
 
- no correction is made.
+, no correction is made.
  The parameter 
 \begin_inset Formula $ifdeck$
 \end_inset
@@ -1671,7 +1689,7 @@ ifanis, tref, ifdeck
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsubsection
 \begin_inset ERT
 status collapsed
 
@@ -1688,10 +1706,9 @@ status collapsed
 
 
 \shape italic
-\size large
-Tabular Setting,
+Tabular Setting, 
 \size normal
- 
+
 \begin_inset Formula $ifdeck=1$
 \end_inset
 
@@ -1702,13 +1719,14 @@ Tabular Setting,
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3: 
 \shape italic
 N, nic, noc
 \shape default
  
 \newline
- 
+
 \begin_inset Formula $N$
 \end_inset
 
@@ -1749,12 +1767,13 @@ leq 223$.
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
 \begin_layout Description
-Lines 4
+Lines\InsetSpace ~
+4
 \begin_inset Formula $\;-\;(N+3)$
 \end_inset
 
@@ -1764,7 +1783,7 @@ r, rho, vpv, vsv, qkappa, qshear, vph, vsh, eta
 \shape default
  
 \newline
- Each line describes the model parameter set for a single knot at radius
+Each line describes the model parameter set for a single knot at radius
  
 \begin_inset Formula $r$
 \end_inset
@@ -1851,7 +1870,7 @@ minos_bran
 \begin_inset Formula $=1$
 \end_inset
 
-) and ends at the free surface, growing from the center of the earth outward.
+) and ends at the free surface, growing from the center of the Earth outward.
  
 \end_layout
 
@@ -2379,7 +2398,6 @@ eta
 
  model is not specified for the knot and no correction for attenuation is
  made.
-\newline
  
 \series bold
 Format:
@@ -2388,9 +2406,9 @@ Format:
 \end_layout
 
 \end_deeper
-\begin_layout Standard
+\begin_layout Subsubsection
 \begin_inset ERT
-status collapsed
+status open
 
 \begin_layout Standard
 
@@ -2405,10 +2423,9 @@ status collapsed
 
 
 \shape italic
-\size large
-Polynomial Setting,
+Polynomial Setting, 
 \size normal
- 
+
 \begin_inset Formula $ifdeck=0$
 \end_inset
 
@@ -2419,13 +2436,14 @@ Polynomial Setting,
 \end_layout
 
 \begin_layout Description
-Line 3: 
+Line\InsetSpace ~
+3: 
 \shape italic
 nreg, nic, noc, rx
 \shape default
  
 \newline
- 
+
 \begin_inset Formula $nreg$
 \end_inset
 
@@ -2451,18 +2469,19 @@ nreg, nic, noc, rx
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
 \begin_layout Description
-Line 4: 
+Line\InsetSpace ~
+4: 
 \shape italic
 nlay,r1,r2
 \shape default
  
 \newline
- 
+
 \begin_inset Formula $nlay$
 \end_inset
 
@@ -2493,7 +2512,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines 5-9 or 5-12: Lines 4-9 or 4-12 must be repeated 
+Lines\InsetSpace ~
+5-9\InsetSpace ~
+or\InsetSpace ~
+5-12: Lines 4-9 or 4-12 must be repeated 
 \begin_inset Formula $nreg$
 \end_inset
 
@@ -2508,7 +2530,7 @@ Lines 5-9 or 5-12: Lines 4-9 or 4-12 must be repeated
 \begin_inset Formula $P(x)=a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}+a_{4}x^{4}$
 \end_inset
 
-, where, 
+, where 
 \begin_inset Formula $x=r/rx$
 \end_inset
 
@@ -2524,8 +2546,10 @@ Format:
  More detail: 
 \end_layout
 
+\begin_deeper
 \begin_layout Description
-Line 5: Coefficients for density 
+Line\InsetSpace ~
+5: Coefficients for density 
 \begin_inset Formula $rho$
 \end_inset
 
@@ -2537,7 +2561,8 @@ Line 5: Coefficients for density
 \end_layout
 
 \begin_layout Description
-Line 6: Coefficients for 
+Line\InsetSpace ~
+6: Coefficients for 
 \begin_inset Formula $vpv$
 \end_inset
 
@@ -2549,7 +2574,8 @@ Line 6: Coefficients for
 \end_layout
 
 \begin_layout Description
-Line 7: Coefficients for 
+Line\InsetSpace ~
+7: Coefficients for 
 \begin_inset Formula $vsv$
 \end_inset
 
@@ -2561,7 +2587,8 @@ Line 7: Coefficients for
 \end_layout
 
 \begin_layout Description
-Line 8: Coefficients for 
+Line\InsetSpace ~
+8: Coefficients for 
 \begin_inset Formula $qkappa$
 \end_inset
 
@@ -2569,20 +2596,22 @@ Line 8: Coefficients for
 \end_layout
 
 \begin_layout Description
-Line 9: Coefficients for 
+Line\InsetSpace ~
+9: Coefficients for 
 \begin_inset Formula $qshear$
 \end_inset
 
  
 \end_layout
 
-\begin_layout Description
+\begin_layout Standard
 Three next lines must be added for an anisotropic model.
  
 \end_layout
 
 \begin_layout Description
-Line 10: Coefficients for 
+Line\InsetSpace ~
+10: Coefficients for 
 \begin_inset Formula $vph$
 \end_inset
 
@@ -2594,7 +2623,8 @@ Line 10: Coefficients for
 \end_layout
 
 \begin_layout Description
-Line 11: Coefficients for 
+Line\InsetSpace ~
+11: Coefficients for 
 \begin_inset Formula $vsh$
 \end_inset
 
@@ -2606,14 +2636,20 @@ Line 11: Coefficients for
 \end_layout
 
 \begin_layout Description
-Line 12: Coefficients for 
+Line\InsetSpace ~
+12: Coefficients for 
 \begin_inset Formula $eta$
 \end_inset
 
  
 \end_layout
 
+\end_deeper
 \begin_layout Subsection
+\begin_inset LatexCommand \label{sub:Output-data (minos_bran program)}
+
+\end_inset
+
 Output data
 \end_layout
 
@@ -2623,25 +2659,29 @@ Output data
 minos_bran
 \series default
  outputs an ASCII listing file and a FORTRAN unformatted binary file.
- The first file contains the model table and the normal mode properties
+ The first file contains the model table and the normal mode properties,
  and the second contains the eigenfunctions.
+\end_layout
+
+\begin_layout Subsubsection
+\noindent
+
+\emph on
+out_plain_file
+\emph default
+ 
 \end_layout
 
 \begin_layout Standard
 \noindent
-
-\series bold
-\size large
-\emph on
-out_plain_file.
-
-\series default
-\emph default
- The file consists of two parts: 
+The file consists of two parts: 
 \end_layout
 
 \begin_layout Description
-Part 1: Model table.
+Part\InsetSpace ~
+1:\InsetSpace ~
+Model\InsetSpace ~
+table.
  The model output is always in tabular form.
  If the input model is in tabular form, the output model is just a copy
  except that knots are given indices and columns are placed in a different
@@ -2688,7 +2728,8 @@ Part 1: Model table.
 
 \begin_deeper
 \begin_layout Description
-Lines 1-5: Contains the model 
+Lines\InsetSpace ~
+1-5: Contains the model 
 \begin_inset Formula $title$
 \end_inset
 
@@ -2706,7 +2747,8 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines 
+Lines\InsetSpace ~
+
 \begin_inset Formula $6\;-\;(N+5)$
 \end_inset
 
@@ -2737,7 +2779,8 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines 
+Lines\InsetSpace ~
+
 \begin_inset Formula $N+6\div\; N+11$
 \end_inset
 
@@ -2755,7 +2798,10 @@ Format:
 
 \end_deeper
 \begin_layout Description
-Part 2: Mode properties.
+Part\InsetSpace ~
+2:\InsetSpace ~
+Mode\InsetSpace ~
+properties.
  For a fixed radial order number 
 \begin_inset Formula $n$
 \end_inset
@@ -2774,7 +2820,7 @@ minos_bran
 \end_inset
 
  and ratio of kinetic to potential energy.
- These scalar parameters are stored in the the normal mode properties table.
+ These scalar parameters are stored in the normal mode properties table.
  Each row (line) in this table gives the properties for the current 
 \begin_inset Formula $n$
 \end_inset
@@ -2789,17 +2835,19 @@ minos_bran
 
 \begin_deeper
 \begin_layout Description
-Lines 
+Lines\InsetSpace ~
+
 \begin_inset Formula $(N+12)\;-$
 \end_inset
 
- end: 
+\InsetSpace ~
+end: 
 \shape italic
 norder, typeo, lorder, phvel, freq, per, grvel, Q, raylquo,
 \shape default
  
 \newline
- where, 
+ where
 \end_layout
 
 \begin_deeper
@@ -3354,13 +3402,10 @@ status collapsed
 \begin_inset Formula $eps$
 \end_inset
 
-), if the eigenfunction is accurate and if there are enough radial knots
+) if the eigenfunction is accurate and if there are enough radial knots
  in the model to allow quadratures to be done accurately.
  (You will probably see some degradation in this parameter for strongly
- exponential modes such as Stoneley modes ).
- 
-\newline
- 
+ exponential modes such as Stoneley modes.) 
 \end_layout
 
 \begin_layout Standard
@@ -3373,17 +3418,17 @@ Format:
 
 \end_deeper
 \end_deeper
-\begin_layout Standard
+\begin_layout Subsubsection
 \noindent
 
 \series bold
-\size large
 \emph on
-out_bin_file.
+out_bin_file
+\end_layout
 
-\series default
-\emph default
- This is a fixed record length binary encapsulated file.
+\begin_layout Standard
+\noindent
+This is a fixed record length binary encapsulated file.
  The file is not portable, which means that the type of encapsulation strongly
  depends on the compiler.
  For example, if the file was created on a SUN platform by the f77 compiler,
@@ -3395,42 +3440,31 @@ eigcon
  removes encapsulation and creates a binary file portable between different
  languages and platforms.
  
-\newline
- 
 \series bold
 minos_bran
 \series default
- outputs each et of the eigenfunctions with a single write statement
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-
-\backslash
-t{:}
+ outputs each et of the eigenfunctions with a single write statement:
 \end_layout
 
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Quote
+\begin_layout LyX-Code
 
 \family typewriter
 real*4 abuf(nvec)
 \family default
  
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+
 \family typewriter
 .....
 
 \family default
  
-\newline
- 
+\end_layout
+
+\begin_layout LyX-Code
+
 \family typewriter
 write(ioeig) (abuf(i),i
 \begin_inset Formula $=$
@@ -3451,7 +3485,11 @@ where nvec is
 \end_inset
 
  words long for other modes.
- The first five words of abuf are 
+ The first five words of 
+\family typewriter
+abuf
+\family default
+ are 
 \begin_inset Formula $n,l,\omega,Q$
 \end_inset
 
@@ -3515,9 +3553,10 @@ abuf
 \end_inset
 
  is the common notation for modes other than S.
-\newline
- Eigenfunctions are stored
- in normalized form.
+\end_layout
+
+\begin_layout Standard
+Eigenfunctions are stored in normalized form.
  The normalization of eigenfunctions is given by 
 \begin_inset Formula \[
 \omega^{2}\int_{0}^{r_{n}}\rho(r)\; W^{2}(r)r^{2}\; dr=1\]
@@ -3532,8 +3571,10 @@ abuf
 
  for spheroidal modes.
  
-\newline
- Note that 
+\end_layout
+
+\begin_layout Quote
+Note that 
 \begin_inset Formula $r,\omega,\rho,V,U,W$
 \end_inset
 
@@ -3686,7 +3727,12 @@ Program
 minos_bran
 \series default
  prints out on the standad output dialog messages only.
- See an example in section 10.1 (Interactive dialog).
+ See an example in Section 
+\begin_inset LatexCommand \ref{sub:Example-1.-Interactive dialog minor_bran}
+
+\end_inset
+
+ (Interactive dialog).
 \end_layout
 
 \begin_layout Standard
@@ -3739,7 +3785,7 @@ preview false
 
 \begin_layout Bibliography
 
-\bibitem {Anderson, Farrell, et al 1990}
+\bibitem {Anderson Farrell et al 1990}
  Anderson, J., Farrell, W.E., et al.
  Center for Seismic Studies version 3 database: Schema reference manual.
  Technical Report C90-01, DARPA, September 1990.
@@ -3748,10 +3794,9 @@ preview false
 
 \begin_layout Bibliography
 
-\bibitem {Biswas, Knopoff 1970}
- Biswas, N.N., Knopoff L.
- (1970).
- Exact earth-flattening calculations for Love wave.
+\bibitem {Biswas Knopoff 1970}
+ Biswas, N.N., and L.
+ Knopoff (1970), Exact earth-flattening calculations for Love wave.
  
 \shape italic
 Bull.
@@ -3771,8 +3816,7 @@ Bull.
 
 \bibitem {Biswas 1972}
  Biswas, N.N.
- (1972).
- Earth-flattening procedure for propagation of Rayleigh wave.
+ (1972), Earth-flattening procedure for propagation of Rayleigh wave.
  
 \shape italic
 PAGEOPH
@@ -3787,11 +3831,10 @@ PAGEOPH
 
 \begin_layout Bibliography
 
-\bibitem {Gilbert, Dziewonski 1975}
+\bibitem {Gilbert Dziewonski 1975}
  Gilbert, F., and A.M.
- Dziewonski (1975).
- An application of normal mode theory to the retrieval of structural parameters
- and source mechanisms from seismic spectra.
+ Dziewonski (1975), An application of normal mode theory to the retrieval
+ of structural parameters and source mechanisms from seismic spectra.
  
 \shape italic
 Phil.
@@ -3809,19 +3852,17 @@ A278
 
 \begin_layout Bibliography
 
-\bibitem {Gilbert, Backus 1969}
+\bibitem {Gilbert Backus 1969}
  Gilbert, F., and G.E.
- Backus (1969).
- Proceedings of AFIPS Fall Joint Computer Conference, San Francisco, CA,
- December 1968.
+ Backus (1969), Proceedings of AFIPS Fall Joint Computer Conference, San
+ Francisco, CA, December 1968.
 \end_layout
 
 \begin_layout Bibliography
 
-\bibitem {Gilbert, Backus 1966}
+\bibitem {Gilbert Backus 1966}
  Gilbert, F., and G.E.
- Backus (1966).
- Propagator matrices in elastic wave and vibration problems.
+ Backus (1966), Propagator matrices in elastic wave and vibration problems.
 
 \emph on
  Geophys.
@@ -3832,10 +3873,9 @@ A278
 
 \begin_layout Bibliography
 
-\bibitem {Hermann 1978}
+\bibitem {Herrmann 1978}
  Herrmann, R.B.
- (1978).
- 
+ (1978), 
 \shape italic
 Computer programs in earthquake seismology.
 
@@ -3851,8 +3891,8 @@ Computer programs in earthquake seismology.
 
 \bibitem {Shanks 1966}
  Shanks, E.B.
- (1966).
- Solutions of differential equations by evaluations of functions, 
+ (1966), Solutions of differential equations by evaluations of functions,
+ 
 \emph on
 Math.
  Comp.
@@ -3863,16 +3903,15 @@ Math.
 
 \begin_layout Bibliography
 
-\bibitem {Woodhouse, Dahlen 1978}
+\bibitem {Woodhouse Dahlen 1978}
  Woodhouse, J.H., and F.A.
- Dahlen (1978).
- The effect of a general aspherical perturbation on the free oscillation
- of the Earth.
+ Dahlen (1978), The effect of a general aspherical perturbation on the free
+ oscillation of the Earth.
  
 \shape italic
 Geophys.
  J.R.
- astr Soc.
+ Astr Soc.
 \shape default
 , 
 \emph on

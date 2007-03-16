@@ -146,8 +146,7 @@ The parameter file consists of four lines:
 Line\InsetSpace ~
 1:
 \shape italic
-\InsetSpace ~
-cmt_event
+ cmt_event
 \shape default
 
 \newline
@@ -175,10 +174,9 @@ Format:
 Line\InsetSpace ~
 2:
 \shape italic
-\InsetSpace ~
-in_dbname 
+ in_dbname
 \shape default
- 
+
 \newline
  
 \shape italic
@@ -214,12 +212,11 @@ Format:
 Line\InsetSpace ~
 3:
 \shape italic
-\InsetSpace ~
-plane
+ plane
 \shape default
- 
+
 \newline
- This defines the method for introducing the moment tensor components.
+This defines the method for introducing the moment tensor components.
  If 
 \begin_inset Formula $plane=0$
 \end_inset
@@ -253,12 +250,11 @@ Format:
 Line\InsetSpace ~
 4:
 \shape italic
-\InsetSpace ~
-out_dbname
+ out_dbname
 \shape default
- 
+
 \newline
- This is the output database name for the 
+This is the output database name for the 
 \shape italic
 .wfdisc
 \shape default
@@ -278,12 +274,11 @@ Format:
 
 \begin_layout Description
 Line\InsetSpace ~
-5:\InsetSpace ~
-
+5:
 \shape italic
-datatype
+ datatype
 \shape default
- 
+
 \newline
 This defines the type of synthetic data.
  If 

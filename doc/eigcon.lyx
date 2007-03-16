@@ -76,7 +76,7 @@ dbname.eigen.dat
 eigen
 \shape default
 , for storing the eigenfunctions.
- This binary file consists of segments with a fixed length - one segment
+ This binary file consists of segments with a fixed length -- one segment
  per eigenfunction.
  The 
 \shape italic
@@ -95,7 +95,7 @@ minos_bran
 .eigen
 \shape default
  relation table, namely, by referencing the path, length, byte offset, and
- by type of data.
+ type of data.
  The 
 \shape italic
 .eigen
@@ -106,7 +106,7 @@ minos_bran
 \end_inset
 
 ) has the structure of an external database file and can be easily incorporated
- into relational databases such as ORACLE, Postgress, MySql, etc.
+ into relational databases such as ORACLE, Postgress, MySQL, etc.
 \end_layout
 
 \begin_layout Subsection
@@ -142,7 +142,7 @@ Single shell command with redirection of the standard input from a parameter
 parameter_file
 \shape default
  containing exactly the same information and in the same order as in the
- interactive dialog - one answer per line:
+ interactive dialog -- one answer per line:
 \end_layout
 
 \begin_deeper
@@ -165,11 +165,7 @@ parameter_file
 \begin_layout Enumerate
 Direct shell script.
  In this case, the contents of the parameter file are directly included
- in the shell script between delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD''
+ in the shell script between delimiters ``WORD'':
 \end_layout
 
 \begin_deeper
@@ -206,9 +202,9 @@ Line\InsetSpace ~
 \shape italic
  jcom
 \shape default
- 
+
 \newline
- 
+
 \shape italic
 jcom
 \shape default
@@ -234,7 +230,7 @@ jcom
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
@@ -250,8 +246,12 @@ model_file
 \shape italic
 model_file
 \shape default
- is the path to the 1-D input model file.
- Text string up to 256 characters long.
+ is the path to the 1D input model file.
+ 
+\series bold
+Format:
+\series default
+ Text string of up to 256 characters long.
  
 \end_layout
 
@@ -268,7 +268,7 @@ max_depth
 max_depth
 \shape default
  is the depth to cut all output eigenfunctions (in km).
- All output values exists in the interval 
+ All output values exist in the interval 
 \begin_inset Formula $[r_{n},r_{n}-max\_depth]$
 \end_inset
 
@@ -282,7 +282,7 @@ max_depth
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
@@ -292,7 +292,9 @@ Line\InsetSpace ~
 \shape italic
 in_plain_file
 \shape default
- is the path to the input ASCII file.
+
+\newline
+This is the path to the input ASCII file.
  The file is the output model listing 
 \shape italic
 out_plain_file
@@ -302,8 +304,17 @@ out_plain_file
 minos_bran
 \series default
 .
- See section 3.3.
- Text string up to 256 characters long.
+ See Section 
+\begin_inset LatexCommand \ref{sub:Output-data (minos_bran program)}
+
+\end_inset
+
+.
+ 
+\series bold
+Format:
+\series default
+ Text string of up to 256 characters long.
  
 \end_layout
 
@@ -315,7 +326,7 @@ in_bin_file
 \shape default
  
 \newline
- 
+
 \shape italic
 in_bin_file
 \shape default
@@ -325,7 +336,12 @@ in_bin_file
 minos_bran
 \series default
 .
- See section 1.3.
+ See Section 
+\begin_inset LatexCommand \ref{sec:Getting-Started}
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -342,41 +358,12 @@ dbname
 dbname
 \shape default
  is the path to the output database name.
- The path is a string up to 256 characters long.
- The path should not end with a backslash, 
-\begin_inset Quotes eld
-\end_inset
-
-/".
- The part of string after the last 
-\begin_inset Quotes eld
-\end_inset
-
-/" or from the beginning of the string, if string does not have 
-\begin_inset Quotes eld
-\end_inset
-
-/" at all, is the data base name.
- The data base name must be at least one character long.
+ The path is a string of up to 256 characters long.
+ The path should not end with a backslash, ``/''.
+ The part of string after the last ``/'' or from the beginning of the string,
+ if string does not have ``/'' at all, is the database name.
+ The database name must be at least one character long.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-% Input data
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -388,7 +375,12 @@ Input data
 \emph on
 model_file
 \emph default
- See description in Section 3.2, 
+ See description in Section 
+\begin_inset LatexCommand \ref{sub:Input-data (minor_bran)}
+
+\end_inset
+
+, 
 \series bold
 \emph on
 model_file
@@ -410,7 +402,12 @@ in_plain_file
 minos_bran
 \series default
  as an output file.
- See description of the file in Section 3.3, 
+ See description of the file in Section 
+\begin_inset LatexCommand \ref{sub:Output-data (minos_bran program)}
+
+\end_inset
+
+, 
 \series bold
 \emph on
 out_plain_file
@@ -442,7 +439,12 @@ in_bin_file
 minos_bran
 \series default
  as an output file.
- See description of the file in Section 3.3, 
+ See description of the file in Section 
+\begin_inset LatexCommand \ref{sub:Output-data (minos_bran program)}
+
+\end_inset
+
+, 
 \series bold
 \emph on
 out_bin_file
@@ -537,15 +539,8 @@ datatype
 \series bold
 eigcon
 \series default
- automaticaly detects the byte order and places the text strings 
-\begin_inset Quotes eld
-\end_inset
-
-t4" (BIG_ENDIAN) or 
-\begin_inset Quotes eld
-\end_inset
-
-f4" (LOW_ENDIAN) into the 
+ automaticaly detects the byte order and places the text strings ``t4''
+ (BIG_ENDIAN) or ``f4'' (LOW_ENDIAN) into the 
 \shape italic
 datatype
 \shape default

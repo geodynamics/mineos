@@ -59,11 +59,8 @@ green
 
 \end_inset
 
-), or (c) for 3-components with the Z component directed 
-\begin_inset Quotes erd
-\end_inset
-
-up" and two orthogonal horizontal components oriented arbitrarily.
+), or (c) for 3-components with the Z component directed ``up'' and two
+ orthogonal horizontal components oriented arbitrarily.
  To set up station information, it is necessary to create a flat file database
  consisting of the two relations 
 \shape italic
@@ -130,7 +127,7 @@ Single shell command with redirection of the standard input to a parameter
 parameter_file
 \shape default
  containing exactly the same information and in the same order as in the
- interactive dialog - one answer per line
+ interactive dialog -- one answer per line
 \end_layout
 
 \begin_deeper
@@ -153,11 +150,7 @@ parameter_file
 \begin_layout Enumerate
 Direct shell script.
  In this case, the contents of the parameter file are directly included
- in the shell script between the delimiters 
-\begin_inset Quotes eld
-\end_inset
-
-WORD'':
+ in the shell script between the delimiters ``WORD'':
 \end_layout
 
 \begin_deeper
@@ -192,14 +185,9 @@ The input parameter file consists of six lines:
 Line\InsetSpace ~
 1:
 \shape italic
-\InsetSpace ~
-in_dbname 
-\shape default
- 
+ in_dbname
 \newline
- 
-\shape italic
-in_dbname 
+in_dbname
 \shape default
  is the input database name for the 
 \shape italic
@@ -222,12 +210,11 @@ Format:
 Line\InsetSpace ~
 2:
 \shape italic
-\InsetSpace ~
-db_list
+ db_list
 \shape default
- 
+
 \newline
- This is the path to the file defining the list of database names containing
+This is the path to the file defining the list of database names containing
  the eigenfunctions, one name per line.
  Each name refers to the database in which the 
 \shape italic
@@ -246,12 +233,11 @@ Format:
 Line\InsetSpace ~
 3:
 \shape italic
-\InsetSpace ~
-cmt_event
+ cmt_even
 \shape default
-
+t
 \newline
- This is the path to the file with the CMT solution for a single event.
+This is the path to the file with the CMT solution for a single event.
  It includes the CMT location, the seismic moment tensor components, the
  scalar moment, the focal planes, the source half duration time, and the
  output time step of the synthetic seismograms.
@@ -267,14 +253,9 @@ Format:
 Line\InsetSpace ~
 4:
 \shape italic
-\InsetSpace ~
-fmin,\InsetSpace ~
-fmax
-\shape default
- 
+ fmin,\InsetSpace ~
+fmax 
 \newline
- 
-\shape italic
 fmin, fmax
 \shape default
  define the frequency range to be selected from the input eigenfunction
@@ -292,12 +273,11 @@ Format:
 Line\InsetSpace ~
 5:
 \shape italic
-\InsetSpace ~
-nsamples
+ nsamples
 \shape default
- 
+
 \newline
- This is the number of samples in the synthetic seismograms.
+This is the number of samples in the synthetic seismograms.
  All synthetic seismograms start from the source time.
  
 \series bold
@@ -311,10 +291,9 @@ Format:
 Line\InsetSpace ~
 6:
 \shape italic
-\InsetSpace ~
-out_dbname
+ out_dbname
 \shape default
- 
+
 \newline
 This is the output database name including only the 
 \shape italic
@@ -333,24 +312,6 @@ Format:
 \series default
  Any string of up to 256 characters long.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-% Input data
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -420,7 +381,7 @@ chan
  relation is a three-character channel name following the SEED format convention.
  The first two characters define the type of channel (e.g., BH, LH, etc.) unique,
  for each station's group.
- The third character must be the component name: Z (upper case, for vertical)
+ The third character must be the component name: Z (uppercase, for vertical)
  and other symbols (any case, for the horizontals).
  
 \end_layout
@@ -457,14 +418,14 @@ cmt_event
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
+\begin_layout Quote
 
 \shape italic
 evid, year, jday, hour, min, sec, lat, lon, depth, step, halfd, 
 \shape default
 
 \newline
- 
+
 \begin_inset Formula $M_{0}$
 \end_inset
 
@@ -474,7 +435,7 @@ evid, year, jday, hour, min, sec, lat, lon, depth, step, halfd,
 
  
 \newline
- 
+
 \begin_inset Formula $M_{n},$
 \end_inset
 

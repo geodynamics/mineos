@@ -49,11 +49,11 @@ Due to modification of the
 Mineos
 \series default
  codes, the revised version has been benchmarked again.
- Three benchmark tests were performed: test against the original code at
- UCSD, test against Bob Hermann's eigenfunction and synthetic seismogram
- code for fundamental modes, and test against SPECFEM3D_GLOBE v3.6 code designed
- for simulation of three-dimensional global seismic wave propagation based
- upon the spectral-element method (SEM).
+ Three benchmark tests were performed: a test against the original code
+ at UCSD, a test against Bob Hermann's eigenfunction and synthetic seismogram
+ code for fundamental modes, and a test against SPECFEM3D_GLOBE v3.6 code
+ designed for simulation of three-dimensional global seismic wave propagation
+ based upon the spectral-element method (SEM).
 \end_layout
 
 \begin_layout Section
@@ -76,29 +76,10 @@ s for all types of oscillation (spheroidal, toroidal, inner core toroidal,
  synthetic seismograms for both codes.
  Differences did not exceed the last significant digit.
  The most important difference of the revised version against the UCSD code
- is that the revised code uses sensor orientation 
-\begin_inset Quotes eld
-\end_inset
-
-Up" instead of 
-\begin_inset Quotes eld
-\end_inset
-
-Down".
- The revised code uses the coordinate system 
-\begin_inset Quotes eld
-\end_inset
-
-Up", 
-\begin_inset Quotes eld
-\end_inset
-
-South", and 
-\begin_inset Quotes eld
-\end_inset
-
-East", so we need to reverse the sign of all Green functions and synthetic
- seismograms of the UCSD code to get the revised code results.
+ is that the revised code uses sensor orientation ``Up'' instead of ``Down.''
+ The revised code uses the coordinate system ``Up,'' ``South,'' and ``East,''
+ so we need to reverse the sign of all Green functions and synthetic seismograms
+ of the UCSD code to get the revised code results.
  Also note that the revised 
 \series bold
 Mineos
@@ -158,13 +139,14 @@ Old Pacific Ocean, (40N, 160E)
 \end_layout
 
 \begin_layout Standard
-To take into account the Earth's sphericity, the original version of the
- Herrmann's plane code
+To take into account the Earth's sphericity, the original version of Herrmann's
+ plane code
 \begin_inset LatexCommand \cite{Hermann 1978}
 
 \end_inset
 
  had been modified using the Earth flattening exact formulas for Love waves
+ 
 \begin_inset LatexCommand \cite{Biswas, Knopoff 1970}
 
 \end_inset
@@ -191,10 +173,15 @@ As an example, Figures
 \end_inset
 
  illustrate plane (blue) and spherical (red) three-component synthetic seismogra
-m for the three different seismic stations: BJT, TLY, and BILL.
- The event location (CMT solution) is (25.39N, 101.40E), depth is 33 km.
+ms for the three different seismic stations: BJT, TLY, and BILL.
+ The event location (CMT solution) is 25.39N, 101.40E, depth is 33 km.
  The station coordinates (geographic), epicentral distances (geocentric),
- and source azimuths (geocentric) are shown in Table; units are degrees.
+ and source azimuths (geocentric) are shown in Table 
+\begin_inset LatexCommand \ref{tab:Station-coordinates-(geographic),}
+
+\end_inset
+
+; units are degrees.
 \end_layout
 
 \begin_layout Standard
@@ -222,7 +209,7 @@ status collapsed
 \begin_inset Text
 
 \begin_layout Standard
-Cod 
+Code 
 \end_layout
 
 \end_inset
@@ -513,9 +500,13 @@ status collapsed
 
 \begin_layout Caption
 \noindent
+\begin_inset LatexCommand \label{tab:Station-coordinates-(geographic),}
+
+\end_inset
+
 Station coordinates (geographic), epicentral distances (geocentric), and
  source azimuths (geocentric) for Benchmark test #2, Mineos vs.
- Herrmnn's plane code for fundamental modes.
+ Herrmann's plane code for fundamental modes.
 \end_layout
 
 \end_inset
@@ -528,12 +519,14 @@ Moment tensor components are:
 \end_layout
 
 \begin_layout Quote
+\noindent
+\align center
 \begin_inset Formula $M_{rr}=-0.60e24,\; M_{\theta\theta}=-6.29e24,\; M_{\varphi\varphi}=6.89e24,$
 \end_inset
 
  
 \newline
- 
+
 \begin_inset Formula $M_{r\theta}=-1.85e24,\; M_{r\varphi}=0.12e24,\; M_{\theta\varphi}=-4.73e24$
 \end_inset
 
@@ -548,10 +541,10 @@ The input model is isotropic double-layered crust PREM in which the water
 
 \begin_layout Standard
 \noindent
-Computations for the both codes were performed without attenuation and gravity
+Computations for both codes were performed without attenuation and gravity
  effects.
  Srtictly speaking, plane code does not support gravity computation at all,
- so, gravity was turned off for the 
+ so gravity was turned off for the 
 \series bold
 Mineos
 \series default
@@ -561,7 +554,7 @@ Mineos
 Mineos
 \series default
  synthetic accelerograms were converted to displacement.
- All seismograms were computed in the period range 5 - 200 seconds.
+ All seismograms were computed in the period range 5 to 200 seconds.
  The spectral range was tapered with half-cosine windows with corner frequencies
 : (1/200, 1/100) Hz and (1/6, 1/5) Hz.
 \end_layout
@@ -574,10 +567,10 @@ The dispersion curves of the phase and group velocities obtained from the
 
 \end_inset
 
-) are practically indentical, the maximum absolute difference of velocities
+) are practically identical; the maximum absolute difference of velocities
  doesn't exceed 0.8 m/s.
- Synthetic seismograms are very close, except the long period earlier part
- of the records.
+ Synthetic seismograms are very close, except the long period in the earlier
+ part of the records.
  This difference is due to the significant increasing noise level after
  acceleration-displacement transformation (proportional to 
 \begin_inset Formula $1/\omega^{2}$
@@ -603,7 +596,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -663,9 +656,10 @@ status collapsed
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -717,9 +711,10 @@ status collapsed
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -771,9 +766,10 @@ status collapsed
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Standard
 \align center
@@ -795,7 +791,7 @@ Mineos
 \series default
  results, the black dotted lines are for the Herrmann's plane code.
  The solid lines color are: blue for Rayleigh phase velocity, red for Rayleigh
- group velocity, green for Love phase velocity, and magneta for group Love
+ group velocity, green for Love phase velocity, and magenta for group Love
  velocity.
  
 \end_layout
@@ -845,16 +841,17 @@ Mineos
  for the same event and station set as described in the previous section.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 \noindent
 
 \series bold
 \emph on
-Input 1D model.
+Input 1D model
+\end_layout
 
-\series default
-\emph default
- The input model is an anisotropic, single-layered crust PREM with attenuation.
+\begin_layout Standard
+\noindent
+The input model is an anisotropic, single-layered crust PREM with attenuation.
  The 3 km water layer is filled with crustal properties.
  SPECFEM3D_GLOBE has a special subroutine for evaluation of the model parameters
  by polynomial interpolation across a fixed number of layers from the center
@@ -870,43 +867,76 @@ Mineos
  km.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 \noindent
 
 \series bold
 \emph on
-SPECFEM3D_GLOBE run notes.
+SPECFEM3D_GLOBE run notes
+\end_layout
 
-\series default
-\emph default
- SPECFEM3D_GLOBE was configured to make the synthetic seismogram (displacement,
+\begin_layout Standard
+\noindent
+SPECFEM3D_GLOBE was configured to make the synthetic seismogram (displacement,
  nm) 1 hour long.
  The Earth was split into 6 chunks.
- Each chunk consisted of \InsetSpace ~
-480x480 elements.
- So, the average lateral size of the elements near to the surface was \InsetSpace ~
-20x20
- km.
- The state of some important run parameters were: ELLIPTICITY - off, TOPOGRAPHY
- - off, ROTATION - off, and GRAVITY - on.
- As with 
+ Each chunk consisted of 480
+\begin_inset Formula $\times$
+\end_inset
+
+480 elements.
+ So, the average lateral size of the elements near to the surface was 20
+\begin_inset Formula $\times$
+\end_inset
+
+20 km.
+ The state of some important run parameters were
+\end_layout
+
+\begin_layout Itemize
+\noindent
+ELLIPTICITY - off
+\end_layout
+
+\begin_layout Itemize
+\noindent
+TOPOGRAPHY - off
+\end_layout
+
+\begin_layout Itemize
+\noindent
+ROTATION - off 
+\end_layout
+
+\begin_layout Itemize
+\noindent
+GRAVITY - on.
+\end_layout
+
+\begin_layout Standard
+\noindent
+As with 
 \series bold
 Mineos
 \series default
-, input coordinates are geographic and geocentric coordinates are used internall
-y.
+, input coordinates are geographic, and geocentric coordinates are used
+ internally.
+\end_layout
+
+\begin_layout Subsection
+\noindent
+
+\series bold
+\emph on
+Mineos run notes
+\series default
+\emph default
+ 
 \end_layout
 
 \begin_layout Standard
 \noindent
 
-\series bold
-\emph on
-Mineos run notes.
-
-\series default
-\emph default
- 
 \series bold
 Mineos
 \series default
@@ -929,16 +959,20 @@ Mineos
  All seismograms were converted from acceleration to displacement in nm.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
 \noindent
 
 \series bold
 \emph on
-Tapering, results discussion.
-
+Tapering, results discussion
 \series default
 \emph default
- To reduce noise at spectral edges, all seismograms were half cosine tapered
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+To reduce noise at spectral edges, all seismograms were half cosine tapered
  with corner frequencies 
 \begin_inset Formula $(1/200,\;1/100)$
 \end_inset
@@ -971,7 +1005,7 @@ Mineos
 \noindent
 The test shows that synthetic seismograms and spectra for both methods are
  close.
- Attempts to increase the high cut frequency, say to 5 sec, lead to differences
+ Attempts to increase the high-cut frequency, e.g., to 5 sec, lead to differences
  in some places with periods close to 8 sec.
  This probably resulted because the SPECFEM3D_GLOBE spectral elements were
  not small enough.

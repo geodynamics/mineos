@@ -40,6 +40,10 @@
 \begin_body
 
 \begin_layout Chapter
+\begin_inset LatexCommand \label{cha:The-Utilities-User's}
+
+\end_inset
+
 The Utilities User's Manual
 \end_layout
 
@@ -61,7 +65,7 @@ NAME
 \series bold
 cucss2sac
 \series default
- Convert CSS 3.0 waveforms to SAC binary or ASCII files 
+ Converts CSS 3.0 waveforms to SAC binary or ASCII files 
 \end_layout
 
 \begin_layout Subsubsection*
@@ -158,23 +162,22 @@ css2sac
 cucss2sac
 \series default
  only supports the CSS3.0 schema and two input CSS binary data formats: 
-\begin_inset Quotes eld
-\end_inset
+\end_layout
 
-t4'' (BIG_ENDIAN, single precision floating point) and 
-\begin_inset Quotes eld
-\end_inset
+\begin_layout Itemize
+``t4'' (BIG_ENDIAN, single precision floating point)
+\end_layout
 
-f4'' ( LOW_ENDIAN, single precision floating point).
- 
+\begin_layout Itemize
+``f4'' (LOW_ENDIAN, single precision floating point)
+\end_layout
+
+\begin_layout Standard
+
 \series bold
 cucss2sac
 \series default
- converts CSS binary data 
-\begin_inset Quotes eld
-\end_inset
-
-as is'' without any corrections or modifications.
+ converts CSS binary data ``as is'' without any corrections or modifications.
  For the 
 \series bold
 Mineos
@@ -192,8 +195,13 @@ A CSS database
 \series bold
 db_name
 \series default
- must include at least one file db_name.wfdisc file containing CSS format
- information about the waveforms.
+ must include at least one file 
+\family typewriter
+\size small
+db_name.wfdisc
+\family default
+\size default
+ file containing CSS format information about the waveforms.
  It is also desirable to add to the database 
 \shape italic
 .origin
@@ -202,8 +210,19 @@ db_name
 \shape italic
 .site
 \shape default
- relation tables (files db_name.origin and db_name.site) to get a more complete
- SAC header.
+ relation tables (files 
+\family typewriter
+\size small
+db_name.origin
+\family default
+\size default
+ and 
+\family typewriter
+\size small
+db_name.site
+\family default
+\size default
+) to get a more complete SAC header.
  Note that the 
 \shape italic
 .origin
@@ -224,7 +243,7 @@ cucss2sac
  uses only the first line from this file.
  In the case of ASCII output, all available parameters go to the ASCII header
  -- three lines in the beginning of the file.
- For example, output file for a synthetic seismogram looks as follows:
+ For example, an output file for a synthetic seismogram looks as follows:
 \end_layout
 
 \begin_layout LyX-Code
@@ -309,25 +328,41 @@ DATA: 2000(014)-23:37:10.800 947893030.80000 8000 1.000000
 \end_layout
 
 \begin_layout Standard
-where, the 
+where 
+\end_layout
+
+\begin_layout Itemize
+the 
 \family typewriter
 EVENT
 \family default
  line represents event information: origin time (human and epoch), latitude
- (deg), longitude (deg), and depth (km); the 
+ (deg), longitude (deg), and depth (km); 
+\end_layout
+
+\begin_layout Itemize
+the 
 \family typewriter
 STATION
 \family default
  line represents station information: station code, channel name, latitude
- (deg), longitude (deg), and depth = 0; the 
+ (deg), longitude (deg), and depth = 0; 
+\end_layout
+
+\begin_layout Itemize
+the 
 \family typewriter
 DATA
 \family default
  line represents data parameters: waveform starting time (human and epoch),
  number of samples, and sampling step (sec).
- The rest of the lines, the body, is two columns table.
+ 
+\end_layout
+
+\begin_layout Standard
+The rest of the lines (the body) is a two-column table.
  The first column represents relative time from the beginning of waveform
- in seconds and the second ones waveform samples in nm, nm/s or nm/s
+ in seconds, and the second one shows waveform samples in nm, nm/s or nm/s
 \begin_inset Formula $^{2}$
 \end_inset
 
@@ -348,13 +383,13 @@ If the presence of the header is not desired, suppress it with option
 
 \begin_layout Standard
 The output ASCII file format for the Green functions is different.
- The header is the same, but the body is a 7 column table.
+ The header is the same, but the body is a 7-column table.
  The first column is relative time, as before, and the other 6 columns are
- the 6 unit Green functions (
+ the 6-unit Green functions (
 \begin_inset Formula $G_{rr},G_{\theta\theta},G_{\varphi\varphi},G_{r\theta},G_{r\varphi},G_{\theta\varphi}$
 \end_inset
 
-) for the chosen component - vertical or some horizontal.
+) for the chosen component -- vertical or some horizontal.
  The order of the components is the same as the order of the seismic moment
  tensor components 
 \begin_inset Formula $M_{ij}$
@@ -365,7 +400,13 @@ The output ASCII file format for the Green functions is different.
 syndat
 \series default
  program.
- So, the corresponding synthetic seismogram S (IN ACCELERATION !!!, nm/s
+ So the corresponding synthetic seismogram S (
+\series bold
+\color red
+NOTE:
+\series default
+\color default
+ IN ACCELERATION, nm/s
 \begin_inset Formula $^{2}$
 \end_inset
 
@@ -394,7 +435,7 @@ where
 \end_layout
 
 \begin_layout Quote
-NOTE: According to SAC complaince, event depth is stored in the SAC header
+NOTE: According to SAC compliance, event depth is stored in the SAC header
  in meters.
  
 \end_layout
@@ -422,24 +463,6 @@ cucss2sac -a -n Syndat Syndat_ASC_NOHEADER
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-% EIGEN2ASC
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 eigen2asc
 \end_layout
@@ -458,7 +481,7 @@ NAME
 \series bold
 eigen2asc
 \series default
- Converts 
+ Converts the 
 \shape italic
 .eigen
 \shape default
@@ -522,8 +545,14 @@ eigen2asc
 \series bold
 eigen2asc
 \series default
- searches in the db_name.eigen file for all eigenfunctions with mode numbers
- n, l satisfying the following conditions: 
+ searches in the 
+\family typewriter
+\size small
+db_name.eigen
+\family default
+\size default
+ file for all eigenfunctions with mode numbers n, l satisfying the following
+ conditions: 
 \series bold
 nmin
 \series default
@@ -592,15 +621,7 @@ X.nnnnnnn.mmmmmmm.ASC
 \series bold
 X
 \series default
- is 
-\begin_inset Quotes eld
-\end_inset
-
-S'' for spheroidal modes or 
-\begin_inset Quotes eld
-\end_inset
-
-T'' for toroidal modes, 
+ is ``S'' for spheroidal modes or ``T'' for toroidal modes, 
 \series bold
 nnnnnnn
 \series default
@@ -712,7 +733,7 @@ nw
 \series bold
 nw
 \series default
- it stays unswapped.
+, it stays unswapped.
  
 \end_layout
 
@@ -748,7 +769,7 @@ endi
 \end_layout
 
 \begin_layout Standard
-we change the order of 4 byte words to BIG_ENDIAN for transfering these
+we change the order of 4-byte words to BIG_ENDIAN for transferring these
  files on a computer with BIG_ENDIAN byte order, e.g., a SUN Ultra machine,
  where we may use a direct access READ statement to read data as real*4
  variables.
@@ -1035,11 +1056,7 @@ chan, edepth, hang, vang
 .sitechan
 \shape default
  relation.
- The standard orientation of a sensor 
-\begin_inset Quotes erd
-\end_inset
-
-XX'' is defined as 
+ The standard orientation of a sensor ``XX'' is defined as 
 \end_layout
 
 \begin_layout LyX-Code
@@ -1174,7 +1191,12 @@ Mineos
 \shape italic
 .origin
 \shape default
- relation see below, or for the complete description see Anderson, J,.
+ relation see Table 
+\begin_inset LatexCommand \ref{tab:Relation:-origin.-Description:}
+
+\end_inset
+
+ below, or for the complete description, see Anderson, J,.
  et al., 1990.
 \begin_inset LatexCommand \cite{Anderson, Farrell, et al 1990}
 
@@ -1193,6 +1215,10 @@ sideways false
 status collapsed
 
 \begin_layout Caption
+\begin_inset LatexCommand \label{tab:Relation:-origin.-Description:}
+
+\end_inset
+
 Relation: 
 \series bold
 origin

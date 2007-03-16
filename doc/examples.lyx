@@ -39,27 +39,11 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status collapsed
-
-\begin_layout Standard
-
-% MINOS
-\backslash
-_BRAN
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
+\begin_layout Chapter
+\begin_inset LatexCommand \label{cha:Examples}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Chapter
 Examples
 \end_layout
 
@@ -130,7 +114,7 @@ eprem_noocean_S
 \begin_inset Formula $l$
 \end_inset
 
-, frequency, period, phase and group speed, etc) and the second file contains
+, frequency, period, phase and group speed, etc.) and the second file contains
  the eigenfunctions.
  Both files are needed to be read into the eigenfunction renormalization
  program, 
@@ -162,6 +146,10 @@ eigcon
 
 \series bold
 \emph on
+\begin_inset LatexCommand \label{sub:Example-1.-Interactive dialog minor_bran}
+
+\end_inset
+
 Example 1.
 
 \series default
@@ -349,7 +337,7 @@ and start the following command:
 \begin_layout LyX-Code
 
 \family typewriter
-...% minos_bran 
+$ minos_bran 
 \begin_inset Formula $<$
 \end_inset
 
@@ -487,7 +475,7 @@ eigcon
  renormalizes the eigenfunctions and outputs them to a depth of 1000 km,
  in this example.
  The renormalized eigenfunctions are placed in an extension of the CSS3.0
- data base, using the relation 
+ dataase, using the relation 
 \shape italic
 test_S.eigen
 \shape default
@@ -513,8 +501,8 @@ eigen
 \shape default
  relation, which is used in subsequent programs to swap bytes appropriately.
  Eigenfunctions are computed here to 1000 km for plotting purposes, but
- for runs in which earthquakes are no deeper than say 40 km, then 40 would
- be input here.
+ for runs in which earthquakes are no deeper than, for example, 40 km, ``40''
+ would be input here.
 \end_layout
 
 \begin_layout Subsection
@@ -727,7 +715,7 @@ and start the following command:
 \begin_layout LyX-Code
 
 \family typewriter
-...% eigcon 
+$ eigcon 
 \begin_inset Formula $<$
 \end_inset
 
@@ -845,8 +833,8 @@ green
 In this example, there are three principal input files.
 \end_layout
 
-\begin_layout Standard
-(1) The first input file is the data base name of the 
+\begin_layout Enumerate
+The first input file is the database name of the 
 \shape italic
 .site
 \shape default
@@ -865,12 +853,12 @@ In this example, there are three principal input files.
 \shape italic
 .sitechan
 \shape default
- file, by station coordinates are in the 
+ file, but station coordinates are in the 
 \shape italic
 .site
 \shape default
  file.
- The data base name for these relations in this example is 
+ The database name for these relations in this example is 
 \shape italic
 short
 \shape default
@@ -886,8 +874,8 @@ short.sitechan
 .
 \end_layout
 
-\begin_layout Standard
-(2) The second input file is the file 
+\begin_layout Enumerate
+The second input file is the file 
 \shape italic
 dblist
 \shape default
@@ -909,8 +897,16 @@ prem_noocean_S.eigen
 db_list
 \shape default
  would have a single entry: prem_noocean_S.
- Note, that only the data base name is included and not the relation name
- suffix 
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Quote
+
+\series bold
+Note:
+\series default
+ Only the database name is included and not the relation name suffix 
 \shape italic
 .eigen
 \shape default
@@ -919,8 +915,8 @@ db_list
 \shape italic
 db_list
 \shape default
- would include the data base names of the other modes.
- For example, toroidal modes are usually included in synthetic or SH motions
+ would include the database names of the other modes.
+ For example, toroidal modes are usually included in synthetic, or SH motions
  will be ignored.
  In this simple example, 
 \shape italic
@@ -929,8 +925,9 @@ db_list
  can be considered to have a single entry.
 \end_layout
 
-\begin_layout Standard
-(3) The third input file is the file 
+\end_deeper
+\begin_layout Enumerate
+The third input file is the file 
 \shape italic
 china_cmt_evt
 \shape default
@@ -960,7 +957,7 @@ The program will output a
 \shape italic
 .wfdisc
 \shape default
- relation in the data base called 
+ relation in the database called 
 \shape italic
 green
 \shape default
@@ -1166,7 +1163,7 @@ and start the following command:
 \begin_layout LyX-Code
 
 \family typewriter
-...% green 
+$ green 
 \begin_inset Formula $<$
 \end_inset
 
@@ -1303,7 +1300,7 @@ green
 green.wfdisc
 \shape default
 .
- Only the data base name, 
+ Only the database name, 
 \shape italic
 green
 \shape default
@@ -1492,7 +1489,7 @@ and start the following command:
 \begin_layout LyX-Code
 
 \family typewriter
-...% syndat 
+$ syndat 
 \begin_inset Formula $<$
 \end_inset
 
