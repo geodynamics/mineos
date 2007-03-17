@@ -57,8 +57,8 @@ Mineos
 \end_layout
 
 \begin_layout Section
-Benchmark test #1: Revised version vs.
- UCSD version.
+Revised Version vs.
+ UCSD Version
 \end_layout
 
 \begin_layout Standard
@@ -78,8 +78,8 @@ s for all types of oscillation (spheroidal, toroidal, inner core toroidal,
  The most important difference of the revised version against the UCSD code
  is that the revised code uses sensor orientation ``Up'' instead of ``Down.''
  The revised code uses the coordinate system ``Up,'' ``South,'' and ``East,''
- so we need to reverse the sign of all Green functions and synthetic seismograms
- of the UCSD code to get the revised code results.
+ so we need to reverse the sign of all Green's functions and synthetic seismogra
+ms of the UCSD code to get the revised code results.
  Also note that the revised 
 \series bold
 Mineos
@@ -95,8 +95,8 @@ Mineos
 \end_layout
 
 \begin_layout Section
-Benchmark test #2: Mineos code vs.
- Herrmann's plane code for fundamental modes
+Mineos Code vs.
+ Herrmann's Plane Code for Fundamental Modes
 \end_layout
 
 \begin_layout Standard
@@ -107,51 +107,51 @@ Mineos
  synthetic seismograms were benchmarked against Herrmann's plane code seismogram
 s for the fundamental spheroidal and toroidal modes in the period range
  6 - 100 seconds.
- For testing purposes, there were taken 8 1D models: 6 vertical profiles
- of the global 3D CUB2.0 CU Earth model, PREM model with 3 km water layer,
- and PREM model with water layer filled with upper crust.
+ For testing purposes, 8 1D models were taken: 6 vertical profiles of the
+ global 3D CUB2.0 CU Earth model, PREM model with 3 km water layer, and PREM
+ model with water layer filled with upper crust.
  The chosen 6 points are located at places characterized by different tectonics,
  namely: 
 \end_layout
 
 \begin_layout Itemize
-Korean Peninsula, (36N, 128E)
+Korean Peninsula (36N, 128E)
 \end_layout
 
 \begin_layout Itemize
-Utah, U.S., seismo-tectonic region, (40N, 112W)
+Utah, U.S., seismo-tectonic region (40N, 112W)
 \end_layout
 
 \begin_layout Itemize
-Near Hudson bay, Canada, craton, (56N, 90W) 
+Near Hudson bay, Canada, craton (56N, 90W) 
 \end_layout
 
 \begin_layout Itemize
-Center of Hudson Bay, Canada, craton, (58N, 86N)
+Center of Hudson Bay, Canada, craton (58N, 86N)
 \end_layout
 
 \begin_layout Itemize
-Young Pacific Ocean, (0N, 100W)
+Young Pacific Ocean (0N, 100W)
 \end_layout
 
 \begin_layout Itemize
-Old Pacific Ocean, (40N, 160E)
+Old Pacific Ocean (40N, 160E)
 \end_layout
 
 \begin_layout Standard
 To take into account the Earth's sphericity, the original version of Herrmann's
- plane code
-\begin_inset LatexCommand \cite{Hermann 1978}
+ plane code 
+\begin_inset LatexCommand \cite{Herrmann 1978}
 
 \end_inset
 
  had been modified using the Earth flattening exact formulas for Love waves
  
-\begin_inset LatexCommand \cite{Biswas, Knopoff 1970}
+\begin_inset LatexCommand \cite{Biswas Knopoff 1970}
 
 \end_inset
 
- and Earth flattening approximation for Rayleigh waves
+ and Earth flattening approximation for Rayleigh waves 
 \begin_inset LatexCommand \cite{Biswas 1972}
 
 \end_inset
@@ -161,7 +161,6 @@ To take into account the Earth's sphericity, the original version of Herrmann's
 \end_layout
 
 \begin_layout Standard
-\noindent
 As an example, Figures 
 \begin_inset LatexCommand \ref{fig:1a}
 
@@ -188,6 +187,7 @@ ms for the three different seismic stations: BJT, TLY, and BILL.
 \noindent
 \align center
 \begin_inset Float table
+placement H
 wide false
 sideways false
 status collapsed
@@ -518,20 +518,13 @@ Station coordinates (geographic), epicentral distances (geocentric), and
 Moment tensor components are: 
 \end_layout
 
-\begin_layout Quote
-\noindent
-\align center
-\begin_inset Formula $M_{rr}=-0.60e24,\; M_{\theta\theta}=-6.29e24,\; M_{\varphi\varphi}=6.89e24,$
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+M_{rr} & = & -0.60e24,\; M_{\theta\theta}=-6.29e24,\; M_{\varphi\varphi}=6.89e24,M_{r\theta}=-1.85e24,\; M_{r\varphi}=0.12e24,\; M_{\theta\varphi}=-4.73e24\end{eqnarray*}
+
 \end_inset
 
- 
-\newline
 
-\begin_inset Formula $M_{r\theta}=-1.85e24,\; M_{r\varphi}=0.12e24,\; M_{\theta\varphi}=-4.73e24$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Standard
@@ -556,11 +549,10 @@ Mineos
  synthetic accelerograms were converted to displacement.
  All seismograms were computed in the period range 5 to 200 seconds.
  The spectral range was tapered with half-cosine windows with corner frequencies
-: (1/200, 1/100) Hz and (1/6, 1/5) Hz.
+ (1/200, 1/100) Hz and (1/6, 1/5) Hz.
 \end_layout
 
 \begin_layout Standard
-\noindent
 The dispersion curves of the phase and group velocities obtained from the
  two codes (Figure 
 \begin_inset LatexCommand \ref{fig:4a}
@@ -775,7 +767,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Figures/Fig4a.eps
-	width 5in
+	width 6in
 
 \end_inset
 
@@ -783,14 +775,14 @@ status open
 \end_layout
 
 \begin_layout Caption
-Dispersion curves of phase and group velocities for spheroidal and totoidal
+Dispersion curves of phase and group velocities for spheroidal and toroidal
  fundamental modes.
  The solid color lines are the 
 \series bold
 Mineos
 \series default
- results, the black dotted lines are for the Herrmann's plane code.
- The solid lines color are: blue for Rayleigh phase velocity, red for Rayleigh
+ results, the (faint) black dotted lines are for the Herrmann's plane code.
+ The solid line colors are blue for Rayleigh phase velocity, red for Rayleigh
  group velocity, green for Love phase velocity, and magenta for group Love
  velocity.
  
@@ -828,7 +820,7 @@ status collapsed
 \end_layout
 
 \begin_layout Section
-Benchmark test #3: Mineos vs.
+Mineos vs.
  SPECFEM3D_GLOBE
 \end_layout
 
@@ -843,10 +835,7 @@ Mineos
 
 \begin_layout Subsection
 \noindent
-
-\series bold
-\emph on
-Input 1D model
+Input 1D Model
 \end_layout
 
 \begin_layout Standard
@@ -869,10 +858,7 @@ Mineos
 
 \begin_layout Subsection
 \noindent
-
-\series bold
-\emph on
-SPECFEM3D_GLOBE run notes
+SPECFEM3D_GLOBE Run Notes
 \end_layout
 
 \begin_layout Standard
@@ -910,7 +896,7 @@ ROTATION - off
 
 \begin_layout Itemize
 \noindent
-GRAVITY - on.
+GRAVITY - on
 \end_layout
 
 \begin_layout Standard
@@ -925,13 +911,7 @@ Mineos
 
 \begin_layout Subsection
 \noindent
-
-\series bold
-\emph on
-Mineos run notes
-\series default
-\emph default
- 
+Mineos Run Notes 
 \end_layout
 
 \begin_layout Standard
@@ -961,12 +941,8 @@ Mineos
 
 \begin_layout Subsection
 \noindent
-
-\series bold
+Tapering, Results Discussion
 \emph on
-Tapering, results discussion
-\series default
-\emph default
  
 \end_layout
 
@@ -1002,10 +978,9 @@ Mineos
 \end_layout
 
 \begin_layout Standard
-\noindent
 The test shows that synthetic seismograms and spectra for both methods are
  close.
- Attempts to increase the high-cut frequency, e.g., to 5 sec, lead to differences
+ Attempts to increase the high-cut frequency, e.g., to 5 sec, led to differences
  in some places with periods close to 8 sec.
  This probably resulted because the SPECFEM3D_GLOBE spectral elements were
  not small enough.
@@ -1067,7 +1042,7 @@ Synthetic seismograms for SPECFEM3D_GLOBE (red) and
 Mineos
 \series default
  (blue).
- Station BJT, chan LHZ.
+ Station BJT, channel LHZ.
  Distance = 
 \begin_inset Formula $19.123^{o}$
 \end_inset
@@ -1077,7 +1052,7 @@ Mineos
 \end_inset
 
 .
- The top plot shows the whole record, the others plot separate fragments.
+ The top plot shows the whole record; the others plot separate fragments.
  
 \end_layout
 
@@ -1127,12 +1102,12 @@ status open
 \end_layout
 
 \begin_layout Caption
- The same as Figure 
+The same as Figure 
 \begin_inset LatexCommand \ref{fig:5a}
 
 \end_inset
 
-, but for LHN channel.
+, but for the LHN channel.
 \end_layout
 
 \begin_layout Standard
@@ -1186,7 +1161,7 @@ The same as Figure
 
 \end_inset
 
-, but for LHE channel.
+, but for the LHE channel.
 \end_layout
 
 \begin_layout Standard
@@ -1236,11 +1211,11 @@ status open
 
 \begin_layout Caption
 Amplitude spectra for the station BJT.
- Red color - SPECFEM3D_GLOBE spectra, blue - 
+ SPECFEM3D_GLOBE spectra (red), 
 \series bold
 Mineos
 \series default
-.
+ (blue).
 \end_layout
 
 \begin_layout Standard
@@ -1312,7 +1287,7 @@ Synthetic seismograms for SPECFEM3D_GLOBE (red) and
 Mineos
 \series default
  (blue).
- Station TLY, chan LHZ.
+ Station TLY, channel LHZ.
  Distance = 
 \begin_inset Formula $26.308^{o}$
 \end_inset
@@ -1322,7 +1297,7 @@ Mineos
 \end_inset
 
 .
- The top plot shows the whole record, the others plot separate fragments.
+ The top plot shows the whole record; the others plot separate fragments.
  
 \end_layout
 
@@ -1372,12 +1347,12 @@ status open
 \end_layout
 
 \begin_layout Caption
- The same as Figure 
+The same as Figure 
 \begin_inset LatexCommand \ref{fig:9a}
 
 \end_inset
 
-, but for LHN channel.
+, but for the LHN channel.
 \end_layout
 
 \begin_layout Standard
@@ -1426,12 +1401,12 @@ status open
 \end_layout
 
 \begin_layout Caption
- The same as Figure 
+The same as Figure 
 \begin_inset LatexCommand \ref{fig:9a}
 
 \end_inset
 
-, but for LHE channel.
+, but for the LHE channel.
 \end_layout
 
 \begin_layout Standard
@@ -1481,11 +1456,11 @@ status open
 
 \begin_layout Caption
 Amplitude spectra for the station TLY.
- Red color - SPECFEM3D_GLOBE spectra, blue - 
+ SPECFEM3D_GLOBE spectra (red), 
 \series bold
 Mineos
 \series default
-.
+ (blue).
 \end_layout
 
 \begin_layout Standard
@@ -1557,7 +1532,7 @@ Synthetic seismograms for SPECFEM3D_GLOBE (red) and
 Mineos
 \series default
  (blue).
- Station BILL, chan LHZ.
+ Station BILL, channel LHZ.
  Distance = 
 \begin_inset Formula $57.417^{o}$
 \end_inset
@@ -1567,7 +1542,7 @@ Mineos
 \end_inset
 
 .
- The top plot shows the whole record, the others plot separate fragments.
+ The top plot shows the whole record; the others plot separate fragments.
  
 \end_layout
 
@@ -1617,12 +1592,12 @@ status open
 \end_layout
 
 \begin_layout Caption
- The same as Figure 
+The same as Figure 
 \begin_inset LatexCommand \ref{fig:13a}
 
 \end_inset
 
-, but for LHN channel.
+, but for the LHN channel.
 \end_layout
 
 \begin_layout Standard
@@ -1671,12 +1646,12 @@ status open
 \end_layout
 
 \begin_layout Caption
- The same as Figure 
+The same as Figure 
 \begin_inset LatexCommand \ref{fig:13a}
 
 \end_inset
 
-, but for LHE channel.
+, but for the LHE channel.
 \end_layout
 
 \begin_layout Standard
@@ -1726,11 +1701,11 @@ status open
 
 \begin_layout Caption
 Amplitude spectra for the station BILL.
- Red color - SPECFEM3D_GLOBE spectra, blue - 
+ SPECFEM3D_GLOBE spectra (red), 
 \series bold
 Mineos
 \series default
-.
+ (blue).
 \end_layout
 
 \begin_layout Standard

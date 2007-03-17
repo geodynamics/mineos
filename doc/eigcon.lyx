@@ -33,7 +33,7 @@
 \begin_body
 
 \begin_layout Section
-eigcon program
+eigcon Program
 \end_layout
 
 \begin_layout Standard
@@ -88,7 +88,7 @@ eigen
 minos_bran
 \series default
  binary file it does not have any encapsulation and can be easily treated
- by programs written in various high level languages such as C, C++, Perl,
+ by programs written in various high-level languages such as C, C++, Perl,
  etc.
  Access to a segment is provided through the 
 \shape italic
@@ -110,7 +110,11 @@ minos_bran
 \end_layout
 
 \begin_layout Subsection
-Command line
+\begin_inset LatexCommand \label{sub:Command-Line eigcon}
+
+\end_inset
+
+Command Line
 \end_layout
 
 \begin_layout Standard
@@ -193,6 +197,15 @@ eigcon
 \end_deeper
 \begin_layout Standard
 \noindent
+See Chapter 
+\begin_inset LatexCommand \ref{cha:Examples}
+
+\end_inset
+
+ for examples.
+\end_layout
+
+\begin_layout Standard
 The parameter file consists of six lines: 
 \end_layout
 
@@ -225,7 +238,7 @@ jcom
 \begin_inset Formula $=4$
 \end_inset
 
- for inner core toroidal modes.
+ for inner-core toroidal modes.
  
 \series bold
 Format:
@@ -251,7 +264,7 @@ model_file
 \series bold
 Format:
 \series default
- Text string of up to 256 characters long.
+ Text string up to 256 characters long.
  
 \end_layout
 
@@ -269,7 +282,7 @@ max_depth
 \shape default
  is the depth to cut all output eigenfunctions (in km).
  All output values exist in the interval 
-\begin_inset Formula $[r_{n},r_{n}-max\_depth]$
+\begin_inset Formula $(r_{n},r_{n}-max\_depth)$
 \end_inset
 
  only.
@@ -314,7 +327,7 @@ minos_bran
 \series bold
 Format:
 \series default
- Text string of up to 256 characters long.
+ Text string up to 256 characters long.
  
 \end_layout
 
@@ -358,16 +371,20 @@ dbname
 dbname
 \shape default
  is the path to the output database name.
- The path is a string of up to 256 characters long.
+ The path is a string up to 256 characters long.
  The path should not end with a backslash, ``/''.
- The part of string after the last ``/'' or from the beginning of the string,
- if string does not have ``/'' at all, is the database name.
+ The part of the string after the last ``/'' (or from the beginning of the
+ string, if the string does not have ``/'' at all) is the database name.
  The database name must be at least one character long.
  
 \end_layout
 
 \begin_layout Subsection
-Input data
+\begin_inset LatexCommand \label{sub:Input-Data 3.2.2 (eigcon)}
+
+\end_inset
+
+Input Data
 \end_layout
 
 \begin_layout Description
@@ -407,12 +424,6 @@ minos_bran
 
 \end_inset
 
-, 
-\series bold
-\emph on
-out_plain_file
-\series default
-\emph default
 .
  Actually, 
 \series bold
@@ -440,21 +451,15 @@ minos_bran
 \series default
  as an output file.
  See description of the file in Section 
-\begin_inset LatexCommand \ref{sub:Output-data (minos_bran program)}
+\begin_inset LatexCommand \ref{sub:Command-Line eigcon}
 
 \end_inset
 
-, 
-\series bold
-\emph on
-out_bin_file
-\series default
-\emph default
 .
 \end_layout
 
 \begin_layout Subsection
-Output data
+Output Data
 \end_layout
 
 \begin_layout Standard
@@ -533,8 +538,8 @@ datatype
  describes numeric memory storage data (byte order).
  There are two common byte orders for most computer architectures: BIG_ENDIAN
  (straight order 1-2-3-4) and LOW_ENDIAN (reverse order 4-3-2-1).
- BIG_ENDIAN is used by Suns and RISC-oriented platforms, and LOW_ENDIAN
- is used by PC, VAX and DEC hardware.
+ BIG_ENDIAN is used by SUN and RISC-oriented platforms, and LOW_ENDIAN is
+ used by PC, VAX and DEC hardware.
  
 \series bold
 eigcon
@@ -797,7 +802,7 @@ real*4
 \begin_inset Formula $v_{n}=r_{n}\;(\pi G\rho_{n})^{-1/2}$
 \end_inset
 
-, where, 
+, where 
 \begin_inset Formula $G$
 \end_inset
 
@@ -916,17 +921,16 @@ real*4
  The first column is radius.
  The other columns are the eigenfunctions.
  The number of eigenfunctions depends on modal type.
- For spheroidal modes, it should be 7 columns (
-\begin_inset Formula $r,\; U,\; U^{\prime},\; V,\; V^{\prime},\; P,\; P^{\prime}$
+ For spheroidal modes, it should be 7 columns 
+\begin_inset Formula $(r,\, U,\, U^{'},\, V,\, V^{'},\, P,\, P^{'})$
 \end_inset
 
-), for toroidal and others, it should be 3 columns (
-\begin_inset Formula $r,\; W,\; W^{\prime}$
+ for toroidal and others, it should be 3 columns 
+\begin_inset Formula $(r,\, W,\, W^{'})$
 \end_inset
 
-).
+.
  The matrix is stored in segments by the second index, by columns.
- 
 \end_layout
 
 \begin_layout Standard
@@ -942,9 +946,9 @@ eigcon
 \end_inset
 
 .
- This is done in accordance with theory developed by Woodhouse & Dahlen
+ This is done in accordance with theory developed by Woodhouse and Dahlen
  (1978) 
-\begin_inset LatexCommand \cite{Woodhouse, Dahlen 1978}
+\begin_inset LatexCommand \cite{Woodhouse Dahlen 1978}
 
 \end_inset
 
@@ -1144,8 +1148,8 @@ nnn
 \family typewriter
 mmm
 \family default
- is the number of staring node after cutting eigenfunction by depth, and
- 
+ is the number of the starting node after cutting eigenfunction by depth,
+ and 
 \family typewriter
 kkk
 \family default

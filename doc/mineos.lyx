@@ -166,7 +166,11 @@ Mineos Package Overview
 \end_layout
 
 \begin_layout Standard
-The Mineos Package by Guy Masters consists of four programs: 
+The 
+\series bold
+Mineos Package
+\series default
+ by Guy Masters consists of four programs: 
 \series bold
 minos_bran
 \series default
@@ -206,7 +210,7 @@ eigcon
 \series bold
 eigcon
 \series default
- and compute Green functions and synthetic seismograms.
+ and compute Green's functions and synthetic seismograms.
  These programs are 
 \series bold
 green
@@ -231,7 +235,14 @@ The four programs are executed in sequence.
  Each file is an ASCII flat file that can be read with a text editor, but
  has the advantage of also being subsumable into a database system such
  as ORACLE, Postgress, MySQL, or Antelope.
- This multi-tiered access is a design goal of the I/O system of the Mineos
+ This 
+\emph on
+multi-tiered access
+\emph default
+ is a design goal of the I/O system of the 
+\series bold
+Mineos
+\series default
  package.
  The potential disadvantage of using the relational database framework is
  that the files in the schema are formatted ASCII files that are better
@@ -240,109 +251,57 @@ The four programs are executed in sequence.
 
 \begin_layout Standard
 Under the CSS schema, the files are identified by a database name (
-\family typewriter
 \shape italic
-\size small
-\emph on
 dbname
-\family default
 \shape default
-\size default
-\emph default
 ) and a suffix that specifies a particular type of file (or relation).
  An example would be 
-\family typewriter
-\size small
-mineos.site
-\family default
-\size default
-, which is a site table (or relation) for the database named 
-\family typewriter
-\shape italic
-\size small
 \emph on
-mineos
-\family default
-\shape default
-\size default
+mineos.site
 \emph default
+, which is a site table (or relation) for the database named 
+\shape italic
+mineos
+\shape default
 .
  To the many users of Antelope, some of these files will be transparent
  as they are part of the core CSS-3.0 definition.
  Examples include the 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .site
-\family default
 \shape default
-\size default
-\emph default
 , 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .sitechan
-\family default
 \shape default
-\size default
-\emph default
 , and 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .wfdisc
-\family default
 \shape default
-\size default
-\emph default
  relations.
  Other tables are extensions to CSS, such as the 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .eigen
-\family default
 \shape default
-\size default
-\emph default
  relation which contains parametric information for the eigenfunctions and
  points to a much larger direct access file containing the eigenfunctions.
  The package does not slavishly adhere to CSS, however.
- For example, event information is summarized into a single flat file that
+ For example, event information is contained in a single flat file that
  summarizes the information that would be contained in the 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .origin
-\family default
-\size default
+\emph on
 ,
 \emph default
- 
-\family typewriter
-\size small
-\emph on
-.centryd
-\family default
+ .centryd
 \shape default
-\size default
+\emph on
+,
 \emph default
-, and 
-\family typewriter
+ and 
 \shape italic
-\size small
-\emph on
 .moment
-\family default
 \shape default
-\size default
-\emph default
  relations in CSS.
  The input 1D model file also is not part of the CSS schema.
  File formats, therefore, are a hybrid with CSS and extensions to the CSS
@@ -351,15 +310,9 @@ mineos
 
 \begin_layout Standard
 The final output synthetic seismograms are represented by a 
-\family typewriter
 \shape italic
-\size small
-\emph on
 .wfdisc
-\family default
 \shape default
-\size default
-\emph default
  relation, which points to binary waveform files.
  The synthetic, therefore, can be read and displayed by Antelope programs
  such as 
@@ -397,32 +350,38 @@ Mineos History
 \begin_layout Standard
 The original algorithm was based on direct numerical integration of the
  governing differential equations (variable order, variable step-size Runge-Kutt
-a, up to the eighth order).
+a, up to the eighth order) 
 \begin_inset LatexCommand \cite{Shanks 1966}
 
 \end_inset
 
+.
  This initial version was coded by J.
  Freeman Gilbert circa 1966 while at the Institute of Geophysics and Planetary
  Physics (IGPP), University of California, San Diego.
  Tests showed the code, then called EOS, was superior to Burlisch-Stoer
- (despite claims to the contrary in Numerical Recipes).
+ (despite claims to the contrary in 
+\emph on
+Numerical Recipes
+\emph default
+).
  The variable step size was based on the growth rate approximated from estimates
- of the eigenvalues of the matrix A.
+ of the eigenvalues of the matrix A 
 \begin_inset LatexCommand \cite{Gilbert Backus 1966}
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 Finding the solution for spheroidal modes was computationally unstable,
- Gilbert and Backus suggested using the method of minors.
+ Gilbert and Backus suggested using the method of minors 
 \begin_inset LatexCommand \cite{Gilbert Backus 1969}
 
 \end_inset
 
+.
  This was implemented in 1980 by John Woodhouse of Harvard University, who
  included a clever method of computing eigenfunctions and, later, a mode
  counter for spheroidals.
@@ -444,8 +403,8 @@ The codes were benchmarked against the Rayleigh-Ritz code of Ray Buland
 \begin_layout Standard
 The Mineos code has been uncopyrighted and handed down from investigator
  to investigator until donated to the community with an open source license
- (via CIG) in 2006 by Guy Masters and Michael Ritzwoller of University of
- Colorado at Boulder.
+ via Computational Infrastructure for Geodynamics (CIG) in 2006 by Guy Masters
+ and Michael Ritzwoller of University of Colorado at Boulder.
  At that time, the code was cleaned up and placed under source control,
  and its user documentation assembled and revised, by Misha Barmine (U.
  Colorado at Boulder).
@@ -454,9 +413,8 @@ The Mineos code has been uncopyrighted and handed down from investigator
 \end_layout
 
 \begin_layout Standard
-Computational Infrastructure for Geodynamics (CIG) is making this source
- code available to you in the hope that the software will enhance your research
- in geophysics.
+CIG is making this source code available to you in the hope that the software
+ will enhance your research in geophysics.
  CIG requests that in your oral presentations and in your papers that you
  indicate your use of this code and acknowledge the authors of the code
  and 
@@ -528,7 +486,7 @@ minos_bran
 Mineos
 \series default
  Package.
- Given a 1D model of the earth and the normal mode band of interest, i.e.,
+ Given a 1D model of the Earth and the normal mode band of interest, i.e.,
  defined in terms of a range of frequencies (
 \shape italic
 fmin, fmax
@@ -569,8 +527,8 @@ The eigenfunctions themselves may be interesting to some users if sensitivity
 \series bold
 minos_bran
 \series default
- is discussed in Section 
-\begin_inset LatexCommand \ref{sec:Running_minos_bran-program}
+ is discussed in Chapter 
+\begin_inset LatexCommand \ref{cha:Running-the-Mineos}
 
 \end_inset
 
@@ -587,7 +545,7 @@ eigcon
  to extend only to a cut-off depth which is intended to be the depth of
  the deepest earthquake considered.
  This truncation greatly reduces the size of the eigenfunction file and
- speeds computation of the Green functions.
+ speeds computation of the Green's functions.
  In addition, 
 \series bold
 eigcon
@@ -626,10 +584,10 @@ Synthetic Seismogram System of Programs
 \noindent
 \align center
 \begin_inset Float figure
-placement h
+placement t
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Standard
 \align center
@@ -674,12 +632,12 @@ Synthetic seismograms are produced in two stages.
 \series bold
 green
 \series default
- computes Green functions and, in the second stage, program 
+ computes Green's functions and, in the second stage, program 
 \series bold
 syndat
 \series default
- transforms the Green functions to synthetic seismograms by convolving them
- with a centroid moment tensor and input event half-rise time.
+ transforms the Green's functions to synthetic seismograms by convolving
+ them with a centroid moment tensor and input event half-rise time.
 \end_layout
 
 \begin_layout Standard
@@ -687,7 +645,7 @@ Program
 \series bold
 green
 \series default
- computes the Green function for an event at an input depth.
+ computes the Green's function for an event at an input depth.
  The primary input is the 
 \shape italic
 .eigen
@@ -707,7 +665,7 @@ eigcon
  the input eigenfunctions into more files, if desired.
  It is up to the user to ensure that the files contain unique normal modes,
  however.
- The stations and channels for which Green functions are produced by program
+ The stations and channels for which Green's functions are produced by program
  
 \series bold
 green
@@ -764,8 +722,8 @@ green
 .wfdisc
 \shape default
  file (in the CSS-3.0 database schema) in which each row corresponds to a
- given station:channel pair and points to the Green function on disk.
- Antelope products can be used to view the Green functions in which each
+ given station:channel pair and points to the Green's function on disk.
+ Antelope products can be used to view the Green's functions in which each
  station:channel set of six waveforms is multiplexed into a single waveform.
 \end_layout
 
@@ -774,7 +732,7 @@ Program
 \series bold
 syndat
 \series default
- convolves the Green functions pointed to by the 
+ convolves the Green's functions pointed to by the 
 \shape italic
 .wfdisc
 \shape default
@@ -887,11 +845,11 @@ prem_noocean_T.eigen.dat
  Eigenfunctions are computed with the following characteristics: (fmin,
  fmax) = (0, 125.0 mHz), (nmin, nmax) = (1, 30), (lmin, lmax) = (1, 1631).
  This produces all toroidal and the vast majority of spheroidal modes up
- to 8 sec period.
+ to an 8 sec period.
  There are about 28,000 spheroidal and 28,000 toroidal modes.
  Truncation depth of the eigenfunctions is 1000 km.
  The eigen files for the spheroidal and toroidal modes are about 52 and
- 22 Mb, respectively.
+ 22 MB, respectively.
  
 \end_layout
 
@@ -980,7 +938,11 @@ cucss2sac
 \shape default
  relation pointing to binary formatted waveforms on disk) into SAC or ASCII
  formatted waveform files.
- Note that the seismological community provides us with other CSS to SAC
+ 
+\end_layout
+
+\begin_layout Quote
+Note that the seismological community provides us with other CSS to SAC
  converters, and you may use them at your own risk.
  For example, for the SUN platform, the distribution set 
 \family typewriter
@@ -994,16 +956,7 @@ css2sac-3.0.3.tar.z
 .
  The utility from that site, however, doesn't work under Linux or Windows
  platforms.
- The bugs are fixed in the 
-\family typewriter
-css2sac_082006.zip
-\family default
- package which is available from 
-\shape italic
-http://www.sunrisear.com/download.html
-\shape default
-.
- (TODO: web page offline, in fact entire domain; asked Misha if he has file.)
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -1023,7 +976,7 @@ eigen2asc
 eigen2asc
 \series default
  matches the order number l with the closest period to T.
- Output can be redirected to file for further usage.
+ Output can be redirected to a file for further usage.
  
 \end_layout
 
@@ -1032,8 +985,8 @@ eigen2asc
 \series bold
 endi
 \series default
- swaps order of word bytes in binary files.
- The length of word is any integer number, for example, 2, 4, 6, 16, etc.
+ swaps the order of word bytes in binary files.
+ The length of a word is any integer number, for example, 2, 4, 6, 16, etc.
  
 \series bold
 endi
@@ -1080,7 +1033,7 @@ china_cmt_event.txt
 \end_layout
 
 \begin_layout Standard
-For more details see Chapter 
+For more details, see Chapter 
 \begin_inset LatexCommand \ref{cha:The-Utilities-User's}
 
 \end_inset
@@ -1119,7 +1072,7 @@ Mineos
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
+\begin_layout Standard
 To check if you have these compilers, type at the command line:
 \end_layout
 
@@ -1159,7 +1112,7 @@ Download the tar file from the CIG website or SVN (Subversion) server
 \end_layout
 
 \begin_deeper
-\begin_layout Enumerate
+\begin_layout Itemize
 Go to 
 \begin_inset LatexCommand \htmlurl[CIG Software Packages: Mineos]{geodynamics.org/cig/software/packages/seismo/mineos}
 
@@ -1168,7 +1121,7 @@ Go to
 (TODO: need web page there and tar file.), OR
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Itemize
 Check out from the Subversion server:
 \end_layout
 
@@ -1286,6 +1239,10 @@ to submit bugs and requests for new features.
 \end_layout
 
 \begin_layout Chapter
+\begin_inset LatexCommand \label{cha:Running-the-Mineos}
+
+\end_inset
+
 Running the Mineos Programs
 \end_layout
 
@@ -1294,7 +1251,7 @@ Running the Mineos Programs
 
 \end_inset
 
-minos_bran program
+minos_bran Program
 \end_layout
 
 \begin_layout Standard
@@ -1306,7 +1263,7 @@ minos_bran
 on problem.
  The program evaluates the eigenvalues and eigenfunctions for radial, spheroidal
  (S) and toroidal (T) modes.
- The model of the earth is self-gravitating, spherically symmetric, transversely
+ The model of the Earth is self-gravitating, spherically symmetric, transversely
  isotropic, and attenuative.
  
 \series bold
@@ -1317,7 +1274,7 @@ minos_bran
 \end_layout
 
 \begin_layout Subsection
-Command line
+Command Line
 \end_layout
 
 \begin_layout Standard
@@ -1399,7 +1356,15 @@ WORD
 
 \end_deeper
 \begin_layout Standard
-\noindent
+See Chapter 
+\begin_inset LatexCommand \ref{cha:Examples}
+
+\end_inset
+
+ for examples.
+\end_layout
+
+\begin_layout Standard
 The parameter file consists of six lines: 
 \end_layout
 
@@ -1420,7 +1385,7 @@ model_file
 \series bold
 Format:
 \series default
- Text string of up to 256 characters long.
+ Text string up to 256 characters long.
  
 \end_layout
 
@@ -1442,7 +1407,7 @@ out_plain_file
 \series bold
 Format:
 \series default
- Text string of up to 256 characters long.
+ Text string up to 256 characters long.
  
 \end_layout
 
@@ -1460,13 +1425,13 @@ out_bin_file
 \shape default
  is the path to the output FORTRAN unformatted binary file.
  The file is a collection of eigenfunctions in a binary representation.
- The file name ``none'' is a special name.
- ``none'' will suppress the calculation of eigenfunctions.
+ The file name ``none'' is a special name; ``none'' will suppress the calculatio
+n of eigenfunctions.
  
 \series bold
 Format:
 \series default
- Text string of up to 256 characters long.
+ Text string up to 256 characters long.
  
 \end_layout
 
@@ -1586,7 +1551,7 @@ lmin, lmax, wmin, wmax, nmin, nmax
 \begin_inset Formula $wmin,\; wmax$
 \end_inset
 
- define the frequency range to be computed (in milli-Hertz).
+ define the frequency range to be computed (in millihertz).
  
 \begin_inset Formula $nmin,\; nmax$
 \end_inset
@@ -1614,7 +1579,7 @@ Format:
 
 \end_inset
 
-Input data
+Input Data
 \end_layout
 
 \begin_layout Description
@@ -2464,7 +2429,7 @@ nreg, nic, noc, rx
 \begin_inset Formula $rx$
 \end_inset
 
- is given in (km) and it is usually 6371 km.
+ is given in km and it is usually 6371 km.
  
 \series bold
 Format:
@@ -2477,7 +2442,7 @@ Format:
 Line\InsetSpace ~
 4: 
 \shape italic
-nlay,r1,r2
+nlay, r1, r2
 \shape default
  
 \newline
@@ -2494,7 +2459,7 @@ nlay,r1,r2
 \begin_inset Formula $r2$
 \end_inset
 
-, 
+; 
 \begin_inset Formula $r1$
 \end_inset
 
@@ -2502,12 +2467,12 @@ nlay,r1,r2
 \begin_inset Formula $r2$
 \end_inset
 
- are in (km).
+ are in km.
  
 \series bold
 Format:
 \series default
- unformatted.
+ Unformatted.
  
 \end_layout
 
@@ -2605,7 +2570,7 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Standard
-Three next lines must be added for an anisotropic model.
+The next three lines must be added for an anisotropic model.
  
 \end_layout
 
@@ -2650,7 +2615,7 @@ Line\InsetSpace ~
 
 \end_inset
 
-Output data
+Output Data
 \end_layout
 
 \begin_layout Standard
@@ -2763,14 +2728,12 @@ index, r, rho, vpv, vph, vsv, vsh, eta, dshear, qkappa
 \end_inset
 
  is the knot number, starting from 1.
- The content of the remaining fields is described in section 3.2.
- 
-\series bold
-Input data
-\series default
+ The content of the remaining fields is described in Section 
+\begin_inset LatexCommand \ref{sub:Input-Data 3.2.2 (eigcon)}
+
+\end_inset
+
 .
- 
-\newline
  
 \series bold
 Format:
@@ -2787,12 +2750,11 @@ Lines\InsetSpace ~
 : Contains text messages with Runge-Kutta precision integration, gravity
  cut off frequency, empty lines, and the header for the normal mode properties
  table (totaling 6 lines).
-\newline
  
 \series bold
 Format:
 \series default
- free.
+ Free.
  
 \end_layout
 
@@ -3590,7 +3552,7 @@ Note that
 \begin_inset Formula $\pi g$
 \end_inset
 
- is 1, where, 
+ is 1, where 
 \begin_inset Formula $G$
 \end_inset
 
@@ -3726,7 +3688,7 @@ Program
 \series bold
 minos_bran
 \series default
- prints out on the standad output dialog messages only.
+ prints out only dialog messages on the standard output.
  See an example in Section 
 \begin_inset LatexCommand \ref{sub:Example-1.-Interactive dialog minor_bran}
 
@@ -3831,6 +3793,18 @@ PAGEOPH
 
 \begin_layout Bibliography
 
+\bibitem {Ganse Hutt 1982}
+Ganse, R., and C.R.
+ Hutt (1982), 
+\emph on
+Directory of World Digital Seismic Stations.
+ 
+\emph default
+Boulder: World Data Center for Solid Earth Geophysics, Report SE-32.
+\end_layout
+
+\begin_layout Bibliography
+
 \bibitem {Gilbert Dziewonski 1975}
  Gilbert, F., and A.M.
  Dziewonski (1975), An application of normal mode theory to the retrieval
@@ -3854,8 +3828,13 @@ A278
 
 \bibitem {Gilbert Backus 1969}
  Gilbert, F., and G.E.
- Backus (1969), Proceedings of AFIPS Fall Joint Computer Conference, San
- Francisco, CA, December 1968.
+ Backus (1969), A computational problem encountered in a study of the earth's
+ normal modes.
+
+\emph on
+ Proceedings of AFIPS Fall Joint Computer Conference, 32,
+\emph default
+ San Francisco, CA, December 1968, 1273-1277.
 \end_layout
 
 \begin_layout Bibliography

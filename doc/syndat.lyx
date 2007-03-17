@@ -36,7 +36,7 @@
 \begin_body
 
 \begin_layout Section
-syndat program
+syndat Program
 \end_layout
 
 \begin_layout Standard
@@ -44,7 +44,8 @@ The
 \series bold
 syndat
 \series default
- program makes synthetic seismograms by convolution of Green functions (
+ program makes synthetic seismograms by convolution of Green's functions
+ (
 \series bold
 green
 \series default
@@ -52,7 +53,7 @@ green
 \end_layout
 
 \begin_layout Subsection
-Command line
+Command Line
 \end_layout
 
 \begin_layout Standard
@@ -139,7 +140,16 @@ syndat
 \end_deeper
 \begin_layout Standard
 \noindent
-The parameter file consists of four lines: 
+See Chapter 
+\begin_inset LatexCommand \ref{cha:Examples}
+
+\end_inset
+
+ for examples.
+\end_layout
+
+\begin_layout Standard
+The parameter file consists of five lines: 
 \end_layout
 
 \begin_layout Description
@@ -155,7 +165,7 @@ Line\InsetSpace ~
 \shape italic
 cmt_event
 \shape default
- file as used in the construction of the Green functions by the 
+ file as used in the construction of the Green's functions by the 
 \series bold
 green
 \series default
@@ -166,7 +176,7 @@ green
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -182,7 +192,7 @@ Line\InsetSpace ~
 \shape italic
 in_dbname 
 \shape default
- is the input database name for the input Green functions.
+ is the input database name for the input Green's functions.
  The 
 \shape italic
 .wfdisc
@@ -204,7 +214,7 @@ green
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -312,8 +322,8 @@ Mineos
 \end_inset
 
 .
- This is done by additional conversation of accelerograms to velocity or
- displacement.
+ This is done by additional conversion of accelerograms to velocity or displacem
+ent.
  
 \end_layout
 
@@ -336,7 +346,7 @@ status collapsed
 \end_layout
 
 \begin_layout Subsection
-Input data
+Input Data
 \end_layout
 
 \begin_layout Description
@@ -379,7 +389,7 @@ green
 \end_layout
 
 \begin_layout Subsection
-Output data
+Output Data
 \end_layout
 
 \begin_layout Description

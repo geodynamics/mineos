@@ -40,7 +40,7 @@
 \begin_body
 
 \begin_layout Section
-green program
+green Program
 \end_layout
 
 \begin_layout Standard
@@ -48,18 +48,18 @@ The
 \series bold
 green
 \series default
- program computes the Green functions for a single event and a given set
+ program computes the Green's functions for a single event and a given set
  of stations.
  For each station, a station-channel list specifying the orientation of
  the sensors must be input.
- The program can optionally compute Green functions (a) for the Z component
- alone, (b) for 3-components with the standard ZNE sensor orientation (see
+ The program can optionally compute Green's functions (a) for the Z component
+ alone, (b) for 3 components with the standard ZNE sensor orientation (see
  Appendix 
 \begin_inset LatexCommand \ref{cha:Reference-Frame-Convention}
 
 \end_inset
 
-), or (c) for 3-components with the Z component directed ``up'' and two
+), or (c) for 3 components with the Z component directed ``up'' and two
  orthogonal horizontal components oriented arbitrarily.
  To set up station information, it is necessary to create a flat file database
  consisting of the two relations 
@@ -91,11 +91,11 @@ green
 \shape italic
 .wfdisc
 \shape default
- relation six Green functions, one per moment tensor component.
+ relation six Green's functions, one per moment tensor component.
 \end_layout
 
 \begin_layout Subsection
-Command line
+Command Line
 \end_layout
 
 \begin_layout Standard
@@ -178,6 +178,15 @@ green
 \end_deeper
 \begin_layout Standard
 \noindent
+See Chapter 
+\begin_inset LatexCommand \ref{cha:Examples}
+
+\end_inset
+
+ for examples.
+\end_layout
+
+\begin_layout Standard
 The input parameter file consists of six lines: 
 \end_layout
 
@@ -202,7 +211,7 @@ in_dbname
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -225,7 +234,7 @@ This is the path to the file defining the list of database names containing
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -245,7 +254,7 @@ This is the path to the file with the CMT solution for a single event.
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -260,7 +269,7 @@ fmin, fmax
 \shape default
  define the frequency range to be selected from the input eigenfunction
  databases.
- All modes with frequences out of this range are rejected.
+ All modes with frequencies out of this range are rejected.
  
 \series bold
 Format:
@@ -299,18 +308,18 @@ This is the output database name including only the
 \shape italic
 .wfdisc
 \shape default
- relation for unit Green functions.
+ relation for unit Green's functions.
  Each row of the 
 \shape italic
 .wfdisc
 \shape default
- relation refers to the binary file with 6 multiplexed Green functions,
+ relation refers to the binary file with 6 multiplexed Green's functions,
  i.e., one tensor component.
  
 \series bold
 Format:
 \series default
- Any string of up to 256 characters long.
+ Any string up to 256 characters long.
  
 \end_layout
 
@@ -319,7 +328,7 @@ Format:
 
 \end_inset
 
-Input data
+Input Data
 \end_layout
 
 \begin_layout Description
@@ -354,7 +363,11 @@ green
 \shape italic
 hang
 \shape default
- field in the sitechan relation).
+ field in the 
+\emph on
+.sitechan
+\emph default
+ relation).
  Before grouping, the 
 \series bold
 green
@@ -379,8 +392,8 @@ chan
 .sitechan
 \shape default
  relation is a three-character channel name following the SEED format convention.
- The first two characters define the type of channel (e.g., BH, LH, etc.) unique,
- for each station's group.
+ The first two characters define the type of unique channel (e.g., BH, LH,
+ etc.) for each station's group.
  The third character must be the component name: Z (uppercase, for vertical)
  and other symbols (any case, for the horizontals).
  
@@ -453,7 +466,7 @@ evid is the event identifier, 8 characters long
 \end_layout
 
 \begin_layout Description
-year is the event year of form 
+year is the event year in the form 
 \series bold
 yyyy
 \series default
@@ -473,7 +486,7 @@ min is the event minutes
 \end_layout
 
 \begin_layout Description
-sec is the event seconds with decimal fraction 
+sec is the event seconds with decimal fractions 
 \end_layout
 
 \begin_layout Description
@@ -489,11 +502,11 @@ depth is the event depth (km)
 \end_layout
 
 \begin_layout Description
-step is the time step for Green functions and seismograms (sec)
+step is the time step for Green's functions and seismograms (sec)
 \end_layout
 
 \begin_layout Description
-halfd is the source half time duration (sec)
+halfd is the source half-time duration (sec)
 \end_layout
 
 \begin_layout Description
@@ -557,7 +570,7 @@ slip2
 
 \end_deeper
 \begin_layout Subsection
-Output data
+Output Data
 \end_layout
 
 \begin_layout Description
@@ -579,8 +592,8 @@ green
 \shape italic
 out_dbname
 \shape default
- and a multiplexed binary file contained the Green function waveforms.
- The binary file contains six Green functions in an order corresponding
+ and a multiplexed binary file containing the Green's function waveforms.
+ The binary file contains six Green's functions in an order corresponding
  to the tensor components: 
 \begin_inset Formula $M_{rr},\; M_{\theta\theta},\; M_{\varphi\varphi},\; M_{r\theta},\; M_{r\varphi},\; M_{\theta\varphi}$
 \end_inset
@@ -770,7 +783,7 @@ WARNING: green: # of points in Green functions is stripped to nnn
 \begin_deeper
 \begin_layout Standard
 Warning message.
- The number of requested points for the Green functions exceeds the maximum
+ The number of requested points for the Green's functions exceeds the maximum
  allowed value 
 \family typewriter
 mseis
@@ -1066,8 +1079,7 @@ meig
  
 \end_layout
 
-\end_deeper
-\begin_layout Enumerate
+\begin_layout Standard
 \noindent
 
 \family typewriter
@@ -1078,7 +1090,6 @@ green: # tor.
  
 \end_layout
 
-\begin_deeper
 \begin_layout Standard
 Info message.
  
@@ -1134,7 +1145,7 @@ Info message.
 \shape italic
 cmt_event
 \shape default
- file: event information, Green function's time step and number of samples.
+ file: event information, Green's function's time step and number of samples.
  See description of the 
 \shape italic
 cmt_event
@@ -1269,11 +1280,11 @@ green: nnn code chan date&time step mmm
 \begin_deeper
 \begin_layout Standard
 Info message.
- This message informs about some attributes specifying the Green functions.
- nnn is the global number of Green functions set, code is the station name,
- chan is the channel name, date&time is the event origin time, step is the
- Green function sampling step in seconds, and mmm is the total number of
- samples for the block of six Green functions.
+ This message informs about some attributes specifying the Green's functions.
+ nnn is the global number of Green's functions set, code is the station
+ name, chan is the channel name, date&time is the event origin time, step
+ is the Green's function sampling step in seconds, and mmm is the total
+ number of samples for the block of six Green's functions.
  
 \end_layout
 

@@ -186,7 +186,7 @@ Mineos
 \series bold
 cucss2sac
 \series default
- may be used for the conversation of Green functions or synthetic seismograms
+ may be used for the conversion of Green's functions or synthetic seismograms
  to binary SAC or ASCII files.
 \end_layout
 
@@ -197,10 +197,8 @@ db_name
 \series default
  must include at least one file 
 \family typewriter
-\size small
 db_name.wfdisc
 \family default
-\size default
  file containing CSS format information about the waveforms.
  It is also desirable to add to the database 
 \shape italic
@@ -382,10 +380,10 @@ If the presence of the header is not desired, suppress it with option
 \end_layout
 
 \begin_layout Standard
-The output ASCII file format for the Green functions is different.
+The output ASCII file format for the Green's functions is different.
  The header is the same, but the body is a 7-column table.
  The first column is relative time, as before, and the other 6 columns are
- the 6-unit Green functions (
+ the 6-unit Green's functions (
 \begin_inset Formula $G_{rr},G_{\theta\theta},G_{\varphi\varphi},G_{r\theta},G_{r\varphi},G_{\theta\varphi}$
 \end_inset
 
@@ -405,7 +403,7 @@ syndat
 \color red
 NOTE:
 \series default
-\color default
+\color none
  IN ACCELERATION, nm/s
 \begin_inset Formula $^{2}$
 \end_inset
@@ -547,10 +545,8 @@ eigen2asc
 \series default
  searches in the 
 \family typewriter
-\size small
 db_name.eigen
 \family default
-\size default
  file for all eigenfunctions with mode numbers n, l satisfying the following
  conditions: 
 \series bold
@@ -608,9 +604,9 @@ out_dir
  excludes the header output.
  The body is a three-column (radial, toroidal modes) or seven-column (spheroidal
  mode) table.
- The first body column is radius in meters and the others columns contain
+ The first body column is radius in meters and the other columns contain
  the eigen functions and their derivatives by radius (in the internal, normalize
-d units) - U, U', V, V', P, P' for spheroidal modes and W, W' for other
+d units) -- U, U', V, V', P, P' for spheroidal modes and W, W' for other
  modes.
  For more details, see Section 4.1.
  The output file name has the form 
@@ -747,7 +743,8 @@ EXAMPLES
 
 \begin_layout Standard
 Example 1.
- Let w.00001 and w.00002 the binary real*4 data files from some 
+ Let's examine w.00001 and w.00002 the binary real*4 data files from some
+ 
 \shape italic
 .wfdisc
 \shape default
@@ -872,7 +869,7 @@ rdseed
 Mineos
 \series default
  programs.
- In case of a lot of station data, a better solution is to write a program,
+ In case of a lot of station data, a better solution is to write a program
  which creates 
 \series bold
 ascii_file
@@ -1035,7 +1032,7 @@ sta, lat, lon, elev, staname
 
 \end_inset
 
- .
+.
  A channel line starts with text field 
 \begin_inset Quotes eld
 \end_inset
@@ -1151,7 +1148,7 @@ create_origin
 \series bold
 cmt_event
 \series default
- ASCII file the first line written in format of input 
+ ASCII file the first line written in the format of input 
 \series bold
 cmt_event
 \series default
@@ -1196,13 +1193,13 @@ Mineos
 
 \end_inset
 
- below, or for the complete description, see Anderson, J,.
- et al., 1990.
-\begin_inset LatexCommand \cite{Anderson, Farrell, et al 1990}
+ below, or for the complete description, see Anderson et al.
+ 1990 
+\begin_inset LatexCommand \cite{Anderson Farrell et al 1990}
 
 \end_inset
 
- 
+.
 \end_layout
 
 \begin_layout Standard

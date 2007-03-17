@@ -58,7 +58,7 @@ This chapter defines the tables (relations) in the flat file database.
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-eigen.-Description:}
@@ -1116,7 +1116,7 @@ load date
 \begin_inset Float table
 placement H
 wide false
-sideways true
+sideways false
 status collapsed
 
 \begin_layout Caption
@@ -1126,9 +1126,9 @@ status collapsed
 
 Relation: 
 \series bold
-site.
-
+site
 \series default
+.
  Description: Station location information.
 \end_layout
 
@@ -1143,7 +1143,7 @@ site.
 <column alignment="center" valignment="top" leftline="true" width="0">
 <column alignment="center" valignment="top" leftline="true" width="0">
 <column alignment="center" valignment="top" leftline="true" width="0">
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="1.5in">
 <row topline="true" bottomline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -1890,7 +1890,7 @@ load date
 \begin_inset Float table
 placement H
 wide false
-sideways true
+sideways false
 status collapsed
 
 \begin_layout Caption
@@ -2608,8 +2608,8 @@ load date
 \begin_inset Float table
 placement H
 wide false
-sideways true
-status collapsed
+sideways false
+status open
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-wfdisc.-Description:}
@@ -2635,7 +2635,7 @@ wfdisc
 <column alignment="center" valignment="top" leftline="true" width="0">
 <column alignment="center" valignment="top" leftline="true" width="0">
 <column alignment="center" valignment="top" leftline="true" width="0">
-<column alignment="center" valignment="top" leftline="true" rightline="true" width="0">
+<column alignment="center" valignment="top" leftline="true" rightline="true" width="1.5in">
 <row topline="true" bottomline="true">
 <cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -3856,8 +3856,7 @@ Description: Attenuation coefficient
 \begin_inset Formula $Q$
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Description
@@ -3866,8 +3865,7 @@ Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Description
@@ -3931,8 +3929,7 @@ Units: Nanometers/digital count
 \end_layout
 
 \begin_layout Description
-Range: Any nonzero floating point number.
- 
+Range: Any nonzero floating point number
 \end_layout
 
 \begin_layout Standard
@@ -3972,7 +3969,7 @@ Range:  { c
 \begin_inset Formula $|$
 \end_inset
 
- n}, lower case
+ n}, lowercase
 \end_layout
 
 \begin_layout Standard
@@ -4471,7 +4468,7 @@ Value:  - (a dash)
 \end_layout
 
 \begin_layout Description
-Range:  Any free-format string of up to 50 characters long.
+Range:  Any free-format string up to 50 characters long.
  
 \end_layout
 
@@ -4523,8 +4520,7 @@ Value:
 \end_layout
 
 \begin_layout Description
-Units:  Kilometers.
- 
+Units:  Kilometers
 \end_layout
 
 \begin_layout Description
@@ -4563,7 +4559,7 @@ Description:  Data file.
 \begin_inset Formula $wfdisc$
 \end_inset
 
- this is the file name of a disk waveform or single component Green function.
+ this is the file name of a disk waveform or single component Green's function.
  In 
 \begin_inset Formula $eigen$
 \end_inset
@@ -4580,7 +4576,7 @@ Value:  NOT ALLOWED.
 \end_layout
 
 \begin_layout Description
-Range:  Any string of up to 32 characters long.
+Range:  Any string up to 32 characters long.
  
 \end_layout
 
@@ -4677,8 +4673,7 @@ Value:
 \end_layout
 
 \begin_layout Description
-Units:  Kilometers.
- 
+Units:  Kilometers
 \end_layout
 
 \begin_layout Description
@@ -4988,7 +4983,6 @@ NA Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
  
 \end_layout
 
@@ -5104,8 +5098,12 @@ Value:  - (a dash)
 
 \begin_layout Description
 Range: Uppercase, and too numerous to mention.
- For details see ``Directory of World Digital Seismic Station,'' Ganse 
- Hutt, WDC A, Report SE-32, August, 1982.
+ For details, see Ganse and Hutt, 1982 
+\begin_inset LatexCommand \cite{Ganse Hutt 1982}
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -5141,7 +5139,8 @@ Description:  Julian date.
  Note: there is no  year = 0000 or day = 000.
  Where only the year is known, day of the year = 001;  where only year and
  month are known, day of year = first day of month.
-  For example, Jan 1 of 10 BC is -0010001.
+  For example, Jan 1 of 10 B.C.E.
+ is -0010001.
  See 
 \shape italic
 time
@@ -5166,7 +5165,6 @@ Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
  
 \end_layout
 
@@ -5258,8 +5256,7 @@ Description:  Load date.
 \end_layout
 
 \begin_layout Description
-Range:  Any value.
- 
+Range:  Any value
 \end_layout
 
 \begin_layout Standard
@@ -5287,7 +5284,7 @@ site
 \begin_layout Description
 Description:  Longitude.
  This attribute is the geographic longitude.
- Longitudes  are measured positive east of Greenwich meridian.
+ Longitudes  are measured positive east of the Greenwich meridian.
  
 \end_layout
 
@@ -5347,8 +5344,7 @@ Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Standard
@@ -5435,7 +5431,6 @@ Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
  
 \end_layout
 
@@ -5642,7 +5637,7 @@ site, sitechan
 \begin_layout Description
 Description:  Turn on date.
  This attribute is the Julian Date on which the station or sensor indicated
- was began operation.
+ began operation.
  
 \shape italic
 Offdate
@@ -5714,8 +5709,7 @@ Value
 \begin_inset Formula $-1$
 \end_inset
 
-.
- 
+
 \end_layout
 
 \begin_layout Description
@@ -5774,7 +5768,6 @@ Value:
 \begin_inset Formula $-1$
 \end_inset
 
-.
  
 \end_layout
 
@@ -5863,7 +5856,7 @@ wfdisc
 \begin_layout Description
 Description: Segment type.
  The attribute indicates if a waveform is o (original), v (virtual), s (segmente
-d), d (duplicate), g (Green function), or w (synthetic waveform).
+d), d (duplicate), g (Green's function), or w (synthetic waveform).
  
 \end_layout
 
@@ -5919,7 +5912,7 @@ site, sitechan, wfdisc
 \end_layout
 
 \begin_layout Description
-Description:  Station code, or common code name for a seismic observatory.
+Description:  Station code, or common code-name for a seismic observatory.
  Generally only three or four characters are used.
  
 \end_layout
@@ -5959,7 +5952,7 @@ site
 
 \begin_layout Description
 Description:  Station name/description.
- This is the full name of the station whose code name is in 
+ This is the full name of the station whose code-name is in 
 \shape italic
 sta
 \shape default
@@ -6002,7 +5995,7 @@ site
 \begin_layout Description
 Description:  Station type.
  This character string specifies the station type.
- Recommended  type are ss (single stations) or ar (array).
+ Recommended types are ss (single stations) or ar (array).
  
 \end_layout
 
@@ -6133,7 +6126,7 @@ site
 
 \begin_layout Description
 Description:  Reference station.
- This string specifies the reference station with respect to which array
+ This string specifies the reference station with respect to which the array
  members are located.
  See 
 \shape italic

@@ -60,7 +60,7 @@ fdb
 \end_layout
 
 \begin_layout Standard
-
+The 
 \series bold
 fdb
 \series default
@@ -211,7 +211,7 @@ subroutine get_wfdisc
 \series bold
 subroutine select_sitechan
 \series default
- - grouping 
+ grouping 
 \shape italic
 .sitechan
 \shape default
@@ -349,7 +349,7 @@ loctime
 
 \series bold
 subroutine\InsetSpace ~
-epochtoh(t,\InsetSpace ~
+epochtoh (t,\InsetSpace ~
 year,\InsetSpace ~
 doy,\InsetSpace ~
 hour,\InsetSpace ~
@@ -375,7 +375,7 @@ real*8 sec
 \series bold
 doy
 \series default
- is a day starting from the beginning of year 
+ is a day starting from the beginning of year .
 \end_layout
 
 \begin_layout Description
@@ -493,7 +493,7 @@ loctime()
 \series bold
 mm/dd/yy-hh:mm:ss
 \series default
- 
+.
 \end_layout
 
 \end_body

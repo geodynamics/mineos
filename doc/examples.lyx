@@ -160,7 +160,7 @@ Example 1.
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% minos_bran 
+$ minos_bran 
 \end_layout
 
 \begin_layout LyX-Code
@@ -268,7 +268,7 @@ enter lmin,lmax,wmin,wmax,nmin,nmax
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% 
+$ 
 \family default
  
 \end_layout
@@ -475,7 +475,7 @@ eigcon
  renormalizes the eigenfunctions and outputs them to a depth of 1000 km,
  in this example.
  The renormalized eigenfunctions are placed in an extension of the CSS3.0
- dataase, using the relation 
+ database, using the relation 
 \shape italic
 test_S.eigen
 \shape default
@@ -519,7 +519,7 @@ Example 1.
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% eigcon 
+$ eigcon 
 \end_layout
 
 \begin_layout LyX-Code
@@ -646,7 +646,7 @@ test_S
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% 
+$ 
 \family default
  
 \end_layout
@@ -848,7 +848,7 @@ The first input file is the database name of the
 .sitechan
 \shape default
  file determine which stations and channels are used for constructing the
- Green functions.
+ Green's functions.
  Channel orientations are in the 
 \shape italic
 .sitechan
@@ -877,10 +877,10 @@ short.sitechan
 \begin_layout Enumerate
 The second input file is the file 
 \shape italic
-dblist
+db_list
 \shape default
 .
- This file contains the listing of all data base names for the eigenfunction
+ This file contains the listing of all database names for the eigenfunction
  files.
  In the previous subsection, the 
 \shape italic
@@ -891,8 +891,8 @@ dblist
 prem_noocean_S.eigen
 \shape default
  was created.
- So, if that file contains the only normal modes to be used in the construction
- of the Green functions, then the file 
+ So if that file contains the only normal modes to be used in the construction
+ of the Green's functions, then the file 
 \shape italic
 db_list
 \shape default
@@ -943,12 +943,12 @@ syndat
 \begin_layout Standard
 This example will choose modes only between frequencies of 0 and 166 mHz
  (i.e., periods greater than 6 sec).
- It will produce Green functions that are 8000 samples long.
+ It will produce Green's functions that are 8000 samples long.
  The time sampling specified in the 
 \shape italic
 china_cmt_evt
 \shape default
- file is 1 sec, so this is a time series length of a little over 2 hours.
+ file is 1 sec, so this is a time series length of a little over two hours.
  In many cases, both the minor and major arc arrivals can be seen.
 \end_layout
 
@@ -982,7 +982,7 @@ Example 1.
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% green 
+$ green 
 \end_layout
 
 \begin_layout LyX-Code
@@ -1092,7 +1092,7 @@ green
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% 
+$ 
 \family default
  
 \end_layout
@@ -1305,7 +1305,7 @@ green.wfdisc
 green
 \shape default
 , is input rather than the whole file name.
- The output data base name is also specified, which in this example is 
+ The output database name is also specified, which in this example is 
 \shape italic
 Syndat
 \shape default
@@ -1335,7 +1335,7 @@ Example 1.
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% syndat 
+$ syndat 
 \end_layout
 
 \begin_layout LyX-Code
@@ -1426,7 +1426,7 @@ enter output datatype: 0 -accn, 1 -vel, 2 -displ
 \begin_layout LyX-Code
 
 \family typewriter
-mathis% 
+$ 
 \family default
  
 \end_layout
