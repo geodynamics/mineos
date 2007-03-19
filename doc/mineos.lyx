@@ -1118,7 +1118,7 @@ Go to
 
 \end_inset
 
-(TODO: need web page there and tar file.), OR
+, OR
 \end_layout
 
 \begin_layout Itemize
@@ -1126,7 +1126,7 @@ Check out from the Subversion server:
 \end_layout
 
 \begin_layout LyX-Code
-svn co svn+ssh://svn@geodynamics.org/cig/seismo/1D/mineos/trunk mineos
+svn co http://svn@geodynamics.org/cig/seismo/1D/mineos/trunk
 \end_layout
 
 \end_deeper
@@ -3405,7 +3405,7 @@ eigcon
 \series bold
 minos_bran
 \series default
- outputs each et of the eigenfunctions with a single write statement:
+ outputs each eigenfunction with a single write statement:
 \end_layout
 
 \begin_layout LyX-Code
@@ -3688,7 +3688,7 @@ Program
 \series bold
 minos_bran
 \series default
- prints out only dialog messages on the standard output.
+ prints out dialog messages only on the standard output.
  See an example in Section 
 \begin_inset LatexCommand \ref{sub:Example-1.-Interactive dialog minor_bran}
 

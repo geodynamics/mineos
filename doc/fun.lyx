@@ -215,7 +215,7 @@ subroutine select_sitechan
 \shape italic
 .sitechan
 \shape default
- relation by components (single channel or) 
+ relation by components (single Z component or 3-components) 
 \end_layout
 
 \begin_layout Description
@@ -360,22 +360,49 @@ sec)
 \series bold
 double* t
 \series default
-, into human time, 
+, into human time 
 \series bold
-integer*4\InsetSpace ~
-year,doy,hour,min
+year, 
 \series default
-,
-\series bold
-\InsetSpace ~
-real*8 sec
-\series default
-.
- 
+day of year (
 \series bold
 doy
 \series default
- is a day starting from the beginning of year .
+)
+\series bold
+, hour
+\series default
+, minutes (
+\series bold
+min
+\series default
+), 
+\series bold
+sec
+\series default
+.
+ Note: 
+\series bold
+integer*4 
+\series default
+applies to
+\series bold
+ year, doy, hour, min
+\series default
+ and 
+\series bold
+real*8 
+\series default
+applies to
+\series bold
+ sec.
+ 
+\series default
+Day of year
+\series bold
+ (doy)
+\series default
+ is the number of days counted from the first day of the year.
 \end_layout
 
 \begin_layout Description
@@ -404,15 +431,21 @@ min
 sec
 \series default
 .
- Here, 
+ Note: 
 \series bold
-integer*4 year,doy,hour,min
+integer*4 
+\series default
+applies to
+\series bold
+ year, doy, hour, min
 \series default
  and 
 \series bold
-real*8 sec
+real*8 
 \series default
- (TODO: is this sentence incomplete?)
+applies to
+\series bold
+ sec.
 \end_layout
 
 \begin_layout Description

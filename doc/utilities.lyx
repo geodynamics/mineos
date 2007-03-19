@@ -742,15 +742,14 @@ EXAMPLES
 \end_layout
 
 \begin_layout Standard
-Example 1.
- Let's examine w.00001 and w.00002 the binary real*4 data files from some
- 
+In this example, w.00001 and w.00002 are the binary real*4 data files from
+ some 
 \shape italic
 .wfdisc
 \shape default
  relation created on a PC computer.
- These files have internal LOW_ENDIAN data representation created, for example,
- by a direct access FORTRAN WRITE statement.
+ These files have internal LOW_ENDIAN data representation created, e.g., by
+ a direct access FORTRAN WRITE statement.
  After applying the command:
 \end_layout
 
@@ -1209,7 +1208,7 @@ Mineos
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Caption
 \begin_inset LatexCommand \label{tab:Relation:-origin.-Description:}
@@ -1792,7 +1791,7 @@ i4
 
 \begin_layout Standard
 no.
- of lacating phases
+ of locating phases
 \end_layout
 
 \end_inset
