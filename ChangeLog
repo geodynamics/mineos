@@ -1,3 +1,73 @@
+2007-03-20 00:29  sue
+
+	* [r6306] fixed a blank return space; regen pdf
+
+2007-03-20 00:21  leif
+
+	* [r6305] Minor fixes to configure, Makefile, and RUN_* shell
+	  scripts. Revised the "Download and Configure" section of the
+	  manual.
+
+2007-03-19 20:10  sue
+
+	* [r6292] deleting tex files and dir
+
+2007-03-19 20:05  sue
+
+	* [r6291] final edits; new pdf; cleanup tex files
+
+2007-03-17 02:03  sue
+
+	* [r6276] one file alm. escaped saving
+
+2007-03-17 02:00  sue
+
+	* [r6275] second review edits and some questions answered but
+	  still some key ones needed from Misha
+
+2007-03-16 00:15  sue
+
+	* [r6269] full edit done, pdf regen. lacks answers to questions
+	  posed to Misha and some reference work
+
+2007-03-15 20:43  sue
+
+	* [r6266] changes to main lyx man file
+
+2007-03-15 20:24  sue
+
+	* [r6265] more edits to manual content
+
+2007-03-15 19:44  sue
+
+	* [r6264] first batch of edits to manual content
+
+2007-03-15 17:15  sue
+
+	* [r6261] added history of code
+
+2007-03-14 00:40  sue
+
+	* [r6253] added history of code
+
+2007-03-10 01:32  sue
+
+	* [r6217] moving Figures dir up a level
+
+2007-03-10 01:19  sue
+
+	* [r6216] put mineos content into lyx template that will generate
+	  PDf; generated pdf. more edits to come.
+
+2007-03-03 00:16  sue
+
+	* [r6167] preliminary changes to manual
+
+2007-02-22 21:40  leif
+
+	* [r6061] Added COPYING and ChangeLog. svn log --xml | xsltproc
+	  --stringparam include-rev yes svn2cl.xsl - > ChangeLog
+
 2007-02-22 21:19  leif
 
 	* [r6060] Added Guy Masters's SIO227B class notes as additional
