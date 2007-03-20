@@ -1,4 +1,4 @@
-#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
+#LyX 1.4.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 245
 \begin_document
 \begin_header
@@ -1108,7 +1108,8 @@ Download and Configure Mineos
 \end_layout
 
 \begin_layout Enumerate
-Download the tar file from the CIG website or SVN (Subversion) server
+Download the source package from the CIG website, or check-out the source
+ from the SVN (Subversion) server
 \end_layout
 
 \begin_deeper
@@ -1118,20 +1119,40 @@ Go to
 
 \end_inset
 
-, OR
-\end_layout
-
-\begin_layout Itemize
-Check out from the Subversion server:
+ and download the source package.
+ Extract the source from the tar file:
 \end_layout
 
 \begin_layout LyX-Code
-svn co http://svn@geodynamics.org/cig/seismo/1D/mineos/trunk
+gunzip -c mineos-1.0.0.tar.gz | tar xf -
+\end_layout
+
+\begin_layout LyX-Code
+cd mineos-1.0.0
+\end_layout
+
+\begin_layout Standard
+~ OR ~
+\end_layout
+
+\begin_layout Itemize
+Check out the source from the Subversion server:
+\end_layout
+
+\begin_layout LyX-Code
+svn co http://svn@geodynamics.org/cig/seismo/1D/mineos/trunk mineos
+\end_layout
+
+\begin_layout LyX-Code
+cd mineos
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Run ``autoreconf -i'' to unpack configure scripts
+If you checked-out the source using Subversion, run ``autoreconf -i'' to
+ generate the 'configure' script and related files.
+ (Skip this step if you downloaded the source package.
+ The resulting files are included in the tar file.)
 \end_layout
 
 \begin_deeper
@@ -1141,16 +1162,12 @@ $ autoreconf -i
 
 \end_deeper
 \begin_layout Enumerate
-Run configure
+Run ``configure''
 \end_layout
 
 \begin_deeper
 \begin_layout LyX-Code
-./configure --prefix=/home/
-\emph on
-YourHomeDirectory
-\emph default
-/mineos-bin
+./configure --prefix=$HOME/cig
 \end_layout
 
 \end_deeper
@@ -1175,26 +1192,39 @@ make install
 
 \end_deeper
 \begin_layout Enumerate
-Untar the DEMO directory to access the provided input files
+Untar the DEMO tar file to access the provided input files
 \end_layout
 
 \begin_deeper
 \begin_layout LyX-Code
-tar -ztvf DEMO/DEMO.tar.gz
+cd DEMO
+\end_layout
+
+\begin_layout LyX-Code
+gunzip -c DEMO.tar.gz | tar xf -
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
-Now you can run one of the demo input files, e.g., 
+Now you can run using the demo input files.
+ For example, under the Bash shell: 
 \end_layout
 
 \begin_deeper
 \begin_layout LyX-Code
-/home/
-\emph on
-YourHomeDirectory
-\emph default
-/mineos-bin/bin/minos_bran < prem_noocean.txt
+
+\end_layout
+
+\begin_layout LyX-Code
+export PATH=$HOME/cig/bin:$PATH
+\end_layout
+
+\begin_layout LyX-Code
+cd DEMO3
+\end_layout
+
+\begin_layout LyX-Code
+./RUN_MINEOS.sh prem_noocean
 \end_layout
 
 \end_deeper

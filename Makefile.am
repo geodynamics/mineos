@@ -17,19 +17,19 @@
 ## Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ##
 
-# $Id: Makefile.am 2452 2005-10-19 20:03:01Z leif $
-
 bin_PROGRAMS = minos_bran syndat green eigcon \
 	endi eigen2asc simpledit cucss2sac
 
 # scripts
 
-bin_SCRIPTS = scripts/creat_origin
+dist_bin_SCRIPTS = scripts/creat_origin
 
-# docs
+# demo
 
-nobase_data_DATA = doc/tex/Figures/* doc/tex/*.tex doc/UserManual.pdf
-data_DATA = DEMO/DEMO.tar.gz DEMO/README
+dist_pkgdata_DATA = \
+	doc/mineos.pdf \
+	DEMO/DEMO.tar.gz \
+	DEMO/README
 
 # main programs
 
@@ -49,6 +49,7 @@ fdb = \
 	fdb/fdb_wfdisc.h \
 	fdb/fdb_eigen.h \
 	fdb/swapn.c
+
 # time utils
 time = \
 	time/time.f
@@ -58,11 +59,5 @@ endi_SOURCES = utils/endi.c utils/swap.c
 simpledit_SOURCES = utils/simpledit.f $(fdb) $(time)
 cucss2sac_SOURCES = utils/cucss2sac.c utils/swap.c utils/cucss2sac.h
 eigen2asc_SOURCES = utils/eigen2asc.f $(fdb) $(time)
-
-EXTRA_DIST = \
-	scripts \
-	doc \
-	DEMO/DEMO.tar.gz \
-	DEMO/README
 
 ## end of Makefile.am
