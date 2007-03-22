@@ -425,8 +425,59 @@ CIG is making this source code available to you in the hope that the software
 .
 \end_layout
 
-\begin_layout Standard
+\begin_layout Section
+Known Limitations
+\end_layout
 
+\begin_layout Standard
+Unlike mose of the geodynamic codes, Mineos is a legacy code, not a research
+ code, and substantial modifications are less likely to be forthcoming.
+ Users should be aware of the following known limitations of this release
+ of Mineos:
+\end_layout
+
+\begin_layout Itemize
+Attempts to make synthetics for difrated P will find that the inner core
+ modes (specifically, the energy integrals) are not accurately computed.
+ It's uncertain that adding nodes to the inner core will solve this problem.
+ Some success has been reported by having the synthetics do the energy integrals
+ differently, which does not depend on knot spacing.
+ 
+\end_layout
+
+\begin_layout Itemize
+This version of Mineos is fine for low-frequency applications but not for
+ working at periods of a few seconds.
+\end_layout
+
+\begin_layout Standard
+The primary point of support for Mineos is the 
+\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
+
+\end_inset
+
+.
+ Feel free to send questions, comments, feature requests, and bugs to the
+ list.
+ The mailing list is archived at
+\end_layout
+
+\begin_layout LyX-Code
+\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You may also use the bug tracker 
+\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
+
+\end_inset
+
+ to report problems or issues.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1104,11 +1155,15 @@ autoconf 2.59 or higher version and automake 1.8.4 or higher version.
 \end_layout
 
 \begin_layout Section
-Download and Configure Mineos
+\begin_inset LatexCommand \label{sec:Download-and-Configure}
+
+\end_inset
+
+Download and Configure Mineos (Linux/Mac OS X)
 \end_layout
 
 \begin_layout Enumerate
-Download the source package from the CIG website, or check-out the source
+Download the source package from the CIG website, or check out the source
  from the SVN (Subversion) server
 \end_layout
 
@@ -1225,6 +1280,92 @@ cd DEMO3
 
 \end_deeper
 \begin_layout Section
+Download and Configure Mineos (Windows using Cygwin)
+\end_layout
+
+\begin_layout Standard
+Mineo has been tested under the 
+\begin_inset LatexCommand \htmlurl[Cygwin]{www.cygwin.com}
+
+\end_inset
+
+ environment for Windows.
+ To build Mineos using the source package (see step 1 in Section 
+\begin_inset LatexCommand \ref{sec:Download-and-Configure}
+
+\end_inset
+
+), you will need the following development tools which are included in the
+ Cygwin "Devel" packages:
+\end_layout
+
+\begin_layout Itemize
+gcc
+\end_layout
+
+\begin_layout Itemize
+gcc-g77
+\end_layout
+
+\begin_layout Itemize
+make
+\end_layout
+
+\begin_layout Standard
+Select these packages for installation in the ``Cygwin Setup - Select Packages''
+ dialog box.
+ See 
+\begin_inset LatexCommand \htmlurl[Chapter 2 of the Cygwin User's Guide]{www.cygwin.com/cygwin-ug-net/setup-net.html}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Once you have Cygwin installed with all the necessary packages, you can
+ install Mineos just as you would under Unix, as instructed in Section 
+\begin_inset LatexCommand \ref{sec:Download-and-Configure}
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Some of the 
+\family typewriter
+.asc
+\family default
+ and 
+\family typewriter
+.sac
+\family default
+ files in the 
+\family typewriter
+DEMO.tar.gz
+\family default
+ archive have colons (`:') in their filenames, so you will have to perform
+ some trickery to unpack this archive on Windows without errors:
+\end_layout
+
+\begin_layout LyX-Code
+tar --transform=s/:/-/g -xvzf DEMO.tar.gz
+\end_layout
+
+\begin_layout Standard
+Note that these 
+\family typewriter
+.asc
+\family default
+ and 
+\family typewriter
+.sac
+\family default
+ files aren't necessary for running the code.
+\end_layout
+
+\begin_layout Section
 Support
 \end_layout
 
@@ -1249,19 +1390,13 @@ The primary point of support for Mineos is the
 \end_layout
 
 \begin_layout Standard
-You may also use the bug tracker
-\end_layout
-
-\begin_layout LyX-Code
+You may also use the bug tracker 
 \begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-to submit bugs and requests for new features.
+ to report problems or issues.
+ 
 \end_layout
 
 \begin_layout Chapter
