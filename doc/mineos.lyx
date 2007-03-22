@@ -1159,7 +1159,7 @@ autoconf 2.59 or higher version and automake 1.8.4 or higher version.
 
 \end_inset
 
-Download and Configure Mineos (Linux/Mac OS X)
+Download and Configure Mineos (Unix/Linux/Mac OS X)
 \end_layout
 
 \begin_layout Enumerate
@@ -1284,7 +1284,7 @@ Download and Configure Mineos (Windows using Cygwin)
 \end_layout
 
 \begin_layout Standard
-Mineo has been tested under the 
+Mineos has been tested under the 
 \begin_inset LatexCommand \htmlurl[Cygwin]{www.cygwin.com}
 
 \end_inset
