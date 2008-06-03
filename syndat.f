@@ -64,6 +64,15 @@ c.... i/o database name
       write(*,*) 'enter output dbname'
       read(*,'(a256)') dbout
       write(*,*) dbout(1:lnblnk(dbout))
+c.... type of output data
+      write(*,*) 'enter output datatype: 0 -accn, 1 -vel, 2 -displ'
+      read(*,*)  idout
+      if(idout.lt.0.or.idout.gt.2) then
+        write(*,*) 'WARNING: syndat: wrong output datatype = ',
+     *      idout,', assumed accereration = 0'
+      idout = 0
+      endif
+      write(*,*) idout
 c
 c    read source and moment
 c
