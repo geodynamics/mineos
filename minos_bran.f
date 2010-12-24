@@ -250,8 +250,9 @@ c*** find roots by spline interpolation ***
       common/bits/pi,rn,vn,wn,w,wsq,wray,qinv,cg,wgrav,tref,fct,eps,fl,
      +  fl1,fl2,fl3,sfl3,jcom,nord,l,kg,kount,knsw,ifanis,iback
       common/mtab/we(2),de(2),ke(2),wtry,bm
-      dimension x(20),det(20),qx(3,20),wrk(60),wt(*),ichar(4)
-      data tol/1.d-9/,itmax/15/,ichar/' s',' t',' s',' c'/
+      dimension x(20),det(20),qx(3,20),wrk(60),wt(*),kchar(4)
+      character*2 kchar
+      data tol/1.d-9/,itmax/15/,kchar/' s',' t',' s',' c'/
       if(de(1)*de(2).gt.0.d0) return
       nord=ke(2)
       if(l.eq.1) nord=nord+1
@@ -315,8 +316,8 @@ c*** write out frequencies ***
         qmod=0.d0
         if(qinv.gt.0.d0) qmod=1.d0/qinv
 c		remove writing resulting to stnd output (mhr)
-c       print 200,nord,ichar(jcom),l,cvel,wmhz,tcom,gcom,qmod,wdiff
-        write(iout,200) nord,ichar(jcom),l,cvel,wmhz,tcom,gcom,qmod,
+c       print 200,nord,kchar(jcom),l,cvel,wmhz,tcom,gcom,qmod,wdiff
+        write(iout,200) nord,kchar(jcom),l,cvel,wmhz,tcom,gcom,qmod,
      +      wdiff
   200   format(i5,a2,i5,6g16.7)
         call modout(b,qmod,gcom,ioeig,ncall)
@@ -327,8 +328,8 @@ c*** we estimate group velocity using previous frequencies
         gcom=vn*cg/1000.d0
 c		added print of gcom. qmod & wdiff not computed w/o egnfcns. (mhr)
 c		remove writing resulting to stnd output (mhr)
-c        print 200,nord,ichar(jcom),l,cvel,wmhz,tcom,gcom
-        write(iout,200) nord,ichar(jcom),l,cvel,wmhz,tcom,gcom
+c        print 200,nord,kchar(jcom),l,cvel,wmhz,tcom,gcom
+        write(iout,200) nord,kchar(jcom),l,cvel,wmhz,tcom,gcom
       end if
       wtry=b+2.d0*cg*wn
       wt(1)=b

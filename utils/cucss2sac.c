@@ -189,12 +189,12 @@ endian(endi);
 if(strcmp(wfd.datatype,endi) != 0) swapn((unsigned char *)sig,4,wfd.nsamp);
 /* Output data into file  */
 if(iasc) {
-    sprintf(cmd,"%s.%7d:%02d:%02d:%02d.%s.%s.ASC",argv[nargc-2],wfd.jdate,
+    sprintf(cmd,"%s.%7d:%2d:%2d:%2d.%s.%s.ASC",argv[nargc-2],wfd.jdate,
         nzhour,nzmin,(int)sach.nzsec,wfd.sta,wfd.chan);
     strcat(fname,cmd);
     write_asc (fname, ihed, s2, wfd.time,ori.time, sig, &sach); /* Write ASCII file  */
 } else {
-    sprintf(cmd,"%s.%7d:%02d:%02d:%02d.%s.%s.SAC",argv[nargc-2],wfd.jdate,
+    sprintf(cmd,"%s.%7d:%2d:%2d:%2d.%s.%s.SAC",argv[nargc-2],wfd.jdate,
         nzhour,nzmin,(int)sach.nzsec,wfd.sta,wfd.chan);
     strcat(fname,cmd);
     write_sac (fname, sig, &sach); /* Write SAC file  */
@@ -216,9 +216,9 @@ void write_sac (char *fname, float *sig, SAC_HD *SHD)
     exit(-1);
   }
 
-    SHD->iftype = (long)ITIME;
-    SHD->leven = (long)TRUE;
-    SHD->lovrok = (long)TRUE;
+    SHD->iftype = (int)ITIME;
+    SHD->leven = (int)TRUE;
+    SHD->lovrok = (int)TRUE;
     SHD->internal4 = 6L;
     SHD->iztype = IB;
 /* mysterious LLL-set values */

@@ -70,14 +70,14 @@ float	dist,      az,        baz,       gcarc,     internal2;
 float	internal3, depmen,    cmpaz,     cmpinc,    unused2;   
 float	unused3,   unused4,   unused5,   unused6,   unused7;   
 float	unused8,   unused9,   unused10,  unused11,  unused12;  
-long	nzyear,    nzjday,    nzhour,    nzmin,     nzsec;     
-long	nzmsec,    internal4, internal5, internal6, npts;      
-long	internal7, internal8, unused13,  unused14,  unused15;  
-long	iftype,    idep,      iztype,    unused16,  iinst;     
-long	istreg,    ievreg,    ievtyp,    iqual,     isynth;    
-long	unused17,  unused18,  unused19,  unused20,  unused21;  
-long	unused22,  unused23,  unused24,  unused25,  unused26;  
-long	leven,     lpspol,    lovrok,    lcalda,    unused27;  
+int	nzyear,    nzjday,    nzhour,    nzmin,     nzsec;     
+int	nzmsec,    internal4, internal5, internal6, npts;      
+int	internal7, internal8, unused13,  unused14,  unused15;  
+int	iftype,    idep,      iztype,    unused16,  iinst;     
+int	istreg,    ievreg,    ievtyp,    iqual,     isynth;    
+int	unused17,  unused18,  unused19,  unused20,  unused21;  
+int	unused22,  unused23,  unused24,  unused25,  unused26;  
+int	leven,     lpspol,    lovrok,    lcalda,    unused27;  
 char	kstnm[8],  kevnm[16];           
 char	khole[8],  ko[8],     ka[8];               
 char	kt0[8],    kt1[8],    kt2[8];              
@@ -200,7 +200,7 @@ static SAC_HD sac_null = {
 #define CCS2 "%-8.8s%-16.16s\n"
 
 /* Finction prototypes		*/
-SAC_HD *read_sac (char *fname, float *sig, SAC_HD *SHD, long nmax);
+SAC_HD *read_sac (char *fname, float *sig, SAC_HD *SHD, int nmax);
 void write_sac (char *fname, float *sig, SAC_HD *SHD);
 void write_asc (char *fname, int ihed, char *dtype, double wtime, double otime,float *sig, SAC_HD *SHD);
 void e2h(double t, int *year,int *doy,int *hour,int *miin,double *sec);

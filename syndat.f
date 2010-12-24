@@ -65,12 +65,13 @@ c.... i/o database name
       read(*,'(a256)') dbout
       write(*,*) dbout(1:lnblnk(dbout))
 c.... type of output data
-      write(*,*) 'enter output datatype: 0 -accn, 1 -vel, 2 -displ'
+      write(*,*) 'Enter output datatype: 0: acceleration, 1: velocity,',
+     *     '2: displacement'
       read(*,*)  idout
       if(idout.lt.0.or.idout.gt.2) then
-        write(*,*) 'WARNING: syndat: wrong output datatype = ',
-     *      idout,', assumed accereration = 0'
-      idout = 0
+         write(*,*) 'WARNING: syndat: wrong output datatype = ',
+     *        idout,', assumed accereration = 0'
+         idout = 0
       endif
       write(*,*) idout
 c
