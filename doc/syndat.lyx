@@ -1,5 +1,5 @@
-#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 245
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
 \begin_document
 \begin_header
 \textclass book
@@ -9,15 +9,26 @@
 \let\myUrl\url
 \renewcommand{\url}[1]{(\myUrl{#1})}
 \end_preamble
+\use_default_options false
 \language english
 \inputencoding latin1
-\fontscheme default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
 \graphics default
 \paperfontsize 11
 \spacing single
+\use_hyperref false
 \papersize default
 \use_geometry false
 \use_amsmath 0
+\use_esint 0
 \cite_engine basic
 \use_bibtopic false
 \paperorientation portrait
@@ -31,6 +42,7 @@
 \paperpagestyle default
 \tracking_changes false
 \output_changes false
+\author "" 
 \end_header
 
 \begin_body
@@ -127,13 +139,19 @@ syndat
 \end_inset
 
  WORD 
-\newline
+\begin_inset Newline newline
+\end_inset
+
  ........
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
  ........
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
  WORD
 \end_layout
 
@@ -141,7 +159,9 @@ syndat
 \begin_layout Standard
 \noindent
 See Chapter 
-\begin_inset LatexCommand \ref{cha:Examples}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Examples"
 
 \end_inset
 
@@ -153,13 +173,18 @@ The parameter file consists of five lines:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
-1:
+Line
+\begin_inset space ~
+\end_inset
+
+1: 
 \shape italic
- cmt_event
+cmt_event
 \shape default
 
-\newline
+\begin_inset Newline newline
+\end_inset
+
  This is the path to the file with the CMT solution for a single event.
  It must be the same 
 \shape italic
@@ -181,51 +206,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
-2:
+Line
+\begin_inset space ~
+\end_inset
+
+2: 
 \shape italic
- in_dbname
+plane
 \shape default
 
-\newline
- 
-\shape italic
-in_dbname 
-\shape default
- is the input database name for the input Green's functions.
- The 
-\shape italic
-.wfdisc
-\shape default
- relation of the 
-\shape italic
-in_dbname 
-\shape default
- database must be the output 
-\shape italic
-.wfdisc
-\shape default
- relation of the 
-\series bold
-green
-\series default
- program.
- 
-\series bold
-Format:
-\series default
- Any string up to 256 characters long.
- 
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Description
-Line\InsetSpace ~
-3:
-\shape italic
- plane
-\shape default
-
-\newline
 This defines the method for introducing the moment tensor components.
  If 
 \begin_inset Formula $plane=0$
@@ -257,13 +249,61 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
-4:
+Line
+\begin_inset space ~
+\end_inset
+
+3: 
 \shape italic
- out_dbname
+in_dbname
 \shape default
 
-\newline
+\begin_inset Newline newline
+\end_inset
+
+ 
+\shape italic
+in_dbname
+\shape default
+  is the input database name for the input Green's functions.
+ The 
+\shape italic
+.wfdisc
+\shape default
+ relation of the 
+\shape italic
+in_dbname
+\shape default
+  database must be the output 
+\shape italic
+.wfdisc
+\shape default
+ relation of the 
+\series bold
+green
+\series default
+ program.
+ 
+\series bold
+Format:
+\series default
+ Any string up to 256 characters long.
+ 
+\end_layout
+
+\begin_layout Description
+Line
+\begin_inset space ~
+\end_inset
+
+4: 
+\shape italic
+out_dbname
+\shape default
+
+\begin_inset Newline newline
+\end_inset
+
 This is the output database name for the 
 \shape italic
 .wfdisc
@@ -283,13 +323,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
-5:
+Line
+\begin_inset space ~
+\end_inset
+
+5: 
 \shape italic
- datatype
+datatype
 \shape default
 
-\newline
+\begin_inset Newline newline
+\end_inset
+
 This defines the type of synthetic data.
  If 
 \begin_inset Formula $datatype=0$
@@ -331,12 +376,12 @@ ent.
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 % Input data
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -357,7 +402,9 @@ cmt_event
 \series default
 \emph default
  See description in Section 
-\begin_inset LatexCommand \ref{sub:Input-data (green)}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Input-data (green)"
 
 \end_inset
 
