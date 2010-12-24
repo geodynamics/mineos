@@ -21,7 +21,7 @@ dnl
 # $Id: configure.ac 2450 2005-10-19 19:34:15Z leif $
 
 AC_PREREQ(2.59)
-AC_INIT([mineos], [1.0.0], [cig-seismo@geodynamics.org])
+AC_INIT([mineos], [1.0.1], [cig-seismo@geodynamics.org])
 AC_CONFIG_AUX_DIR([./aux-config])
 AC_CONFIG_SRCDIR([syndat.f])
 AC_CONFIG_HEADER([config.h])
