@@ -1,5 +1,5 @@
-#LyX 1.4.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 245
+#LyX 1.6.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
 \begin_document
 \begin_header
 \textclass book
@@ -9,15 +9,26 @@
 \let\myUrl\url
 \renewcommand{\url}[1]{(\myUrl{#1})}
 \end_preamble
+\use_default_options false
 \language english
 \inputencoding auto
-\fontscheme default
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
 \graphics default
 \paperfontsize default
 \spacing single
+\use_hyperref false
 \papersize default
 \use_geometry true
 \use_amsmath 1
+\use_esint 0
 \cite_engine basic
 \use_bibtopic false
 \paperorientation portrait
@@ -34,7 +45,8 @@
 \papersides 2
 \paperpagestyle headings
 \tracking_changes false
-\output_changes true
+\output_changes false
+\author "" 
 \end_header
 
 \begin_body
@@ -47,7 +59,7 @@
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -63,7 +75,7 @@ wide false
 sideways false
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \noindent
 \begin_inset Graphics
 	filename mineos_cover.pdf
@@ -84,18 +96,22 @@ Mineos
 \end_layout
 
 \begin_layout Author
-© California Institute of Technology
-\newline
+Â© California Institute of Technology
+\begin_inset Newline newline
+\end_inset
+
 Guy Masters
-\newline
-Version 1.0
+\begin_inset Newline newline
+\end_inset
+
+Version 1.0.1
 \end_layout
 
 \begin_layout Date
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -108,7 +124,8 @@ today
 \end_layout
 
 \begin_layout Standard
-\begin_inset LatexCommand \tableofcontents{}
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
 \end_inset
 
@@ -132,8 +149,9 @@ today
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
 
-\newpage
 
 \end_layout
 
@@ -141,14 +159,14 @@ today
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
 raggedbottom
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -200,7 +218,9 @@ eigcon
 .
  Information flow into and out of these two programs, which we call the
  eigenfunction system, is summarized in Figure 
-\begin_inset LatexCommand \ref{fig:1}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:1"
 
 \end_inset
 
@@ -220,7 +240,9 @@ green
 syndat
 \series default
 , and information flow through these programs is summarized in Figure 
-\begin_inset LatexCommand \ref{fig:2}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:2"
 
 \end_inset
 
@@ -292,8 +314,11 @@ mineos
 .origin
 \emph on
 ,
+\shape default
 \emph default
- .centryd
+ 
+\shape italic
+.centryd
 \shape default
 \emph on
 ,
@@ -351,7 +376,9 @@ Mineos History
 The original algorithm was based on direct numerical integration of the
  governing differential equations (variable order, variable step-size Runge-Kutt
 a, up to the eighth order) 
-\begin_inset LatexCommand \cite{Shanks 1966}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shanks 1966"
 
 \end_inset
 
@@ -367,7 +394,9 @@ Numerical Recipes
 ).
  The variable step size was based on the growth rate approximated from estimates
  of the eigenvalues of the matrix A 
-\begin_inset LatexCommand \cite{Gilbert Backus 1966}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gilbert Backus 1966"
 
 \end_inset
 
@@ -377,7 +406,9 @@ Numerical Recipes
 \begin_layout Standard
 Finding the solution for spheroidal modes was computationally unstable,
  Gilbert and Backus suggested using the method of minors 
-\begin_inset LatexCommand \cite{Gilbert Backus 1969}
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gilbert Backus 1969"
 
 \end_inset
 
@@ -417,8 +448,14 @@ CIG is making this source code available to you in the hope that the software
  will enhance your research in geophysics.
  CIG requests that in your oral presentations and in your papers that you
  indicate your use of this code and acknowledge the authors of the code
- and 
-\begin_inset LatexCommand \htmlurl[CIG]{geodynamics.org}
+ and CIG 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+geodynamics.org
+\end_layout
 
 \end_inset
 
@@ -449,7 +486,9 @@ Attempts to make synthetics for diffracted P waves will find that the inner
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand \label{sec:Getting-Help-and}
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Getting-Help-and"
 
 \end_inset
 
@@ -457,8 +496,15 @@ Getting Help and Reporting Problems
 \end_layout
 
 \begin_layout Standard
-The primary point of support for Mineos is the 
-\begin_inset LatexCommand \url[CIG Computational Seismology Mailing List]{cig-seismo@geodynamics.org}
+The primary point of support for Mineos is the CIG Computational Seismology
+ Mailing List 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+cig-seismo@geodynamics.org
+\end_layout
 
 \end_inset
 
@@ -469,7 +515,14 @@ The primary point of support for Mineos is the
 \end_layout
 
 \begin_layout LyX-Code
-\begin_inset LatexCommand \htmlurl[cig-seismo Archives]{geodynamics.org/pipermail/cig-seismo/}
+cig-seismo Archives 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+geodynamics.org/pipermail/cig-seismo/
+\end_layout
 
 \end_inset
 
@@ -478,8 +531,14 @@ The primary point of support for Mineos is the
 
 \begin_layout Standard
 If you find a bug in the code you should use the CIG bug tracker system
- at 
-\begin_inset LatexCommand \htmlurl[Roundup]{geodynamics.org/roundup}
+ at Roundup 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+geodynamics.org/roundup
+\end_layout
 
 \end_inset
 
@@ -503,7 +562,7 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
@@ -515,8 +574,13 @@ status collapsed
  
 \end_layout
 
-\begin_layout Caption
-\begin_inset LatexCommand \label{fig:1}
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:1"
 
 \end_inset
 
@@ -530,6 +594,11 @@ minos_bran
 eigcon
 \series default
 .
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -589,7 +658,9 @@ The eigenfunctions themselves may be interesting to some users if sensitivity
 minos_bran
 \series default
  is discussed in Chapter 
-\begin_inset LatexCommand \ref{cha:Running-the-Mineos}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Running-the-Mineos"
 
 \end_inset
 
@@ -650,7 +721,7 @@ wide false
 sideways false
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \align center
 \begin_inset Graphics
 	filename Figures/Fig2.eps
@@ -661,7 +732,10 @@ status collapsed
  
 \end_layout
 
-\begin_layout Caption
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
 Summary of information flow through the synthetic seismogram system of programs
  comprising 
 \series bold
@@ -674,8 +748,15 @@ syndat
 .
 \end_layout
 
-\begin_layout Standard
-\begin_inset LatexCommand \label{fig:2}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:2"
 
 \end_inset
 
@@ -822,7 +903,9 @@ Installation
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand \label{sec:Getting-Started}
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Getting-Started"
 
 \end_inset
 
@@ -831,7 +914,9 @@ Getting Started
 
 \begin_layout Standard
 There are examples for running the four programs in Chapter 
-\begin_inset LatexCommand \ref{cha:Examples}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Examples"
 
 \end_inset
 
@@ -843,7 +928,10 @@ There are examples for running the four programs in Chapter
 \begin_layout Description
 
 \series bold
-Model\InsetSpace ~
+Model
+\begin_inset space ~
+\end_inset
+
 files
 \series default
 .
@@ -870,7 +958,10 @@ prem_noocean.txt, prem_ocean.txt, NRussia.txt, CPacific.txt
 \begin_layout Description
 
 \series bold
-Eigenfunction\InsetSpace ~
+Eigenfunction
+\begin_inset space ~
+\end_inset
+
 files
 \series default
 .
@@ -917,7 +1008,10 @@ prem_noocean_T.eigen.dat
 \begin_layout Description
 
 \series bold
-Event\InsetSpace ~
+Event
+\begin_inset space ~
+\end_inset
+
 files
 \series default
 .
@@ -932,7 +1026,10 @@ china_cmt_event.txt
 \begin_layout Description
 
 \series bold
-Station:Channel\InsetSpace ~
+Station:Channel
+\begin_inset space ~
+\end_inset
+
 files
 \series default
 .
@@ -1009,8 +1106,14 @@ Note that the seismological community provides us with other CSS to SAC
 \family typewriter
 css2sac-3.0.3.tar.z
 \family default
- is available from 
-\begin_inset LatexCommand \htmlurl[IRIS]{www.iris.edu}
+ is available from IRIS 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.iris.edu
+\end_layout
 
 \end_inset
 
@@ -1095,7 +1198,9 @@ china_cmt_event.txt
 
 \begin_layout Standard
 For more details, see Chapter 
-\begin_inset LatexCommand \ref{cha:The-Utilities-User's}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:The-Utilities-User's"
 
 \end_inset
 
@@ -1165,7 +1270,9 @@ autoconf 2.59 or higher version and automake 1.8.4 or higher version.
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand \label{sec:Download-and-Configure}
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Download-and-Configure"
 
 \end_inset
 
@@ -1179,8 +1286,14 @@ Download the source package from the CIG website, or check out the source
 
 \begin_deeper
 \begin_layout Itemize
-Go to 
-\begin_inset LatexCommand \htmlurl[CIG Software Packages: Mineos]{geodynamics.org/cig/software/packages/seismo/mineos}
+Go to CIG Software Packages: Mineos 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+geodynamics.org/cig/software/packages/seismo/mineos
+\end_layout
 
 \end_inset
 
@@ -1189,11 +1302,11 @@ Go to
 \end_layout
 
 \begin_layout LyX-Code
-gunzip -c mineos-1.0.0.tar.gz | tar xf -
+gunzip -c mineos-1.0.1.tar.gz | tar xf -
 \end_layout
 
 \begin_layout LyX-Code
-cd mineos-1.0.0
+cd mineos-1.0.1
 \end_layout
 
 \begin_layout Standard
@@ -1294,14 +1407,22 @@ Download and Configure Mineos (Windows using Cygwin)
 \end_layout
 
 \begin_layout Standard
-Mineos has been tested under the 
-\begin_inset LatexCommand \htmlurl[Cygwin]{www.cygwin.com}
+Mineos has been tested under the Cygwin 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.cygwin.com
+\end_layout
 
 \end_inset
 
  environment for Windows.
  To build Mineos using the source package (see step 1 in Section 
-\begin_inset LatexCommand \ref{sec:Download-and-Configure}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Download-and-Configure"
 
 \end_inset
 
@@ -1324,8 +1445,14 @@ make
 \begin_layout Standard
 Select these packages for installation in the ``Cygwin Setup - Select Packages''
  dialog box.
- See 
-\begin_inset LatexCommand \htmlurl[Chapter 2 of the Cygwin User's Guide]{www.cygwin.com/cygwin-ug-net/setup-net.html}
+ See Chapter 2 of the Cygwin User's Guide 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+www.cygwin.com/cygwin-ug-net/setup-net.html
+\end_layout
 
 \end_inset
 
@@ -1335,7 +1462,9 @@ Select these packages for installation in the ``Cygwin Setup - Select Packages''
 \begin_layout Standard
 Once you have Cygwin installed with all the necessary packages, you can
  install Mineos just as you would under Unix, as instructed in Section 
-\begin_inset LatexCommand \ref{sec:Download-and-Configure}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Download-and-Configure"
 
 \end_inset
 
@@ -1382,7 +1511,9 @@ Support
 \begin_layout Standard
 To obtain assistance or report problems or bugs with the code, see Section
  
-\begin_inset LatexCommand \ref{sec:Getting-Help-and}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Getting-Help-and"
 
 \end_inset
 
@@ -1390,7 +1521,9 @@ To obtain assistance or report problems or bugs with the code, see Section
 \end_layout
 
 \begin_layout Chapter
-\begin_inset LatexCommand \label{cha:Running-the-Mineos}
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Running-the-Mineos"
 
 \end_inset
 
@@ -1398,7 +1531,9 @@ Running the Mineos Programs
 \end_layout
 
 \begin_layout Section
-\begin_inset LatexCommand \label{sec:Running_minos_bran-program}
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Running_minos_bran-program"
 
 \end_inset
 
@@ -1495,20 +1630,28 @@ minos_bran
 \end_inset
 
  WORD 
-\newline
+\begin_inset Newline newline
+\end_inset
+
 ........
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 ........
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 WORD
 \end_layout
 
 \end_deeper
 \begin_layout Standard
 See Chapter 
-\begin_inset LatexCommand \ref{cha:Examples}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Examples"
 
 \end_inset
 
@@ -1520,13 +1663,18 @@ The parameter file consists of six lines:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 1: 
 \shape italic
 model_file
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \shape italic
 model_file
@@ -1541,13 +1689,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 2: 
 \shape italic
 out_plain_file
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \shape italic
 out_plain_file
@@ -1563,13 +1716,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 3: 
 \shape italic
 out_bin_file
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \shape italic
 out_bin_file
@@ -1587,13 +1745,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 4: 
 \shape italic
 eps, wgrav
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 The parameter 
 \shape italic
 eps
@@ -1635,13 +1798,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 5: 
 \shape italic
 jcom
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \shape italic
 jcom
@@ -1673,13 +1841,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 6: 
 \shape italic
 lmin, lmax, wmin, wmax, nmin, nmax
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Formula $lmin,\; lmax$
 \end_inset
@@ -1726,7 +1899,9 @@ Format:
 \end_layout
 
 \begin_layout Subsection
-\begin_inset LatexCommand \label{sub:Input-data (minor_bran)}
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Input-data (minor_bran)"
 
 \end_inset
 
@@ -1748,25 +1923,35 @@ model_file
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 1: 
 \shape italic
 title
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
  Any text of up to 80 characters long.
  
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 2: 
 \shape italic
 ifanis, tref, ifdeck
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Formula $ifanis=1$
 \end_inset
@@ -1809,12 +1994,12 @@ ifanis, tref, ifdeck
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 % Tabular model
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1835,13 +2020,18 @@ Tabular Setting,
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 3: 
 \shape italic
 N, nic, noc
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Formula $N$
 \end_inset
@@ -1865,7 +2055,7 @@ N, nic, noc
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 %Note that $n$ must be $
 \backslash
@@ -1873,7 +2063,7 @@ leq 223$.
  (mhr)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1888,7 +2078,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
 4
 \begin_inset Formula $\;-\;(N+3)$
 \end_inset
@@ -1898,7 +2091,9 @@ Lines\InsetSpace ~
 r, rho, vpv, vsv, qkappa, qshear, vph, vsh, eta
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 Each line describes the model parameter set for a single knot at radius
  
 \begin_inset Formula $r$
@@ -1910,7 +2105,9 @@ Each line describes the model parameter set for a single knot at radius
  The discontinuity interfaces are defined by a pair of knots at the same
  radius.
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
  The line fields are: 
 \end_layout
 
@@ -1919,7 +2116,7 @@ Each line describes the model parameter set for a single knot at radius
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -1930,7 +2127,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -1941,7 +2138,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -1954,7 +2151,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -1965,7 +2162,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -1994,7 +2191,7 @@ minos_bran
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2005,7 +2202,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2016,7 +2213,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2029,7 +2226,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2040,7 +2237,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2058,7 +2255,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2069,7 +2266,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2080,7 +2277,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2093,7 +2290,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2104,7 +2301,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2118,7 +2315,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2129,7 +2326,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2140,7 +2337,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2153,7 +2350,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2164,7 +2361,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2178,7 +2375,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2189,7 +2386,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2200,7 +2397,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2213,7 +2410,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2224,7 +2421,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2238,7 +2435,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2249,7 +2446,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2260,7 +2457,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2273,7 +2470,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2284,7 +2481,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2298,7 +2495,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2309,7 +2506,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2320,7 +2517,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2333,7 +2530,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2344,7 +2541,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2358,7 +2555,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2369,7 +2566,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2380,7 +2577,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2393,7 +2590,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2404,7 +2601,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2418,7 +2615,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2429,7 +2626,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2440,7 +2637,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -2453,7 +2650,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -2464,7 +2661,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -2526,12 +2723,12 @@ Format:
 \begin_inset ERT
 status open
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 % Polynomial model
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -2552,13 +2749,18 @@ Polynomial Setting,
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 3: 
 \shape italic
 nreg, nic, noc, rx
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Formula $nreg$
 \end_inset
@@ -2590,13 +2792,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 4: 
 \shape italic
 nlay, r1, r2
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Formula $nlay$
 \end_inset
@@ -2628,9 +2835,18 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines\InsetSpace ~
-5-9\InsetSpace ~
-or\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
+5-9
+\begin_inset space ~
+\end_inset
+
+or
+\begin_inset space ~
+\end_inset
+
 5-12: Lines 4-9 or 4-12 must be repeated 
 \begin_inset Formula $nreg$
 \end_inset
@@ -2664,7 +2880,10 @@ Format:
 
 \begin_deeper
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 5: Coefficients for density 
 \begin_inset Formula $rho$
 \end_inset
@@ -2677,7 +2896,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 6: Coefficients for 
 \begin_inset Formula $vpv$
 \end_inset
@@ -2690,7 +2912,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 7: Coefficients for 
 \begin_inset Formula $vsv$
 \end_inset
@@ -2703,7 +2928,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 8: Coefficients for 
 \begin_inset Formula $qkappa$
 \end_inset
@@ -2712,7 +2940,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 9: Coefficients for 
 \begin_inset Formula $qshear$
 \end_inset
@@ -2726,7 +2957,10 @@ The next three lines must be added for an anisotropic model.
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 10: Coefficients for 
 \begin_inset Formula $vph$
 \end_inset
@@ -2739,7 +2973,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 11: Coefficients for 
 \begin_inset Formula $vsh$
 \end_inset
@@ -2752,7 +2989,10 @@ Line\InsetSpace ~
 \end_layout
 
 \begin_layout Description
-Line\InsetSpace ~
+Line
+\begin_inset space ~
+\end_inset
+
 12: Coefficients for 
 \begin_inset Formula $eta$
 \end_inset
@@ -2762,7 +3002,9 @@ Line\InsetSpace ~
 
 \end_deeper
 \begin_layout Subsection
-\begin_inset LatexCommand \label{sub:Output-data (minos_bran program)}
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Output-data (minos_bran program)"
 
 \end_inset
 
@@ -2794,9 +3036,18 @@ The file consists of two parts:
 \end_layout
 
 \begin_layout Description
-Part\InsetSpace ~
-1:\InsetSpace ~
-Model\InsetSpace ~
+Part
+\begin_inset space ~
+\end_inset
+
+1:
+\begin_inset space ~
+\end_inset
+
+Model
+\begin_inset space ~
+\end_inset
+
 table.
  The model output is always in tabular form.
  If the input model is in tabular form, the output model is just a copy
@@ -2844,7 +3095,10 @@ table.
 
 \begin_deeper
 \begin_layout Description
-Lines\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
 1-5: Contains the model 
 \begin_inset Formula $title$
 \end_inset
@@ -2863,7 +3117,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $6\;-\;(N+5)$
 \end_inset
@@ -2873,14 +3130,18 @@ Lines\InsetSpace ~
 index, r, rho, vpv, vph, vsv, vsh, eta, dshear, qkappa
 \shape default
 
-\newline
+\begin_inset Newline newline
+\end_inset
+
  where 
 \begin_inset Formula $index$
 \end_inset
 
  is the knot number, starting from 1.
  The content of the remaining fields is described in Section 
-\begin_inset LatexCommand \ref{sub:Input-Data 3.2.2 (eigcon)}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Input-Data 3.2.2 (eigcon)"
 
 \end_inset
 
@@ -2893,7 +3154,10 @@ Format:
 \end_layout
 
 \begin_layout Description
-Lines\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $N+6\div\; N+11$
 \end_inset
@@ -2911,9 +3175,18 @@ Format:
 
 \end_deeper
 \begin_layout Description
-Part\InsetSpace ~
-2:\InsetSpace ~
-Mode\InsetSpace ~
+Part
+\begin_inset space ~
+\end_inset
+
+2:
+\begin_inset space ~
+\end_inset
+
+Mode
+\begin_inset space ~
+\end_inset
+
 properties.
  For a fixed radial order number 
 \begin_inset Formula $n$
@@ -2948,18 +3221,26 @@ minos_bran
 
 \begin_deeper
 \begin_layout Description
-Lines\InsetSpace ~
+Lines
+\begin_inset space ~
+\end_inset
+
 
 \begin_inset Formula $(N+12)\;-$
 \end_inset
 
-\InsetSpace ~
+
+\begin_inset space ~
+\end_inset
+
 end: 
 \shape italic
 norder, typeo, lorder, phvel, freq, per, grvel, Q, raylquo,
 \shape default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
  where
 \end_layout
 
@@ -2968,7 +3249,7 @@ norder, typeo, lorder, phvel, freq, per, grvel, Q, raylquo,
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -2979,7 +3260,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -2990,7 +3271,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3003,7 +3284,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3014,7 +3295,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3032,7 +3313,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3043,7 +3324,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3054,7 +3335,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3067,7 +3348,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3078,7 +3359,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3093,7 +3374,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3104,7 +3385,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3115,7 +3396,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3128,7 +3409,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3139,7 +3420,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3157,7 +3438,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3168,7 +3449,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3179,7 +3460,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3192,7 +3473,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3203,7 +3484,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3217,7 +3498,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3228,7 +3509,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3239,7 +3520,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3252,7 +3533,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3263,7 +3544,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3277,7 +3558,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3288,7 +3569,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3299,7 +3580,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3312,7 +3593,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3323,7 +3604,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3337,7 +3618,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3348,7 +3629,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3359,7 +3640,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3372,7 +3653,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3383,7 +3664,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3397,7 +3678,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3408,7 +3689,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3419,7 +3700,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3432,7 +3713,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3443,7 +3724,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3457,7 +3738,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 [
 \end_layout
@@ -3468,7 +3749,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 {
 \end_layout
@@ -3479,7 +3760,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -3492,7 +3773,7 @@ it
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 }
 \end_layout
@@ -3503,7 +3784,7 @@ status collapsed
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 ]
 \end_layout
@@ -3734,7 +4015,7 @@ Note that
 <cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 acceleration normalization: 
 \end_layout
 
@@ -3743,7 +4024,7 @@ acceleration normalization:
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula $a_{n}=10^{20}/(\rho_{n}r_{n}^{4})$
 \end_inset
 
@@ -3757,7 +4038,7 @@ acceleration normalization:
 <cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 velocity normalization: 
 \end_layout
 
@@ -3766,7 +4047,7 @@ velocity normalization:
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula $v_{n}=r_{n}\;(\pi G\rho_{n})^{-1/2}$
 \end_inset
 
@@ -3780,7 +4061,7 @@ velocity normalization:
 <cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 frequency normalization: 
 \end_layout
 
@@ -3789,7 +4070,7 @@ frequency normalization:
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula $\omega_{n}=v_{n}/r_{n}$
 \end_inset
 
@@ -3803,7 +4084,7 @@ frequency normalization:
 <cell alignment="right" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 radius normalization: 
 \end_layout
 
@@ -3812,7 +4093,7 @@ radius normalization:
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Formula $r_{n}$
 \end_inset
 
@@ -3841,7 +4122,9 @@ minos_bran
 \series default
  prints out dialog messages only on the standard output.
  See an example in Section 
-\begin_inset LatexCommand \ref{sub:Example-1.-Interactive dialog minor_bran}
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Example-1.-Interactive dialog minor_bran"
 
 \end_inset
 
@@ -3849,20 +4132,23 @@ minos_bran
 \end_layout
 
 \begin_layout Standard
-\begin_inset Include \include{eigcon.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "eigcon.lyx"
 
 \end_inset
 
  
-\begin_inset Include \include{green.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "green.lyx"
 
 \end_inset
 
  
-\begin_inset Include \include{syndat.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "syndat.lyx"
 
 \end_inset
 
@@ -3870,26 +4156,30 @@ preview false
 \end_layout
 
 \begin_layout Standard
-\begin_inset Include \include{utilities.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "utilities.lyx"
 
 \end_inset
 
 
-\begin_inset Include \include{fun.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "fun.lyx"
 
 \end_inset
 
 
-\begin_inset Include \include{tab.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "tab.lyx"
 
 \end_inset
 
 
-\begin_inset Include \include{examples.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "examples.lyx"
 
 \end_inset
 
@@ -3897,8 +4187,12 @@ preview false
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Anderson Farrell et al 1990"
 
-\bibitem {Anderson Farrell et al 1990}
+\end_inset
+
  Anderson, J., Farrell, W.E., et al.
  Center for Seismic Studies version 3 database: Schema reference manual.
  Technical Report C90-01, DARPA, September 1990.
@@ -3906,8 +4200,12 @@ preview false
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Biswas Knopoff 1970"
 
-\bibitem {Biswas Knopoff 1970}
+\end_inset
+
  Biswas, N.N., and L.
  Knopoff (1970), Exact earth-flattening calculations for Love wave.
  
@@ -3926,8 +4224,12 @@ Bull.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Biswas 1972"
 
-\bibitem {Biswas 1972}
+\end_inset
+
  Biswas, N.N.
  (1972), Earth-flattening procedure for propagation of Rayleigh wave.
  
@@ -3943,20 +4245,28 @@ PAGEOPH
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Ganse Hutt 1982"
 
-\bibitem {Ganse Hutt 1982}
+\end_inset
+
 Ganse, R., and C.R.
  Hutt (1982), 
 \emph on
 Directory of World Digital Seismic Stations.
- 
+
 \emph default
-Boulder: World Data Center for Solid Earth Geophysics, Report SE-32.
+ Boulder: World Data Center for Solid Earth Geophysics, Report SE-32.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Gilbert Dziewonski 1975"
 
-\bibitem {Gilbert Dziewonski 1975}
+\end_inset
+
  Gilbert, F., and A.M.
  Dziewonski (1975), An application of normal mode theory to the retrieval
  of structural parameters and source mechanisms from seismic spectra.
@@ -3976,34 +4286,46 @@ A278
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Gilbert Backus 1969"
 
-\bibitem {Gilbert Backus 1969}
+\end_inset
+
  Gilbert, F., and G.E.
  Backus (1969), A computational problem encountered in a study of the earth's
  normal modes.
-
+ 
 \emph on
- Proceedings of AFIPS Fall Joint Computer Conference, 32,
+Proceedings of AFIPS Fall Joint Computer Conference, 32,
 \emph default
  San Francisco, CA, December 1968, 1273-1277.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Gilbert Backus 1966"
 
-\bibitem {Gilbert Backus 1966}
+\end_inset
+
  Gilbert, F., and G.E.
  Backus (1966), Propagator matrices in elastic wave and vibration problems.
-
+ 
 \emph on
- Geophys.
+Geophys.
  31(2),
 \emph default
  326-332.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Herrmann 1978"
 
-\bibitem {Herrmann 1978}
+\end_inset
+
  Herrmann, R.B.
  (1978), 
 \shape italic
@@ -4018,8 +4340,12 @@ Computer programs in earthquake seismology.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Shanks 1966"
 
-\bibitem {Shanks 1966}
+\end_inset
+
  Shanks, E.B.
  (1966), Solutions of differential equations by evaluations of functions,
  
@@ -4032,8 +4358,12 @@ Math.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "Woodhouse Dahlen 1978"
 
-\bibitem {Woodhouse Dahlen 1978}
+\end_inset
+
  Woodhouse, J.H., and F.A.
  Dahlen (1978), The effect of a general aspherical perturbation on the free
  oscillation of the Earth.
@@ -4052,8 +4382,12 @@ Geophys.
 \end_layout
 
 \begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "SPECFEM3D_GLOBE"
 
-\bibitem {SPECFEM3D_GLOBE}
+\end_inset
+
  SPECFEM3D_GLOBE, Version 3.6.
  User Manual.
  CIG/CIT, October 24, 2006 
@@ -4061,20 +4395,23 @@ Geophys.
 
 \begin_layout Standard
 \start_of_appendix
-\begin_inset Include \include{model.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "model.lyx"
 
 \end_inset
 
 
-\begin_inset Include \include{benchmark.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "benchmark.lyx"
 
 \end_inset
 
 
-\begin_inset Include \include{frame.lyx}
-preview false
+\begin_inset CommandInset include
+LatexCommand include
+filename "frame.lyx"
 
 \end_inset
 
@@ -4093,7 +4430,9 @@ GNU GENERAL PUBLIC LICENSE Version 2, June 1991.
  59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 \series default
  
-\newline
+\begin_inset Newline newline
+\end_inset
+
 
 \series medium
 Everyone is permitted to copy and distribute verbatim copies of this license
@@ -4184,7 +4523,7 @@ GNU GENERAL PUBLIC LICENSE TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4200,7 +4539,7 @@ begin{itemize}
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4218,12 +4557,15 @@ This License applies to any program or other work which contains a notice
  either verbatim or with modifications and/or translated into another language.
  (Hereinafter, translation is included without limitation in the term "modificat
 ion.") Each licensee is addressed as "you."
-\newline
+\begin_inset Newline newline
+\end_inset
 
-\newline
-Activities other than copying,
- distribution and modification are not covered by this License; they are
- outside its scope.
+
+\begin_inset Newline newline
+\end_inset
+
+Activities other than copying, distribution and modification are not covered
+ by this License; they are outside its scope.
  The act of running the Program is not restricted, and the output from the
  Program is covered only if its contents constitute a work based on the
  Program (independent of having been made by running the Program).
@@ -4235,7 +4577,7 @@ Activities other than copying,
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4510,7 +4852,7 @@ NO WARRANTY
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4526,7 +4868,7 @@ begin{itemize}
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4552,7 +4894,7 @@ BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4576,7 +4918,7 @@ IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL
 \begin_inset ERT
 status collapsed
 
-\begin_layout Standard
+\begin_layout Plain Layout
 
 
 \backslash
@@ -4615,7 +4957,7 @@ y convey the exclusion of warranty; and each file should have at least the
 One line to give the program's name and a brief idea of what it does.
  Copyright 
 \size footnotesize
-© (
+Â© (
 \size default
 year) (name of author) 
 \end_layout
@@ -4653,7 +4995,7 @@ If the program is interactive, make it output a short notice like this when
 \end_layout
 
 \begin_layout Quote
-Gnomovision version 69, Copyright © year name of author Gnomovision comes
+Gnomovision version 69, Copyright Â© year name of author Gnomovision comes
  with ABSOLUTELY NO WARRANTY; for details type `show w'.
  This is free software, and you are welcome to redistribute it under certain
  conditions; type `show c' for details.
@@ -4683,9 +5025,13 @@ on' (which makes passes at compilers) written by James Hacker.
 
 \begin_layout Quote
 (signature of Ty Coon)
-\newline
+\begin_inset Newline newline
+\end_inset
+
 1 April 1989 
-\newline
+\begin_inset Newline newline
+\end_inset
+
 Ty Coon, President of Vice 
 \end_layout
 
