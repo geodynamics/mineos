@@ -383,6 +383,7 @@ c sort sitechan relation by sta and channel
            endif
         enddo
       enddo
+    9 continue
 c  remove duplicates from sitechan relation
       n = 1
       i1 = iabs(numchan(1))
@@ -401,7 +402,6 @@ c  remove duplicates from sitechan relation
       enddo
       numchan(n) = -numchan(n)
       nchn = n
-    9 continue
       if(nchn.le.1) goto 99
 c remove sitechan for nonexistent stations
       staold = ' '
