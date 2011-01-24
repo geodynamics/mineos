@@ -47,6 +47,7 @@
 \tracking_changes false
 \output_changes false
 \author "" 
+\author "" 
 \end_header
 
 \begin_body
@@ -2673,7 +2674,7 @@ status collapsed
 
 \begin_layout Standard
 If the model is isotropic, 
-\begin_inset Formula $ifanis=1$
+\begin_inset Formula $ifanis=0$
 \end_inset
 
  and 
