@@ -1863,15 +1863,15 @@ lmin, lmax, wmin, wmax, nmin, nmax
 \end_inset
 
  to be computed.
- For radial modes, 
+ If 
 \begin_inset Formula $jcom=1$
 \end_inset
 
-, 
+, then 
 \begin_inset Formula $lmin,\; lmax$
 \end_inset
 
- are read in but are not used.
+ are read in but not used.
  
 \begin_inset Formula $wmin,\; wmax$
 \end_inset
