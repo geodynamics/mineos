@@ -2,20 +2,19 @@ MINEOS NEWS -- history of user-visible changes.
 
 Please send MINEOS bug reports to cig-seismo@geodynamics.org.
 
-
+Version 1.0.2
+
+* This release features minor documentation fixes.
+
+
 Version 1.0.1
 
 * This release fixes issues with gfortran and 64 bit machines, in
   addition to some small updates to the manual.
 
-
+
 Version 1.0.0
 
 * MINEOS is now distributed under the GNU General Public License.
   See the file COPYING for copying conditions.
 
-
-Local variables:
-version-control: never
-mode: indented-text
-end:
