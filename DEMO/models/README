@@ -1,0 +1,7 @@
+Directory contents:
+
+README            - this file
+CPacific.txt      - Central Pacific 1D model
+NRussia.txt       - North Russia 1D model
+prem_noocean.txt  - PREM with filled water layer by upper crust material
+prem_ocean.txt    - PREM model

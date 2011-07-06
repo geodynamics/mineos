@@ -1208,66 +1208,16 @@ reference "cha:The-Utilities-User's"
 .
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Subsection
 System Requirements
 \end_layout
 
 \begin_layout Itemize
-32-bit processor (64-bit is recommended)
+Fortran and C compilers.
 \end_layout
 
-\begin_layout Itemize
-Unix Operating System
-\end_layout
-
-\begin_layout Itemize
-512 MB of RAM
-\end_layout
-
-\begin_layout Itemize
-FORTRAN 77 and C compilers.
- Currently, the 
-\series bold
-Mineos
-\series default
- package was tested under SunOS 5.7/f77/cc and under Linux RedHat/f77/g77.
- 
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-To check if you have these compilers, type at the command line:
-\end_layout
-
-\begin_layout LyX-Code
-$ f77
-\end_layout
-
-\begin_layout LyX-Code
-$ g77
-\end_layout
-
-\begin_layout LyX-Code
-$ gcc
-\end_layout
-
-\begin_layout LyX-Code
-$ cc
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
 At least 1 GB of available hard-disk space
-\end_layout
-
-\begin_layout Itemize
-autoconf 2.59 or higher version and automake 1.8.4 or higher version.
- This requirement is only for software developers.
- 
 \end_layout
 
 \begin_layout Section
@@ -1371,20 +1321,6 @@ make install
 
 \end_deeper
 \begin_layout Enumerate
-Untar the DEMO tar file to access the provided input files
-\end_layout
-
-\begin_deeper
-\begin_layout LyX-Code
-cd DEMO
-\end_layout
-
-\begin_layout LyX-Code
-gunzip -c DEMO.tar.gz | tar xf -
-\end_layout
-
-\end_deeper
-\begin_layout Enumerate
 Now you can run using the demo input files.
  For example, under the Bash shell: 
 \end_layout
@@ -1395,7 +1331,7 @@ export PATH=$HOME/cig/bin:$PATH
 \end_layout
 
 \begin_layout LyX-Code
-cd DEMO3
+cd DEMO/DEMO3
 \end_layout
 
 \begin_layout LyX-Code
@@ -1436,7 +1372,7 @@ gcc
 \end_layout
 
 \begin_layout Itemize
-gcc-g77
+gcc4-gfortran
 \end_layout
 
 \begin_layout Itemize
@@ -1473,36 +1409,7 @@ reference "sec:Download-and-Configure"
 \end_layout
 
 \begin_layout Standard
-Some of the 
-\family typewriter
-.asc
-\family default
- and 
-\family typewriter
-.sac
-\family default
- files in the 
-\family typewriter
-DEMO.tar.gz
-\family default
- archive have colons (`:') in their filenames, so you will have to perform
- some trickery to unpack this archive on Windows without errors:
-\end_layout
 
-\begin_layout LyX-Code
-tar --transform=s/:/-/g -xvzf DEMO.tar.gz
-\end_layout
-
-\begin_layout Standard
-Note that these 
-\family typewriter
-.asc
-\family default
- and 
-\family typewriter
-.sac
-\family default
- files aren't necessary for running the code.
 \end_layout
 
 \begin_layout Section

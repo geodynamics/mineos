@@ -27,9 +27,7 @@ dist_bin_SCRIPTS = scripts/creat_origin
 # demo
 
 dist_pkgdata_DATA = \
-	doc/mineos.pdf \
-	DEMO/DEMO.tar.gz \
-	DEMO/README
+	doc/mineos.pdf
 
 # main programs
 

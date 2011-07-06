@@ -1,28 +1,33 @@
-We are pleased to announce the version 1 release of MINEOS.
+We are pleased to announce the version 1.0.2 release of Mineos.
+Mineos computes synthetic seismograms in a spherically symmetric
+non-rotating Earth by summing normal modes.
 
-See the file INSTALL for building and installation instructions.
+To build Mineos, you will need a Fortran compiler.  If you are running
+Linux, you should be able to get gfortran from your distribution.  If
+you are running Windows, the easiest way is to install Cygwin
+(cygwin.com).  If you are running Mac OS X, you can download a Fortran
+compiler from
 
-Please send all bug reports by electronic mail to:
+  http://hpc.sourceforge.net
+
+Once you have a fortran compiler, run configure
+
+  ./configure
+
+If it can not find the Fortran compiler, you can tell it where it is
+with the FC variable
+
+  ./configure F77=/path/to/fortran/compiler
+
+If that succeeds, then run "make" to build Mineos.
+
+The file INSTALL has more detailed instructions on how to build
+Mineos.
+
+The manual is at doc/mineos.pdf.
+
+If you have any problems, please send a message to
     cig-seismo@geodynamics.org
 
 MINEOS is free software.  See the file COPYING for copying conditions.
 
-==============================================================
-
-NOTES for FORTRAN compilation.
-
-Due to heavy computations in MINEOS package, it is recommended
-to setup optimization option for FORTRAN compiler high as possible,
-for example,
-
-... > ./configure F77=g77 FFLAGS=-O2 --prefix=.....
-
-for Linux/g77 compiler, or
-
-... > ./configure F77=f77 FFLAGS=-fast --prefix=....
-
-for SUN/f77 compiler.
-
-Command make install creates directory bin for executable modules
-and directory share for demo and testing MINEOS package.
-Go to share directory after installation and follow README files.
