@@ -79,7 +79,7 @@ status open
 \begin_layout Plain Layout
 \noindent
 \begin_inset Graphics
-	filename mineos_cover.pdf
+	filename mineos_cover.eps
 	width 75page%
 
 \end_inset
@@ -105,7 +105,7 @@ Guy Masters
 \begin_inset Newline newline
 \end_inset
 
-Version 1.0.1
+Version 1.0.2
 \end_layout
 
 \begin_layout Date
@@ -1303,11 +1303,11 @@ geodynamics.org/cig/software/packages/seismo/mineos
 \end_layout
 
 \begin_layout LyX-Code
-gunzip -c mineos-1.0.1.tar.gz | tar xf -
+gunzip -c mineos-1.0.2.tar.gz | tar xf -
 \end_layout
 
 \begin_layout LyX-Code
-cd mineos-1.0.1
+cd mineos-1.0.2
 \end_layout
 
 \begin_layout Standard
