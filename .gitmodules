@@ -1,0 +1,3 @@
+[submodule "DEMO"]
+	path = DEMO
+	url = git://vcs.geodynamics.org/mineos_data
