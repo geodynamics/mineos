@@ -1,0 +1,29 @@
+
+# Configure time
+.deps/
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+aux-config/
+config.h
+config.h.in
+config.log
+config.status
+configure
+stamp-h1
+
+# Build time
+*.o
+cucss2sac
+eigcon
+eigen2asc
+endi
+green
+minos_bran
+simpledit
+syndat
+
+# Documentation
+doc/mineos.pdf
+
