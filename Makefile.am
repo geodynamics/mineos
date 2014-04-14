@@ -24,10 +24,27 @@ bin_PROGRAMS = minos_bran syndat green eigcon \
 
 dist_bin_SCRIPTS = scripts/creat_origin
 
-# demo
+# documentation
+
+if HAVE_LYX
 
 dist_pkgdata_DATA = \
 	doc/mineos.pdf
+
+doc/mineos.pdf: doc/mineos.lyx \
+                doc/eigcon.lyx \
+                doc/green.lyx \
+                doc/syndat.lyx \
+                doc/utilities.lyx \
+                doc/fun.lyx \
+                doc/tab.lyx \
+                doc/examples.lyx \
+                doc/model.lyx \
+                doc/benchmark.lyx \
+                doc/frame.lyx
+	$(LYX) --export pdf2 doc/mineos.lyx
+
+endif
 
 # main programs
 

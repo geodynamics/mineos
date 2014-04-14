@@ -32,6 +32,18 @@ AC_PROG_F77
 AC_PROG_CC
 AC_F77_WRAPPERS
 
+AC_ARG_ENABLE([doc],
+	[AS_HELP_STRING([--disable-doc], [disable installation of documentation])],
+	[enable_doc="$enableval"],
+	[enable_doc=yes])
+if test "x$enable_doc" != "xno"; then
+	AC_CHECK_PROG([LYX], [lyx], [lyx])
+	if test -z "$LYX"; then
+		AC_MSG_ERROR([Unable to create PDF version of the user manual without LyX.])
+	fi
+fi
+AM_CONDITIONAL([HAVE_LYX], test -n "$LYX")
+
 # Checks for libraries.
 
 # Checks for header files.
