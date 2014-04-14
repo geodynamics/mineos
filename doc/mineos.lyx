@@ -1232,7 +1232,7 @@ Download and Configure Mineos (Unix/Linux/Mac OS X)
 
 \begin_layout Enumerate
 Download the source package from the CIG website, or check out the source
- from the SVN (Subversion) server
+ from the Git server (GitHub)
 \end_layout
 
 \begin_deeper
@@ -1265,11 +1265,11 @@ cd mineos-1.0.2
 \end_layout
 
 \begin_layout Itemize
-Check out the source from the Subversion server:
+Check out the source from the Git server:
 \end_layout
 
 \begin_layout LyX-Code
-svn co http://svn@geodynamics.org/cig/seismo/1D/mineos/trunk mineos
+git checkout --recursive https://github.com/geodynamics/mineos
 \end_layout
 
 \begin_layout LyX-Code
@@ -1278,7 +1278,7 @@ cd mineos
 
 \end_deeper
 \begin_layout Enumerate
-If you checked-out the source using Subversion, run ``autoreconf -i'' to
+If you checked-out the source using Git, run ``autoreconf -i'' to
  generate the 'configure' script and related files.
  (Skip this step if you downloaded the source package.
  The resulting files are included in the tar file.)
