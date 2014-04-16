@@ -531,8 +531,8 @@ http://lists.geodynamics.org/pipermail/cig-seismo/
 \end_layout
 
 \begin_layout Standard
-If you find a bug in the code you should use the CIG bug tracker system
- at Roundup 
+If you find a bug in the code you should use the bug tracker system
+ at Github 
 \begin_inset Flex URL
 status collapsed
 
