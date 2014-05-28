@@ -29,35 +29,28 @@
 #include "config.h"
 #define SWAP2(a, b) { (a) ^= (b); (b) ^= (a); (a) ^= (b); }
 
-F77_FUNC(swap,SWAP)(c, b, N, n)
-  char *c;
-  char *b;
-  int *N;
-  int *n;
+void
+F77_FUNC(swap,SWAP)(char *c, char *b, int *N, int *n)
 {
   int i, j;
   memcpy((void *)b, (void *)c,(*n)*(*N));
   for (i = 0; i < (*n)*(*N); i += *N)
     for (j = 0; j < *N/2; j ++)
       SWAP2(b[i + j], b[i + *N - j - 1]);
-  return;
 }
+
 /*
- *
  * Byte swap in place an array b of n of elements each one N bytes long.
  * A good compiler should unroll the inner loops. Letting the compiler do it
  * gives us portability.  Note that we might want to isolate the
  * cases N = 2, 4, 8 (and 16 for long double and perhaps long long)
  *
  */
-F77_FUNC(swap1,SWAP1)(b, N, n)
-  unsigned char *b;
-  int *N;
-  int *n;
+void
+F77_FUNC(swap1,SWAP1)(unsigned char *b, int *N, int *n)
 {
   int i, j;
   for (i = 0; i < (*n)*(*N); i += *N)
     for (j = 0; j < *N/2; j ++)
       SWAP2(b[i + j], b[i + *N - j - 1]);
-  return;
 }
