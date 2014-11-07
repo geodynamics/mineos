@@ -50,7 +50,7 @@ Mineos
 \series default
  codes, the revised version has been benchmarked again.
  Three benchmark tests were performed: a test against the original code
- at UCSD, a test against Bob Hermann's eigenfunction and synthetic seismogram
+ at UCSD, a test against Bob Herrmann's eigenfunction and synthetic seismogram
  code for fundamental modes, and a test against SPECFEM3D_GLOBE v3.6 code
  designed for simulation of three-dimensional global seismic wave propagation
  based upon the spectral-element method (SEM).
@@ -536,7 +536,7 @@ The input model is isotropic double-layered crust PREM in which the water
 \noindent
 Computations for both codes were performed without attenuation and gravity
  effects.
- Srtictly speaking, plane code does not support gravity computation at all,
+ Strictly speaking, plane code does not support gravity computation at all,
  so gravity was turned off for the 
 \series bold
 Mineos
@@ -807,7 +807,7 @@ status collapsed
 
 \begin_layout Standard
 
-% MINEOS VS SPECFM
+% MINEOS VS SPECFEM
 \end_layout
 
 \begin_layout Standard

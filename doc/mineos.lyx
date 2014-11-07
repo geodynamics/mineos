@@ -257,7 +257,7 @@ The four programs are executed in sequence.
  schema.
  Each file is an ASCII flat file that can be read with a text editor, but
  has the advantage of also being subsumable into a database system such
- as ORACLE, Postgress, MySQL, or Antelope.
+ as ORACLE, Postgres, MySQL, or Antelope.
  This 
 \emph on
 multi-tiered access
@@ -1809,7 +1809,7 @@ Format:
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
-name "sub:Input-data (minor_bran)"
+name "sub:Input-data (minos_bran)"
 
 \end_inset
 
@@ -1958,7 +1958,7 @@ N, nic, noc
 \begin_inset Formula $noc$
 \end_inset
 
- is the index of the fluid side of the mantle core boundary (MCB).
+ is the index of the fluid side of the core mantle boundary (CMB).
  
 \begin_inset ERT
 status collapsed
@@ -3734,7 +3734,8 @@ This is a fixed record length binary encapsulated file.
  The file is not portable, which means that the type of encapsulation strongly
  depends on the compiler.
  For example, if the file was created on a SUN platform by the f77 compiler,
- it cannot be read by a progam created by the g77 compiler on the same platform.
+ it cannot be read by a program created by the g77 compiler on the same
+ platform.
  To avoid this inconvenience, the program 
 \series bold
 eigcon
@@ -4032,7 +4033,7 @@ minos_bran
  See an example in Section 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "sub:Example-1.-Interactive dialog minor_bran"
+reference "sub:Example-1.-Interactive dialog minos_bran"
 
 \end_inset
 
