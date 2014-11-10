@@ -106,7 +106,7 @@ minos_bran
 \end_inset
 
 ) has the structure of an external database file and can be easily incorporated
- into relational databases such as ORACLE, Postgress, MySQL, etc.
+ into relational databases such as ORACLE, Postgres, MySQL, etc.
 \end_layout
 
 \begin_layout Subsection
@@ -393,7 +393,7 @@ Input Data
 model_file
 \emph default
  See description in Section 
-\begin_inset LatexCommand \ref{sub:Input-data (minor_bran)}
+\begin_inset LatexCommand \ref{sub:Input-data (minos_bran)}
 
 \end_inset
 
